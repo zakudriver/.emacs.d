@@ -29,6 +29,8 @@
 
 ;; Load path
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+;; benchmarking
+(require 'init-benchmarking)
 
 ;; set my own configuration
 (with-temp-message ""                   ;抹掉插件启动的输出

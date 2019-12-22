@@ -12,7 +12,7 @@
   "Set color theme."
   :type '(choice
           (const :tag "Doom theme" doom)
-          (const :tag "spacemacs theme" spacemacs)))
+          (const :tag "Monokai theme" monokai)))
 
 (defcustom use-yas nil
   "Enable yasnippet for company backends or not."

@@ -55,6 +55,11 @@
       (setq doom-modeline-minor-modes nil)
       (size-indication-mode -1))))
 
+ ((eq kumo-theme 'monokai)
+  (use-package monokai-theme
+    :init
+    (load-theme 'monokai t)))
+
  (t
   (ignore-errors (load-theme kumo-theme t))))
 
