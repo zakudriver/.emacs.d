@@ -3,6 +3,9 @@
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 
+;; linum-mode
+(global-linum-mode t)
+
 ;; Miscs
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets) ; Show path if names are same
 (setq adaptive-fill-regexp "[ t]+|[ t]*([0-9]+.|*+)[ t]*")

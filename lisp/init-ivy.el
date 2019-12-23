@@ -3,6 +3,8 @@
 (use-package counsel
   :diminish ivy-mode counsel-mode
   :bind (
+         ("C-s" . 'swiper)
+         ("C-x C-r" . 'counsel-recentf)
          :map ivy-minibuffer-map
          ([escape] . minibuffer-keyboard-quit)
          :map swiper-map
@@ -337,6 +339,7 @@
            ((ivy-rich-file-icon)
             (ivy-rich-candidate))
            :delimiter "\t"))))
+
 
 (provide 'init-ivy)
 

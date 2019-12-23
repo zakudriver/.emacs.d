@@ -42,7 +42,7 @@
 
     (company-mode)
 
-    (add-node-modules-path)
+    ;;(add-node-modules-path)
 
     ;; company-backends setup
     (set (make-local-variable 'company-backends)
@@ -78,7 +78,7 @@
     ;; format typescript files using prettier
     (prettier-js-mode)
 
-    (add-node-modules-path)
+    ;;(add-node-modules-path)
 
     (company-mode)
 
@@ -140,11 +140,6 @@
          (web-mode . prettier-js-mode)))
 
 
-;; add-node-modules-path
-;;(use-package add-node-modules-path
-;;  :init (add-hook 'js2-mode-hook #'add-node-modules-path)
-;;  (add-hook 'typescript-mode-hook #'add-node-modules-path))
-
 
 (provide 'init-js)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

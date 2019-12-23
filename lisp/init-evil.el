@@ -22,7 +22,6 @@
  "sc"  'kumo-no-hlsearch
  "cc"  'comment-dwim-2
  "wd"  'delete-window
- "o"   'ace-window
  "u"   'undo-tree-visualize
  "ff" 'counsel-find-file
  "ft" 'counsel-imenu
@@ -43,14 +42,15 @@
  :prefix "C-c"
  "j" 'avy-goto-line-below
  "k" 'avy-goto-line-above
- "hk" 'describe-key
- "hf" 'describe-function
- "hv" 'describe-variable
  "R" 'kumo-rename-current-buffer-file
  "K" 'kumo-delete-current-buffer-file
  "n" 'global-display-line-numbers-mode
  "ff" 'kumo-fzf
  "t" 'treemacs
+
+;; "hk" 'describe-key
+;; "hf" 'describe-function
+;; "hv" 'describe-variable
  )
 
 (general-define-key

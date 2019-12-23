@@ -61,7 +61,7 @@
 
     (prettier-js-mode)
 
-    (add-node-modules-path)
+    ;;(add-node-modules-path)
 
     ;; company-backends setup
     (set (make-local-variable 'company-backends)
