@@ -42,13 +42,6 @@
   :commands lsp-javascript-typescript-enable
   :hook ((typescript-mode js2-mode) . lsp-javascript-typescript-enable))
 
-;; Java support for lsp-mode using the Eclipse JDT Language Server.
-;; Install:
-;; wget http://download.eclipse.org/jdtls/snapshots/jdt-language-server-latest.tar.gz
-;; tar jdt-language-server-latest.tar.gz -C ~/.emacs.d/eclipse.jdt.ls/server/
-(use-package lsp-java
-  :commands lsp-java-enable
-  :hook (java-mode . lsp-java-enable))
 
 (provide 'init-lsp)
 

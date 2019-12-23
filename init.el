@@ -49,13 +49,14 @@
   (require 'init-basic)
   (require 'init-funcs)
   (require 'init-utils)
+  (require 'init-edit)
   (require 'init-ui)
   (require 'init-eshell)
 
   (require 'init-evil)
-  (require 'init-edit)
 
   (require 'init-ivy)
+  (require 'init-helm)
   (require 'init-company)
   (require 'init-dired)
   (require 'init-window)
@@ -64,4 +65,9 @@
   (require 'init-prog)
   (require 'init-lisp)
   (require 'init-go)
+  (require 'init-yasnippet)
+
+  ;; Web
+  (require 'init-js)
+  (require 'init-web)
 )

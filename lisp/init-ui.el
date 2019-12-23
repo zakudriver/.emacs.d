@@ -47,6 +47,7 @@
     :config
     (doom-themes-visual-bell-config)
     (doom-themes-org-config)
+    (doom-themes-treemacs-config)
     (use-package doom-modeline
       :ensure t
       :hook (after-init . doom-modeline-init)

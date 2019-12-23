@@ -29,9 +29,9 @@
   :hook (after-init . global-auto-revert-mode))
 
 ;; Jump to Chinese characters
-(use-package ace-pinyin
-  :diminish ace-pinyin-mode
-  :hook (after-init . ace-pinyin-global-mode))
+;;(use-package ace-pinyin
+;;  :diminish ace-pinyin-mode
+;;  :hook (after-init . ace-pinyin-global-mode))
 
 ;; An all-in-one comment command to rule them all
 (use-package comment-dwim-2)
@@ -58,7 +58,7 @@
 ;; treemacs
 (use-package treemacs
   :diminish treemacs-mode
-  :hook (after-init . treemacs-tag-follow-mode))
+  :config (treemacs-resize-icons 16))
 
 (provide 'init-edit)
 
