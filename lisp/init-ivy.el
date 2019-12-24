@@ -5,6 +5,9 @@
   :bind (
          ("C-s" . 'swiper)
          ("C-x C-r" . 'counsel-recentf)
+         ;;("C-x C-s" . 'counsel-rg)
+         ("C-h f" . 'counsel-describe-function)
+         ("C-h v" . 'counsel-describe-variable)
          :map ivy-minibuffer-map
          ([escape] . minibuffer-keyboard-quit)
          :map swiper-map

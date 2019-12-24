@@ -3,6 +3,7 @@
 ;; Directory operations
 (use-package dired
   :ensure nil
+  :bind ("C-x C-d" . 'dired)
   :config
   ;; Show directory first
   (setq dired-listing-switches "-alh --group-directories-first")

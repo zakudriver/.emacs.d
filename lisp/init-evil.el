@@ -28,7 +28,6 @@
  "ag" 'kumo-ag
  "bb" 'counsel-switch-buffer
  ","  'counsel-M-x
- "ss" 'swiper
  "w" 'avy-goto-char-timer
  
 ;; "fg" 'counsel-git
@@ -45,12 +44,10 @@
  "R" 'kumo-rename-current-buffer-file
  "K" 'kumo-delete-current-buffer-file
  "n" 'global-display-line-numbers-mode
- "ff" 'kumo-fzf
- "t" 'treemacs
-
-;; "hk" 'describe-key
-;; "hf" 'describe-function
-;; "hv" 'describe-variable
+ "t" 'treemacs-select-window
+ "T" 'treemacs
+ "S" 'counsel-rg
+ "s" 'swiper
  )
 
 (general-define-key
@@ -62,6 +59,8 @@
  "f" 'avy-goto-char-in-line
  "gb" 'pop-tag-mark
  "<f1>" 'start-eshell)
+
+
 
 ;; esc quits
 (provide 'init-evil)

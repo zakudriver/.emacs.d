@@ -56,7 +56,6 @@
   (require 'init-evil)
 
   (require 'init-ivy)
-  (require 'init-helm)
   (require 'init-company)
   (require 'init-dired)
   (require 'init-window)

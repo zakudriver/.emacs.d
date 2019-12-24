@@ -64,6 +64,14 @@
  (t
   (ignore-errors (load-theme kumo-theme t))))
 
+
+;; nyan-mode
+(use-package nyan-mode
+  :init 
+  (nyan-mode t)
+  (setq nyan-animate-nyancat nil))
+
+
 ;; Line and Column
 (setq-default fill-column 80)
 (setq column-number-mode t)
@@ -135,9 +143,9 @@
   (add-to-list 'all-the-icons-mode-icon-alist
                '(gfm-mode all-the-icons-octicon "markdown" :face all-the-icons-blue)))
 
-;; frame-width
-(set-frame-width (selected-frame) 180)
-(set-frame-height (selected-frame) 50)
+
+(setq-default initial-scratch-message
+              (concat ";; Happy hacking, " user-login-name " - Emacs ♥ you!\n\n"))
 
 (provide 'init-ui)
 

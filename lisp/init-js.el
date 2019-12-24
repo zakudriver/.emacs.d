@@ -1,7 +1,6 @@
 ;;; Code:
 
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; javascript
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -63,8 +62,7 @@
 (use-package typescript-mode
   :hook ((typescript-mode . ts-tide-setup-hook))
   :bind ((:map typescript-mode-map
-               ("C-c C-t" . tide-documentation-at-point)
-               ("C-c T p" . typescript/open-region-in-playground)))
+               ("C-c C-t" . tide-documentation-at-point)))
   :config
   (defun ts-tide-setup-hook ()
     ;; configure tide
@@ -129,6 +127,14 @@
                      return buf)
       (kill-process (tide-current-server)))))
 
+
+;; evil-keymap
+(general-define-key
+ :states '(normal visual)
+ :keymaps 'tide-mode-map
+ "gd" 'tide-jump-to-definition
+ "gh" 'tide-documentation-at-point
+)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

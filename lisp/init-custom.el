@@ -8,7 +8,7 @@
           (const :tag "Emacs-China" emacs-china)
           (const :tag "Tuna" tuna)))
 
-(defcustom kumo-theme 'doom
+(defcustom kumo-theme 'monokai
   "Set color theme."
   :type '(choice
           (const :tag "Doom theme" doom)

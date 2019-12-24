@@ -61,6 +61,13 @@
 ;; treemacs
 (use-package treemacs
   :diminish treemacs-mode
+  :bind (
+    :map treemacs-mode-map
+    ("C-x f" . treemacs-create-file)
+    ("C-x d" . treemacs-create-dir)
+    ("C-x C-d" . treemacs-delete)
+    ("SPC RET" . treemacs-collapse-parent-node)
+  )
   :config (treemacs-resize-icons 16))
 
 (provide 'init-edit)
