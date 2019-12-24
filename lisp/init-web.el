@@ -14,8 +14,8 @@
   :hook ((web-mode . company-mode)
          (web-mode . (lambda ()
                        (highlight-indent-guides-mode -1))))
-  :config
 
+  :config
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2)

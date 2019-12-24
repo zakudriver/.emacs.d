@@ -66,7 +66,7 @@
     ("C-x f" . treemacs-create-file)
     ("C-x d" . treemacs-create-dir)
     ("C-x C-d" . treemacs-delete)
-    ("SPC RET" . treemacs-collapse-parent-node)
+    ("C-c RET" . treemacs-collapse-parent-node)
   )
   :config (treemacs-resize-icons 16))
 
