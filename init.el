@@ -62,7 +62,7 @@
 
   ;; Programming
   (require 'init-prog)
-  (require 'init-lisp)
+;;  (require 'init-lisp)
   (require 'init-go)
   (require 'init-yasnippet)
 

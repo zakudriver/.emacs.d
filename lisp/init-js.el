@@ -33,7 +33,7 @@
     ;; highlight identifiers
     (tide-hl-identifier-mode +1)
     ;;enable eldoc-mode
-    (eldoc-mode)
+    ;;(eldoc-mode)
     ;; enable flycheck
     (flycheck-mode)
     ;; format javascript files using prettier
@@ -70,7 +70,7 @@
     ;; highlight identifiers
     (tide-hl-identifier-mode +1)
     ;;enable eldoc-mode
-    (eldoc-mode)
+    ;;(eldoc-mode)
     ;; enable flycheck
     (flycheck-mode)
     ;; format typescript files using prettier

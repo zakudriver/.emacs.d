@@ -12,8 +12,9 @@
          ("\\.erb\\'" . web-mode)
          ("\\.hbs\\'" . web-mode))
   :hook ((web-mode . company-mode)
-         (web-mode . (lambda ()
-                       (highlight-indent-guides-mode -1))))
+         ;;(web-mode . (lambda ()
+         ;;              (highlight-indent-guides-mode -1)))
+                       )
 
   :config
   (setq web-mode-markup-indent-offset 2)
@@ -53,7 +54,7 @@
     ;; configure tide
     (tide-setup)
     ;;enable eldoc-mode
-    (eldoc-mode)
+    ;;(eldoc-mode)
     ;; highlight identifiers
     (tide-hl-identifier-mode +1)
     ;; enable flycheck

@@ -15,14 +15,14 @@
   ;; aligns annotation to the right hand side
   (setq company-tooltip-align-annotations t)
 
-  (setq company-idle-delay 0.2
+  (setq company-idle-delay 0.08
         company-tooltip-limit 10
         company-minimum-prefix-length 2
         company-require-match nil
         company-dabbrev-ignore-case nil
         company-dabbrev-downcase nil
         company-dabbrev-code-other-buffers t
-        ;; company-show-numbers t
+        company-show-numbers t
         company-backends '(company-files company-dabbrev-code company-dabbrev company-keywords))
 
   (defvar company-enable-yas use-yas
