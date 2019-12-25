@@ -40,7 +40,7 @@
     :after company
   )
   (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
-  )
+)
 
 
 

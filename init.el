@@ -1,3 +1,6 @@
+
+;; (setq debug-on-error t)
+
 (when (version< emacs-version "26.1")
   (error "This requires Emacs 26.1 and above!"))
 
@@ -64,7 +67,6 @@
   (require 'init-prog)
   (require 'init-lisp)
   (require 'init-go)
-  ;; (require 'init-yasnippet)
   (require 'init-lsp)
 
   ;; Web

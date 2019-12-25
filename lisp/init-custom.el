@@ -1,3 +1,6 @@
+;;; Code:
+
+
 (eval-when-compile
  (require 'init-const))
 
@@ -17,6 +20,8 @@
 (defcustom use-yas nil
   "Enable yasnippet for company backends or not."
   :type 'boolean)
+
+
 
 (provide 'init-custom)
 

@@ -26,6 +26,15 @@
   (string-equal "root" (getenv "USER"))
   "Are you using ROOT user?")
 
+(defconst sys/username
+  (getenv "USER")
+  "Username.")
+
+(defconst sys/path
+  '("/usr/local/bin" "/Users/kumotyou/code/golang/bin" "/Users/kumotyou/code/go/bin")
+  "PATH list.")
+
+
 (provide 'init-const)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

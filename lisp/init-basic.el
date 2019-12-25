@@ -15,13 +15,24 @@
 (setq ring-bell-function 'ignore)
 
 ;; Environment
-(when (or sys/mac-x-p sys/linux-x-p)
-  (use-package exec-path-from-shell
-    :init
-    (setq exec-path-from-shell-check-startup-files nil)
-    (setq exec-path-from-shell-variables '("PATH" "MANPATH" "PYTHONPATH" "GOPATH"))
-    (setq exec-path-from-shell-arguments '("-l"))
-    (exec-path-from-shell-initialize)))
+;; (when (or sys/mac-x-p sys/linux-x-p)
+;;   (use-package exec-path-from-shell
+;;     :init
+;;     (setq exec-path-from-shell-check-startup-files nil)
+;;     (setq exec-path-from-shell-variables '("PATH" "MANPATH" "GOPATH"))
+;;     (setq exec-path-from-shell-arguments '("-l"))
+;;     (exec-path-from-shell-initialize)))
+
+;; (mapconcat 'identity (list "zzzz" "ffff" "/a/v") ",") 
+(progn
+  (setenv "PATH" (concat (getenv "PATH") ":" (mapconcat 'identity sys/path ":")))
+  (dolist (i sys/path)
+    (add-to-list 'exec-path i)))
+  ;; (add-to-list 'exec-path my-path))
+
+ ;; (let ((my-path "/usr/local/bin"))
+ ;;   (setenv "PATH" (concat my-path ":" (getenv "PATH"))) ; Assume ":" is the separator
+ ;;   (add-to-list 'exec-path my-path))
 
 ;; History
 (use-package saveplace

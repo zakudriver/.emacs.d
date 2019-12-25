@@ -17,9 +17,8 @@
 ;; go get -u github.com/davidrjenni/reftools/cmd/fillstruct
 ;;
 (use-package go-mode
-  :bind (:map go-mode-map
-              ([remap xref-find-definitions] . godef-jump))
-
+  ;; :bind (:map go-mode-map
+  ;;             ([remap xref-find-definitions] . godef-jump))
   :config
   (use-package go-guru
     :bind (:map go-mode-map
@@ -32,9 +31,10 @@
 (general-define-key
  :states '(normal visual)
  :keymaps 'go-mode-map
- "gd" 'godef-jump
- "gr" 'go-guru-referrers)
+ ;; "gd" 'godef-jump
+ ;; "gr" 'go-guru-referrers
 )
+
 
 (provide 'init-go)
 
