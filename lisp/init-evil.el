@@ -1,10 +1,12 @@
-(use-package evil)
-(evil-mode 1)
 
-(use-package evil-search-highlight-persist
+;;; Code:
+
+(setq evil-want-C-u-scroll t)
+
+(use-package evil
   :init
-  (add-hook 'after-init-hook '(lambda()
-                                (global-evil-search-highlight-persist t))))
+  (evil-mode t))
+
 
 (use-package general)
 (define-key evil-normal-state-map (kbd "SPC") (general-simulate-key "C-c"))
@@ -12,30 +14,23 @@
 (general-define-key
  :states '(normal visual)
  :prefix ","
- "q"  'save-buffers-kill-terminal
- "Q"  'kumo-kill-emacs
- "bd"  'kumo-kill-this-buffer
- "bm"  'kumo-kill-other-buffers
- "ba"  'kumo-kill-all-buffers
- "k"   'symbol-overlay-put
- "dr"  'dired
- "sc"  'kumo-no-hlsearch
- "cc"  'comment-dwim-2
- "wd"  'delete-window
- "u"   'undo-tree-visualize
- "ff" 'counsel-find-file
- "ft" 'counsel-imenu
+ "," 'counsel-M-x
+ "q" 'save-buffers-kill-terminal
+ "Q" 'kumo-kill-emacs
+ "k" 'symbol-overlay-put
+ "K" 'symbol-overlay-remove-all
+ "cc" 'comment-dwim-2
+ "u" 'undo-tree-visualize
+ "f" 'counsel-find-file
+ "F" 'counsel-fzf
+ "im" 'counsel-imenu
  "ag" 'kumo-ag
  "bb" 'counsel-switch-buffer
- ","  'counsel-M-x
  "w" 'avy-goto-char-timer
- 
-;; "fg" 'counsel-git
 ;; "gb"  'magit-blame-echo
 ;; "gs"  'magit-status
 ;; "gm"  'magit-dispatch-popup
-;; "ww"  'save-buffer
- )
+)
 
 (general-define-key
  :prefix "C-c"
@@ -43,12 +38,20 @@
  "k" 'avy-goto-line-above
  "R" 'kumo-rename-current-buffer-file
  "K" 'kumo-delete-current-buffer-file
- "n" 'global-display-line-numbers-mode
  "t" 'treemacs-select-window
  "T" 'treemacs
  "S" 'counsel-rg
  "s" 'swiper
- )
+ "f" 'counsel-find-file
+ "F" 'counsel-fzf
+ "bb" 'counsel-switch-buffer
+ "bt" 'kumo-kill-this-buffer
+ "bo" 'kumo-kill-other-buffers
+ "ba" 'kumo-kill-all-buffers
+ "dr" 'dired
+ "ww" 'save-buffer
+ "cc" 'comment-dwim-2
+)
 
 (general-define-key
  :states '(normal visual)
@@ -58,8 +61,8 @@
  "L" 'mwim-end-of-code-or-line
  "f" 'avy-goto-char-in-line
  "gb" 'pop-tag-mark
- "<f1>" 'start-eshell)
-
+ "<f1>" 'start-eshell
+)
 
 
 ;; esc quits

@@ -1,3 +1,7 @@
+;;Code:
+
+(global-prettify-symbols-mode t)
+
 ;; Show function arglist or variable docstring
 (use-package eldoc
   :ensure nil

@@ -59,11 +59,17 @@
 
 (setq mouse-drag-copy-region t)
 
+;; open init.el
 (defun open-init-file()
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
 (global-set-key (kbd "<f2>") 'open-init-file)
+
+
+;; fixed : Disabling backend flymake-proc-legacy-flymake because (error Can’t find a suitable init function)
+(remove-hook 'flymake-diagnostic-functions 'flymake-proc-legacy-flymake)
+
 
 (provide 'init-basic)
 

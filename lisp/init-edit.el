@@ -1,3 +1,7 @@
+
+;;; Code:
+
+
 (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
 (set-terminal-coding-system 'utf-8)
@@ -31,10 +35,6 @@
   :diminish auto-revert-mode
   :hook (after-init . global-auto-revert-mode))
 
-;; Jump to Chinese characters
-;;(use-package ace-pinyin
-;;  :diminish ace-pinyin-mode
-;;  :hook (after-init . ace-pinyin-global-mode))
 
 ;; An all-in-one comment command to rule them all
 (use-package comment-dwim-2)
@@ -47,7 +47,7 @@
 ;; Hungry deletion
 (use-package hungry-delete
   :diminish hungry-delete-mode
-  :hook (after-init-hook . global-hungry-delete-mode)
+  :init (add-hook 'prog-mode-hook 'global-hungry-delete-mode)
   :config (setq-default hungry-delete-chars-to-skip " \t\f\v"))
 
 ;; Move to the beginning/end of line or code
@@ -58,17 +58,11 @@
   :diminish undo-tree-mode
   :hook (after-init . global-undo-tree-mode))
 
-;; treemacs
-(use-package treemacs
-  :diminish treemacs-mode
-  :bind (
-    :map treemacs-mode-map
-    ("C-x f" . treemacs-create-file)
-    ("C-x d" . treemacs-create-dir)
-    ("C-x C-d" . treemacs-delete)
-    ("C-c RET" . treemacs-collapse-parent-node)
-  )
-  :config (treemacs-resize-icons 16))
+;; rainbow-delimiters
+(use-package rainbow-delimiters
+  :diminish rainbow-delimiters-mode
+  :init (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+
 
 (provide 'init-edit)
 

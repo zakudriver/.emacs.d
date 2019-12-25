@@ -194,11 +194,6 @@ Including indent-buffer, which should not be called automatically on save."
     (fzf/start))
   (fzf/start current-directory nil))
 
-(defun kumo-no-hlsearch ()
-  (interactive)
-  ;; (require 'symbol-overlay)
-  (evil-search-highlight-persist-remove-all)
-  (symbol-overlay-remove-all))
 
 (defun kumo-add-subdirs-to-load-path (dir)
   "Recursive add directories to `load-path'."

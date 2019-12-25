@@ -28,14 +28,6 @@
   "Run `after-load-theme-hook'."
   (run-hooks 'after-load-theme-hook))
 
-(use-package hide-mode-line
-  :init
-  (dolist (hook '(completion-list-mode-hook
-                  completion-in-region-mode-hook
-                  neotree-mode-hook
-                  treemacs-mode-hook))
-    (add-hook hook #'hide-mode-line-mode)))
-
 
 ;;Color Theme
 (cond
@@ -73,8 +65,8 @@
 
 
 ;; Line and Column
-(setq-default fill-column 80)
-(setq column-number-mode t)
+;;(setq-default fill-column 80)
+;;(setq column-number-mode t)
 
 (use-package smooth-scrolling
   :init (add-hook 'after-init-hook #'smooth-scrolling-mode)
