@@ -34,6 +34,7 @@
  :keymaps 'go-mode-map
  "gd" 'godef-jump
  "gr" 'go-guru-referrers)
+)
 
 (provide 'init-go)
 
