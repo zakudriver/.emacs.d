@@ -34,7 +34,7 @@
 
     (dired-rainbow-define web "#4e9a06" ("htm" "html" "xhtml" "xml" "xaml" "css" "js"
                                          "json" "asp" "aspx" "haml" "php" "jsp" "ts"
-                                         "coffee" "scss" "less" "phtml"))
+                                         "coffee" "scss" "sass" "less" "phtml"))
     (dired-rainbow-define prog "yellow3" ("el" "l" "ml" "py" "rb" "pl" "pm" "c"
                                           "cpp" "cxx" "c++" "h" "hpp" "hxx" "h++"
                                           "m" "cs" "mk" "make" "swift" "go" "java"

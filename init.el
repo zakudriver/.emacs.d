@@ -55,6 +55,7 @@
   (require 'init-edit)
   (require 'init-treemacs)
   (require 'init-ui)
+  (require 'init-which-key)
 
   (require 'init-evil)
 
@@ -65,11 +66,13 @@
 
   ;; Programming
   (require 'init-prog)
-  (require 'init-lisp)
   (require 'init-go)
-  (require 'init-lsp)
+  (require 'init-lisp)
 
   ;; Web
   (require 'init-js)
   (require 'init-web)
+
+  ;; lsp
+  (require 'init-lsp)
 )

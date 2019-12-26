@@ -3,7 +3,8 @@
 ;; web-mode: major-mode for editing multiple web formats
 ;; http://web-mode.org/ , https://github.com/fxbois/web-mode
 (use-package web-mode
-  :mode (("\\.html$" . web-mode)
+  :mode
+  (("\\.html$" . web-mode)
          ("\\.djhtml$" . web-mode)
          ("\\.tsx$" . web-mode)
          ("\\.mustache\\'" . web-mode)
@@ -11,16 +12,13 @@
          ("\\.as[cp]x\\'" . web-mode)
          ("\\.erb\\'" . web-mode)
          ("\\.hbs\\'" . web-mode))
-  :hook ((web-mode . company-mode)
-         ;;(web-mode . (lambda ()
-         ;;              (highlight-indent-guides-mode -1)))
-                       )
+  :hook
+  ((web-mode . company-mode))
 
   :config
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2)
-
   (setq web-mode-enable-html-entities-fontification t
         web-mode-auto-close-style 2)
 
@@ -50,54 +48,36 @@
   ;; highlight matching tag
   (setq web-mode-enable-current-element-highlight t)
 
-  (defun web-tide-setup-hook ()
-    ;; configure tide
-    (tide-setup)
-    ;;enable eldoc-mode
-    ;;(eldoc-mode)
-    ;; highlight identifiers
-    (tide-hl-identifier-mode +1)
-    ;; enable flycheck
-    (flycheck-mode)
+  (defun web-lsp-html-setup ()
+    "Function to setup `lsp-html'"
+    (lsp)
+    (emmet-mode)
 
+    (set (make-local-variable 'company-backends)
+         '((company-lsp company-files :with company-yasnippet)
+           (company-dabbrev-code company-dabbrev)))
+
+    (setq-local lsp-highlight-symbol-at-point nil))
+
+
+  (defun web-tsx-setup-hook ()
+    ;; (flycheck-mode)
     (prettier-js-mode)
-
-    ;;(add-node-modules-path)
 
     ;; company-backends setup
     (set (make-local-variable 'company-backends)
          '((company-tide company-files :with company-yasnippet)
            (company-dabbrev-code company-dabbrev)))
-
     ;; enable typescript-tslint checker
-    (flycheck-add-mode 'typescript-tslint 'web-mode))
-
-  (defun my-web-mode-hook ()
-    "company hook for `web-mode' for non-html buffers."
-    (set (make-local-variable 'company-backends)
-         '((company-capf company-files :with company-yasnippet)
-           (company-dabbrev-code company-dabbrev))))
-
-  (defun my-lsp-html-mode-hook ()
-    " company hook for `web-mode' for html buffers."
-    (set (make-local-variable 'company-backends)
-         '((company-lsp company-files :with company-yasnippet)
-           (company-dabbrev-code company-dabbrev))))
-
-  (defun lsp-html-setup ()
-    "Function to setup `lsp-html'"
-    (lsp)
-    (my-lsp-html-mode-hook)
-    (emmet-mode)
-    (setq-local lsp-highlight-symbol-at-point nil)
-    (bind-key "C-c o b" #'browse-url-of-file (current-local-map)))
+    ;; (flycheck-add-mode 'typescript-tslint 'web-mode)
+  )
+  
 
   (add-hook 'web-mode-hook
             (lambda ()
               (pcase (file-name-extension buffer-file-name)
-                ("tsx" (web-tide-setup-hook))
-                ("html" (lsp-html-setup))
-                (_ (my-web-mode-hook)))))
+                ("tsx" (web-tsx-setup-hook))
+                ("html" (web-lsp-html-setup)))))
 
   ;; colorize colors in buffers
   (setq web-mode-enable-css-colorization t))
@@ -115,6 +95,13 @@
   (setq emmet-indentation 2)
   (unbind-key "C-M-<left>" emmet-mode-keymap)
   (unbind-key "C-M-<right>" emmet-mode-keymap))
+
+
+;; sass-mode
+;; (use-package sass-mode
+;;   :mode
+;;   ("\\.sass$" . sass-mode))
+
 
 (provide 'init-web)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

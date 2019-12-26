@@ -6,7 +6,6 @@
 (use-package js2-mode
   :mode (("\\.js$" . js2-mode))
   :hook ((js2-mode . (lambda ()
-    (flycheck-mode)
     (prettier-js-mode)
     ;;(add-node-modules-path)
     )))
@@ -17,7 +16,7 @@
         js-chain-indent t)
 
   ;; use eslint_d insetad of eslint for faster linting
-  (setq flycheck-javascript-eslint-executable "eslint_d")
+  ;; (setq flycheck-javascript-eslint-executable "eslint_d")
   ;; Try to highlight most ECMA built-ins
   (setq js2-highlight-level 3)
   ;; turn off all warnings in js2-mode
@@ -31,7 +30,6 @@
 ;; https://github.com/ananthakumaran/typescript.el
 (use-package typescript-mode
   :hook ((typescript-mode . (lambda ()
-    (flycheck-mode)
     (prettier-js-mode)
     ;;(add-node-modules-path)
     )))

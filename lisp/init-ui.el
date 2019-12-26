@@ -53,6 +53,11 @@
     :init
     (load-theme 'monokai t)))
 
+  ((eq kumo-theme 'dracula)
+  (use-package dracula-theme
+    :init
+    (load-theme 'dracula t)))
+
  (t
   (ignore-errors (load-theme kumo-theme t))))
 

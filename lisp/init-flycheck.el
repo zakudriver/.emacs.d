@@ -1,5 +1,3 @@
-;; Flycheck configurations.
-;;
 ;;; Code:
 
 (use-package flycheck

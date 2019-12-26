@@ -6,6 +6,8 @@
 (use-package treemacs
   :diminish treemacs-mode
   :bind (
+    ("C-x pt" . treemacs-select-window)
+    ("C-x pT" . treemacs)
     :map treemacs-mode-map
     ("C-x o" . treemacs-collapse-parent-node)
     ("C-x f" . treemacs-create-file)

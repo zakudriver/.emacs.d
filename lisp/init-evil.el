@@ -38,8 +38,8 @@
  "k" 'avy-goto-line-above
  "R" 'kumo-rename-current-buffer-file
  "K" 'kumo-delete-current-buffer-file
- "t" 'treemacs-select-window
- "T" 'treemacs
+ "pt" 'treemacs-select-window
+ "pT" 'treemacs
  "S" 'counsel-rg
  "s" 'swiper
  "f" 'counsel-find-file

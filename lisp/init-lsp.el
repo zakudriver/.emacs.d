@@ -28,6 +28,7 @@
 ;; Emacs client for the Language Server Protocol
 ;; https://github.com/emacs-lsp/lsp-mode
 (use-package lsp-mode
+  :ensure nil
   :hook ((typescript-mode web-mode) . lsp)
   :commands lsp
   :config
@@ -39,8 +40,7 @@
     :commands company-lsp
     :after company
   )
-  (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
-)
+  (use-package lsp-treemacs :commands lsp-treemacs-errors-list))
 
 
 
