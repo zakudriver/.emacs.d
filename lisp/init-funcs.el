@@ -56,17 +56,19 @@
   (interactive)
   (kill-emacs))
 
-(defun switch-to-previous-buffer ()
+(defun kumo-switch-to-previous-buffer ()
   "Switch to previously open buffer.
 Repeated invocations toggle between the two most recently open buffers."
   (interactive)
   (switch-to-buffer (other-buffer (current-buffer) 1)))
+
 
 (defun remove-dos-eol ()
   "Do not show ^M in files containing mixed UNIX and DOS line endings."
   (interactive)
   (setq buffer-display-table (make-display-table))
   (aset buffer-display-table ?\^M []))
+
 
 (defun kumo-set-project-directory ()
   (interactive)
@@ -75,21 +77,14 @@ Repeated invocations toggle between the two most recently open buffers."
     (setq current-directory (expand-file-name filename))
     (setq ffip-project-root (expand-file-name filename))))
 
-(defun kumo-ag ()
-  (interactive)
-  (let ((directory-name (read-directory-name "the directory name : ")))
-    (setq root-directory (expand-file-name directory-name))
-    (counsel-ag nil root-directory)))
+
 
 (defun kumo-relative-line-number ()
+  "Set relative line number."
+  (interactive)
   (setq-local display-line-numbers 'visual))
 
-(defun kumo-absolute-line-number ()
-  (setq-local display-line-numbers t))
 
-(defun buffer-too-big-p ()
-  (or (> (buffer-size) (* 5000 80))
-      (> (line-number-at-pos (point-max)) 5000)))
 
 (defun kumo-rename-current-buffer-file ()
   "Rename current buffer and file it is visiting."
@@ -162,44 +157,7 @@ Including indent-buffer, which should not be called automatically on save."
              (set-window-start w2 s1)
              (setq i (1+ i)))))))
 
-(defun kumo-toggle-window-split ()
-  (interactive)
-  (if (= (count-windows) 2)
-      (let* ((this-win-buffer (window-buffer))
-             (next-win-buffer (window-buffer (next-window)))
-             (this-win-edges (window-edges (selected-window)))
-             (next-win-edges (window-edges (next-window)))
-             (this-win-2nd (not (and (<= (car this-win-edges)
-                                         (car next-win-edges))
-                                     (<= (cadr this-win-edges)
-                                         (cadr next-win-edges)))))
-             (splitter
-              (if (= (car this-win-edges)
-                     (car (window-edges (next-window))))
-                  'split-window-horizontally
-                'split-window-vertically)))
-        (delete-other-windows)
-        (let ((first-win (selected-window)))
-          (funcall splitter)
-          (if this-win-2nd (other-window 1))
-          (set-window-buffer (selected-window) this-win-buffer)
-          (set-window-buffer (next-window) next-win-buffer)
-          (select-window first-win)
-          (if this-win-2nd (other-window 1))))))
 
-(defun kumo-fzf ()
-  (interactive)
-  (use-package fzf
-    :commands
-    (fzf/start))
-  (fzf/start current-directory nil))
-
-
-(defun kumo-add-subdirs-to-load-path (dir)
-  "Recursive add directories to `load-path'."
-  (let ((default-directory (file-name-as-directory dir)))
-    (add-to-list 'load-path dir)
-    (normal-top-level-add-subdirs-to-load-path)))
 
 
 (provide 'init-funcs)

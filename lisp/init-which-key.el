@@ -6,9 +6,9 @@
   (which-key-setup-side-window-right)
   (which-key-mode)
   :config
-  (setq which-key-paging-key "<f5>")
-  (setq which-key-idle-secondary-delay 0.05)
-  )
+  (setq which-key-popup-type 'minibuffer)
+  (setq which-key-sort-order 'which-key-prefix-then-key-order)
+)
 
 
 

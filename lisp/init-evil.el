@@ -15,8 +15,6 @@
  :states '(normal visual)
  :prefix ","
  "," 'counsel-M-x
- "q" 'save-buffers-kill-terminal
- "Q" 'kumo-kill-emacs
  "k" 'symbol-overlay-put
  "K" 'symbol-overlay-remove-all
  "cc" 'comment-dwim-2
@@ -32,8 +30,11 @@
 ;; "gm"  'magit-dispatch-popup
 )
 
+
 (general-define-key
  :prefix "C-c"
+ "q" 'save-buffers-kill-terminal
+ "Q" 'kill-emacs
  "j" 'avy-goto-line-below
  "k" 'avy-goto-line-above
  "R" 'kumo-rename-current-buffer-file
@@ -48,10 +49,15 @@
  "bt" 'kumo-kill-this-buffer
  "bo" 'kumo-kill-other-buffers
  "ba" 'kumo-kill-all-buffers
+ "bp" 'kumo-switch-to-previous-buffer
  "dr" 'dired
  "ww" 'save-buffer
  "cc" 'comment-dwim-2
+ "t0" 'doom-theme
+ "t1" 'monokai-theme
+ "t2" 'dracula-theme
 )
+
 
 (general-define-key
  :states '(normal visual)

@@ -25,7 +25,7 @@
         company-show-numbers t
         company-backends '(company-files company-dabbrev-code company-dabbrev company-keywords))
 
-  (defvar company-enable-yas use-yas
+  (defvar company-enable-yas t
     "Enable yasnippet for all backends.")
 
   (defun company-backend-with-yas (backend)

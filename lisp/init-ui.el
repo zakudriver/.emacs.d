@@ -30,12 +30,18 @@
 
 
 ;;Color Theme
-(cond
- ((eq kumo-theme 'doom)
+(setq kumo-current-theme kumo-theme)
+
+
+(defun doom-theme ()
+  "doom theme"
+  (interactive)
   (use-package doom-themes
     :preface (defvar region-fg nil)
     :init
+    (disable-theme 'kumo-current-theme)
     (load-theme 'doom-vibrant t)
+    (setq kumo-current-theme 'doom-vibrant)
     :config
     (doom-themes-visual-bell-config)
     (doom-themes-org-config)
@@ -48,15 +54,36 @@
       (setq doom-modeline-minor-modes nil)
       (size-indication-mode -1))))
 
- ((eq kumo-theme 'monokai)
+
+(defun monokai-theme ()
+  "monokai-theme"
+  (interactive)
   (use-package monokai-theme
     :init
-    (load-theme 'monokai t)))
+    (disable-theme 'kumo-current-theme)
+    (load-theme 'monokai t)
+    (setq kumo-current-theme 'monokai)))
 
-  ((eq kumo-theme 'dracula)
+
+(defun dracula-theme ()
+  "dracula-theme"
+  (interactive)
   (use-package dracula-theme
     :init
-    (load-theme 'dracula t)))
+    (disable-theme 'kumo-current-theme)
+    (load-theme 'dracula t)
+    (setq kumo-current-theme 'dracula)))
+
+
+(cond
+ ((eq kumo-theme 'doom)
+  (doom-theme))
+ 
+ ((eq kumo-theme 'monokai)
+  (monokai-theme))
+
+ ((eq kumo-theme 'dracula)
+  (dracula-theme))
 
  (t
   (ignore-errors (load-theme kumo-theme t))))

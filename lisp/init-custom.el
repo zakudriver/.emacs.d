@@ -4,6 +4,7 @@
 (eval-when-compile
  (require 'init-const))
 
+
 (defcustom kumo-package-archives 'emacs-china
   "Set package archives from which to fetch."
   :type '(choice
@@ -22,8 +23,7 @@
   "Enable yasnippet for company backends or not."
   :type 'boolean)
 
-
-(defconst sys/path
+(defconst kumo-path
   (if (and sys/macp)
     '("/usr/local/bin" "/Users/kumotyou/code/golang/bin" "/Users/kumotyou/code/go/bin")
     '("/home/kumotyou/Code/Go/bin" "/usr/lib/go/bin"))

@@ -23,8 +23,8 @@
 ;;     (setq exec-path-from-shell-arguments '("-l"))
 ;;     (exec-path-from-shell-initialize)))
 (progn
-  (setenv "PATH" (concat (getenv "PATH") ":" (mapconcat 'identity sys/path ":")))
-  (dolist (i sys/path)
+  (setenv "PATH" (concat (getenv "PATH") ":" (mapconcat 'identity kumo-path ":")))
+  (dolist (i kumo-path)
     (add-to-list 'exec-path i)))
 
 ;; History
