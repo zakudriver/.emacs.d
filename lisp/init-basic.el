@@ -22,6 +22,8 @@
 ;;     (setq exec-path-from-shell-variables '("PATH" "MANPATH" "GOPATH"))
 ;;     (setq exec-path-from-shell-arguments '("-l"))
 ;;     (exec-path-from-shell-initialize)))
+
+;; Environment
 (progn
   (setenv "PATH" (concat (getenv "PATH") ":" (mapconcat 'identity kumo-path ":")))
   (dolist (i kumo-path)

@@ -33,48 +33,68 @@
 (setq kumo-current-theme kumo-theme)
 
 
+;; theme factory macro
+(defmacro theme-factory-macro (name load-name &rest config)
+  "theme factory macro"
+  `(use-package ,name
+    :init
+    (disable-theme kumo-current-theme)
+    (load-theme (quote ,load-name) t)
+    (setq kumo-current-theme (quote ,load-name))
+    ,@config)
+)
+
+
+;; doom-theme
 (defun doom-theme ()
   "doom theme"
   (interactive)
-  (use-package doom-themes
-    :preface (defvar region-fg nil)
-    :init
-    (disable-theme 'kumo-current-theme)
-    (load-theme 'doom-vibrant t)
-    (setq kumo-current-theme 'doom-vibrant)
-    :config
-    (doom-themes-visual-bell-config)
-    (doom-themes-org-config)
-    (doom-themes-treemacs-config)
-    (use-package doom-modeline
-      :ensure t
-      :hook (after-init . doom-modeline-init)
-      :config
-      (setq doom-modeline-buffer-file-name-style 'buffer-name)
-      (setq doom-modeline-minor-modes nil)
-      (size-indication-mode -1))))
+  (theme-factory-macro doom-themes doom-vibrant
+                       :preface (defvar region-fg nil)
+                       :config
+                       (doom-themes-visual-bell-config)
+                       (doom-themes-org-config)
+                       (doom-themes-treemacs-config)
+                       (use-package doom-modeline
+                         :ensure t
+                         :hook (after-init . doom-modeline-init)
+                         :config
+                         (setq doom-modeline-buffer-file-name-style 'buffer-name)
+                         (setq doom-modeline-minor-modes nil)
+                         (size-indication-mode -1))))
+    
+  ;; (use-package doom-themes
+  ;;   :preface (defvar region-fg nil)
+  ;;   :init
+  ;;   (disable-theme kumo-current-theme)
+  ;;   (load-theme 'doom-vibrant t)
+  ;;   (setq kumo-current-theme 'doom-vibrant)
+  ;;   :config
+  ;;   (doom-themes-visual-bell-config)
+  ;;   (doom-themes-org-config)
+  ;;   (doom-themes-treemacs-config)
+  ;;   (use-package doom-modeline
+  ;;     :ensure t
+  ;;     :hook (after-init . doom-modeline-init)
+  ;;     :config
+  ;;     (setq doom-modeline-buffer-file-name-style 'buffer-name)
+  ;;     (setq doom-modeline-minor-modes nil)
+  ;;     (size-indication-mode -1)))
 
-
+;; monoka-theme
 (defun monokai-theme ()
   "monokai-theme"
   (interactive)
-  (use-package monokai-theme
-    :init
-    (disable-theme 'kumo-current-theme)
-    (load-theme 'monokai t)
-    (setq kumo-current-theme 'monokai)))
+  (theme-factory-macro monokai-theme monokai))
 
-
+;; dracula-theme
 (defun dracula-theme ()
   "dracula-theme"
   (interactive)
-  (use-package dracula-theme
-    :init
-    (disable-theme 'kumo-current-theme)
-    (load-theme 'dracula t)
-    (setq kumo-current-theme 'dracula)))
+  (theme-factory-macro dracula-theme dracula))
 
 
+;; init default theme
 (cond
  ((eq kumo-theme 'doom)
   (doom-theme))

@@ -165,7 +165,7 @@
   (setq ivy-rich-parse-remote-buffer nil)
 
   ;; Setting tab size to 1, to insert tabs as delimiters
-  (add-hook 'minibuffer-setup-hook
+  (add-hook #'minibuffer-setup-hook
             (lambda ()
               (setq tab-width 1)))
 

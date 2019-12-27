@@ -9,7 +9,7 @@
 (setq file-name-handler-alist nil)
 (setq gc-cons-threshold 40000000)
 
-(add-hook 'emacs-startup-hook
+(add-hook #'emacs-startup-hook
           (lambda ()
             "Restore defalut values after init"
             (setq file-name-handler-alist default-file-name-handler-alist)
@@ -19,7 +19,7 @@
                               (lambda()
                                 (unless (frame-focus-state)
                                   (garbage-collect))))
-              (add-hook 'focus-out-hokk 'garbage-collect))
+              (add-hook #'focus-out-hokk #'garbage-collect))
 
             (defun my-minibuffer-setup-hook ()
               (setq gc-cons-threshold 40000000))
@@ -27,8 +27,8 @@
             (defun my-minibuffer-exit-hook ()
               (setq gc-cons-threshold 800000))
 
-            (add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
-            (add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)))
+            (add-hook #'minibuffer-setup-hook #'my-minibuffer-setup-hook)
+            (add-hook #'minibuffer-exit-hook #'my-minibuffer-exit-hook)))
 
 ;; Load path
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
