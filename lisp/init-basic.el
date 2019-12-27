@@ -36,7 +36,7 @@
   :ensure nil
   :hook (after-init . recentf-mode)
   :init
-  (setq recentf-max-saved-items 200)
+  (setq recentf-max-saved-items 25)
   (setq recentf-exclude '((expand-file-name package-user-dir)
                           ".cache"
                           ".cask"

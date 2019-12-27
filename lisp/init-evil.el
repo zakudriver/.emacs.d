@@ -50,9 +50,9 @@
  "bo" 'kumo-kill-other-buffers
  "ba" 'kumo-kill-all-buffers
  "bp" 'kumo-switch-to-previous-buffer
- "dr" 'dired
  "ww" 'save-buffer
  "cc" 'comment-dwim-2
+ "d" 'dired
  "t0" 'doom-theme
  "t1" 'monokai-theme
  "t2" 'dracula-theme
