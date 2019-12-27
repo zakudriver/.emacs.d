@@ -56,3 +56,4 @@ flymd.md
 README.html
 *~
 /ycmd/
+.lsp-session-*
