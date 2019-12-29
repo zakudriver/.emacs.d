@@ -29,7 +29,21 @@
   (run-hooks 'after-load-theme-hook))
 
 
-;;Color Theme
+;; Font
+(global-set-key (kbd "s-=")
+                (lambda ()
+                  (interactive)
+                  (let ((old-face-attribute (face-attribute 'default :height)))
+                    (set-face-attribute 'default nil :height (+ old-face-attribute 10)))))
+
+(global-set-key (kbd "s--")
+                (lambda ()
+                  (interactive)
+                  (let ((old-face-attribute (face-attribute 'default :height)))
+                    (set-face-attribute 'default nil :height (- old-face-attribute 10)))))
+
+
+;; Color Theme
 (setq kumo-current-theme kumo-theme)
 
 
@@ -62,24 +76,6 @@
                          (setq doom-modeline-buffer-file-name-style 'buffer-name)
                          (setq doom-modeline-minor-modes nil)
                          (size-indication-mode -1))))
-    
-  ;; (use-package doom-themes
-  ;;   :preface (defvar region-fg nil)
-  ;;   :init
-  ;;   (disable-theme kumo-current-theme)
-  ;;   (load-theme 'doom-vibrant t)
-  ;;   (setq kumo-current-theme 'doom-vibrant)
-  ;;   :config
-  ;;   (doom-themes-visual-bell-config)
-  ;;   (doom-themes-org-config)
-  ;;   (doom-themes-treemacs-config)
-  ;;   (use-package doom-modeline
-  ;;     :ensure t
-  ;;     :hook (after-init . doom-modeline-init)
-  ;;     :config
-  ;;     (setq doom-modeline-buffer-file-name-style 'buffer-name)
-  ;;     (setq doom-modeline-minor-modes nil)
-  ;;     (size-indication-mode -1)))
 
 ;; monoka-theme
 (defun monokai-theme ()
@@ -107,6 +103,14 @@
 
  (t
   (ignore-errors (load-theme kumo-theme t))))
+
+;; change theme keymap
+(general-define-key
+ :prefix "C-c"
+ "t0" 'doom-theme
+ "t1" 'monokai-theme
+ "t2" 'dracula-theme
+)
 
 
 ;; nyan-mode
