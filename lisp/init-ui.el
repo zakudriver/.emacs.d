@@ -15,7 +15,8 @@
 ;; Menu/Tool/Scroll bars
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))(if (fboundp 'blink-cursor-mode) (blink-cursor-mode -1))
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+(if (fboundp 'blink-cursor-mode) (blink-cursor-mode -1))
 (setq inhibit-startup-message t)
 (setq-default initial-scratch-message nil)
 
