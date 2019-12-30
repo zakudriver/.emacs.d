@@ -108,9 +108,6 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "F" 'counsel-fzf
  "im" 'counsel-imenu
  "w" 'avy-goto-char-timer
-;; "gb"  'magit-blame-echo
-;; "gs"  'magit-status
-;; "gm"  'magit-dispatch-popup
 )
 
 
@@ -137,9 +134,9 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "cc" 'comment-dwim-2
  "d" 'dired
  "tt" 'kumo-eshell
- ;; "t0" 'doom-theme
- ;; "t1" 'monokai-theme
- ;; "t2" 'dracula-theme
+ "gs" 'magit-status
+;; "gb"  'magit-blame-echo
+;; "gm"  'magit-dispatch-popup
 )
 
 
