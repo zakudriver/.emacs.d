@@ -133,7 +133,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "ww" 'save-buffer
  "cc" 'comment-dwim-2
  "d" 'dired
- "e" 'kumo-eshell
+ ;; "e" 'kumo-eshell
  "gs" 'magit-status
 ;; "gb"  'magit-blame-echo
 ;; "gm"  'magit-dispatch-popup

@@ -56,7 +56,7 @@
   (require 'init-treemacs)
   (require 'init-ui)
   ;; (require 'init-modeline)
-  (require 'init-eshell)
+  ;; (require 'init-eshell)
   (require 'init-which-key)
 
   (require 'init-evil)
