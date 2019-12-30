@@ -136,6 +136,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "ww" 'save-buffer
  "cc" 'comment-dwim-2
  "d" 'dired
+ "tt" 'kumo-eshell
  ;; "t0" 'doom-theme
  ;; "t1" 'monokai-theme
  ;; "t2" 'dracula-theme

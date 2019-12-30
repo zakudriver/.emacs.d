@@ -55,6 +55,7 @@
   (require 'init-edit)
   (require 'init-treemacs)
   (require 'init-ui)
+  (require 'init-eshell)
   (require 'init-which-key)
 
   (require 'init-evil)

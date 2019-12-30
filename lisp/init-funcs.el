@@ -158,6 +158,23 @@ Including indent-buffer, which should not be called automatically on save."
              (setq i (1+ i)))))))
 
 
+(defun kumo-shell-dir (dir)
+  "Terminal by current directory."
+  (interactive "Directory: ")
+  (let ((default-directory dir))
+         (shell)))
+
+
+(setq explicit-shell-file-name "/usr/bin/zsh")
+
+(defun kumo-term ()
+  "Term."
+  (interactive)
+  (set-buffer (make-term "terminal" explicit-shell-file-name))
+  (term-mode)
+  (term-char-mode)
+  (switch-to-buffer "*terminal*"))
+
 
 
 (provide 'init-funcs)
