@@ -52,10 +52,10 @@
   (require 'init-basic)
   (require 'init-funcs)
   (require 'init-utils)
+  (require 'init-ui)
+  (require 'init-window)
   (require 'init-edit)
   (require 'init-treemacs)
-  (require 'init-ui)
-  ;; (require 'init-modeline)
   ;; (require 'init-eshell)
   (require 'init-which-key)
 
@@ -64,7 +64,6 @@
   (require 'init-ivy)
   (require 'init-company)
   (require 'init-dired)
-  (require 'init-window)
 
   ;; Programming
   (require 'init-prog)

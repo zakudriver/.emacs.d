@@ -1,13 +1,14 @@
 ;;; Code:
 
 
-(setq evil-want-C-u-scroll t)
-
 (use-package evil
   :init
+  (setq evil-want-C-u-scroll t)
   (evil-mode t)
   (setq x-select-enable-clipboard t)
-  ;; (fset 'evil-visual-update-x-selection 'ignore)
+  ;; bug
+  (define-key evil-normal-state-map (kbd "d") 'evil-delete-no-yank)
+  (define-key evil-visual-state-map (kbd "d") 'evil-delete)
   :config
   (evil-define-operator evil-delete-char-no-yank (beg end type register yank-handler)
     "Delete next character without yanking."
@@ -70,9 +71,9 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
         (unless (string-match-p "\n" text)
           ;; set the small delete register
           (evil-set-register ?- text))))
-    (let ((evil-was-yanked-without-register nil))
-      (evil-yank beg end type ?_ yank-handler))
-      ;; (evil-yank beg end type register yank-handler))
+    ;; (let ((evil-was-yanked-without-register nil))
+    ;;   ;; (evil-yank beg end type ?_ yank-handler))
+    ;;   (evil-yank beg end type register yank-handler))
     (cond
      ((eq type 'block)
       (evil-apply-on-block #'delete-region beg end nil))
@@ -118,7 +119,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "j" 'avy-goto-line-below
  "k" 'avy-goto-line-above
  "R" 'kumo-rename-current-buffer-file
- "K" 'kumo-delete-current-buffer-file
+ "D" 'kumo-delete-current-buffer-file
  "pt" 'treemacs-select-window
  "pT" 'treemacs
  "S" 'counsel-rg
@@ -130,16 +131,16 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "bo" 'kumo-kill-other-buffers
  "ba" 'kumo-kill-all-buffers
  "bp" 'kumo-switch-to-previous-buffer
- "ww" 'save-buffer
+ "bs" 'save-buffer
  "cc" 'comment-dwim-2
  "d" 'dired
+ "wr" 'kumo-rotate-window
+ "wt" 'kumo-toggle-window-split
  ;; "e" 'kumo-eshell
  "gs" 'magit-status
 ;; "gb"  'magit-blame-echo
 ;; "gm"  'magit-dispatch-popup
 )
-
-
 
 
 (general-define-key
@@ -156,8 +157,10 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "X" 'evil-delete-backward-char-no-yank
  "s" 'evil-substitute-no-yank
  "S" 'evil-substitute-whole-line-no-yank
- "d" 'evil-delete-no-yank
 )
+
+
+;; (define-key evil-normal-state-map "d" #'evil-delete-no-yank)
 
 
 
