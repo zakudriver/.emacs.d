@@ -24,6 +24,7 @@
   :init 
   (add-hook 'before-save-hook 'gofmt-before-save)
   (add-hook 'go-mode-hook 'lsp-deferred)
+  (add-hook 'go-mode-hook 'dap-go)
   :config
   (setq gofmt-command "goimports")
   ;; Env vars
@@ -31,7 +32,8 @@
   ;;   (exec-path-from-shell-copy-envs '("GOPATH" "GO111MODULE" "GOPROXY")))
 
   (use-package company-go
-    :init (add-to-list 'company-backends (company-backend-with-yas 'company-go))
+    :init
+    (add-to-list 'company-backends (company-backend-with-yas 'company-go))
     :after company)
 
 
@@ -80,6 +82,7 @@
                  (message "Installed %s" pkg)
                (message "Failed to install %s: %d" pkg status))))))))
 )
+
 
 
 (provide 'init-go)

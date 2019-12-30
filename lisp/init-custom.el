@@ -15,9 +15,13 @@
 (defcustom kumo-theme 'dracula
   "Set color theme."
   :type '(choice
-          (const :tag "Doom theme" doom)
+          (const :tag "Doom theme one" doom-one)
+          (const :tag "Doom theme vibrant" doom-vibrant)
           (const :tag "Sanityinc theme" dracula)
-          (const :tag "Monokai theme" monokai)))
+          (const :tag "Monokai theme" monokai)
+          (const :tag "Material theme" material)
+         (const :tag "Material theme light" material-light)))
+          
 
 (defcustom use-yas nil
   "Enable yasnippet for company backends or not."

@@ -43,7 +43,9 @@
                     (set-face-attribute 'default nil :height (- old-face-attribute 10)))))
 
 
+;;;;;;;;;;;;;;;;
 ;; Color Theme
+;;;;;;;;;;;;;;;;
 (setq kumo-current-theme kumo-theme)
 
 
@@ -59,23 +61,26 @@
 )
 
 
-;; doom-theme
-(defun doom-theme ()
-  "doom theme"
+;; doom-theme-one
+(defun doom-theme-one ()
+  "doom-theme-one"
+  (interactive)
+  (theme-factory-macro doom-themes doom-one
+                       :preface (defvar region-fg nil)
+                       :config
+                       (doom-themes-visual-bell-config)
+                       (doom-themes-org-config)
+                       (doom-themes-treemacs-config)))
+
+(defun doom-theme-vibrant ()
+  "doom-theme-vibrant"
   (interactive)
   (theme-factory-macro doom-themes doom-vibrant
                        :preface (defvar region-fg nil)
                        :config
                        (doom-themes-visual-bell-config)
                        (doom-themes-org-config)
-                       (doom-themes-treemacs-config)
-                       (use-package doom-modeline
-                         :ensure t
-                         :hook (after-init . doom-modeline-init)
-                         :config
-                         (setq doom-modeline-buffer-file-name-style 'buffer-name)
-                         (setq doom-modeline-minor-modes nil)
-                         (size-indication-mode -1))))
+                       (doom-themes-treemacs-config)))
 
 ;; monoka-theme
 (defun monokai-theme ()
@@ -89,11 +94,26 @@
   (interactive)
   (theme-factory-macro dracula-theme dracula))
 
+;; material-theme
+(defun material-theme ()
+  "material-theme"
+  (interactive)
+  (theme-factory-macro material-theme material))
+
+;; material-theme-light
+(defun material-theme-light ()
+  "material-theme-light"
+  (interactive)
+  (theme-factory-macro material-theme material-light))
+
 
 ;; init default theme
 (cond
- ((eq kumo-theme 'doom)
-  (doom-theme))
+ ((eq kumo-theme 'doom-one)
+  (doom-theme-one))
+
+ ((eq kumo-theme 'doom-vibrant)
+  (doom-theme-vibrant))
  
  ((eq kumo-theme 'monokai)
   (monokai-theme))
@@ -101,19 +121,40 @@
  ((eq kumo-theme 'dracula)
   (dracula-theme))
 
+ ((eq kumo-theme 'material)
+  (material-theme))
+
+ ((eq kumo-theme 'material-light)
+  (material-theme-light))
+
  (t
   (ignore-errors (load-theme kumo-theme t))))
 
 ;; change theme keymap
 (general-define-key
  :prefix "C-c"
- "t0" 'doom-theme
- "t1" 'monokai-theme
- "t2" 'dracula-theme
+ "t0" 'doom-theme-one
+ "t1" 'doom-theme-vibrant
+ "t2" 'monokai-theme
+ "t3" 'dracula-theme
+ "t4" 'material-theme
+ "t5" 'material-theme-light
 )
 
 
-;; nyan-mode
+;;;;;;;;;;;;;;;;
+;; Mode Line
+;;;;;;;;;;;;;;;;
+(use-package doom-modeline
+      :ensure t
+      :hook (after-init . doom-modeline-mode)
+      :init
+      (setq doom-modeline-height 20)
+      (setq doom-modeline-major-mode-icon t)
+      (setq doom-modeline-major-mode-color-icon t)
+      (setq doom-modeline-buffer-modification-icon t))
+
+nyan-mode
 (use-package nyan-mode
   :init 
   (nyan-mode t)

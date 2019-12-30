@@ -62,34 +62,34 @@
     (evil-change beg end type ?_ yank-handler #'evil-delete-whole-line)
     )
 
-(evil-define-operator evil-delete-no-yank (beg end type register yank-handler)
-  "Delete text from BEG to END with TYPE.
+  (evil-define-operator evil-delete-no-yank (beg end type register yank-handler)
+    "Delete text from BEG to END with TYPE.
 Save in REGISTER or in the kill-ring with YANK-HANDLER."
-  (unless register
-    (let ((text (filter-buffer-substring beg end)))
-      (unless (string-match-p "\n" text)
-        ;; set the small delete register
-        (evil-set-register ?- text))))
-  (let ((evil-was-yanked-without-register nil))
-    ;; (evil-yank beg end type ?_ yank-handler))
-    (evil-yank beg end type register yank-handler))
-  (cond
-   ((eq type 'block)
-    (evil-apply-on-block #'delete-region beg end nil))
-   ((and (eq type 'line)
+    (unless register
+      (let ((text (filter-buffer-substring beg end)))
+        (unless (string-match-p "\n" text)
+          ;; set the small delete register
+          (evil-set-register ?- text))))
+    (let ((evil-was-yanked-without-register nil))
+      (evil-yank beg end type ?_ yank-handler))
+      ;; (evil-yank beg end type register yank-handler))
+    (cond
+     ((eq type 'block)
+      (evil-apply-on-block #'delete-region beg end nil))
+     ((and (eq type 'line)
          (= end (point-max))
          (or (= beg end)
              (/= (char-before end) ?\n))
          (/= beg (point-min))
          (=  (char-before beg) ?\n))
-    (delete-region (1- beg) end))
-   (t
-    (delete-region beg end)))
-  ;; place cursor on beginning of line
-  (when (and (called-interactively-p 'any)
+      (delete-region (1- beg) end))
+     (t
+      (delete-region beg end)))
+    ;; place cursor on beginning of line
+    (when (and (called-interactively-p 'any)
              (eq type 'line))
     (evil-first-non-blank)))
-  )
+)
 
 
 
@@ -133,7 +133,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "ww" 'save-buffer
  "cc" 'comment-dwim-2
  "d" 'dired
- "tt" 'kumo-eshell
+ "e" 'kumo-eshell
  "gs" 'magit-status
 ;; "gb"  'magit-blame-echo
 ;; "gm"  'magit-dispatch-popup
@@ -156,18 +156,11 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "X" 'evil-delete-backward-char-no-yank
  "s" 'evil-substitute-no-yank
  "S" 'evil-substitute-whole-line-no-yank
+ "d" 'evil-delete-no-yank
 )
 
 
-;; (general-define-key
-;;  :states 'normal
-;;  "d" 'evil-delete-no-yank
-;; )
-;; (define-key evil-normal-state-map (kbd "d") 'evil-delete-no-yank)
-
-;; esc quits
 
 (provide 'init-evil)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; init-evil.el ends here
