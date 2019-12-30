@@ -6,7 +6,8 @@
   (setq evil-want-C-u-scroll t)
   (evil-mode t)
   (setq x-select-enable-clipboard t)
-  ;; bug
+  ;; normal d no yank
+  ;; visual d yank
   (define-key evil-normal-state-map (kbd "d") 'evil-delete-no-yank)
   (define-key evil-visual-state-map (kbd "d") 'evil-delete)
   :config
