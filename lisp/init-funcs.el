@@ -184,6 +184,22 @@ Including indent-buffer, which should not be called automatically on save."
           (if this-win-2nd (other-window 1))))))
 
 
+;; Font
+(defun font-size-increase ()
+  "Font size increase."
+  (interactive)
+  (let ((old-face-attribute (face-attribute 'default :height)))
+  (set-face-attribute 'default nil :height (+ old-face-attribute 10))))
+
+(defun font-size-decrease ()
+  "Font size decrease."
+  (interactive)
+  (let ((old-face-attribute (face-attribute 'default :height)))
+    (set-face-attribute 'default nil :height (- old-face-attribute 10))))
+
+
+
+
 (defun kumo-shell-dir (dir)
   "Terminal by current directory."
   (interactive "Directory: ")

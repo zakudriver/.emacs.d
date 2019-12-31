@@ -28,7 +28,7 @@
 ;; Emacs client for the Language Server Protocol
 ;; https://github.com/emacs-lsp/lsp-mode
 (use-package lsp-mode
-  :ensure nil
+  :ensure t
   :hook ((typescript-mode web-mode) . lsp)
   :commands lsp
 
@@ -46,7 +46,7 @@
     ;; (lsp-ui-doc-enable nil)
     (lsp-ui-doc-header t)
     ;; (lsp-ui-doc-include-signature nil)
-    (lsp-ui-doc-position 'top) ;; top, bottom, or at-point
+    (lsp-ui-doc-position 'bottom) ;; top, bottom, or at-point
     (lsp-ui-doc-max-width 120)
     (lsp-ui-doc-max-height 30)
     (lsp-ui-doc-use-childframe t)
@@ -89,8 +89,6 @@
       (dap-ui-mode t)))
 
   (use-package lsp-treemacs :commands lsp-treemacs-errors-list))
-
-
 
 
 

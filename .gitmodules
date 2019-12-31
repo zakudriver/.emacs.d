@@ -1,6 +1,0 @@
-[submodule "site-lisp/tab"]
-	path = site-lisp/tab
-	url = https://github.com/manateelazycat/awesome-tab.git
-[submodule "site-lisp/shell"]
-	path = site-lisp/shell
-	url = https://github.com/manateelazycat/aweshell.git

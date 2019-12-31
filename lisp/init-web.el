@@ -66,8 +66,7 @@
 
     ;; company-backends setup
     (set (make-local-variable 'company-backends)
-         '((company-tide company-files :with company-yasnippet)
-           (company-dabbrev-code company-dabbrev)))
+         '((company-dabbrev-code company-dabbrev)))
     ;; enable typescript-tslint checker
     ;; (flycheck-add-mode 'typescript-tslint 'web-mode)
   )
@@ -79,7 +78,6 @@
                 ("tsx" (web-tsx-setup-hook))
                 ("html" (web-lsp-html-setup)))))
 
-  ;; colorize colors in buffers
   (setq web-mode-enable-css-colorization t))
 
 
@@ -95,6 +93,7 @@
   (setq emmet-indentation 2)
   (unbind-key "C-M-<left>" emmet-mode-keymap)
   (unbind-key "C-M-<right>" emmet-mode-keymap))
+
 
 
 ;; sass-mode

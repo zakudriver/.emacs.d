@@ -20,7 +20,10 @@
           (const :tag "Sanityinc theme" dracula)
           (const :tag "Monokai theme" monokai)
           (const :tag "Material theme" material)
-         (const :tag "Material theme light" material-light)))
+          (const :tag "Material theme light" material-light)
+          (const :tag "Srcery theme" srcery)
+          (const :tag "Flucui theme" flucui)
+          (const :tag "Flucui theme light" flucui-light)))
           
 
 (defcustom use-yas nil
@@ -30,7 +33,7 @@
 (defconst kumo-path
   (if (and sys/macp)
     '("/usr/local/bin" "/Users/kumotyou/code/golang/bin" "/Users/kumotyou/code/go/bin")
-    '("/home/kumotyou/Code/Go/bin" "/usr/lib/go/bin"))
+    '("/home/kumotyou/Code/Go/bin" "/usr/lib/go/bin" "/home/kumotyou/.yarn/bin"))
   "PATH list.")
 
 

@@ -1,22 +1,5 @@
 ;;; Code:
 
-;; Quickly switch windows
-(use-package winum
-  :init (winum-mode)
-  :bind (
-    :map winum-keymap
-      ("M-0" . 'winum-select-window-0)
-      ("M-1" . 'winum-select-window-1)
-      ("M-2" . 'winum-select-window-2)
-      ("M-3" . 'winum-select-window-3)
-      ("M-4" . 'winum-select-window-4)
-      ("C-5" . 'winum-select-window-5)
-      ("M-6" . 'winum-select-window-6)
-      ("M-7" . 'winum-select-window-7)
-      ("M-8" . 'winum-select-window-8)
-      ("M-9" . 'winum-select-window-9)
-      ("M-n" . 'winum-select-window-by-number)
-  ))
 
 ;; fullscreen
 (if sys/macp
@@ -45,6 +28,51 @@
   ;; 非Mac平台直接全屏
   (setq initial-frame-alist (quote ((fullscreen . maximized)))))
 
+
+;; Quickly switch windows
+(use-package winum
+  :init (winum-mode)
+  :bind (
+    :map winum-keymap
+      ("M-0" . 'winum-select-window-0)
+      ("M-1" . 'winum-select-window-1)
+      ("M-2" . 'winum-select-window-2)
+      ("M-3" . 'winum-select-window-3)
+      ("M-4" . 'winum-select-window-4)
+      ("M-5" . 'winum-select-window-5)
+      ("M-6" . 'winum-select-window-6)
+      ("M-7" . 'winum-select-window-7)
+      ("M-8" . 'winum-select-window-8)
+      ("M-9" . 'winum-select-window-9)
+      ("M-n" . 'winum-select-window-by-number)))
+
+
+(use-package hydra
+  :init
+  (defhydra hydra-frame-window (:color red :hint nil)
+      "
+ ^Window^             Frame^              ^^Window Size^^^      ^Text Zoom^               
+ _0_: delete          _2_: delete              ^ ^ _k_ ^ ^            _=_                   
+ _1_: delete others   _3_: delete others       _h_ ^+^ _l_            ^+^             
+ _t_oggle             _4_: new                 ^ ^ _j_ ^ ^            _-_            
+ _s_wap               _F_ullscreen            ^_b_alance^^^^          ^ ^        
+"
+      ("0" delete-window)
+      ("1" delete-other-windows)
+      ("2" delete-frame :exit t)
+      ("3" delete-other-frames :exit t)
+      ("4" make-frame  :exit t)
+      ("b" balance-windows)
+      ("s" kumo-toggle-window-split)
+      ("F" toggle-frame-fullscreen)
+      ("t" kumo-rotate-window)
+      ("=" font-size-increase)
+      ("-" font-size-decrease)
+      ("h" shrink-window-horizontally)
+      ("k" shrink-window)
+      ("j" enlarge-window)
+      ("l" enlarge-window-horizontally)
+      ("q" nil "quit")))
 
 
 (provide 'init-window)

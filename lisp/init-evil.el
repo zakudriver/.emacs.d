@@ -93,6 +93,13 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
     (evil-first-non-blank)))
 )
 
+;; evil-surround
+(use-package evil-surround
+  :ensure t
+  :init
+  (global-evil-surround-mode t)
+  :config
+  (evil-define-key 'visual evil-surround-mode-map (kbd "zc") 'evil-surround-change))
 
 
 (use-package general)
@@ -123,10 +130,10 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "D" 'kumo-delete-current-buffer-file
  "pt" 'treemacs-select-window
  "pT" 'treemacs
- "S" 'counsel-rg
- "s" 'swiper
- "f" 'counsel-find-file
- "F" 'counsel-fzf
+ "sr" 'counsel-rg
+ "ss" 'swiper
+ "ff" 'counsel-find-file
+ "fz" 'counsel-fzf
  "bb" 'counsel-switch-buffer
  "bt" 'kumo-kill-this-buffer
  "bo" 'kumo-kill-other-buffers
@@ -135,12 +142,17 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "bs" 'save-buffer
  "cc" 'comment-dwim-2
  "d" 'dired
- "wr" 'kumo-rotate-window
- "wt" 'kumo-toggle-window-split
- ;; "e" 'kumo-eshell
+ "w" 'hydra-frame-window/body
+ "mo" 'multi-term
+ "md" 'kumo-multi-term-dedicated-open
+ "mc" 'multi-term-dedicated-close
+ "mp" 'multi-term-dedicated-prev
+ "mn" 'multi-term-dedicated-next
+ "mt" 'multi-term-dedicated-toggle
+ "ms" 'multi-term-dedicated-select
  "gs" 'magit-status
-;; "gb"  'magit-blame-echo
-;; "gm"  'magit-dispatch-popup
+ ;; "gb"  'magit-blame-echo
+ ;; "gm"  'magit-dispatch-popup
 )
 
 
@@ -153,7 +165,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "f" 'avy-goto-char-in-line
  "gb" 'pop-tag-mark
  "c" 'evil-change-no-yank
- "C" 'evil-change-line-no-yank
+ ;; "C" 'evil-change-line-no-yank
  "x" 'evil-delete-char-no-yank
  "X" 'evil-delete-backward-char-no-yank
  "s" 'evil-substitute-no-yank

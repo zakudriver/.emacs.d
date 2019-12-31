@@ -52,20 +52,20 @@
   (require 'init-basic)
   (require 'init-funcs)
   (require 'init-utils)
+  (require 'init-evil)
   (require 'init-ui)
-  (require 'init-window)
   (require 'init-edit)
   (require 'init-treemacs)
-  ;; (require 'init-eshell)
+  (require 'init-shell)
   (require 'init-which-key)
 
-  (require 'init-evil)
-
+  (require 'init-window)
   (require 'init-ivy)
   (require 'init-company)
   (require 'init-dired)
 
   ;; Programming
+  (require 'init-lsp)
   (require 'init-prog)
   (require 'init-go)
   (require 'init-lisp)
@@ -74,6 +74,28 @@
   (require 'init-js)
   (require 'init-web)
 
-  ;; lsp
-  (require 'init-lsp)
 )
+
+(put 'magit-diff-edit-hunk-commit 'disabled nil)
+
+;; Title
+(setq frame-title-format
+      '("Emacs " emacs-version "@" user-login-name " : "
+        (:eval (if (buffer-file-name)
+                   (abbreviate-file-name (buffer-file-name))
+                 "%b"))))
+(setq icon-title-format frame-title-format)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(all-the-icons-dired-dir-face ((t (:foreground nil)))))
