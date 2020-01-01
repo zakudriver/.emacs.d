@@ -23,8 +23,8 @@
          ("C-c R" . go-remove-unused-imports))
   :init 
   (add-hook 'before-save-hook 'gofmt-before-save)
-  (add-hook 'go-mode-hook 'lsp-deferred)
-  (add-hook 'go-mode-hook 'dap-go)
+  ;; (add-hook 'go-mode-hook 'lsp)
+  ;; (add-hook 'go-mode-hook 'dap-mode)
   :config
   (setq gofmt-command "goimports")
   ;; Env vars

@@ -29,9 +29,11 @@
 ;; https://github.com/emacs-lsp/lsp-mode
 (use-package lsp-mode
   :ensure t
-  :hook ((typescript-mode web-mode) . lsp)
   :commands lsp
-
+  :hook
+  ((typescript-mode web-mode go-mode) . lsp)
+  (go-mode . lsp-deferred)
+  :commands (lsp lsp-deferred)
   :custom
   ;; debug
   (lsp-print-io nil)
@@ -69,6 +71,7 @@
     (lsp-ui-peek-peek-height 20)
     (lsp-ui-peek-list-width 50)
     (lsp-ui-peek-fontify 'on-demand) ;; never, on-demand, or always
+    (lsp-use-native-json nil)
    )
 
   (use-package company-lsp 
@@ -80,7 +83,7 @@
   (use-package dap-mode
     :hook (lsp-mode . dap-mode)
     :config
-    (dap-mode 1)
+    (dap-mode t)
     (require 'dap-hydra)
     (require 'dap-go)
     (use-package dap-ui
@@ -88,7 +91,9 @@
       :config
       (dap-ui-mode t)))
 
-  (use-package lsp-treemacs :commands lsp-treemacs-errors-list))
+
+  (use-package lsp-treemacs
+    :commands lsp-treemacs-errors-list))
 
 
 

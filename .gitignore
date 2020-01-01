@@ -56,5 +56,6 @@ flymd.md
 README.html
 *~
 /ycmd/
-.lsp-session-*
+.lsp-*
+.dap-*
 /.extension
