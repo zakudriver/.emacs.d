@@ -5,36 +5,36 @@
  (require 'init-const))
 
 
-(defcustom kumo-package-archives 'emacs-china
+(defcustom kumo/package-archives 'emacs-china
   "Set package archives from which to fetch."
   :type '(choice
           (const :tag "Melpa" melpa)
           (const :tag "Emacs-China" emacs-china)
           (const :tag "Tuna" tuna)))
 
-(defcustom kumo-theme 'dracula
-  "Set color theme."
-  :type '(choice
-          (const :tag "Doom theme one" doom-one)
-          (const :tag "Doom theme vibrant" doom-vibrant)
-          (const :tag "Sanityinc theme" dracula)
-          (const :tag "Monokai theme" monokai)
-          (const :tag "Material theme" material)
-          (const :tag "Material theme light" material-light)
-          (const :tag "Srcery theme" srcery)
-          (const :tag "Flucui theme" flucui)
-          (const :tag "Flucui theme light" flucui-light)))
-          
+
+(defconst kumo/default-theme 'flucui-dark)
+
+(defconst kumo/theme
+  '((monokai-theme monokai)
+    (dracula-theme dracula)
+    (material-theme material)
+    (material-theme material-light)
+    (srcery-theme srcery)
+    (flucui-themes flucui-dark)
+    (flucui-themes flucui-light))
+    "Theme list.")
+
 
 (defcustom use-yas nil
   "Enable yasnippet for company backends or not."
   :type 'boolean)
 
-(defconst kumo-path
+(defconst kumo/env-path
   (if (and sys/macp)
     '("/usr/local/bin" "/Users/kumotyou/code/golang/bin" "/Users/kumotyou/code/go/bin")
     '("/home/kumotyou/Code/Go/bin" "/usr/lib/go/bin" "/home/kumotyou/.yarn/bin"))
-  "PATH list.")
+  "ENV_PATH list.")
 
 
 

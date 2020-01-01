@@ -23,23 +23,23 @@
     (intern (completing-read "Switch to archives: "
                              package-archives-list))))
   (cond
-   ((eq kumo-package-archives 'melpa)
+   ((eq kumo/package-archives 'melpa)
     (setq package-archives '(("gnu"   . "http://elpa.gnu.org/packages/")
                              ("melpa" . "http://melpa.org/packages/"))))
-   ((eq kumo-package-archives 'emacs-china)
+   ((eq kumo/package-archives 'emacs-china)
     (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
                              ("melpa" . "http://elpa.emacs-china.org/melpa/"))))
-   ((eq kumo-package-archives 'netease)
+   ((eq kumo/package-archives 'netease)
     (setq package-archives '(("gnu"   . "http://mirrors.163.com/elpa/gnu/")
                              ("melpa" . "http://mirrors.163.com/elpa/melpa/"))))
-   ((eq kumo-package-archives 'melpa-mirror)
+   ((eq kumo/package-archives 'melpa-mirror)
     (setq package-archives '(("gnu"   . "http://elpa.gnu.org/packages/")
                              ("melpa" . "http://www.mirrorservice.org/sites/melpa.org/packages/"))))
-   ((eq kumo-package-archives 'tuna)
+   ((eq kumo/package-archives 'tuna)
     (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
                              ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/"))))))
 
-(switch-package-archives kumo-package-archives)
+(switch-package-archives kumo/package-archives)
 
 ;; Initialize packages
 (setq package-enable-at-startup nil)    ; To prevent initialising twice

@@ -14,10 +14,18 @@
   (string-equal "root" (getenv "USER"))
   "Are you using ROOT user?")
 
-(defconst sys/username
+(defconst kumo/username
   (getenv "USER")
   "Username.")
 
+
+(defconst kumo/symbol-list '(
+                    ("(" . ")")
+                    ("[" . "]")
+                    ("{" . "}")
+                    ("<" . ">")
+                    )
+  "Symbols for wrap ")
 
 
 (provide 'init-const)

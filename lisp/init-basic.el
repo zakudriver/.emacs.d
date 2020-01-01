@@ -28,8 +28,8 @@
 
 ;; Environment
 (progn
-  (setenv "PATH" (concat (getenv "PATH") ":" (mapconcat 'identity kumo-path ":")))
-  (dolist (i kumo-path)
+  (setenv "PATH" (concat (getenv "PATH") ":" (mapconcat 'identity kumo/env-path ":")))
+  (dolist (i kumo/env-path)
     (add-to-list 'exec-path i)))
 
 ;; History

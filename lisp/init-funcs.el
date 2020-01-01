@@ -198,6 +198,25 @@ Including indent-buffer, which should not be called automatically on save."
     (set-face-attribute 'default nil :height (- old-face-attribute 10))))
 
 
+;; Wrap selected text by input symbol.
+(defun kumo-wrap-with-input (beg end symbol)
+  "Wrap selected text by input symbol."
+  (interactive "r \nsPlease input symbol: ")
+  (let ((beg-symbol symbol)(end-symbol symbol))
+
+    (cl-loop for (i . j) in kumo/symbol-list
+             do (cond
+                      ((string= symbol j)
+                       (setq beg-symbol i))
+                      ((string= symbol i)
+                       (setq end-symbol j))
+                       ))
+
+    (goto-char beg)
+    (insert beg-symbol)
+    (goto-char (1+ end))
+    (insert end-symbol)))
+
 
 
 (defun kumo-shell-dir (dir)

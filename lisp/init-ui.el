@@ -4,6 +4,10 @@
   (require 'init-const)
   (require 'init-custom))
 
+;; Font
+(set-face-attribute 'default nil :height 130)
+;; (set-face-attribute 'default nil :font "Menlo")
+
 ;; Title
 (setq frame-title-format
       '("Emacs " emacs-version "@" user-login-name " : "
@@ -21,14 +25,6 @@
 (setq inhibit-startup-message t)
 (setq-default initial-scratch-message nil)
 
-;; paren hl
-(show-paren-mode 1)
-(define-advice show-paren-function (:around (fn) fix-show-paren-function)
-  "Highlight enclosing parens."
-  (cond ((looking-at-p "\\s(") (funcall fn))
-	(t (save-excursion
-	     (ignore-errors (backward-up-list))
-	     (funcall fn)))))
 
 
 (defvar after-load-theme-hook nil
@@ -41,7 +37,12 @@
 ;;;;;;;;;;;;;;;;
 ;; Color Theme
 ;;;;;;;;;;;;;;;;
-(setq kumo-current-theme kumo-theme)
+
+;;// TODO the theme config
+;; ----- variable name: xxxx-config -----
+;; (setq doom-config '(:config (setq a "a")))
+
+(setq kumo/current-theme kumo/default-theme)
 
 
 ;; theme factory macro
@@ -49,124 +50,48 @@
   "theme factory macro"
   `(use-package ,name
     :init
-    (disable-theme kumo-current-theme)
+    (disable-theme kumo/current-theme)
     (load-theme (quote ,load-name) t)
-    (setq kumo-current-theme (quote ,load-name))
+    (setq kumo/current-theme (quote ,load-name))
     ,@config)
 )
 
 
-;; doom-theme-one
-(defun doom-theme-one ()
-  "doom-theme-one"
-  (interactive)
-  (theme-factory-macro doom-themes doom-one
-                       :preface (defvar region-fg nil)
-                       :config
-                       (doom-themes-visual-bell-config)
-                       (doom-themes-org-config)
-                       (doom-themes-treemacs-config)))
+(defun create-theme-func (theme)
+  `(defun ,(nth 1 theme) ()
+     (interactive)
+    ;;  (let ((theme-config (intern (concat (symbol-name (nth 1 theme)) "-config"))))
+    ;;    (if (boundp theme-config)
+    ;;        (theme-factory-macro ,@theme ,@theme-config)
+    ;;      (theme-factory-macro ,@theme)))
+     (theme-factory-macro ,@theme)))
 
-(defun doom-theme-vibrant ()
-  "doom-theme-vibrant"
-  (interactive)
-  (theme-factory-macro doom-themes doom-vibrant
-                       :preface (defvar region-fg nil)
-                       :config
-                       (doom-themes-visual-bell-config)
-                       (doom-themes-org-config)
-                       (doom-themes-treemacs-config)))
 
-;; monoka-theme
-(defun monokai-theme ()
-  "monokai-theme"
-  (interactive)
-  (theme-factory-macro monokai-theme monokai))
+(defmacro create-theme-func-macro ()
+  `(progn ,@(mapcar 'create-theme-func kumo/theme)))
 
-;; dracula-theme
-(defun dracula-theme ()
-  "dracula-theme"
-  (interactive)
-  (theme-factory-macro dracula-theme dracula))
 
-;; material-theme
-(defun material-theme ()
-  "material-theme"
-  (interactive)
-  (theme-factory-macro material-theme material))
+;; bind theme keymap. 
+(defun bind-change-theme-keymap ()
+  "Bind change theme keymap on general."
+  (eval
+   (let ((keybinds '(general-define-key
+              :prefix "C-c"))
+        (idx 0))
+    (dolist (i kumo/theme keybinds)
+               (setq keybinds (append keybinds `(,(concat "t" (number-to-string idx))) `((quote ,(nth 1 i)))))
+               (setq idx (+ idx 1))
+      ))))
 
-;; material-theme-light
-(defun material-theme-light ()
-  "material-theme-light"
-  (interactive)
-  (theme-factory-macro material-theme material-light))
 
-;; srcery-theme
-(defun srcery-theme ()
-  "srcery-theme"
-  (interactive)
-  (theme-factory-macro srcery-theme srcery))
-
-;; flucui-theme
-(defun flucui-theme ()
-  "flucui-theme"
-  (interactive)
-  (theme-factory-macro flucui-themes flucui-dark))
-
-;; flucui-theme-light
-(defun flucui-theme-light ()
-  "flucui-theme-light"
-  (interactive)
-  (theme-factory-macro flucui-themes flucui-light))
-
+;; create-interactive-theme-func
+(create-theme-func-macro)
 
 ;; init default theme
-(cond
- ((eq kumo-theme 'doom-one)
-  (doom-theme-one))
+(funcall kumo/default-theme)
 
- ((eq kumo-theme 'doom-vibrant)
-  (doom-theme-vibrant))
- 
- ((eq kumo-theme 'monokai)
-  (monokai-theme))
-
- ((eq kumo-theme 'dracula)
-  (dracula-theme))
-
- ((eq kumo-theme 'material)
-  (material-theme))
-
- ((eq kumo-theme 'material-light)
-  (material-theme-light))
-
- ((eq kumo-theme 'srcery)
-  (srcery-theme))
-
- ((eq kumo-theme 'flucui)
-  (flucui-theme))
-
- ((eq kumo-theme 'flucui-light)
-  (flucui-theme-light))
-
- (t
-  (ignore-errors (load-theme kumo-theme t))))
-
-;; change theme keymap
-(with-eval-after-load 'general
-  (general-define-key
-    :prefix "C-c"
-    "t0" 'doom-theme-one
-    "t1" 'doom-theme-vibrant
-    "t2" 'monokai-theme
-    "t3" 'dracula-theme
-    "t4" 'material-theme
-    "t5" 'material-theme-light
-    "t6" 'srcery-theme
-    "t7" 'flucui-theme 
-    "t8" 'flucui-theme-light 
-    )
-)
+;; bind change theme keymap
+(bind-change-theme-keymap)
 
 
 ;;;;;;;;;;;;;;;;
@@ -187,16 +112,11 @@
 ;;       (set-face-attribute 'mode-line nil :height 100)
 ;;       (set-face-attribute 'mode-line-inactive nil :height 100))
 
-(use-package moody
+(use-package minions
   :ensure t
   :hook
-  (after-init . moody-mode)
-  :config
-  (setq x-underline-at-descent-line t)
-  (setq moody-mode-line-height 24)
-  (moody-replace-mode-line-buffer-identification)
-  (moody-replace-vc-mode)
-)
+  (after-init . minions-mode)
+  :config (minions-mode t))
 
 
 ;; nyan-mode
@@ -206,7 +126,6 @@
   :config
   (setq nyan-animate-nyancat t)
   (setq nyan-wavy-trail nil))
-
 
 
 ;; Line and Column
@@ -219,6 +138,7 @@
                 scroll-conservatively 100000
                 scroll-preserve-screen-position 1))
 
+
 ;; Misc
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq inhibit-startup-screen t)
@@ -226,17 +146,30 @@
 (setq track-eol t)                      ; Keep cursor at end of lines. Require line-move-visual is nil.
 (setq line-move-visual nil)
 
+
 ;; Don't open a file in a new frame
 (when (boundp 'ns-pop-up-frames)
   (setq ns-pop-up-frames nil))
+
 
 ;; Don't use GTK+ tooltip
 (when (boundp 'x-gtk-use-system-tooltips)
   (setq x-gtk-use-system-tooltips nil))
 
+
 ;; highlight
 (use-package symbol-overlay)
 (global-hl-line-mode t)
+
+
+;; paren highlight
+(show-paren-mode 1)
+(define-advice show-paren-function (:around (fn) fix-show-paren-function)
+  "Highlight enclosing parens."
+  (cond ((looking-at-p "\\s(") (funcall fn))
+	(t (save-excursion
+	     (ignore-errors (backward-up-list))
+	     (funcall fn)))))
 
 ;; icons
 (use-package all-the-icons

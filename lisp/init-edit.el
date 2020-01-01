@@ -63,6 +63,16 @@
   :diminish rainbow-delimiters-mode
   :init (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
+;; wrap-region
+;; (use-package wrap-region
+;;   :init
+;;   (wrap-region-mode t)
+;;   :config
+;;   (wrap-region-add-wrapper "$" "$")
+;;   (wrap-region-add-wrapper "{-" "-}" "#")
+;;   (wrap-region-add-wrapper "`" "`" nil '(markdown-mode)))
+
+
 
 (provide 'init-edit)
 

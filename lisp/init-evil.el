@@ -7,9 +7,10 @@
   (evil-mode t)
   (setq x-select-enable-clipboard t)
   ;; normal d no yank
-  ;; visual d yank
   (define-key evil-normal-state-map (kbd "d") 'evil-delete-no-yank)
+  ;; visual d yank
   (define-key evil-visual-state-map (kbd "d") 'evil-delete)
+  (evil-define-key 'visual global-map (kbd "z") 'kumo-wrap-with-input)
   :config
   (evil-define-operator evil-delete-char-no-yank (beg end type register yank-handler)
     "Delete next character without yanking."
@@ -91,15 +92,57 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
     (when (and (called-interactively-p 'any)
              (eq type 'line))
     (evil-first-non-blank)))
-)
 
-;; evil-surround
-(use-package evil-surround
-  :ensure t
-  :init
-  (global-evil-surround-mode t)
-  :config
-  (evil-define-key 'visual evil-surround-mode-map (kbd "zc") 'evil-surround-change))
+(evil-define-command evil-paste-after
+  (count &optional register yank-handler)
+  "Pastes the latest yanked text behind point.
+The return value is the yanked text."
+  :suppress-operator t
+  (interactive "p<x>")
+  (if (evil-visual-state-p)
+      (evil-visual-paste count register)
+    (evil-with-undo
+      (let* ((text (if register
+                       (evil-get-register register)
+                     (current-kill 0)))
+             (yank-handler (or yank-handler
+                               (when (stringp text)
+                                 (car-safe (get-text-property
+                                            0 'yank-handler text)))))
+             (opoint (point)))
+        (when text
+          (if (functionp yank-handler)
+              (let ((evil-paste-count count)
+                    ;; for non-interactive use
+                    (this-command #'evil-paste-after))
+                (insert-for-yank text))
+            ;; no yank-handler, default
+            (when (vectorp text)
+              (setq text (evil-vector-to-string text)))
+            (set-text-properties 0 (length text) nil text)
+            (unless (eolp) (forward-char))
+            (push-mark (point) t)
+            ;; TODO: Perhaps it is better to collect a list of all
+            ;; (point . mark) pairs to undo the yanking for COUNT > 1.
+            ;; The reason is that this yanking could very well use
+            ;; `yank-handler'.
+            (let ((beg (point)))
+              (dotimes (i (or count 1))
+                (insert-for-yank text))
+              (setq evil-last-paste
+                    (list #'evil-paste-after
+                          count
+                          opoint
+                          beg       ; beg
+                          (point))) ; end
+              (evil-set-marker ?\[ beg)
+              (evil-set-marker ?\] (1- (point)))
+              (when (evil-normal-state-p)
+                (evil-move-cursor-back)))))
+        (when register
+          (setq evil-last-paste nil))
+        (and (> (length text) 0) text)))))
+)
 
 
 (use-package general)
@@ -165,15 +208,12 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "f" 'avy-goto-char-in-line
  "gb" 'pop-tag-mark
  "c" 'evil-change-no-yank
- ;; "C" 'evil-change-line-no-yank
+ "C" 'evil-change-line-no-yank
  "x" 'evil-delete-char-no-yank
  "X" 'evil-delete-backward-char-no-yank
  "s" 'evil-substitute-no-yank
  "S" 'evil-substitute-whole-line-no-yank
 )
-
-
-;; (define-key evil-normal-state-map "d" #'evil-delete-no-yank)
 
 
 
