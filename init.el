@@ -55,6 +55,7 @@
   (require 'init-evil)
   (require 'init-ui)
   (require 'init-edit)
+  (require 'init-symbol-overlay)
   (require 'init-treemacs)
   (require 'init-shell)
   (require 'init-which-key)
@@ -92,7 +93,13 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default))))
+    ("5e515425f8a5ce00097d707742eb5eee09b27cebc693b8998c734305cbdce1f5" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
+ '(lsp-auto-guess-root t t)
+ '(lsp-enable-snippet nil t)
+ '(lsp-prefer-flymake nil t)
+ '(lsp-print-io nil t)
+ '(lsp-print-performance nil t)
+ '(lsp-trace nil t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

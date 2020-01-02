@@ -2,7 +2,6 @@
 
 
 ;; js2-mode: enhanced JavaScript editing mode
-;; https://github.com/mooz/js2-mode
 (use-package js2-mode
   :mode (("\\.js$" . js2-mode))
   :hook ((js2-mode . (lambda ()
@@ -21,7 +20,6 @@
 
 
 ;; typescript: major mode for editing typescript files
-;; https://github.com/ananthakumaran/typescript.el
 (use-package typescript-mode
   :hook ((typescript-mode . (lambda ()
     (prettier-js-mode)
@@ -29,6 +27,14 @@
     )))
   :config 
   (setq typescript-indent-level 2))
+
+
+;; rjsx-mode
+;; (use-package rjsx-mode
+;;   :mode
+;;   (("\\.jsx$" . rjsx-mode)
+;;    ("\\.tsx$" . rjsx-mode))
+;; )
 
 
 

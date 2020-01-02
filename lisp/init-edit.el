@@ -40,9 +40,12 @@
 (use-package comment-dwim-2)
 
 ;; Automatic parenthesis pairing
-(use-package elec-pair
-  :ensure nil
-  :hook (after-init . electric-pair-mode))
+(use-package smartparens
+  :ensure t
+  :init (smartparens-global-mode t)
+  :config 
+  (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
+  (sp-local-pair 'lisp-interaction-mode "'" nil :actions nil))
 
 ;; Hungry deletion
 (use-package hungry-delete

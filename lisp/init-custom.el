@@ -22,7 +22,11 @@
     (material-theme material-light)
     (srcery-theme srcery)
     (flucui-themes flucui-dark)
-    (flucui-themes flucui-light))
+    (flucui-themes flucui-light)
+    (solarized-theme solarized-dark)
+    (solarized-theme solarized-light)
+    (lab-themes lab-dark)
+    )
     "Theme list.")
 
 
@@ -39,6 +43,5 @@
 
 
 (provide 'init-custom)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-custom.el ends here

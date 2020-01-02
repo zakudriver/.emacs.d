@@ -1,39 +1,22 @@
 ;;; Code:
 
-;; Emacs client for the Language Server Protocol
-;; https://github.com/emacs-lsp/lsp-mode
-;;(use-package lsp-mode
-;;  :diminish lsp-mode
-;;  :init
-;;  (add-hook 'prog-major-mode #'lsp-prog-major-mode-enable)
-;;  :config
-;;  (use-package lsp-ui
-;;    :defines lsp-ui-mode-map
-;;    :commands (lsp-ui-mode lsp-ui-peek-find-definistions lsp-ui-peek-find-references)
-;;    :bind (:map lsp-ui-mode-map
-;;                ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
-;;                ([remap xref-find-references] . lsp-ui-peek-find-references))
-;;   :hook (lsp-mode . lsp-ui-mode)
-;;   :config
-;;   (setq lsp-ui-sideline-enable nil))
-;;    (use-package company-lsp
-;;      :defines company-backends
-;;      :functions company-backend-with-yas
-;;      :init (add-to-list 'company-backends (company-backend-with-yas 'company-lsp))
-;;      :after company
-;;      :config
-;;      (setq company-transformers nil company-lsp-async t company-lsp-cache-candidates nil)))
-
 
 ;; Emacs client for the Language Server Protocol
-;; https://github.com/emacs-lsp/lsp-mode
 (use-package lsp-mode
   :ensure t
+  :diminish lsp-mode
   :commands lsp
+  ;; :hook
+  ;; ((typescript-mode web-mode go-mode) . lsp)
   :hook
-  ((typescript-mode web-mode go-mode) . lsp)
+  (typescript-mode . lsp-deferred)
   (go-mode . lsp-deferred)
-  :commands (lsp lsp-deferred)
+  :custom
+  (lsp-auto-guess-root t)
+  (lsp-enable-snippet nil)
+  (lsp-prefer-flymake nil)
+  :commands
+  (lsp lsp-deferred)
   :custom
   ;; debug
   (lsp-print-io nil)
@@ -45,7 +28,7 @@
     :hook (lsp-mode . lsp-ui-mode)
     :custom
     ;; lsp-ui-doc
-    ;; (lsp-ui-doc-enable nil)
+    (lsp-ui-doc-enable t)
     (lsp-ui-doc-header t)
     ;; (lsp-ui-doc-include-signature nil)
     (lsp-ui-doc-position 'bottom) ;; top, bottom, or at-point
@@ -55,7 +38,6 @@
     (lsp-ui-doc-use-webkit t)
     ;; lsp-ui-flycheck
     ;; (lsp-ui-flycheck-enable nil)
-    ;; lsp-ui-sideline
     (lsp-ui-sideline-enable nil)
     (lsp-ui-sideline-ignore-duplicate t)
     (lsp-ui-sideline-show-symbol t)
@@ -93,7 +75,9 @@
 
 
   (use-package lsp-treemacs
-    :commands lsp-treemacs-errors-list))
+    :bind (:map lsp-mode-map
+                ("M-`" . lsp-treemacs-errors-list)))
+)
 
 
 

@@ -157,10 +157,12 @@
   (setq x-gtk-use-system-tooltips nil))
 
 
-;; highlight
-(use-package symbol-overlay)
-(global-hl-line-mode t)
 
+;;;;;;;;;;;;;;;;
+;; Highlight
+;;;;;;;;;;;;;;;;
+;; line highlight
+(global-hl-line-mode t)
 
 ;; paren highlight
 (show-paren-mode 1)
@@ -171,7 +173,10 @@
 	     (ignore-errors (backward-up-list))
 	     (funcall fn)))))
 
+
+;;;;;;;;;;;;;;;;
 ;; icons
+;;;;;;;;;;;;;;;;
 (use-package all-the-icons
   :if (display-graphic-p)
   :init (unless (or sys/win32p (member "all-the-icons" (font-family-list)))
@@ -218,7 +223,7 @@
 (setq-default initial-scratch-message
               (concat ";; Happy hacking, " user-login-name " - Emacs ♥ you!\n\n"))
 
-(provide 'init-ui)
 
+(provide 'init-ui)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-ui.el ends here
