@@ -5,7 +5,8 @@
 (use-package lsp-mode
   :ensure t
   :diminish lsp-mode
-  :commands lsp
+  :commands
+  (lsp lsp-deferred)
   ;; :hook
   ;; ((typescript-mode web-mode go-mode) . lsp)
   :hook
@@ -15,8 +16,6 @@
   (lsp-auto-guess-root t)
   (lsp-enable-snippet nil)
   (lsp-prefer-flymake nil)
-  :commands
-  (lsp lsp-deferred)
   :custom
   ;; debug
   (lsp-print-io nil)

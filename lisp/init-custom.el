@@ -34,9 +34,11 @@
   "Enable yasnippet for company backends or not."
   :type 'boolean)
 
+
+ ;; "/usr/local/go/bin" -- complete --> go mode lsp !!!
 (defconst kumo/env-path
   (if (and sys/macp)
-    '("/usr/local/bin" "/Users/kumotyou/code/golang/bin" "/Users/kumotyou/code/go/bin")
+    '("/usr/local/bin" "/Users/kumotyou/code/golang/bin" "/Users/kumotyou/code/go/bin" "/usr/local/go/bin")
     '("/home/kumotyou/Code/Go/bin" "/usr/lib/go/bin" "/home/kumotyou/.yarn/bin"))
   "ENV_PATH list.")
 
