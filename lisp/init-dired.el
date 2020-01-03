@@ -12,18 +12,35 @@
   (setq dired-recursive-deletes 'always)
   (setq dired-recursive-copies 'always)
 
-  (cond
-   (sys/macp
+  ;; (cond
+  ;;  (sys/macp
+  ;;   ;; Suppress the warning: `ls does not support --dired'.
+  ;;   (setq dired-use-ls-dired nil)
+
+  ;;   ;; Use GNU ls as `gls' from `coreutils' if available.
+  ;;   (when (executable-find "gls")
+  ;;     (setq insert-directory-program "gls")))
+  ;;  (sys/win32p
+  ;;   (when (executable-find "ls")
+  ;;     ;; `dired-quick-sort' needs it
+  ;;     (setq ls-lisp-use-insert-directory-program t))))
+
+
+(when sys/macp
     ;; Suppress the warning: `ls does not support --dired'.
     (setq dired-use-ls-dired nil)
 
-    ;; Use GNU ls as `gls' from `coreutils' if available.
     (when (executable-find "gls")
+      ;; Use GNU ls as `gls' from `coreutils' if available.
       (setq insert-directory-program "gls")))
-   (sys/win32p
-    (when (executable-find "ls")
-      ;; `dired-quick-sort' needs it
-      (setq ls-lisp-use-insert-directory-program t))))
+
+  (when (or (and sys/macp (executable-find "gls"))
+            (and (not sys/macp) (executable-find "ls")))
+    ;; Using `insert-directory-program'
+    (setq ls-lisp-use-insert-directory-program t)
+
+    ;; Show directory first
+    (setq dired-listing-switches "-alh --group-directories-first"))
 
   ;; Extra Dired functionality
   ;; Extended file highlighting according to its type
