@@ -9,8 +9,8 @@
   ;; :hook
   ;; ((typescript-mode web-mode go-mode) . lsp)
   :hook
-  (typescript-mode . lsp-deferred)
-  (go-mode . lsp-deferred)
+  ((typescript-mode web-mode go-mode) . lsp)
+  ((typescript-mode web-mode go-mode) . lsp-deferred)
   :custom
   (lsp-auto-guess-root t)
   (lsp-enable-snippet nil)
