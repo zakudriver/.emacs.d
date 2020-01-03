@@ -25,8 +25,7 @@
 
 ;; Tab and Space
 ;; Permanently indent with spaces, never with TABs
-(setq-default c-basic-offset   2
-              tab-width        2
+(setq-default tab-width        2
               indent-tabs-mode nil)
 
 ;; Automatically reload files was modified by external program
@@ -37,7 +36,8 @@
 
 
 ;; An all-in-one comment command to rule them all
-(use-package comment-dwim-2)
+(use-package comment-dwim-2
+  :bind ([remap comment-dwim] . comment-dwim-2)) 
 
 ;; Automatic parenthesis pairing
 (use-package smartparens
@@ -49,8 +49,8 @@
 
 ;; Hungry deletion
 (use-package hungry-delete
-  :diminish hungry-delete-mode
-  :init (add-hook 'prog-mode-hook 'global-hungry-delete-mode)
+  :diminish 
+  :hook (after-init . global-hungry-delete-mode)
   :config (setq-default hungry-delete-chars-to-skip " \t\f\v"))
 
 ;; Move to the beginning/end of line or code
@@ -65,15 +65,6 @@
 (use-package rainbow-delimiters
   :diminish rainbow-delimiters-mode
   :init (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
-
-;; wrap-region
-;; (use-package wrap-region
-;;   :init
-;;   (wrap-region-mode t)
-;;   :config
-;;   (wrap-region-add-wrapper "$" "$")
-;;   (wrap-region-add-wrapper "{-" "-}" "#")
-;;   (wrap-region-add-wrapper "`" "`" nil '(markdown-mode)))
 
 
 

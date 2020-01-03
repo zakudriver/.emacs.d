@@ -32,8 +32,8 @@
   ;;   (exec-path-from-shell-copy-envs '("GOPATH" "GO111MODULE" "GOPROXY")))
 
   (use-package company-go
-    :init
-    (add-to-list 'company-backends (company-backend-with-yas 'company-go))
+    ;; :init
+    ;; (add-to-list 'company-backends (company-backend-with-yas 'company-go))
     :after company)
 
 

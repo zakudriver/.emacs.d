@@ -58,6 +58,7 @@
   (require 'init-evil)
   (require 'init-ui)
   (require 'init-edit)
+  (require 'init-ibuffer)
   (require 'init-symbol-overlay)
   (require 'init-treemacs)
   (require 'init-shell)

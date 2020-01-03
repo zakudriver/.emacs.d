@@ -194,6 +194,12 @@
                '("\\.go$" all-the-icons-fileicon "go" :face all-the-icons-blue))
   (add-to-list 'all-the-icons-mode-icon-alist
                '(go-mode all-the-icons-fileicon "go" :face all-the-icons-blue))
+  (add-to-list 'all-the-icons-icon-alist
+               '("\\.tsx$" all-the-icons-fileicon "typescript" :height 0.9 :face all-the-icons-dblue))
+  (add-to-list 'all-the-icons-icon-alist
+               '("\\.tx$" all-the-icons-fileicon "typescript" :height 0.9 :face all-the-icons-blue))
+  (add-to-list 'all-the-icons-mode-icon-alist
+               '(typescript-mode all-the-icons-fileicon "typescript" :height 0.9 :face all-the-icons-blue))
   (add-to-list 'all-the-icons-mode-icon-alist
                '(help-mode all-the-icons-faicon "info-circle" :height 1.1 :v-adjust -0.1 :face all-the-icons-purple))
   (add-to-list 'all-the-icons-mode-icon-alist
@@ -220,6 +226,7 @@
                '(gfm-mode all-the-icons-octicon "markdown" :face all-the-icons-blue)))
 
 
+;; initial message
 (setq-default initial-scratch-message
               (concat ";; Happy hacking, " user-login-name " - Emacs ♥ you!\n\n"))
 

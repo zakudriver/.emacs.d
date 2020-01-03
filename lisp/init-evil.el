@@ -134,6 +134,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "ff" 'counsel-find-file
  "fz" 'counsel-fzf
  "bb" 'counsel-switch-buffer
+ "bi" 'ibuffer
  "bt" 'kumo-kill-this-buffer
  "bo" 'kumo-kill-other-buffers
  "ba" 'kumo-kill-all-buffers
@@ -141,7 +142,9 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "bs" 'save-buffer
  "cc" 'comment-dwim-2
  "d" 'dired
- "w" 'hydra-frame-window/body
+ "ww" 'hydra-frame-window/body
+ "ws" 'split-window-below
+ "wh" 'split-window-right
  "mo" 'multi-term
  "md" 'kumo-multi-term-dedicated-open
  "mc" 'multi-term-dedicated-close

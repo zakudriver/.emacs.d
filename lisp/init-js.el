@@ -4,10 +4,6 @@
 ;; js2-mode: enhanced JavaScript editing mode
 (use-package js2-mode
   :mode (("\\.js$" . js2-mode))
-  :hook ((js2-mode . (lambda ()
-    (prettier-js-mode)
-    ;;(add-node-modules-path)
-    )))
   :config
   (setq js-indent-level 2
         js2-basic-offset 2
@@ -18,24 +14,10 @@
   (setq js2-strict-missing-semi-warning nil))
 
 
-
 ;; typescript: major mode for editing typescript files
 (use-package typescript-mode
-  :hook ((typescript-mode . (lambda ()
-    (prettier-js-mode)
-    ;;(add-node-modules-path)
-    )))
   :config 
   (setq typescript-indent-level 2))
-
-
-;; rjsx-mode
-;; (use-package rjsx-mode
-;;   :mode
-;;   (("\\.jsx$" . rjsx-mode)
-;;    ("\\.tsx$" . rjsx-mode))
-;; )
-
 
 
 ;; format
@@ -43,9 +25,9 @@
   :init
   (setq prettier-js-args '("--single-quote" "true" "--print-width" "120"))
   :hook
-  ((js2-mode . prettier-js-mode)
-         (typescript-mode . prettier-js-mode)
-         (web-mode . prettier-js-mode)))
+  (js2-mode . prettier-js-mode)
+  (typescript-mode . prettier-js-mode)
+  (web-mode . prettier-js-mode))
 
 
 

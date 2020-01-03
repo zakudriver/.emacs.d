@@ -13,7 +13,9 @@
           (const :tag "Tuna" tuna)))
 
 
-(defconst kumo/default-theme 'flucui-dark)
+;; (file-exists-p "~/.emacs.d/.theme")
+
+(defconst kumo/default-theme 'solarized-light)
 
 (defconst kumo/theme
   '((monokai-theme monokai)
