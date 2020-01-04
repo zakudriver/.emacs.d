@@ -12,9 +12,6 @@
           (const :tag "Emacs-China" emacs-china)
           (const :tag "Tuna" tuna)))
 
-
-;; (file-exists-p "~/.emacs.d/.theme")
-
 (defconst kumo/default-theme 'solarized-light)
 
 (defconst kumo/theme
@@ -27,8 +24,7 @@
     (flucui-themes flucui-light)
     (solarized-theme solarized-dark)
     (solarized-theme solarized-light)
-    (lab-themes lab-dark)
-    )
+    (lab-themes lab-dark))
     "Theme list.")
 
 

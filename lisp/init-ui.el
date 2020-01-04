@@ -37,13 +37,24 @@
 ;;;;;;;;;;;;;;;;
 ;; Color Theme
 ;;;;;;;;;;;;;;;;
+(defun set-default-theme ()
+  (progn
+      (write-region (symbol-name kumo/default-theme) nil kumo/theme-setting-cache) kumo/default-theme))
 
-;;// TODO the theme config
-;; ----- variable name: xxxx-config -----
-;; (setq doom-config '(:config (setq a "a")))
+(defun theme-is-existing (target)
+  (cl-loop for i in kumo/theme
+        when (eq (nth 1 i) target)
+        return t))
 
-(setq kumo/current-theme kumo/default-theme)
+(defun read-theme-cahce ()
+  (if (file-exists-p kumo/theme-setting-cache)
+      (let ((theme
+             (intern (with-temp-buffer (insert-file-contents kumo/theme-setting-cache) (buffer-string))))) 
+        (if (theme-is-existing theme) theme (set-default-theme))) 
+    (set-default-theme)))
 
+
+(setq kumo/current-theme (read-theme-cahce))
 
 ;; theme factory macro
 (defmacro theme-factory-macro (name load-name &rest config)
@@ -60,11 +71,9 @@
 (defun create-theme-func (theme)
   `(defun ,(nth 1 theme) ()
      (interactive)
-    ;;  (let ((theme-config (intern (concat (symbol-name (nth 1 theme)) "-config"))))
-    ;;    (if (boundp theme-config)
-    ;;        (theme-factory-macro ,@theme ,@theme-config)
-    ;;      (theme-factory-macro ,@theme)))
-     (theme-factory-macro ,@theme)))
+     (theme-factory-macro ,@theme)
+     (write-region (symbol-name (quote ,(nth 1 theme))) nil kumo/theme-setting-cache)
+     ))
 
 
 (defmacro create-theme-func-macro ()
@@ -88,7 +97,7 @@
 (create-theme-func-macro)
 
 ;; init default theme
-(funcall kumo/default-theme)
+(funcall kumo/current-theme)
 
 ;; bind change theme keymap
 (bind-change-theme-keymap)

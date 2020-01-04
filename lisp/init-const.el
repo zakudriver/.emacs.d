@@ -27,6 +27,10 @@
                     )
   "Symbols for wrap ")
 
+(defconst kumo/theme-setting-cache
+  "~/.emacs.d/.theme"
+  "theme-setting-cache")
+
 
 (provide 'init-const)
 
