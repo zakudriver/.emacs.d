@@ -38,15 +38,18 @@
 ;; Color Theme
 ;;;;;;;;;;;;;;;;
 (defun set-default-theme ()
+  "write and return default-theme"
   (progn
       (write-region (symbol-name kumo/default-theme) nil kumo/theme-setting-cache) kumo/default-theme))
 
 (defun theme-is-existing (target)
+  "check the theme is exists"
   (cl-loop for i in kumo/theme
         when (eq (nth 1 i) target)
         return t))
 
-(defun read-theme-cahce ()
+(defun read-theme-cache ()
+  "read theme for theme cache"
   (if (file-exists-p kumo/theme-setting-cache)
       (let ((theme
              (intern (with-temp-buffer (insert-file-contents kumo/theme-setting-cache) (buffer-string))))) 
@@ -54,7 +57,8 @@
     (set-default-theme)))
 
 
-(setq kumo/current-theme (read-theme-cahce))
+;; set current theme
+(setq kumo/current-theme (read-theme-cache))
 
 ;; theme factory macro
 (defmacro theme-factory-macro (name load-name &rest config)
@@ -80,6 +84,10 @@
   `(progn ,@(mapcar 'create-theme-func kumo/theme)))
 
 
+;; when number of themes > 9
+(defconst kumo/index-map
+  '("q" "w" "e" "r" "t" "y" "u" "i" "o" "p"))
+
 ;; bind theme keymap. 
 (defun bind-change-theme-keymap ()
   "Bind change theme keymap on general."
@@ -88,9 +96,8 @@
               :prefix "C-c"))
         (idx 0))
     (dolist (i kumo/theme keybinds)
-               (setq keybinds (append keybinds `(,(concat "t" (number-to-string idx))) `((quote ,(nth 1 i)))))
-               (setq idx (+ idx 1))
-      ))))
+               (setq keybinds (append keybinds `(,(concat "t" (if (> idx 9) (nth (- idx 10) kumo/index-map) (number-to-string idx)))) `((quote ,(nth 1 i)))))
+               (setq idx (+ idx 1))))))
 
 
 ;; create-interactive-theme-func

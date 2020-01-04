@@ -14,6 +14,7 @@
 
 (defconst kumo/default-theme 'solarized-light)
 
+;; max: 18 themes
 (defconst kumo/theme
   '((monokai-theme monokai)
     (dracula-theme dracula)
@@ -24,7 +25,8 @@
     (flucui-themes flucui-light)
     (solarized-theme solarized-dark)
     (solarized-theme solarized-light)
-    (lab-themes lab-dark))
+    (lab-themes lab-dark)
+    (lab-themes lab-light))
     "Theme list.")
 
 
