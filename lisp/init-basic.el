@@ -18,15 +18,6 @@
 (setq ring-bell-function 'ignore)
 
 ;; Environment
-;; (when (or sys/mac-x-p sys/linux-x-p)
-;;   (use-package exec-path-from-shell
-;;     :init
-;;     (setq exec-path-from-shell-check-startup-files nil)
-;;     (setq exec-path-from-shell-variables '("PATH" "MANPATH" "GOPATH"))
-;;     (setq exec-path-from-shell-arguments '("-l"))
-;;     (exec-path-from-shell-initialize)))
-
-;; Environment
 (progn
   (setenv "PATH" (concat (getenv "PATH") ":" (mapconcat 'identity kumo/env-path ":")))
   (dolist (i kumo/env-path)
