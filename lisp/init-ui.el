@@ -38,18 +38,18 @@
 ;; Color Theme
 ;;;;;;;;;;;;;;;;
 (defun set-default-theme ()
-  "write and return default-theme"
+  "Write and return default-theme"
   (progn
       (write-region (symbol-name kumo/default-theme) nil kumo/theme-setting-cache) kumo/default-theme))
 
 (defun theme-is-existing (target)
-  "check the theme is exists"
+  "Check the theme is exists"
   (cl-loop for i in kumo/theme
         when (eq (nth 1 i) target)
         return t))
 
 (defun read-theme-cache ()
-  "read theme for theme cache"
+  "Read theme for theme cache"
   (if (file-exists-p kumo/theme-setting-cache)
       (let ((theme
              (intern (with-temp-buffer (insert-file-contents kumo/theme-setting-cache) (buffer-string))))) 

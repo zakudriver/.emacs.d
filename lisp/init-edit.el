@@ -1,4 +1,3 @@
-
 ;;; Code:
 
 
@@ -35,31 +34,40 @@
   :hook (after-init . global-auto-revert-mode))
 
 
+;; Treat undo history as a tree
+(use-package undo-tree
+  :diminish undo-tree-mode
+  :hook (after-init . global-undo-tree-mode)
+  :bind
+  (:map undo-tree-map
+        ("C-/" . nil))
+)
+
+
 ;; An all-in-one comment command to rule them all
 (use-package comment-dwim-2
-  :bind ([remap comment-dwim] . comment-dwim-2)) 
+  :bind
+  ("C-/" . comment-dwim-2)
+  ([remap comment-dwim] . comment-dwim-2))
+
 
 ;; Automatic parenthesis pairing
 (use-package smartparens
   :ensure t
   :init (smartparens-global-mode t)
-  :config 
+  :config
   (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
   (sp-local-pair 'lisp-interaction-mode "'" nil :actions nil))
 
 ;; Hungry deletion
 (use-package hungry-delete
-  :diminish 
+  :diminish
   :hook (after-init . global-hungry-delete-mode)
   :config (setq-default hungry-delete-chars-to-skip " \t\f\v"))
 
 ;; Move to the beginning/end of line or code
 (use-package mwim)
 
-;; Treat undo history as a tree
-(use-package undo-tree
-  :diminish undo-tree-mode
-  :hook (after-init . global-undo-tree-mode))
 
 ;; rainbow-delimiters
 (use-package rainbow-delimiters

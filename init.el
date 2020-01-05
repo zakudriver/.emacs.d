@@ -34,9 +34,8 @@
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 ;; benchmarking
 (require 'init-benchmarking)
-
+;; custom-file
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-
 
 ;; set my own configuration
 (with-temp-message ""                   ;抹掉插件启动的输出
@@ -70,6 +69,7 @@
   (require 'init-dired)
 
   ;; Programming
+  (require 'init-flycheck)
   (require 'init-lsp)
   (require 'init-prog)
   (require 'init-go)
@@ -78,6 +78,5 @@
   ;; Web
   (require 'init-js)
   (require 'init-web)
-
 )
 

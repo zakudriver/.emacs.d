@@ -110,7 +110,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "," 'counsel-M-x
  "k" 'symbol-overlay-put
  "K" 'symbol-overlay-remove-all
- "cc" 'comment-dwim-2
+ ;; "cc" 'comment-dwim-2
  "u" 'undo-tree-visualize
  "f" 'counsel-find-file
  "F" 'counsel-fzf
@@ -140,11 +140,12 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "ba" 'kumo-kill-all-buffers
  "bp" 'kumo-switch-to-previous-buffer
  "bs" 'save-buffer
- "cc" 'comment-dwim-2
+ "c" 'flycheck-list-errors
  "d" 'dired
  "ww" 'hydra-frame-window/body
  "ws" 'split-window-below
  "wh" 'split-window-right
+ "wd" 'delete-window
  "mo" 'multi-term
  "md" 'kumo-multi-term-dedicated-open
  "mc" 'multi-term-dedicated-close

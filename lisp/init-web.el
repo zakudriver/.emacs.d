@@ -13,32 +13,11 @@
 ;;   (setq scss-compile-at-save nil))
 
 
-(defun web-lsp-html-setup ()
-  (lsp)
-  (emmet-mode)
-
-  (set (make-local-variable 'company-backends)
-       '((company-lsp company-files :with company-yasnippet)
-         (company-dabbrev-code company-dabbrev)))
-
-  (setq-local lsp-highlight-symbol-at-point nil))
-
-
-(defun web-tsx-setup-hook ()
-  ;; company-backends setup
-  (set (make-local-variable 'company-backends)
-       '((company-dabbrev-code company-dabbrev)))
-  ;; enable typescript-tslint checker
-  ;; (flycheck-add-mode 'typescript-tslint 'web-mode)
-)
-
-;; web-mode: major-mode for editing multiple web formats
+;; major-mode for editing multiple web formats
 (use-package web-mode
   :mode
   (("\\.html$" . web-mode)
          ("\\.djhtml$" . web-mode)
-         ("\\.tsx$" . web-mode)
-         ("\\.jsx$" . web-mode)
          ("\\.mustache\\'" . web-mode)
          ("\\.phtml\\'" . web-mode)
          ("\\.as[cp]x\\'" . web-mode)
@@ -54,12 +33,6 @@
   (web-mode-enable-auto-pairing nil)
   (web-mode-enable-current-element-highlight t)
   (web-mode-enable-css-colorization t)
-  ;; :config
-  ;; (add-hook 'web-mode-hook
-  ;;           (lambda ()
-  ;;             (pcase (file-name-extension buffer-file-name)
-  ;;               ("tsx" (web-tsx-setup-hook))
-  ;;               )))
 )
 
 

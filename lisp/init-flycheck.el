@@ -1,22 +1,42 @@
 ;;; Code:
 
 (use-package flycheck
-  :diminish flycheck-mode
+  :diminish
+  :hook (after-init . global-flycheck-mode)
+  :init
+  (add-to-list 'display-buffer-alist
+               `(,(rx bos "*Flycheck errors*" eos)
+                 (display-buffer-reuse-window
+                  display-buffer-in-side-window)
+                 (side . bottom)
+                 (reusable-frames . visible)
+                 (window-height . 0.2)))
   :config
-  (setq flycheck-indication-mode 'right-fringe)
   (setq flycheck-emacs-lisp-load-path 'inherit)
 
+  ;; Only check while saving and opening files
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+
+  ;; Set fringe style
+  (setq flycheck-indication-mode 'right-fringe)
+  (when (fboundp 'define-fringe-bitmap)
+    (define-fringe-bitmap 'flycheck-fringe-bitmap-double-arrow
+      [16 48 112 240 112 48 16] nil nil 'center))
+
+  (use-package flycheck-color-mode-line
+    :hook (flycheck-mode . flycheck-color-mode-line-mode))
   ;; Display Flycheck errors in GUI tooltips
   (if (display-graphic-p)
-      (use-package flycheck-pos-tip
-        :hook (after-init . flycheck-pos-tip-mode)
-        :config (setq flycheck-pos-tip-timeout 30))
+      (use-package flycheck-posframe
+        :custom-face (flycheck-posframe-border-face ((t (:inherit default))))
+        :hook (flycheck-mode . flycheck-posframe-mode)
+        :init (setq flycheck-posframe-border-width 1
+                    flycheck-posframe-inhibit-functions
+                    '((lambda (&rest _) (bound-and-true-p company-backend)))))
     (use-package flycheck-popup-tip
-      :hook (after-init . flycheck-popup-tip-mode)))
+      :hook (flycheck-mode . flycheck-popup-tip-mode))))
 
-  ;; Jump to and fix syntax errors via `avy'
-  (use-package avy-flycheck
-    :hook (after-init . avy-flycheck-setup)))
+
 
 (provide 'init-flycheck)
 

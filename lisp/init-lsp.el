@@ -4,12 +4,12 @@
 ;; Emacs client for the Language Server Protocol
 (use-package lsp-mode
   :ensure t
-  :diminish 
-  :commands 
+  :diminish
+  :commands
   (lsp lsp-deferred)
   :hook
-  ((typescript-mode web-mode go-mode) . lsp)
-  ((typescript-mode web-mode go-mode) . lsp-deferred)
+  ((typescript-mode rjsx-mode go-mode) . lsp)
+  ((typescript-mode rjsx-mode go-mode) . lsp-deferred)
   :custom
   (lsp-auto-guess-root t)
   (lsp-enable-snippet nil)
@@ -18,15 +18,23 @@
   (lsp-print-io nil)
   (lsp-trace nil)
   (lsp-print-performance nil)
+
+  (lsp-clients-angular-language-server-command
+   '("node"
+     "~/.config/yarn/global/node_modules/@angular/language-server"
+     "--ngProbeLocations"
+     "~/.config/yarn/global/node_modules"
+     "--tsProbeLocations"
+     "~/.config/yarn/global/node_modules"
+     "--stdio"))
   :config
-  (use-package lsp-ui 
+  (use-package lsp-ui
     :commands lsp-ui
     ;; :hook (lsp-mode . lsp-ui)
     :custom
     ;; lsp-ui-doc
-    (lsp-ui-doc-enable t)
-    (lsp-ui-doc-header t)
-    ;; (lsp-ui-doc-include-signature nil)
+    (lsp-ui-doc-enable nil)
+    (lsp-ui-doc-header nil)
     (lsp-ui-doc-position 'bottom) ;; top, bottom, or at-point
     (lsp-ui-doc-max-width 120)
     (lsp-ui-doc-max-height 30)
@@ -34,7 +42,7 @@
     (lsp-ui-doc-use-webkit nil)
     (lsp-ui-doc-delay 0.2)
     ;; lsp-ui-flycheck
-    ;; (lsp-ui-flycheck-enable nil)
+    (lsp-ui-flycheck-enable t)
     ;; lsp-ui-sideline
     (lsp-ui-sideline-enable t)
     (lsp-ui-sideline-ignore-duplicate t)
@@ -60,7 +68,7 @@
                 ([remap xref-find-apropos] . lsp-ivy-workspace-symbol)
                 ("C-s-." . lsp-ivy-global-workspace-symbol)))
 
-  (use-package company-lsp 
+  (use-package company-lsp
     :init (setq company-lsp-cache-candidates 'auto)
     :config (push 'company-lsp company-backends))
 

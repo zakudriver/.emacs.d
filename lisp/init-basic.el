@@ -61,11 +61,11 @@
 
 ;; open init.el
 (defun open-init-file()
+  "Open init.el file."
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
 (global-set-key (kbd "<f2>") 'open-init-file)
-
 
 
 (provide 'init-basic)

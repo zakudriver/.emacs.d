@@ -1,7 +1,7 @@
 ;;; Code:
 
 
-;; js2-mode: enhanced JavaScript editing mode
+;; major mode for editing js files
 (use-package js2-mode
   :mode (("\\.js$" . js2-mode))
   :config
@@ -14,10 +14,15 @@
   (setq js2-strict-missing-semi-warning nil))
 
 
-;; typescript: major mode for editing typescript files
+;; major mode for editing ts files
 (use-package typescript-mode
-  :config 
+  :config
   (setq typescript-indent-level 2))
+
+
+;; major mode for tsx/jsx
+(use-package rjsx-mode
+  :mode ("\\.tsx" . rjsx-mode))
 
 
 ;; format
@@ -27,7 +32,9 @@
   :hook
   (js2-mode . prettier-js-mode)
   (typescript-mode . prettier-js-mode)
-  (web-mode . prettier-js-mode))
+  (web-mode . prettier-js-mode)
+  (rjsx-mode . prettier-js-mode))
+
 
 
 

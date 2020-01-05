@@ -12,7 +12,7 @@
           (const :tag "Emacs-China" emacs-china)
           (const :tag "Tuna" tuna)))
 
-(defconst kumo/default-theme 'solarized-light)
+(defconst kumo/default-theme 'monokai)
 
 ;; max: 18 themes
 (defconst kumo/theme
