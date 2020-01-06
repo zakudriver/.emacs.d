@@ -25,7 +25,7 @@
             (setq icon (all-the-icons-faicon "file-o" :face 'all-the-icons-dsilver :height 0.8 :v-adjust 0.0))
           icon)))
 
-    (setq ibuffer-formats `((mark modified read-only (locked) 
+    (setq ibuffer-formats `((mark modified read-only (locked)
                                   ;; Here you may adjust by replacing :right with :center or :left
                                   ;; According to taste, if you want the icon further from the name
                                   " " (icon 2 2 :left :elide)
@@ -36,22 +36,22 @@
                             (mark " " (name 16 -1) " " filename))))
 
   ;; Group ibuffer's list by project root
-  ;; (use-package ibuffer-projectile
-  ;;   :functions all-the-icons-octicon ibuffer-do-sort-by-alphabetic
-  ;;   :hook ((ibuffer . (lambda ()
-  ;;                       (ibuffer-projectile-set-filter-groups)
-  ;;                       (unless (eq ibuffer-sorting-mode 'alphabetic)
-  ;;                         (ibuffer-do-sort-by-alphabetic)))))
-  ;;   :config
-  ;;   (setq ibuffer-projectile-prefix
-  ;;         (if (display-graphic-p)
-  ;;             (concat
-  ;;              (all-the-icons-octicon "file-directory"
-  ;;                                     :face ibuffer-filter-group-name-face
-  ;;                                     :v-adjust -0.05
-  ;;                                     :height 1.25)
-  ;;              " ")
-  ;;           "Project: ")))
+  (use-package ibuffer-projectile
+    :functions all-the-icons-octicon ibuffer-do-sort-by-alphabetic
+    :hook ((ibuffer . (lambda ()
+                        (ibuffer-projectile-set-filter-groups)
+                        (unless (eq ibuffer-sorting-mode 'alphabetic)
+                          (ibuffer-do-sort-by-alphabetic)))))
+    :config
+    (setq ibuffer-projectile-prefix
+          (if (display-graphic-p)
+              (concat
+               (all-the-icons-octicon "file-directory"
+                                      :face ibuffer-filter-group-name-face
+                                      :v-adjust -0.05
+                                      :height 1.25)
+               " ")
+            "Project: ")))
 )
 
 

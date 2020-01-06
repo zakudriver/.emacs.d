@@ -1,4 +1,4 @@
-;;; Code:
+;;; Code
 
 
 ;; Emacs client for the Language Server Protocol
@@ -8,25 +8,32 @@
   :commands
   (lsp lsp-deferred)
   :hook
-  ((typescript-mode rjsx-mode go-mode) . lsp)
-  ((typescript-mode rjsx-mode go-mode) . lsp-deferred)
+  ;; ((typescript-mode rjsx-mode go-mode web-mode) . lsp)
+  ((typescript-mode rjsx-mode go-mode web-mode) . lsp-deferred)
   :custom
-  (lsp-auto-guess-root t)
-  (lsp-enable-snippet nil)
-  (lsp-prefer-flymake nil)
-  ;; debug
-  (lsp-print-io nil)
-  (lsp-trace nil)
-  (lsp-print-performance nil)
-
+  ;; (lsp-clients-angular-language-server-command
+  ;;  '("node"
+  ;;    "~/.config/yarn/global/node_modules/@angular/language-server"
+  ;;    "--ngProbeLocations"
+  ;;    "~/.config/yarn/global/node_modules"
+  ;;    "--tsProbeLocations"
+  ;;    "~/.config/yarn/global/node_modules"
+  ;;    "--stdio"))
   (lsp-clients-angular-language-server-command
    '("node"
-     "~/.config/yarn/global/node_modules/@angular/language-server"
+     "/home/kumotyou/.config/yarn/global/node_modules/@angular/language-server"
      "--ngProbeLocations"
-     "~/.config/yarn/global/node_modules"
+     "/home/kumotyou/.config/yarn/global/node_module/node_modules"
      "--tsProbeLocations"
-     "~/.config/yarn/global/node_modules"
+     "/home/kumotyou/.config/yarn/global/node_modules"
      "--stdio"))
+  ;; (lsp-auto-guess-root t)
+  ;; (lsp-enable-snippet nil)
+  ;; (lsp-prefer-flymake nil)
+  ;; ;; debug
+  ;; (lsp-print-io nil)
+  ;; (lsp-trace nil)
+  ;; (lsp-print-performance nil)
   :config
   (use-package lsp-ui
     :commands lsp-ui
@@ -52,10 +59,10 @@
     (lsp-ui-sideline-show-code-actions t)
     (lsp-ui-sideline-code-actions-prefix " ")
     ;; lsp-ui-imenu
-    (lsp-ui-imenu-enable t)
-    (lsp-ui-imenu-kind-position 'top)
+    ;; (lsp-ui-imenu-enable t)
+    ;; (lsp-ui-imenu-kind-position 'top)
     ;; lsp-ui-peek
-    (lsp-ui-peek-enable t)
+    (lsp-ui-peek-enable nil)
     (lsp-ui-peek-peek-height 20)
     (lsp-ui-peek-list-width 50)
     (lsp-ui-peek-fontify 'on-demand)
@@ -69,8 +76,11 @@
                 ("C-s-." . lsp-ivy-global-workspace-symbol)))
 
   (use-package company-lsp
-    :init (setq company-lsp-cache-candidates 'auto)
-    :config (push 'company-lsp company-backends))
+    :after lsp-mode
+    :custom
+    (company-lsp-cache-candidates 'auto)
+    :config
+    (push 'company-lsp company-backends))
 
   ;; dap
   (use-package dap-mode

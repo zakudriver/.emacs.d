@@ -143,7 +143,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "c" 'flycheck-list-errors
  "d" 'dired
  "ww" 'hydra-frame-window/body
- "ws" 'split-window-below
+ "wv" 'split-window-below
  "wh" 'split-window-right
  "wd" 'delete-window
  "mo" 'multi-term

@@ -2,16 +2,16 @@
 
 
 ;; major mode for editing js files
-(use-package js2-mode
-  :mode (("\\.js$" . js2-mode))
-  :config
-  (setq js-indent-level 2
-        js2-basic-offset 2
-        js-chain-indent t)
-  (setq js2-highlight-level 3)
-  (setq js2-mode-show-parse-errors t)
-  (setq js2-mode-show-strict-warnings nil)
-  (setq js2-strict-missing-semi-warning nil))
+;; (use-package js2-mode
+;;   :mode (("\\.js$" . js2-mode))
+;;   :config
+;;   (setq js-indent-level 2
+;;         js2-basic-offset 2
+;;         js-chain-indent t)
+;;   (setq js2-highlight-level 3)
+;;   (setq js2-mode-show-parse-errors t)
+;;   (setq js2-mode-show-strict-warnings nil)
+;;   (setq js2-strict-missing-semi-warning nil))
 
 
 ;; major mode for editing ts files
@@ -20,9 +20,12 @@
   (setq typescript-indent-level 2))
 
 
-;; major mode for tsx/jsx
-(use-package rjsx-mode
-  :mode ("\\.tsx" . rjsx-mode))
+;; major mode for jsx
+;; (use-package rjsx-mode
+;;   :mode ("\\.tsx" . rjsx-mode)
+;;   :bind
+;;   (:map rjsx-mode-map
+;;         ("C-/" . 'rjsx-comment-dwim)))
 
 
 ;; format

@@ -18,6 +18,7 @@
   :mode
   (("\\.html$" . web-mode)
          ("\\.djhtml$" . web-mode)
+         ("\\.tsx$" . web-mode)
          ("\\.mustache\\'" . web-mode)
          ("\\.phtml\\'" . web-mode)
          ("\\.as[cp]x\\'" . web-mode)
