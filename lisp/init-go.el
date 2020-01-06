@@ -21,7 +21,7 @@
   :bind (:map go-mode-map
          ([remap xref-find-definitions] . godef-jump)
          ("C-c R" . go-remove-unused-imports))
-  :init 
+  :init
   (add-hook 'before-save-hook 'gofmt-before-save)
   ;; (add-hook 'go-mode-hook 'lsp)
   ;; (add-hook 'go-mode-hook 'dap-mode)
@@ -32,8 +32,6 @@
   ;;   (exec-path-from-shell-copy-envs '("GOPATH" "GO111MODULE" "GOPROXY")))
 
   (use-package company-go
-    ;; :init
-    ;; (add-to-list 'company-backends (company-backend-with-yas 'company-go))
     :after company)
 
 
@@ -81,6 +79,9 @@
              (if (= 0 status)
                  (message "Installed %s" pkg)
                (message "Failed to install %s: %d" pkg status))))))))
+
+  (unless (executable-find "gopls")
+    (go-update-tools))
 )
 
 

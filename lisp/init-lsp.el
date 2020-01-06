@@ -27,6 +27,10 @@
      "--tsProbeLocations"
      "/home/kumotyou/.config/yarn/global/node_modules"
      "--stdio"))
+  (lsp-auto-guess-root t)        ; Detect project root
+  (lsp-keep-workspace-alive nil) ; Auto-kill LSP server
+  (lsp-prefer-flymake nil)       ; Use lsp-ui and flycheck
+  (flymake-fringe-indicator-position 'right-fringe)
   ;; (lsp-auto-guess-root t)
   ;; (lsp-enable-snippet nil)
   ;; (lsp-prefer-flymake nil)
