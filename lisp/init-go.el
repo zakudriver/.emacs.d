@@ -23,14 +23,9 @@
          ("C-c R" . go-remove-unused-imports))
   :init
   (add-hook 'before-save-hook 'gofmt-before-save)
-  ;; (add-hook 'go-mode-hook 'lsp)
-  ;; (add-hook 'go-mode-hook 'dap-mode)
+  :custom
+  (gofmt-command "goimports")
   :config
-  (setq gofmt-command "goimports")
-  ;; Env vars
-  ;; (with-eval-after-load 'exec-path-from-shell
-  ;;   (exec-path-from-shell-copy-envs '("GOPATH" "GO111MODULE" "GOPROXY")))
-
   (use-package company-go
     :after company)
 

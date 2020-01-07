@@ -4,44 +4,25 @@
 ;; Emacs client for the Language Server Protocol
 (use-package lsp-mode
   :ensure t
-  :diminish
   :commands
   (lsp lsp-deferred)
   :hook
-  ;; ((typescript-mode rjsx-mode go-mode web-mode) . lsp)
-  ((typescript-mode rjsx-mode go-mode web-mode) . lsp-deferred)
+  ((typescript-mode go-mode web-mode) . lsp-deferred)
   :custom
-  ;; (lsp-clients-angular-language-server-command
-  ;;  '("node"
-  ;;    "~/.config/yarn/global/node_modules/@angular/language-server"
-  ;;    "--ngProbeLocations"
-  ;;    "~/.config/yarn/global/node_modules"
-  ;;    "--tsProbeLocations"
-  ;;    "~/.config/yarn/global/node_modules"
-  ;;    "--stdio"))
   (lsp-clients-angular-language-server-command
    '("node"
-     "/home/kumotyou/.config/yarn/global/node_modules/@angular/language-server"
+     "/Users/kumotyou/.config/yarn/global/node_modules/@angular/language-server"
      "--ngProbeLocations"
-     "/home/kumotyou/.config/yarn/global/node_module/node_modules"
+     "/Users/kumotyou/.config/yarn/global/node_module/node_modules"
      "--tsProbeLocations"
-     "/home/kumotyou/.config/yarn/global/node_modules"
+     "/Users/kumotyou/.config/yarn/global/node_modules"
      "--stdio"))
   (lsp-auto-guess-root t)        ; Detect project root
-  (lsp-keep-workspace-alive nil) ; Auto-kill LSP server
   (lsp-prefer-flymake nil)       ; Use lsp-ui and flycheck
-  (flymake-fringe-indicator-position 'right-fringe)
-  ;; (lsp-auto-guess-root t)
-  ;; (lsp-enable-snippet nil)
-  ;; (lsp-prefer-flymake nil)
-  ;; ;; debug
-  ;; (lsp-print-io nil)
-  ;; (lsp-trace nil)
-  ;; (lsp-print-performance nil)
   :config
   (use-package lsp-ui
     :commands lsp-ui
-    ;; :hook (lsp-mode . lsp-ui)
+    :after lsp-mode
     :custom
     ;; lsp-ui-doc
     (lsp-ui-doc-enable nil)
@@ -92,8 +73,7 @@
                 ("<f5>" . dap-debug)
                 ("M-<f5>" . dap-hydra))
     :hook
-    (go-mode . (lambda () (require 'dap-go)))
-    ;; (lsp-mode . dap-mode)
+    (go-mode . (require 'dap-go))
     :init
     (require 'dap-hydra)
     :config
