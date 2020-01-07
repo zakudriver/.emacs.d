@@ -13,11 +13,11 @@
    '("node"
      "/Users/kumotyou/.config/yarn/global/node_modules/@angular/language-server"
      "--ngProbeLocations"
-     "/Users/kumotyou/.config/yarn/global/node_module/node_modules"
+     "/Users/kumotyou/.config/yarn/global/node_modules"
      "--tsProbeLocations"
      "/Users/kumotyou/.config/yarn/global/node_modules"
      "--stdio"))
-  (lsp-auto-guess-root t)        ; Detect project root
+  (lsp-auto-guess-root nil)      ; not Detect project root
   (lsp-prefer-flymake nil)       ; Use lsp-ui and flycheck
   (lsp-enable-snippet t)
   :config
@@ -26,7 +26,7 @@
     :after lsp-mode
     :custom
     ;; lsp-ui-doc
-    (lsp-ui-doc-enable nil)
+    (lsp-ui-doc-enable t)
     (lsp-ui-doc-header nil)
     (lsp-ui-doc-position 'bottom) ;; top, bottom, or at-point
     (lsp-ui-doc-max-width 120)

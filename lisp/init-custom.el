@@ -35,7 +35,7 @@
 ;; "/home/kumotyou/.config/yarn/global/node_modules" -- trigger --> ng2-mode lsp
 (defconst kumo/env-path
   (if (and sys/macp)
-    '("/usr/local/bin" "/Users/kumotyou/code/golang/bin" "/Users/kumotyou/code/go/bin" "/usr/local/go/bin" "/Users/kumotyou/.config/yarn/global/node_modules" )
+    '("/usr/local/bin" "/Users/kumotyou/code/go/bin" "/usr/local/go/bin" "/Users/kumotyou/.config/yarn/global/node_modules")
     '("/home/kumotyou/Code/Go/bin" "/usr/lib/go/bin" "/home/kumotyou/.yarn/bin" "/home/kumotyou/.config/yarn/global/node_modules"))
   "ENV_PATH list.")
 

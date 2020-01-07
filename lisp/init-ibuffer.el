@@ -30,9 +30,9 @@
                                   ;; According to taste, if you want the icon further from the name
                                   " " (icon 2 2 :left :elide)
                                   ,(propertize " " 'display `(space :align-to 8))
-                                  (name 18 18 :left :elide)
+                                  (name 40 40 :left :elide)
                                   " " (size 9 -1 :right)
-                                  " " (mode 16 16 :left :elide) " " filename-and-process)
+                                  " " (mode 20 20 :left :elide) " " filename-and-process)
                             (mark " " (name 16 -1) " " filename))))
 
   ;; Group ibuffer's list by project root
