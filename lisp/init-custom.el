@@ -14,6 +14,7 @@
 
 (defconst kumo/default-theme 'monokai)
 
+
 ;; max: 18 themes
 (defconst kumo/theme
   '((monokai-theme monokai)
@@ -28,11 +29,6 @@
     (lab-themes lab-dark)
     (lab-themes lab-light))
     "Theme list.")
-
-
-(defcustom use-yas nil
-  "Enable yasnippet for company backends or not."
-  :type 'boolean)
 
 
 ;; "/usr/local/go/bin" -- trigger --> go-mode lsp !!!

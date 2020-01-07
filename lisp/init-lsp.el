@@ -19,6 +19,7 @@
      "--stdio"))
   (lsp-auto-guess-root t)        ; Detect project root
   (lsp-prefer-flymake nil)       ; Use lsp-ui and flycheck
+  (lsp-enable-snippet t)
   :config
   (use-package lsp-ui
     :commands lsp-ui
@@ -44,8 +45,8 @@
     (lsp-ui-sideline-show-code-actions t)
     (lsp-ui-sideline-code-actions-prefix " ")
     ;; lsp-ui-imenu
-    ;; (lsp-ui-imenu-enable t)
-    ;; (lsp-ui-imenu-kind-position 'top)
+    (lsp-ui-imenu-enable t)
+    (lsp-ui-imenu-kind-position 'top)
     ;; lsp-ui-peek
     (lsp-ui-peek-enable nil)
     (lsp-ui-peek-peek-height 20)
@@ -61,11 +62,8 @@
                 ("C-s-." . lsp-ivy-global-workspace-symbol)))
 
   (use-package company-lsp
-    :after lsp-mode
     :custom
-    (company-lsp-cache-candidates 'auto)
-    :config
-    (push 'company-lsp company-backends))
+    (company-lsp-cache-candidates 'auto))
 
   ;; dap
   (use-package dap-mode

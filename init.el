@@ -67,9 +67,11 @@
   (require 'init-ivy)
   (require 'init-company)
   (require 'init-dired)
+  (require 'init-flycheck)
+  (require 'init-yasnippet)
+  (require 'init-projectile)
 
   ;; Programming
-  (require 'init-flycheck)
   (require 'init-lsp)
   (require 'init-prog)
   (require 'init-go)
