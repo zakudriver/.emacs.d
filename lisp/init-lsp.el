@@ -11,11 +11,11 @@
   :custom
   (lsp-clients-angular-language-server-command
    '("node"
-     "/Users/kumotyou/.config/yarn/global/node_modules/@angular/language-server"
+     "/home/kumotyou/.config/yarn/global/node_modules/@angular/language-server"
      "--ngProbeLocations"
-     "/Users/kumotyou/.config/yarn/global/node_modules"
+     "/home/kumotyou/.config/yarn/global/node_modules"
      "--tsProbeLocations"
-     "/Users/kumotyou/.config/yarn/global/node_modules"
+     "/home/kumotyou/.config/yarn/global/node_modules"
      "--stdio"))
   (lsp-auto-guess-root nil)      ; not Detect project root
   (lsp-prefer-flymake nil)       ; Use lsp-ui and flycheck
@@ -37,7 +37,7 @@
     ;; lsp-ui-flycheck
     (lsp-ui-flycheck-enable t)
     ;; lsp-ui-sideline
-    (lsp-ui-sideline-enable t)
+    (lsp-ui-sideline-enable nil)
     (lsp-ui-sideline-ignore-duplicate t)
     (lsp-ui-sideline-show-symbol t)
     (lsp-ui-sideline-show-hover nil)
@@ -45,7 +45,7 @@
     (lsp-ui-sideline-show-code-actions t)
     (lsp-ui-sideline-code-actions-prefix " ")
     ;; lsp-ui-imenu
-    (lsp-ui-imenu-enable t)
+    (lsp-ui-imenu-enable nil)
     (lsp-ui-imenu-kind-position 'top)
     ;; lsp-ui-peek
     (lsp-ui-peek-enable nil)
