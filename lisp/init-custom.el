@@ -5,7 +5,7 @@
  (require 'init-const))
 
 
-(defcustom kumo/package-archives 'emacs-china
+(defcustom kumo/package-archives 'melpa
   "Set package archives from which to fetch."
   :type '(choice
           (const :tag "Melpa" melpa)

@@ -20,12 +20,16 @@
   (setq typescript-indent-level 2))
 
 
-;; major mode for jsx
-;; (use-package rjsx-mode
-;;   :mode ("\\.tsx" . rjsx-mode)
-;;   :bind
-;;   (:map rjsx-mode-map
-;;         ("C-/" . 'rjsx-comment-dwim)))
+;; major mode for typescript language server
+(use-package tide
+  :hook
+  ((typescript-mode web-mode) . tide-setup)
+  ((typescript-mode web-mode) . tide-hl-identifier-mode)
+  :bind
+  (:map tide-mode-map
+        ([remap evil-goto-definition] . tide-jump-to-definition)
+        ([remap pop-tag-mark] . tide-jump-back))
+)
 
 
 ;; format
@@ -35,8 +39,7 @@
   :hook
   (js2-mode . prettier-js-mode)
   (typescript-mode . prettier-js-mode)
-  (web-mode . prettier-js-mode)
-  (rjsx-mode . prettier-js-mode))
+  (web-mode . prettier-js-mode))
 
 
 

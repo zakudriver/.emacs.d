@@ -7,7 +7,7 @@
   :commands
   (lsp lsp-deferred)
   :hook
-  ((typescript-mode go-mode web-mode) . lsp-deferred)
+  ((go-mode) . lsp-deferred)
   :custom
   (lsp-clients-angular-language-server-command
    '("node"
