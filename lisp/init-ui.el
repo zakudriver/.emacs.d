@@ -5,8 +5,35 @@
   (require 'init-custom))
 
 ;; Font
-(set-face-attribute 'default nil :height 130)
+(set-face-attribute 'default nil :height 120)
 ;; (set-face-attribute 'default nil :font "Menlo")
+
+
+;;;;;;;;;;;;;;;;
+;; Dashboard
+;;;;;;;;;;;;;;;;
+(use-package dashboard
+  :ensure t
+  :custom
+  (dashboard-banner-logo-title (concat "Happy hacking, " user-login-name " - Emacs ♥ you!"))
+  (dashboard-set-file-icons t)
+  (dashboard-set-heading-icons t)
+  (dashboard-startup-banner (or kumo/logo 'official))
+  (dashboard-center-content t)
+  (dashboard-show-shortcuts nil)
+  ( dashboard-items '((recents  . 5)
+                      (projects . 5)))
+  (dashboard-set-footer nil)
+  :init
+  (dashboard-setup-startup-hook))
+
+
+
+;; Initial scratch message
+(setq-default initial-scratch-message
+              (concat ";; Happy hacking, " user-login-name " - Emacs ♥ you!\n\n"))
+(setq inhibit-startup-message t)
+
 
 ;; Title
 (setq frame-title-format
@@ -22,16 +49,13 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'blink-cursor-mode) (blink-cursor-mode -1))
-(setq inhibit-startup-message t)
-(setq-default initial-scratch-message nil)
 
 
-
-(defvar after-load-theme-hook nil
-  "Hook run after a color theme is loaded using `load-theme'.")
-(defadvice load-theme (after run-after-load-theme-hook activate)
-  "Run `after-load-theme-hook'."
-  (run-hooks 'after-load-theme-hook))
+;; (defvar after-load-theme-hook nil
+;;   "Hook run after a color theme is loaded using `load-theme'.")
+;; (defadvice load-theme (after run-after-load-theme-hook activate)
+;;   "Run `after-load-theme-hook'."
+;;   (run-hooks 'after-load-theme-hook))
 
 
 ;;;;;;;;;;;;;;;;
@@ -62,13 +86,18 @@
 
 ;; theme factory macro
 (defmacro theme-factory-macro (name load-name &rest config)
-  "theme factory macro"
-  `(use-package ,name
-    :init
-    (disable-theme kumo/current-theme)
-    (load-theme (quote ,load-name) t)
-    (setq kumo/current-theme (quote ,load-name))
-    ,@config)
+  "Theme factory macro."
+  (if name
+      `(use-package ,name
+         :init
+         (disable-theme kumo/current-theme)
+         (load-theme (quote ,load-name) t)
+         (setq kumo/current-theme (quote ,load-name))
+         ,@config)
+    `(progn
+      (disable-theme kumo/current-theme)
+      (load-theme (quote ,load-name) t)
+      (setq kumo/current-theme (quote ,load-name))))
 )
 
 
@@ -113,21 +142,6 @@
 ;;;;;;;;;;;;;;;;
 ;; Mode Line
 ;;;;;;;;;;;;;;;;
-;; (use-package doom-modeline
-;;       :ensure t
-;;       :hook
-;;       (after-init . doom-modeline-mode)
-;;       :config
-;;       (setq find-file-visit-truename t)
-;;       (setq doom-modeline-project-detection 'project)
-;;       ;; (setq doom-modeline-height 20)
-;;       ;; (setq doom-modeline-major-mode-icon t)
-;;       ;; (setq doom-modeline-major-mode-color-icon t)
-;;       (setq doom-modeline-buffer-modification-icon t)
-;;       (setq doom-modeline-height 1)
-;;       (set-face-attribute 'mode-line nil :height 100)
-;;       (set-face-attribute 'mode-line-inactive nil :height 100))
-
 (use-package minions
   :ensure t
   :hook
@@ -157,8 +171,8 @@
 
 ;; Misc
 (fset 'yes-or-no-p 'y-or-n-p)
+(size-indication-mode t)
 (setq inhibit-startup-screen t)
-(size-indication-mode 1)
 (setq track-eol t)                      ; Keep cursor at end of lines. Require line-move-visual is nil.
 (setq line-move-visual nil)
 
@@ -241,10 +255,6 @@
   (add-to-list 'all-the-icons-mode-icon-alist
                '(gfm-mode all-the-icons-octicon "markdown" :face all-the-icons-blue)))
 
-
-;; initial message
-(setq-default initial-scratch-message
-              (concat ";; Happy hacking, " user-login-name " - Emacs ♥ you!\n\n"))
 
 
 (provide 'init-ui)

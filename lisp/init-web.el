@@ -13,17 +13,20 @@
 ;;   (setq scss-compile-at-save nil))
 
 
+(defun tsx-setup-tide-mode ()
+  "Setup tide mode when tsx file."
+  (when (string-equal "tsx" (file-name-extension buffer-file-name))
+    (tide-setup)
+    (tide-hl-identifier-mode)))
+
+
 ;; major-mode for editing multiple web formats
 (use-package web-mode
   :mode
-  (("\\.html$" . web-mode)
-         ("\\.djhtml$" . web-mode)
-         ("\\.tsx$" . web-mode)
-         ("\\.mustache\\'" . web-mode)
-         ("\\.phtml\\'" . web-mode)
-         ("\\.as[cp]x\\'" . web-mode)
-         ("\\.erb\\'" . web-mode)
-         ("\\.hbs\\'" . web-mode))
+  ((".*[^\\(\\.component\\)]\\.html$" . web-mode)
+         ("\\.tsx$" . web-mode))
+  :hook
+  (web-mode . tsx-setup-tide-mode)
   :custom
   (web-mode-markup-indent-offset 2)
   (web-mode-css-indent-offset 2)

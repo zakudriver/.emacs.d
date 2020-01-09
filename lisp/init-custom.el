@@ -5,15 +5,16 @@
  (require 'init-const))
 
 
-(defcustom kumo/package-archives 'melpa
+(defcustom kumo/package-archives 'emacs-china
   "Set package archives from which to fetch."
   :type '(choice
           (const :tag "Melpa" melpa)
           (const :tag "Emacs-China" emacs-china)
           (const :tag "Tuna" tuna)))
 
-(defconst kumo/default-theme 'monokai)
+(defconst kumo/logo (expand-file-name "logo.png" user-emacs-directory))
 
+(defconst kumo/default-theme 'monokai)
 
 ;; max: 18 themes
 (defconst kumo/theme
@@ -27,7 +28,9 @@
     (solarized-theme solarized-dark)
     (solarized-theme solarized-light)
     (lab-themes lab-dark)
-    (lab-themes lab-light))
+    (lab-themes lab-light)
+    ;; (doom-themes doom-cyberpunk)
+    (nil tron-legacy))
     "Theme list.")
 
 

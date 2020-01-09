@@ -1,3 +1,4 @@
+;;; Code:
 
 ;; (setq debug-on-error t)
 
@@ -32,13 +33,17 @@
 
 ;; Load path
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+;; Load custom theme file theme
+(add-to-list 'load-path (expand-file-name "themes" user-emacs-directory))
+(add-to-list 'custom-theme-load-path (expand-file-name "themes" user-emacs-directory))
+
 ;; benchmarking
 (require 'init-benchmarking)
 ;; custom-file
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 
 ;; set my own configuration
-(with-temp-message ""                   ;抹掉插件启动的输出
+(with-temp-message ""                   
   ;; Constants
   (require 'init-const)
 
@@ -56,6 +61,11 @@
   (require 'init-utils)
   (require 'init-evil)
   (require 'init-ui)
+
+  ;; custom-themes
+  ;; (require 'doom-cyberpunk-theme)
+
+
   (require 'init-edit)
   (require 'init-ibuffer)
   (require 'init-symbol-overlay)

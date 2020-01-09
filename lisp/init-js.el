@@ -23,8 +23,8 @@
 ;; major mode for typescript language server
 (use-package tide
   :hook
-  ((typescript-mode web-mode) . tide-setup)
-  ((typescript-mode web-mode) . tide-hl-identifier-mode)
+  (typescript-mode . tide-setup)
+  (typescript-mode . tide-hl-identifier-mode)
   :bind
   (:map tide-mode-map
         ([remap evil-goto-definition] . tide-jump-to-definition)
