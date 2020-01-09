@@ -45,12 +45,14 @@
   :bind
   ((:map emmet-mode-keymap
          ("C-c [" . emmet-prev-edit-point)
-         ("C-c ]" . emmet-next-edit-point)))
-  :config
-  (setq emmet-move-cursor-between-quotes t)
-  (setq emmet-indentation 2)
-  (unbind-key "C-M-<left>" emmet-mode-keymap)
-  (unbind-key "C-M-<right>" emmet-mode-keymap))
+         ("C-c ]" . emmet-next-edit-point)
+         ("TAB" . emmet-expand-yas)))
+  :hook
+  ((web-mode ng2-html-mode) . emmet-mode)
+  :custom
+  (emmet-move-cursor-between-quotes t)
+  (emmet-indentation 2)
+  (emmet-expand-jsx-className? t))
 
 
 

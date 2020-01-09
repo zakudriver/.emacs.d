@@ -101,8 +101,10 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
 )
 
 
-(use-package general)
-(define-key evil-normal-state-map (kbd "SPC") (general-simulate-key "C-c"))
+(use-package general
+  :config
+  (define-key evil-normal-state-map (kbd "SPC") (general-simulate-key "C-c")))
+
 
 (general-define-key
  :states '(normal visual)
@@ -110,14 +112,12 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "," 'counsel-M-x
  "k" 'symbol-overlay-put
  "K" 'symbol-overlay-remove-all
- ;; "cc" 'comment-dwim-2
  "u" 'undo-tree-visualize
- "f" 'counsel-find-file
- "F" 'counsel-fzf
- "im" 'counsel-imenu
+ "m" 'counsel-imenu
  "w" 'avy-goto-char-timer
+ "d" 'hungry-delete-backward
 )
-
+         
 
 (general-define-key
  :prefix "C-c"

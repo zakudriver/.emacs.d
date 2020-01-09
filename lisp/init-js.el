@@ -32,6 +32,12 @@
 )
 
 
+;; major mode for editing *.component.html files
+(use-package ng2-mode
+  :mode
+  (".+\\.component\\.html$" . ng2-mode))
+
+
 ;; format
 (use-package prettier-js
   :init

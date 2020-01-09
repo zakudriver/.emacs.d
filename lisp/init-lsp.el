@@ -7,15 +7,15 @@
   :commands
   (lsp lsp-deferred)
   :hook
-  ((go-mode) . lsp-deferred)
+  ((go-mode ng2-html-mode) . lsp-deferred)
   :custom
   (lsp-clients-angular-language-server-command
    '("node"
-     "/home/kumotyou/.config/yarn/global/node_modules/@angular/language-server"
+     "/Users/kumotyou/.config/yarn/global/node_modules/@angular/language-server"
      "--ngProbeLocations"
-     "/home/kumotyou/.config/yarn/global/node_modules"
+     "/Users/kumotyou/.config/yarn/global/node_modules"
      "--tsProbeLocations"
-     "/home/kumotyou/.config/yarn/global/node_modules"
+     "/Users/kumotyou/.config/yarn/global/node_modules"
      "--stdio"))
   (lsp-auto-guess-root nil)      ; not Detect project root
   (lsp-prefer-flymake nil)       ; Use lsp-ui and flycheck
