@@ -113,10 +113,6 @@
   `(progn ,@(mapcar 'create-theme-func kumo/theme)))
 
 
-;; when number of themes > 9
-(defconst kumo/index-map
-  '("q" "w" "e" "r" "t" "y" "u" "i" "o" "p"))
-
 ;; bind theme keymap. 
 (defun bind-change-theme-keymap ()
   "Bind change theme keymap on general."
@@ -142,6 +138,19 @@
 ;;;;;;;;;;;;;;;;
 ;; Mode Line
 ;;;;;;;;;;;;;;;;
+;; (use-package doom-modeline
+;;   :ensure t
+;;   :hook (after-init . doom-modeline-mode)
+;;   :init
+;;   (setq doom-modeline-height 1)
+;;   (set-face-attribute 'mode-line nil :height 110)
+;;   (set-face-attribute 'mode-line-inactive nil :height 110)
+;;   :custom
+;;   (doom-modeline-buffer-file-name-style 'file-name)
+;;   (doom-modeline-icon (display-graphic-p))
+;;   (doom-modeline-major-mode-icon nil))
+
+
 (use-package minions
   :ensure t
   :hook
@@ -171,10 +180,13 @@
 
 ;; Misc
 (fset 'yes-or-no-p 'y-or-n-p)
+(setq-default fill-column 80)
 (size-indication-mode t)
 (setq inhibit-startup-screen t)
-(setq track-eol t)                      ; Keep cursor at end of lines. Require line-move-visual is nil.
+(setq track-eol t)
 (setq line-move-visual nil)
+
+
 
 
 ;; Don't open a file in a new frame
@@ -254,6 +266,7 @@
                '(nov-mode all-the-icons-faicon "book" :height 1.0 :v-adjust -0.1 :face all-the-icons-green))
   (add-to-list 'all-the-icons-mode-icon-alist
                '(gfm-mode all-the-icons-octicon "markdown" :face all-the-icons-blue)))
+
 
 
 

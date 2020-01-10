@@ -33,9 +33,9 @@
   (define-key magit-status-mode-map (kbd "q") 'magit-quit-session))
 
 
+(use-package docker
+  :ensure t)
 
-;; (use-package projectile
-;;   :commands projectile-project-p)
 
 (provide 'init-utils)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -46,7 +46,7 @@
   ((:map emmet-mode-keymap
          ("C-c [" . emmet-prev-edit-point)
          ("C-c ]" . emmet-next-edit-point)
-         ("TAB" . emmet-expand-yas)))
+         ("<backtab>" . emmet-expand-yas)))
   :hook
   ((web-mode ng2-html-mode) . emmet-mode)
   :custom

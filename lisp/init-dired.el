@@ -6,7 +6,7 @@
 ;; Directory operations
 (use-package dired
   :ensure nil
-  :bind ("C-x C-d" . 'dired)
+  ;; :bind ("C-c d" . 'dired)
   :config
   ;; Always delete and copy recursively
   (setq dired-recursive-deletes 'always

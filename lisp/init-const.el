@@ -31,6 +31,9 @@
   "~/.emacs.d/.theme"
   "theme-setting-cache")
 
+(defconst kumo/index-map
+  '("q" "w" "e" "r" "t" "y" "u" "i" "o" "p"))
+
 
 (provide 'init-const)
 

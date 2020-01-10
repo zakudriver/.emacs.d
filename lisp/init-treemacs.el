@@ -6,8 +6,6 @@
 (use-package treemacs
   :diminish treemacs-mode
   :bind (
-    ("C-x pT" . treemacs-select-window)
-    ("C-x pt" . treemacs)
     :map treemacs-mode-map
     ("C-x o" . treemacs-collapse-parent-node)
     ("C-x f" . treemacs-create-file)
@@ -15,17 +13,16 @@
     ("C-x C-d" . treemacs-delete)
     ("C-x v" . treemacs-visit-node-vertical-split)
     ("C-x h" . treemacs-visit-node-horizontal-split)
-    ("R" . treemacs-refresh)
-  )
+    ("R" . treemacs-refresh))
+  :custom
+  (treemacs-collapse-dirs `(if treemacs-python-executable 3 0))
+  (treemacs-sorting 'alphabetic-case-insensitive-desc)
+  (treemacs-follow-after-init t)
+  (treemacs-is-never-other-window t)
+  (treemacs-silent-filewatch t)
+  (treemacs-silent-refresh t)
+  (treemacs-width 30)
   :config
-  (setq treemacs-collapse-dirs           (if treemacs-python-executable 3 0)
-        treemacs-sorting                 'alphabetic-case-insensitive-desc
-        treemacs-follow-after-init       t
-        treemacs-is-never-other-window   t
-        treemacs-silent-filewatch        t
-        treemacs-silent-refresh          t
-        treemacs-width                   30)
-
   (treemacs-follow-mode t)
   (treemacs-filewatch-mode t)
   (treemacs-resize-icons 16)
@@ -46,11 +43,11 @@
   (use-package treemacs-magit
     :after magit
     :commands treemacs-magit--schedule-update
-    :hook ((magit-post-commit
-            git-commit-post-finish
-            magit-post-stage
-            magit-post-unstage)
-           . treemacs-magit--schedule-update))
+    :hook
+    ((magit-post-commit
+      git-commit-post-finish
+      magit-post-stage
+      magit-post-unstage) . treemacs-magit--schedule-update))
 )
 
 

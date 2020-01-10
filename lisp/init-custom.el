@@ -16,12 +16,9 @@
 
 (defconst kumo/default-theme 'monokai)
 
-;; max: 18 themes
 (defconst kumo/theme
   '((monokai-theme monokai)
     (dracula-theme dracula)
-    (material-theme material)
-    (material-theme material-light)
     (srcery-theme srcery)
     (flucui-themes flucui-dark)
     (flucui-themes flucui-light)
@@ -29,7 +26,12 @@
     (solarized-theme solarized-light)
     (lab-themes lab-dark)
     (lab-themes lab-light)
-    ;; (doom-themes doom-cyberpunk)
+    (doom-themes doom-moonlight)
+    (doom-themes doom-city-lights)
+    (doom-themes doom-nord)
+    (doom-themes doom-oceanic-next)
+    (doom-themes doom-palenight)
+    (doom-themes doom-peacock)
     (nil tron-legacy))
     "Theme list.")
 

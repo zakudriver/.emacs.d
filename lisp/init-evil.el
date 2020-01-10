@@ -142,6 +142,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "bs" 'save-buffer
  "c" 'flycheck-list-errors
  "d" 'dired
+ "D" 'docker
  "ww" 'hydra-frame-window/body
  "wv" 'split-window-below
  "wh" 'split-window-right
