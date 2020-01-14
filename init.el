@@ -73,6 +73,7 @@ decrease this. If you experience stuttering, increase this.")
   (require 'init-utils)
   (require 'init-evil)
   (require 'init-ui)
+  (require 'init-modeline)
 
   (require 'init-edit)
   (require 'init-ibuffer)

@@ -31,7 +31,8 @@
 
 ;; Quickly switch windows
 (use-package winum
-  :init (winum-mode)
+  :hook
+  (after-init . winum-mode)
   :bind (
     :map winum-keymap
       ("M-0" . 'winum-select-window-0)
@@ -44,7 +45,9 @@
       ("M-7" . 'winum-select-window-7)
       ("M-8" . 'winum-select-window-8)
       ("M-9" . 'winum-select-window-9)
-      ("M-n" . 'winum-select-window-by-number)))
+      ("M-n" . 'winum-select-window-by-number))
+  :custom
+  (winum-auto-setup-mode-line nil))
 
 
 (use-package hydra

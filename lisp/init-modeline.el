@@ -1,143 +1,169 @@
 ;;; Code:
 
 
-(use-package hide-mode-line
-  :hook (neotree-mode . hide-mode-line-mode))
 
-;;;###autload
-(defun kevin/maybe-alltheicon (&rest args)
-  "Display octicon via `ARGS'."
-  (when (display-graphic-p)
-    (apply 'all-the-icons-alltheicon args)))
-
-;;;###autload
-(defun kevin/maybe-faicon-icon (&rest args)
-  "Display font awesome icon via `ARGS'."
-  (when (display-graphic-p)
-    (apply 'all-the-icons-faicon args)))
-
-;;;###
-(defun shorten-directory (dir max-length)
-  "Setup a directory(`DIR') `MAX-LENGTH' characters."
-  (let ((path (reverse (split-string (abbreviate-file-name dir) "/")))
-        (output ""))
-    (when (and path (equal "" (car path)))
-      (setq path (cdr path)))
-    (while (and path (< (length output) (- max-length 4)))
-      (setq output (concat (car path) "/" output))
-      (setq path (cdr path)))
-    (when path
-      (setq output (concat ".../" output)))
-    output))
-
+;; nyan-mode
 (use-package nyan-mode
-  :if (display-graphic-p)
   :init
-  (setq nyan-animate-nyancat nil)
-  (nyan-mode t))
+  (nyan-mode t)
+  :custom
+  (nyan-animate-nyancat nil)
+  (nyan-wavy-trail nil))
 
-(use-package anzu
-  :diminish anzu-mode
-  :bind (([remap query-replace] . anzu-query-replace)
-         ([remap query-replace-regexp] . anzu-query-replace-regexp)
-         :map isearch-mode-map
-         ([remap isearch-query-replace] . anzu-isearch-query-replace)
-         ([remap isearch-query-replace-regexp] . anzu-isearch-query-replace-regexp))
-  :init (add-hook 'after-init-hook #'global-anzu-mode)
-  :config
-  (setq anzu-replace-to-string-separator (if (char-displayable-p ?→) " → " " -> ")
-        ;; let spaceline handle auzu info in modeline
-        anzu-cons-mode-line-p nil))
+(setq
+ evil-normal-state-tag   (propertize "[N]" 'face '((:background "green" :foreground "black")))
+ evil-emacs-state-tag    (propertize "[E]" 'face '((:background "orange" :foreground "black")))
+ evil-insert-state-tag   (propertize "[I]" 'face '((:background "red") :foreground "white"))
+ evil-motion-state-tag   (propertize "[M]" 'face '((:background "blue") :foreground "white"))
+ evil-visual-state-tag   (propertize "[V]" 'face '((:background "grey80" :foreground "black")))
+ evil-operator-state-tag (propertize "[O]" 'face '((:background "purple"))))
 
-(use-package powerline
-  :defer t
-  :config
-  (setq powerline-height 23
-        powerline-default-separator (if (display-graphic-p) 'arrow 'utf-8)))
 
-(use-package spaceline
-  :defer t
-  :init
-  (add-hook 'after-init-hook (lambda () (require 'spaceline)))
-  :config
-  ;; To get the mode-line highlight to change color depending on the evil state
-  (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state))
+(defun modeline-unicode-number (str)
+  "Return a nice unicode representation of a single-digit number STR."
+  (cond
+   ((string= "1" str) "➊")
+   ((string= "2" str) "➋")
+   ((string= "3" str) "➌")
+   ((string= "4" str) "➍")
+   ((string= "5" str) "➎")
+   ((string= "6" str) "➏")
+   ((string= "7" str) "➐")
+   ((string= "8" str) "➑")
+   ((string= "9" str) "➒")
+   ((string= "0" str) "➓")))
 
-(use-package spaceline-segments
-  :ensure nil
-  :after spaceline
-  :config
-  (setq spaceline-window-numbers-unicode t
-        spaceline-minor-modes-separator ""
-        spaceline-workspace-numbers-unicode t)
-  ;;define version control segment
-  (spaceline-define-segment version-control
-    "Version control information."
-    (when vc-mode
-      (let ((branch (mapconcat 'concat (cdr (split-string vc-mode "[:-]")) "-")))
-        (powerline-raw (concat (kevin/maybe-alltheicon "git" :face 'warning :v-adjust -0.05)
-                               " "
-                               branch)))))
-  ;; define buffer id segment
-  (spaceline-define-segment buffer-id
-    "Shorten buufer fileanme."
-    (when (buffer-file-name)
-      (concat
-       (kevin/maybe-faicon-icon "floppy-o" :face 'warning :v-adjust -0.05)
-       " "
-       (shorten-directory default-directory 6)
-       (file-relative-name buffer-file-name)))))
 
-(use-package spaceline-config
-  :ensure nil
-  :after spaceline
-  :config
-  (spaceline-toggle-persp-name-on)
-  (spaceline-toggle-workspace-number-on)
-  (spaceline-toggle-window-number-on)
-  (spaceline-toggle-buffer-size-off)
-  (spaceline-toggle-remote-host-off)
-  (spaceline-toggle-flycheck-info-off)
-  (spaceline-toggle-selection-info-on)
-  (spaceline-toggle-input-method-on)
-  (spaceline-toggle-buffer-encoding-abbrev-on)
-  (spaceline-toggle-nyan-cat-on)
-  ;; hide the current position in the buffer as a percentage
-  (spaceline-toggle-buffer-position-off)
-  ;; shows the currently visible part of the buffer.
-  (spaceline-toggle-hud-off)
-  (spaceline-toggle-major-mode-on)
-  ;; configure the separator between the minor modes
-  (unless (display-graphic-p)
-    (spaceline-toggle-minor-modes-off))
-  ;; custom spaceline theme
-  (spaceline-compile
-    ;; define spaceline theme name: spaceline-ml-custom
-    "custom"
-    ;; left side
-    '(((((persp-name :fallback workspace-number) window-number) :separator "")
-       :fallback evil-state
-       :face highlight-face
-       :priority 100)
-      (anzu :priority 95)
-      ((buffer-id) :priority 98)
-      (process :when active)
-      ((flycheck-error flycheck-warning flycheck-info) :when active :priority 99)
-      (version-control :when active :priority 97)
-      (org-pomodoro :when active)
-      (org-clock :when active)
-      (nyan-cat :when active :priority 70)
-      (major-mode :when active :priority 79)
-      (minor-modes :when active :priority 78))
-    ;; right side
-    '((purpose :priority 94)
-      (selection-info :priority 95)
-      input-method
-      ((buffer-encoding-abbrev line-column) :separator "|" :priority 96)
-      (global :when active)
-      (hud :priority 99)))
+(defun mode-line-fill (face reserve)
+  "Return empty space using FACE and leaving RESERVE space on the right."
+  (unless reserve
+    (setq reserve 20))
+  (when (and window-system (eq 'right (get-scroll-bar-mode)))
+    (setq reserve (- reserve 3)))
+  (propertize " "
+              'display `((space :align-to
+                                (- (+ right right-fringe right-margin) ,reserve)))
+              'face face))
 
-  (setq-default mode-line-format '("%e" (:eval (spaceline-ml-custom)))))
+(defun buffer-encoding-abbrev ()
+  "The line ending convention used in the buffer."
+  (let ((buf-coding (format "%s" buffer-file-coding-system)))
+    (if (string-match "\\(dos\\|unix\\|mac\\)" buf-coding)
+        (match-string 1 buf-coding)
+      buf-coding)))
+
+;; flycheck
+(defvar modeline-flycheck
+  '(:eval
+    (pcase flycheck-last-status-change
+      (`not-checked nil)
+      (`no-checker (propertize " -" 'face 'warning))
+      (`running (propertize " ✷" 'face 'success))
+      (`errored (propertize " !" 'face 'error))
+      (`finished
+       (let* ((error-counts (flycheck-count-errors flycheck-current-errors))
+              (no-errors (cdr (assq 'error error-counts)))
+              (no-warnings (cdr (assq 'warning error-counts)))
+              (face (cond (no-errors 'error)
+                          (no-warnings 'warning)
+                          (t 'success))))
+         (propertize (format "%s / %s" (or no-errors 0) (or no-warnings 0))
+                     'face face)))
+      (`interrupted " -")
+      (`suspicious '(propertize " ?" 'face 'warning)))))
+
+
+(setq-default mode-line-format
+              (list
+               ;; winum
+               " "
+               '(:eval (propertize
+                        (modeline-unicode-number (winum-get-number-string))))
+               " "
+
+               ;; is Modified
+               '(:eval (propertize "%*" 'face 'font-lock-string-face))
+               " "
+
+               ;; file info
+               ;; " %* "
+               '(:eval (propertize
+                        (modeline-window-number)
+                        'face
+                        'font-lock-type-face))
+
+               ;; the buffer name; the file name as a tool tip
+               '(:eval (propertize "%b " 'face 'font-lock-keyword-face
+                                   'help-echo (buffer-file-name)))
+
+               ;; size
+               '(:eval (propertize "%I" 'face 'font-lock-constant-face))
+               " "
+
+               ;; evil state
+               '(:eval evil-mode-line-tag)
+               " "
+
+               "["
+               '(:eval (list (nyan-create)))
+               "] "
+               
+               " [" ;; insert vs overwrite mode, input-method in a tooltip
+               '(:eval (propertize (if overwrite-mode "Ovr" "Ins")
+                                   'face 'font-lock-preprocessor-face
+                                   'help-echo (concat "Buffer is in "
+                                                      (if overwrite-mode
+                                                          "overwrite"
+                                                        "insert") " mode")))
+               
+               ;; was this buffer modified since the last save?
+               ;; '(:eval (when (buffer-modified-p)
+               ;;           (concat ","  (propertize "Mod"
+               ;;                                    'face 'font-lock-warning-face
+               ;;                                    'help-echo "Buffer has been modified"))))
+               
+               ;; is this buffer read-only?
+               '(:eval (when buffer-read-only
+                         (concat ","  (propertize "RO"
+                                                  'face 'font-lock-type-face
+                                                  'help-echo "Buffer is read-only"))))
+               "] "
+               
+               
+               ;; the current major mode for the buffer.
+               '(:eval (propertize "%m" 'face 'font-lock-string-face
+                                   'help-echo buffer-file-coding-system))
+               
+               "%1 "
+               modeline-flycheck
+               "%1 "
+               
+               ;; minor modes
+               ;; minor-mode-alist
+               ;; " "
+
+               ;; git info
+               '(:eval vc-mode)
+               " "
+               
+               ;; global-mode-string goes in mode-line-misc-info
+               mode-line-misc-info
+               
+               (mode-line-fill 'mode-line 20)
+               
+               ;; line and column
+               "(" ;; '%02' to set to 2 chars at least; prevents flickering
+               (propertize "%02l" 'face 'font-lock-type-face) ","
+               (propertize "%02c" 'face 'font-lock-type-face)
+               ") "
+               
+               '(:eval (buffer-encoding-abbrev))
+               mode-line-end-spaces
+
+               (propertize " "
+                           'display '(height 1.3))
+               (propertize " " 'display '(raise -0.1))
+               ))
 
 
 (provide 'init-modeline)

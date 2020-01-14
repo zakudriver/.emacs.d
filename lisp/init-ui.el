@@ -151,20 +151,12 @@
 ;;   (doom-modeline-major-mode-icon nil))
 
 
-(use-package minions
-  :ensure t
-  :hook
-  (after-init . minions-mode)
-  :config (minions-mode t))
+;; (use-package minions
+;;   :ensure t
+;;   :hook
+;;   (after-init . minions-mode)
+;;   :config (minions-mode t))
 
-
-;; nyan-mode
-(use-package nyan-mode
-  :init 
-  (nyan-mode t)
-  :config
-  (setq nyan-animate-nyancat t)
-  (setq nyan-wavy-trail nil))
 
 
 ;; Line and Column
