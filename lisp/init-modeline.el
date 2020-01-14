@@ -108,7 +108,8 @@
                '(:eval (list (nyan-create)))
                "] "
                
-               " [" ;; insert vs overwrite mode, input-method in a tooltip
+               ;; insert vs overwrite mode, input-method in a tooltip
+               "["
                '(:eval (propertize (if overwrite-mode "Ovr" "Ins")
                                    'face 'font-lock-preprocessor-face
                                    'help-echo (concat "Buffer is in "
@@ -133,10 +134,10 @@
                ;; the current major mode for the buffer.
                '(:eval (propertize "%m" 'face 'font-lock-string-face
                                    'help-echo buffer-file-coding-system))
+               "  "
                
-               "%1 "
                modeline-flycheck
-               "%1 "
+               " "
                
                ;; minor modes
                ;; minor-mode-alist
