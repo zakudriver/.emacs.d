@@ -5,7 +5,7 @@
   (require 'init-custom))
 
 ;; Font
-(set-face-attribute 'default nil :height 120)
+(set-face-attribute 'default nil :height (if sys/macp 120 110) )
 ;; (set-face-attribute 'default nil :font "Menlo")
 
 
@@ -135,34 +135,6 @@
 (bind-change-theme-keymap)
 
 
-;;;;;;;;;;;;;;;;
-;; Mode Line
-;;;;;;;;;;;;;;;;
-;; (use-package doom-modeline
-;;   :ensure t
-;;   :hook (after-init . doom-modeline-mode)
-;;   :init
-;;   (setq doom-modeline-height 1)
-;;   (set-face-attribute 'mode-line nil :height 110)
-;;   (set-face-attribute 'mode-line-inactive nil :height 110)
-;;   :custom
-;;   (doom-modeline-buffer-file-name-style 'file-name)
-;;   (doom-modeline-icon (display-graphic-p))
-;;   (doom-modeline-major-mode-icon nil))
-
-
-;; (use-package minions
-;;   :ensure t
-;;   :hook
-;;   (after-init . minions-mode)
-;;   :config (minions-mode t))
-
-
-
-;; Line and Column
-;;(setq-default fill-column 80)
-;;(setq column-number-mode t)
-
 (use-package smooth-scrolling
   :init (add-hook 'after-init-hook #'smooth-scrolling-mode)
   :config (setq smooth-scroll-margin 0
@@ -177,8 +149,6 @@
 (setq inhibit-startup-screen t)
 (setq track-eol t)
 (setq line-move-visual nil)
-
-
 
 
 ;; Don't open a file in a new frame

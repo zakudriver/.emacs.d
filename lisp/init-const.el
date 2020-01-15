@@ -32,7 +32,7 @@
   "theme-setting-cache")
 
 (defconst kumo/index-map
-  '("q" "w" "e" "r" "t" "y" "u" "i" "o" "p"))
+  '("a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n"))
 
 
 (provide 'init-const)

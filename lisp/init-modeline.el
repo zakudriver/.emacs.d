@@ -1,7 +1,6 @@
 ;;; Code:
 
 
-
 ;; nyan-mode
 (use-package nyan-mode
   :init
@@ -166,6 +165,8 @@
                (propertize " " 'display '(raise -0.1))
                ))
 
+
+(setq x-underline-at-descent-line t)
 
 (provide 'init-modeline)
 

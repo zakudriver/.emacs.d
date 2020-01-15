@@ -7,10 +7,14 @@
               all-the-icons-auto-mode-match?
               all-the-icons-faicon
               my-ibuffer-find-file)
-  :commands (ibuffer-find-file
-             ibuffer-current-buffer)
-  :bind ("C-x C-b" . ibuffer)
-  :init (setq ibuffer-filter-group-name-face '(:inherit (font-lock-string-face bold)))
+  :commands
+  (ibuffer-find-file
+   ibuffer-current-buffer)
+  :bind
+  ("C-x C-b" . ibuffer)
+  ;; :init (setq ibuffer-filter-group-name-face '(:inherit (font-lock-string-face bold)))
+  :custom
+  (ibuffer-filter-group-name-face '(:inherit (font-lock-string-face bold)))
   :config
   ;; Display buffer icons on GUI
   (when (and (display-graphic-p)
