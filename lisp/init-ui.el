@@ -21,7 +21,7 @@
   (dashboard-startup-banner (or kumo/logo 'official))
   (dashboard-center-content t)
   (dashboard-show-shortcuts nil)
-  ( dashboard-items '((recents  . 5)
+  (dashboard-items '((recents  . 5)
                       (projects . 5)))
   (dashboard-set-footer nil)
   :init

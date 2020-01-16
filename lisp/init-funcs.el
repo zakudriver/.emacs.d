@@ -46,14 +46,9 @@
     (message "Buffers deleted!"))
 
 (defun kumo-prompt-kill-emacs ()
-  "Prompt to save changed buffers and exit Spacemacs"
+  "Prompt to save changed buffers and exit emacs."
   (interactive)
   (save-some-buffers)
-  (kill-emacs))
-
-(defun kumo-kill-emacs ()
-  "Lose all changes and exit Spacemacs"
-  (interactive)
   (kill-emacs))
 
 (defun kumo-switch-to-previous-buffer ()
@@ -78,12 +73,19 @@ Repeated invocations toggle between the two most recently open buffers."
     (setq ffip-project-root (expand-file-name filename))))
 
 
-
 (defun kumo-relative-line-number ()
   "Set relative line number."
   (interactive)
   (setq-local display-line-numbers 'visual))
 
+(defvar temp-number 0 "Temp-buffer tag.")
+(defun kumo-new-temp-buffer ()
+  "New a temp buffer."
+  (interactive)
+  (progn
+    (switch-to-buffer-other-window (concat "*temp-" (number-to-string temp-number) "*"))
+    (setq temp-number (+ temp-number 1))
+    (insert (concat "// Happy hacking, " user-login-name " - Emacs ♥ you!"))))
 
 
 (defun kumo-rename-current-buffer-file ()

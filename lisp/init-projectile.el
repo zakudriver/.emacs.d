@@ -7,16 +7,12 @@
 (use-package projectile
   :diminish
   :bind (:map projectile-mode-map
-         ("C-c p p" . projectile-command-map))
+         ("C-x p" . projectile-command-map))
   :hook (after-init . projectile-mode)
   :custom
   (projectile-mode-line-prefix "")
   (projectile-sort-order 'recentf)
-  (projectile-use-git-grep )
-  ;; :init
-  ;; (setq projectile-mode-line-prefix ""
-  ;;       projectile-sort-order 'recentf
-  ;;       projectile-use-git-grep t)
+  (projectile-use-git-grep t)
   :config
   ;; (projectile-update-mode-line)         ; Update mode-line at the first time
 

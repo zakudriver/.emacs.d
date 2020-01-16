@@ -15,7 +15,7 @@
     ("C-x h" . treemacs-visit-node-horizontal-split)
     ("R" . treemacs-refresh))
   :custom
-  (treemacs-collapse-dirs `(if treemacs-python-executable 3 0))
+  ;; (treemacs-collapse-dirs `(if treemacs-python-executable 3 0))
   (treemacs-sorting 'alphabetic-case-insensitive-desc)
   (treemacs-follow-after-init t)
   (treemacs-is-never-other-window t)

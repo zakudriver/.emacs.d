@@ -133,6 +133,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "D" 'kumo-delete-current-buffer-file
  "ps" 'treemacs-select-window
  "pt" 'treemacs
+ "pp" 'projectile-command-map
  "sr" 'counsel-rg
  "ss" 'swiper
  "ff" 'counsel-find-file
@@ -144,6 +145,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "ba" 'kumo-kill-all-buffers
  "bp" 'kumo-switch-to-previous-buffer
  "bs" 'save-buffer
+ "bn" 'kumo-new-temp-buffer
  "c" 'flycheck-list-errors
  "d" 'dired
  "D" 'docker
