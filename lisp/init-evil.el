@@ -3,19 +3,21 @@
 
 (use-package evil
   :init
-  ;; (setq evil-want-C-u-scroll t)
-  ;; (setq x-select-enable-clipboard t)
   (evil-mode t)
+  :custom
+  (evil-want-C-u-scroll t)
+  (x-select-enable-clipboard t)
+  :config
   ;; normal no yank
   (define-key evil-normal-state-map (kbd "d") 'evil-delete-no-yank)
   ;; (define-key evil-normal-state-map (kbd "p") 'evil-paste-after-no-yank)
   ;; visual yank
   (define-key evil-visual-state-map (kbd "d") 'evil-delete)
+  ;; redefine evil operator
+  (evil-define-key 'insert global-map (kbd "DEL") 'hungry-delete-backward)
   (evil-define-key 'visual global-map (kbd "z") 'kumo-wrap-with-input)
-  :custom
-  (evil-want-C-u-scroll t)
-  (x-select-enable-clipboard t)
-  :config
+
+  ;; redefine evil operator function
   (evil-define-operator evil-delete-char-no-yank (beg end type register yank-handler)
     "Delete next character without yanking."
     :motion evil-forward-char
@@ -119,7 +121,6 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "o" 'overwrite-mode
  "m" 'counsel-imenu
  "w" 'avy-goto-char-timer
- "d" 'hungry-delete-backward
 )
          
 

@@ -10,12 +10,20 @@
   (nyan-wavy-trail nil))
 
 (setq
- evil-normal-state-tag   (propertize "[N]" 'face '((:background "green" :foreground "black")))
- evil-emacs-state-tag    (propertize "[E]" 'face '((:background "orange" :foreground "black")))
- evil-insert-state-tag   (propertize "[I]" 'face '((:background "red") :foreground "white"))
- evil-motion-state-tag   (propertize "[M]" 'face '((:background "blue") :foreground "white"))
- evil-visual-state-tag   (propertize "[V]" 'face '((:background "grey80" :foreground "black")))
- evil-operator-state-tag (propertize "[O]" 'face '((:background "purple"))))
+ evil-normal-state-tag   (propertize " N " 'face '((:background "green" :foreground "black")))
+ evil-emacs-state-tag    (propertize " E " 'face '((:background "orange" :foreground "black")))
+ evil-insert-state-tag   (propertize " I " 'face '((:background "red") :foreground "white"))
+ evil-motion-state-tag   (propertize " M " 'face '((:background "blue") :foreground "white"))
+ evil-visual-state-tag   (propertize " V " 'face '((:background "grey80" :foreground "black")))
+ evil-operator-state-tag (propertize " O " 'face '((:background "purple"))))
+
+;; (setq
+;;  evil-normal-state-tag   (propertize " N " 'face '((:foreground "green")))
+;;  evil-emacs-state-tag    (propertize " E " 'face '((:foreground "orange")))
+;;  evil-insert-state-tag   (propertize " I " 'face '((:foreground "red")))
+;;  evil-motion-state-tag   (propertize " M " 'face '((:foreground "blue")))
+;;  evil-visual-state-tag   (propertize " V " 'face '((:foreground "grey80")))
+;;  evil-operator-state-tag (propertize " O " 'face '((:foreground "purple"))))
 
 
 (defun modeline-unicode-number (str)
@@ -72,99 +80,118 @@
       (`suspicious '(propertize " ?" 'face 'warning)))))
 
 
-(setq-default mode-line-format
-              (list
-               ;; winum
-               " "
-               '(:eval (propertize
-                        (modeline-unicode-number (winum-get-number-string))))
-               " "
+(defun modeline-renderer ()
+  "Mode line renderer."
+  (let* ((modeline-left (list
+                         ;; winum
+                         " "
+                         '(:eval (propertize
+                                  (modeline-unicode-number (winum-get-number-string))))
+                         " "
 
-               ;; is Modified
-               '(:eval (propertize "%*" 'face 'font-lock-string-face))
-               " "
+                         ;; is Modified
+                         '(:eval (propertize "%*" 'face 'font-lock-string-face))
+                         " "
 
-               ;; file info
-               ;; " %* "
-               '(:eval (propertize
-                        (modeline-window-number)
-                        'face
-                        'font-lock-type-face))
+                         ;; file info
+                         ;; " %* "
+                         '(:eval (propertize
+                                  (modeline-window-number)
+                                  'face
+                                  'font-lock-type-face))
+                         
+                         ;; the buffer name; the file name as a tool tip
+                         '(:eval (propertize "%b " 'face 'font-lock-keyword-face
+                                             'help-echo (buffer-file-name)))
+                         
+                         ;; size
+                         '(:eval (propertize "%I" 'face 'font-lock-constant-face))
+                         "  "
+                         
+                         ;; evil state
+                         '(:eval evil-mode-line-tag)
+                         "  "
+                         
+                         ;; '(:eval (propertize "[" 'face 'font-lock-type-face))
+                         '(:eval (list (nyan-create)))
+                         ;; '(:eval (propertize "]" 'face 'font-lock-type-face))
+                         "   "
+                         
+                         
+                         ;; the current major mode for the buffer.
+                         '(:eval (propertize "%m" 'face 'font-lock-string-face
+                                             'help-echo buffer-file-coding-system))
+                         "       "
 
-               ;; the buffer name; the file name as a tool tip
-               '(:eval (propertize "%b " 'face 'font-lock-keyword-face
-                                   'help-echo (buffer-file-name)))
+                         ;; minor modes
+                         ;; minor-mode-alist
+                         ;; " "
+                         
+                         modeline-flycheck
+                         " "
+                         ))
+         (modeline-middle (list
+                           ;; insert vs overwrite mode, input-method in a tooltip
+                           " "
+                           '(:eval (propertize (if overwrite-mode "Ovr" "Ins")
+                                               'face 'font-lock-preprocessor-face
+                                               'help-echo (concat "Buffer is in "
+                                                                  (if overwrite-mode
+                                                                      "overwrite"
+                                                                    "insert") " mode")))
+                         
+                           ;; was this buffer modified since the last save?
+                           ;; '(:eval (when (buffer-modified-p)
+                           ;;           (concat ","  (propertize "Mod"
+                           ;;                                    'face 'font-lock-warning-face
+                           ;;                                    'help-echo "Buffer has been modified"))))
+                         
+                           ;; is this buffer read-only?
+                           '(:eval (when buffer-read-only
+                                     (concat ","  (propertize "RO"
+                                                              'face 'font-lock-type-face
+                                                              'help-echo "Buffer is read-only"))))
+                           " "
+                           
+                           ;; git info
+                           '(:eval vc-mode)
+                         ))
+                        (modeline-right (list
+                                         ;; global-mode-string goes in mode-line-misc-info
+                                         mode-line-misc-info
+                                         
+                                         (mode-line-fill 'mode-line 20)
+                                         
+                                         ;; line and column
+                                         ;; '%02' to set to 2 chars at least; prevents flickering
+                                         (propertize "%02l" 'face 'font-lock-type-face) ","
+                                         (propertize "%02c" 'face 'font-lock-type-face)
+                                         " "
+                                         
+                                         '(:eval (buffer-encoding-abbrev))
 
-               ;; size
-               '(:eval (propertize "%I" 'face 'font-lock-constant-face))
-               " "
+                                         mode-line-end-spaces
+                                         ))
+                        (modeline-height (list
+                                          (propertize " "
+                                                      'display '(height 1.3))
+                                          (propertize " " 'display '(raise -0.3))))
 
-               ;; evil state
-               '(:eval evil-mode-line-tag)
-               " "
+                        (width-left (string-width (format-mode-line modeline-left)))
+                        (width-left-middle (string-width (format-mode-line (list modeline-left modeline-middle))))
+                        (width-fill (string-width (format-mode-line (list modeline-left modeline-middle modeline-right)))))
 
-               "["
-               '(:eval (list (nyan-create)))
-               "] "
-               
-               ;; insert vs overwrite mode, input-method in a tooltip
-               "["
-               '(:eval (propertize (if overwrite-mode "Ovr" "Ins")
-                                   'face 'font-lock-preprocessor-face
-                                   'help-echo (concat "Buffer is in "
-                                                      (if overwrite-mode
-                                                          "overwrite"
-                                                        "insert") " mode")))
-               
-               ;; was this buffer modified since the last save?
-               ;; '(:eval (when (buffer-modified-p)
-               ;;           (concat ","  (propertize "Mod"
-               ;;                                    'face 'font-lock-warning-face
-               ;;                                    'help-echo "Buffer has been modified"))))
-               
-               ;; is this buffer read-only?
-               '(:eval (when buffer-read-only
-                         (concat ","  (propertize "RO"
-                                                  'face 'font-lock-type-face
-                                                  'help-echo "Buffer is read-only"))))
-               "] "
-               
-               
-               ;; the current major mode for the buffer.
-               '(:eval (propertize "%m" 'face 'font-lock-string-face
-                                   'help-echo buffer-file-coding-system))
-               "  "
-               
-               modeline-flycheck
-               " "
-               
-               ;; minor modes
-               ;; minor-mode-alist
-               ;; " "
+    (cond
+     ((> width-left (window-width)) (list modeline-left modeline-height))
+     ((> width-left-middle (window-width)) (list modeline-left modeline-middle modeline-height))
+     (t (list modeline-left modeline-middle modeline-right modeline-height)))))
 
-               ;; git info
-               '(:eval vc-mode)
-               " "
-               
-               ;; global-mode-string goes in mode-line-misc-info
-               mode-line-misc-info
-               
-               (mode-line-fill 'mode-line 20)
-               
-               ;; line and column
-               "(" ;; '%02' to set to 2 chars at least; prevents flickering
-               (propertize "%02l" 'face 'font-lock-type-face) ","
-               (propertize "%02c" 'face 'font-lock-type-face)
-               ") "
-               
-               '(:eval (buffer-encoding-abbrev))
-               mode-line-end-spaces
 
-               (propertize " "
-                           'display '(height 1.3))
-               (propertize " " 'display '(raise -0.1))
-               ))
-
+(setq-default mode-line-format '(:eval (modeline-renderer)))
+(set-face-attribute 'mode-line nil
+                    :family "SF Pro Text"
+                    :height 95
+                    )
 
 (setq x-underline-at-descent-line t)
 
