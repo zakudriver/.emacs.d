@@ -106,6 +106,7 @@
      (interactive)
      (theme-factory-macro ,@theme)
      (write-region (symbol-name (quote ,(nth 1 theme))) nil kumo/theme-setting-cache)
+     (update-modeline-format)
      ))
 
 

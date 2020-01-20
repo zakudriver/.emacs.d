@@ -21,8 +21,11 @@
   :bind (:map go-mode-map
          ([remap xref-find-definitions] . godef-jump)
          ("C-c R" . go-remove-unused-imports))
-  :init
-  (add-hook 'before-save-hook 'gofmt-before-save)
+  ;; :init
+  ;; (setq gofmt-command "goimports")
+  ;; (add-hook 'before-save-hook 'gofmt-before-save)
+  :hook
+  (before-save-hook . gofmt-before-save)
   :custom
   (gofmt-command "goimports")
   :config
