@@ -18,16 +18,14 @@
 ;;
 
 (use-package go-mode
-  :bind (:map go-mode-map
-         ([remap xref-find-definitions] . godef-jump)
-         ("C-c R" . go-remove-unused-imports))
-  ;; :init
-  ;; (setq gofmt-command "goimports")
-  ;; (add-hook 'before-save-hook 'gofmt-before-save)
-  :hook
-  (before-save-hook . gofmt-before-save)
+  :bind
+  (:map go-mode-map
+        ([remap xref-find-definitions] . godef-jump)
+        ("C-r" . go-remove-unused-imports))
   :custom
   (gofmt-command "goimports")
+  :hook
+  (before-save . gofmt-before-save)
   :config
   (use-package company-go
     :after company)
@@ -80,6 +78,24 @@
 
   (unless (executable-find "gopls")
     (go-update-tools))
+
+  ;; Misc
+  (use-package go-dlv)
+  (use-package go-fill-struct)
+  (use-package go-impl)
+
+  (use-package go-tag
+    :bind
+    (:map go-mode-map
+          ("C-t a" . go-tag-add)
+          ("C-t r" . go-tag-remove))
+    :custom
+    (go-tag-args (list "-transform" "camelcase")))
+
+
+  ;; Local Golang playground for short snippets
+  (use-package go-playground
+    :diminish)
 )
 
 

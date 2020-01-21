@@ -34,6 +34,7 @@
     (doom-themes doom-snazzy)
     (doom-themes doom-challenger-deep)
     (doom-themes doom-sourcerer)
+    (cyberpunk-theme cyberpunk)
     (nil tron-legacy))
   "Theme list.")
 
@@ -42,12 +43,13 @@
 ;; "/home/kumotyou/.config/yarn/global/node_modules" -- trigger --> ng2-mode lsp
 (defconst kumo/env-path
   (if (and sys/macp)
-    '("/usr/local/bin" "/Users/kumotyou/code/go/bin" "/usr/local/go/bin" "/Users/kumotyou/.config/yarn/global/node_modules")
-    '("/home/kumotyou/Code/Go/bin" "/usr/lib/go/bin" "/home/kumotyou/.yarn/bin" "/home/kumotyou/.config/yarn/global/node_modules"))
+    '("/usr/local/bin" "/Users/kumotyou/code/go/bin" "/Users/kumotyou/code/go" "/usr/local/go/bin" "/Users/kumotyou/.config/yarn/global/node_modules")
+    '("/home/kumotyou/Code/Go/bin" "/home/kumotyou/Code/Go" "/usr/lib/go/bin" "/home/kumotyou/.yarn/bin" "/home/kumotyou/.config/yarn/global/node_modules"))
   "ENV_PATH list.")
 
 
 
 (provide 'init-custom)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-custom.el ends here

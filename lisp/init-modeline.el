@@ -16,12 +16,12 @@
 
 
 (setq
- evil-normal-state-tag   (propertize "<N>" 'face 'font-lock-preprocessor-face)
- evil-emacs-state-tag    (propertize "<E>" 'face 'font-lock-preprocessor-face)
- evil-insert-state-tag   (propertize "<I>" 'face 'font-lock-preprocessor-face)
- evil-motion-state-tag   (propertize "<M>" 'face 'font-lock-preprocessor-face)
- evil-visual-state-tag   (propertize "<V>" 'face 'font-lock-preprocessor-face)
- evil-operator-state-tag (propertize "<O>" 'face 'font-lock-preprocessor-face))
+ evil-normal-state-tag   (propertize "<𝙽>" 'face 'font-lock-preprocessor-face)
+ evil-emacs-state-tag    (propertize "<𝙴>" 'face 'font-lock-preprocessor-face)
+ evil-insert-state-tag   (propertize "<𝙸>" 'face 'font-lock-preprocessor-face)
+ evil-motion-state-tag   (propertize "<𝙼>" 'face 'font-lock-preprocessor-face)
+ evil-visual-state-tag   (propertize "<𝚅>" 'face 'font-lock-preprocessor-face)
+ evil-operator-state-tag (propertize "<𝙾>" 'face 'font-lock-preprocessor-face))
 
 (defun modeline-modified-p ()
   "Buffer modified symbol."
@@ -196,7 +196,7 @@
                            " "
                          ))
          (modeline-right (list
-                          (modeline-fill 'mode-line (if sys/macp 10 12))
+                          (modeline-fill 'mode-line (if sys/macp 10 16))
 
                           ;; global-mode-string goes in mode-line-misc-info
                           mode-line-misc-info
@@ -229,11 +229,11 @@
   (setq-default mode-line-format '(:eval (modeline-renderer)))
   (set-face-attribute 'mode-line nil
                       :family "SF Pro Text"
-                      :height (if sys/macp 100 90)
+                      :height 100
                       :overline nil
                       :underline nil)
   (set-face-attribute 'mode-line-inactive  nil
-                      :height (if sys/macp 90 80)
+                      :height 90
                       :overline nil
                       :underline nil
                       :background (face-background 'default))

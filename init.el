@@ -57,7 +57,7 @@ decrease this. If you experience stuttering, increase this.")
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 
 ;; set my own configuration
-(with-temp-message ""                   
+(with-temp-message ""
   ;; Constants
   (require 'init-const)
 
@@ -93,6 +93,7 @@ decrease this. If you experience stuttering, increase this.")
   ;; Programming
   (require 'init-lsp)
   (require 'init-prog)
+  (require 'init-markdown)
   (require 'init-go)
   (require 'init-lisp)
 
@@ -100,4 +101,8 @@ decrease this. If you experience stuttering, increase this.")
   (require 'init-js)
   (require 'init-web)
 )
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; init.el ends here
 
