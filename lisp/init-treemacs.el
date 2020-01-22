@@ -7,12 +7,12 @@
   :diminish treemacs-mode
   :bind (
     :map treemacs-mode-map
-    ("C-x o" . treemacs-collapse-parent-node)
+    ("co" . treemacs-collapse-parent-node)
     ("C-x f" . treemacs-create-file)
     ("C-x d" . treemacs-create-dir)
     ("C-x C-d" . treemacs-delete)
-    ("C-x v" . treemacs-visit-node-vertical-split)
-    ("C-x h" . treemacs-visit-node-horizontal-split)
+    ("ov" . treemacs-visit-node-vertical-split)
+    ("oh" . treemacs-visit-node-horizontal-split)
     ("R" . treemacs-refresh))
   :custom
   ;; (treemacs-collapse-dirs `(if treemacs-python-executable 3 0))
@@ -25,7 +25,7 @@
   :config
   (treemacs-follow-mode t)
   (treemacs-filewatch-mode t)
-  (treemacs-resize-icons 16)
+  (treemacs-resize-icons 14)
 
   (pcase (cons (not (null (executable-find "git")))
                (not (null (executable-find "python3"))))
@@ -34,11 +34,6 @@
     (`(t . _)
      (treemacs-git-mode 'simple)))
 
-  (use-package treemacs-projectile
-    :after projectile
-    :bind
-    (:map projectile-command-map
-          ("h" . treemacs-projectile)))
 
   (use-package treemacs-magit
     :after magit

@@ -11,14 +11,13 @@
                  (side . bottom)
                  (reusable-frames . visible)
                  (window-height . 0.2)))
-  :config
-  (setq flycheck-emacs-lisp-load-path 'inherit)
-
+  :custom
+  (flycheck-emacs-lisp-load-path 'inherit)
   ;; Only check while saving and opening files
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-
+  (flycheck-check-syntax-automatically '(save mode-enabled))
   ;; Set fringe style
-  (setq flycheck-indication-mode 'right-fringe)
+  (flycheck-indication-mode 'right-fringe)
+  :config
   (when (fboundp 'define-fringe-bitmap)
     (define-fringe-bitmap 'flycheck-fringe-bitmap-double-arrow
       [16 48 112 240 112 48 16] nil nil 'center))

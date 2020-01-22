@@ -5,8 +5,8 @@
   (require 'init-custom))
 
 (use-package elpa-mirror
-  :config
-  (setq elpamr-default-output-directory "~/.emacs.d/myelpa/"))
+  :custom
+  (elpamr-default-output-directory "~/.emacs.d/myelpa/"))
 
 ;; (use-package expand-region
 ;;   :ensure t

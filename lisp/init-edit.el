@@ -70,12 +70,6 @@
 (use-package mwim)
 
 
-;; rainbow-delimiters
-(use-package rainbow-delimiters
-  :diminish rainbow-delimiters-mode
-  :init (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
-
-
 
 (provide 'init-edit)
 

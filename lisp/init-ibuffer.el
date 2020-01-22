@@ -16,20 +16,17 @@
   :custom
   (ibuffer-filter-group-name-face '(:inherit (font-lock-string-face bold)))
   :config
-  ;; Display buffer icons on GUI
-  (when (and (display-graphic-p)
-             (require 'all-the-icons nil t))
-    ;; For alignment, the size of the name field should be the width of an icon
-    (define-ibuffer-column icon (:name "  ")
-      (let ((icon (if (and (buffer-file-name)
-                           (all-the-icons-auto-mode-match?))
-                      (all-the-icons-icon-for-file (file-name-nondirectory (buffer-file-name)) :v-adjust -0.05)
-                    (all-the-icons-icon-for-mode major-mode :v-adjust -0.05))))
-        (if (symbolp icon)
-            (setq icon (all-the-icons-faicon "file-o" :face 'all-the-icons-dsilver :height 0.8 :v-adjust 0.0))
-          icon)))
+  ;; For alignment, the size of the name field should be the width of an icon
+  (define-ibuffer-column icon (:name "  ")
+    (let ((icon (if (and (buffer-file-name)
+                         (all-the-icons-auto-mode-match?))
+                    (all-the-icons-icon-for-file (file-name-nondirectory (buffer-file-name)) :v-adjust -0.05)
+                  (all-the-icons-icon-for-mode major-mode :v-adjust -0.05))))
+      (if (symbolp icon)
+          (setq icon (all-the-icons-faicon "file-o" :face 'all-the-icons-dsilver :height 0.8 :v-adjust 0.0))
+        icon)))
 
-    (setq ibuffer-formats `((mark modified read-only (locked)
+  (setq ibuffer-formats `((mark modified read-only (locked)
                                   ;; Here you may adjust by replacing :right with :center or :left
                                   ;; According to taste, if you want the icon further from the name
                                   " " (icon 2 2 :left :elide)
@@ -37,7 +34,7 @@
                                   (name 40 40 :left :elide)
                                   " " (size 9 -1 :right)
                                   " " (mode 20 20 :left :elide) " " filename-and-process)
-                            (mark " " (name 16 -1) " " filename))))
+                            (mark " " (name 16 -1) " " filename)))
 
   ;; Group ibuffer's list by project root
   (use-package ibuffer-projectile

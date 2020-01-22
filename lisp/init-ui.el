@@ -45,6 +45,12 @@
 
 
 ;; Menu/Tool/Scroll bars
+
+(when (version< emacs-version "27")
+  (message emacs-version)
+  (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+  (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+  (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1)))
 ;; (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 ;; (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 ;; (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
@@ -167,16 +173,16 @@
 ;; Highlight
 ;;;;;;;;;;;;;;;;
 ;; line highlight
-(global-hl-line-mode t)
+;; (global-hl-line-mode t)
 
 ;; paren highlight
-(show-paren-mode 1)
-(define-advice show-paren-function (:around (fn) fix-show-paren-function)
-  "Highlight enclosing parens."
-  (cond ((looking-at-p "\\s(") (funcall fn))
-	(t (save-excursion
-	     (ignore-errors (backward-up-list))
-	     (funcall fn)))))
+;; (show-paren-mode 1)
+;; (define-advice show-paren-function (:around (fn) fix-show-paren-function)
+;;   "Highlight enclosing parens."
+;;   (cond ((looking-at-p "\\s(") (funcall fn))
+;; 	(t (save-excursion
+;; 	     (ignore-errors (backward-up-list))
+;; 	     (funcall fn)))))
 
 
 ;;;;;;;;;;;;;;;;

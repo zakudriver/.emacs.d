@@ -76,8 +76,8 @@ decrease this. If you experience stuttering, increase this.")
   (require 'init-ui)
 
   (require 'init-edit)
+  (require 'init-highlight)
   (require 'init-ibuffer)
-  (require 'init-symbol-overlay)
   (require 'init-treemacs)
   (require 'init-shell)
   (require 'init-which-key)
@@ -105,4 +105,3 @@ decrease this. If you experience stuttering, increase this.")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init.el ends here
-

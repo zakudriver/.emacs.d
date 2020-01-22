@@ -42,11 +42,13 @@
   ;; Icons and quickhelp
     (use-package company-box
       :diminish
-      :hook (company-mode . company-box-mode)
-      :init (setq company-box-backends-colors nil
-                  company-box-show-single-candidate t
-                  company-box-max-candidates 50
-                  company-box-doc-delay 0.5)
+      :hook
+      (company-mode . company-box-mode)
+      :custom
+      (company-box-backends-colors nil)
+      (company-box-show-single-candidate t)
+      (company-box-max-candidates 50)
+      (company-box-doc-delay 0.5)
       :config
       (with-no-warnings
         ;; Highlight `company-common'

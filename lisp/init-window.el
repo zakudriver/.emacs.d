@@ -1,7 +1,8 @@
 ;;; Code:
 
 
-;; fullscreen
+
+;; Fullscreen
 (if sys/macp
     (progn
       ;; 在Mac平台, Emacs不能进入Mac原生的全屏模式,否则会导致 `make-frame' 创建时也集成原生全屏属性后造成白屏和左右滑动现象.
@@ -19,12 +20,10 @@
       ;; 默认先最大化。
       (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
 
-      (run-at-time "2sec" nil
-                   (lambda ()
-                     (toggle-frame-fullscreen)
-                     ))
+      (run-at-time "2sec" nil (lambda ()
+                                (toggle-frame-fullscreen)
+                                ))
       )
-
   ;; 非Mac平台直接全屏
   (setq initial-frame-alist (quote ((fullscreen . maximized)))))
 
@@ -44,8 +43,7 @@
       ("M-6" . 'winum-select-window-6)
       ("M-7" . 'winum-select-window-7)
       ("M-8" . 'winum-select-window-8)
-      ("M-9" . 'winum-select-window-9)
-      ("M-n" . 'winum-select-window-by-number))
+      ("M-9" . 'winum-select-window-9))
   :custom
   (winum-auto-setup-mode-line nil))
 
