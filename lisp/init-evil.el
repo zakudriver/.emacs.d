@@ -8,6 +8,7 @@
   (evil-want-C-u-scroll t)
   (x-select-enable-clipboard t)
   :config
+  ;; (evil-set-initial-state 'treemacs-mode 'emacs)
   ;; normal no yank
   (define-key evil-normal-state-map (kbd "d") 'evil-delete-no-yank)
   ;; (define-key evil-normal-state-map (kbd "p") 'evil-paste-after-no-yank)

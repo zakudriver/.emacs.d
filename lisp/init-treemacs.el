@@ -5,15 +5,18 @@
 ;; treemacs
 (use-package treemacs
   :diminish treemacs-mode
-  :bind (
-    :map treemacs-mode-map
-    ("co" . treemacs-collapse-parent-node)
-    ("C-x f" . treemacs-create-file)
-    ("C-x d" . treemacs-create-dir)
-    ("C-x C-d" . treemacs-delete)
-    ("ov" . treemacs-visit-node-vertical-split)
-    ("oh" . treemacs-visit-node-horizontal-split)
-    ("R" . treemacs-refresh))
+  :ensure t
+  :defer
+  :bind
+  (:map treemacs-mode-map
+        ("M-o" . treemacs-visit-node-no-split)
+        ("M-c" . treemacs-collapse-parent-node)
+        ("M-f" . treemacs-create-file)
+        ("M-d" . treemacs-create-dir)
+        ("C-x C-d" . treemacs-delete)
+        ("M-v" . treemacs-visit-node-vertical-split)
+        ("M-h" . treemacs-visit-node-horizontal-split)
+        ("R" . treemacs-refresh))
   :custom
   ;; (treemacs-collapse-dirs `(if treemacs-python-executable 3 0))
   (treemacs-sorting 'alphabetic-case-insensitive-desc)
@@ -21,6 +24,7 @@
   (treemacs-is-never-other-window t)
   (treemacs-silent-filewatch t)
   (treemacs-silent-refresh t)
+  ;; (treemacs-no-png-images t)
   (treemacs-width 30)
   :config
   (treemacs-follow-mode t)
@@ -34,6 +38,9 @@
     (`(t . _)
      (treemacs-git-mode 'simple)))
 
+  (use-package treemacs-evil
+    :ensure t
+    :after treemacs evil)
 
   (use-package treemacs-magit
     :after magit
@@ -43,9 +50,13 @@
       git-commit-post-finish
       magit-post-stage
       magit-post-unstage) . treemacs-magit--schedule-update))
-)
+
+  (use-package doom-themes
+    :hook
+    (treemacs-mode . doom-themes-treemacs-config)))
 
 
 (provide 'init-treemacs)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-treemacs.el ends here
