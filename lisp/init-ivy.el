@@ -1,52 +1,60 @@
 ;;; Code:
 
+
 (use-package counsel
   :diminish ivy-mode counsel-mode
-  :bind (
-         ("C-s" . 'swiper)
-         ("C-x C-r" . 'counsel-recentf)
-         ;;("C-x C-s" . 'counsel-rg)
-         ("C-h f" . 'counsel-describe-function)
-         ("C-h v" . 'counsel-describe-variable)
-         :map ivy-minibuffer-map
-         ([escape] . minibuffer-keyboard-quit)
-         :map swiper-map
-         ([escape] . minibuffer-keyboard-quit)
-         )
-  :hook ((after-init . ivy-mode)
-         (ivy-mode . counsel-mode))
-  :init
-  (setq enable-recursive-minibuffers t) ; Allow commands in minibuffers
-  (setq ivy-use-selectable-prompt t
-        ivy-use-virtual-buffers t    ; Enable bookmarks and recentf
-        ivy-height 10
-        ivy-fixed-height-minibuffer t
-        ivy-count-format "(%d/%d) "
-        ivy-on-del-error-function nil
-        ivy-initial-inputs-alist nil)
+  :bind
+  (("C-s" . 'swiper)
+   ("C-x C-r" . 'counsel-recentf)
+   ("C-h f" . 'counsel-describe-function)
+   ("C-h v" . 'counsel-describe-variable)
+   :map ivy-minibuffer-map
+   ([escape] . minibuffer-keyboard-quit)
+   :map swiper-map
+   ([escape] . minibuffer-keyboard-quit))
+  :hook
+  ((after-init . ivy-mode)
+   (ivy-mode . counsel-mode))
+  :custom
+  (enable-recursive-minibuffers t) ; Allow commands in minibuffers
+  (ivy-use-selectable-prompt t)
+  (ivy-use-virtual-buffers t)   ; Enable bookmarks and recentf
+  (ivy-height 10)
+  (ivy-fixed-height-minibuffer t)
+  (ivy-count-format "(%d/%d) ")
+  (ivy-on-del-error-function nil)
+  (ivy-initial-inputs-alist nil)
   :config
-  (with-no-warnings
-    (use-package ivy-hydra)
+  (with-eval-after-load 'projectile
+    (setq projectile-completion-system 'ivy))
 
-    ;; Integration with `projectile'
-    ;; (with-eval-after-load 'projectile
-    ;;   (setq projectile-completion-system 'ivy))
+  (use-package ivy-hydra
+    :commands ivy-hydra-read-action
+    :custom
+    (ivy-read-action-function #'ivy-hydra-read-action))
+
+  ;; Ivy integration for Projectile
+  (use-package counsel-projectile
+    :hook
+    (counsel-mode . counsel-projectile-mode)
+    :custom
+    (counsel-projectile-grep-initial-input '(ivy-thing-at-point)))
 
     ;; Integration with `magit'
-    (with-eval-after-load 'magit
-      (setq magit-completing-read-function 'ivy-completing-read))))
+  (with-eval-after-load 'magit
+    (setq magit-completing-read-function 'ivy-completing-read)))
+
 
 
 ;; More friendly display transformer for Ivy
 (use-package ivy-rich
-  :hook ((ivy-mode . ivy-rich-mode)
+  :hook ((counsel-projectile-mode . ivy-rich-mode)
          (ivy-rich-mode . (lambda ()
                             (setq ivy-virtual-abbreviate
                                   (or (and ivy-rich-mode 'abbreviate) 'name)))))
+  :custom
+  (ivy-rich-parse-remote-buffer nil)
   :init
-  ;; For better performance
-  (setq ivy-rich-parse-remote-buffer nil)
-
   ;; Setting tab size to 1, to insert tabs as delimiters
   (add-hook 'minibuffer-setup-hook
             (lambda ()
@@ -152,6 +160,7 @@
       "Display the process icon in `ivy-rich'."
       (when (display-graphic-p)
         (all-the-icons-faicon "bolt" :height 1.0 :v-adjust -0.05 :face 'all-the-icons-lblue)))
+
 
     (when (display-graphic-p)
       (defun my-ivy-rich-bookmark-type (candidate)

@@ -133,9 +133,9 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "k" 'avy-goto-line-above
  "R" 'kumo-rename-current-buffer-file
  "D" 'kumo-delete-current-buffer-file
- "ps" 'treemacs-select-window
- "pt" 'treemacs
- "pp" 'projectile-command-map
+ "ts" 'treemacs-select-window
+ "tt" 'treemacs
+ "p" 'projectile-command-map
  "sr" 'counsel-rg
  "ss" 'swiper
  "ff" 'counsel-find-file
@@ -148,13 +148,17 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "bp" 'kumo-switch-to-previous-buffer
  "bs" 'save-buffer
  "bn" 'kumo-new-temp-buffer
+ "oo" 'org-switchb
+ "oa" 'org-agenda
  "c" 'flycheck-list-errors
  "d" 'dired
  "D" 'docker
  "ww" 'hydra-frame-window/body
  "wv" 'split-window-below
  "wh" 'split-window-right
- "wd" 'delete-window
+ "wt" 'delete-window
+ "wo" 'delete-other-windows
+ "wb" 'balance-windows
  "mo" 'multi-term
  "md" 'kumo-multi-term-dedicated-open
  "mc" 'multi-term-dedicated-close

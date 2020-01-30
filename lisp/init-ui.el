@@ -128,7 +128,7 @@
               :prefix "C-c"))
         (idx 0))
     (dolist (i kumo/theme keybinds)
-               (setq keybinds (append keybinds `(,(concat "t" (if (> idx 9) (nth (- idx 10) kumo/index-map) (number-to-string idx)))) `((quote ,(nth 1 i)))))
+               (setq keybinds (append keybinds `(,(concat "T" (if (> idx 9) (nth (- idx 10) kumo/index-map) (number-to-string idx)))) `((quote ,(nth 1 i)))))
                (setq idx (+ idx 1))))))
 
 
@@ -166,23 +166,6 @@
 ;; Don't use GTK+ tooltip
 (when (boundp 'x-gtk-use-system-tooltips)
   (setq x-gtk-use-system-tooltips nil))
-
-
-
-;;;;;;;;;;;;;;;;
-;; Highlight
-;;;;;;;;;;;;;;;;
-;; line highlight
-;; (global-hl-line-mode t)
-
-;; paren highlight
-;; (show-paren-mode 1)
-;; (define-advice show-paren-function (:around (fn) fix-show-paren-function)
-;;   "Highlight enclosing parens."
-;;   (cond ((looking-at-p "\\s(") (funcall fn))
-;; 	(t (save-excursion
-;; 	     (ignore-errors (backward-up-list))
-;; 	     (funcall fn)))))
 
 
 ;;;;;;;;;;;;;;;;

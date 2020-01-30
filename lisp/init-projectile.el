@@ -6,9 +6,11 @@
 ;; Manage and navigate projects
 (use-package projectile
   :diminish
-  :bind (:map projectile-mode-map
-         ("C-x p" . projectile-command-map))
-  :hook (after-init . projectile-mode)
+  :bind
+  (:map projectile-mode-map
+        ("C-x p" . projectile-command-map))
+  :hook
+  (after-init . projectile-mode)
   :custom
   (projectile-mode-line-prefix "")
   (projectile-sort-order 'recentf)

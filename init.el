@@ -93,6 +93,7 @@ decrease this. If you experience stuttering, increase this.")
   ;; Programming
   (require 'init-lsp)
   (require 'init-prog)
+  (require 'init-org)
   (require 'init-markdown)
   (require 'init-go)
   (require 'init-lisp)
