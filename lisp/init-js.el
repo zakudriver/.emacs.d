@@ -44,9 +44,9 @@
   (js2-mode . prettier-js-mode)
   (typescript-mode . prettier-js-mode)
   (web-mode . prettier-js-mode)
+  (ng2-mode . prettier-js-mode)
   :custom
   (prettier-js-args '("--single-quote" "true" "--print-width" "120")))
-
 
 
 
