@@ -60,3 +60,4 @@ README.html
 .dap-*
 /.extension
 .theme
+/transient
