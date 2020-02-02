@@ -167,8 +167,8 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "mt" 'multi-term-dedicated-toggle
  "ms" 'multi-term-dedicated-select
  "gs" 'magit-status
+ "gd" 'magit-dispatch
  ;; "gb"  'magit-blame-echo
- ;; "gm"  'magit-dispatch-popup
 )
 
 
