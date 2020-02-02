@@ -13,10 +13,10 @@
         ("M-c" . treemacs-collapse-parent-node)
         ("M-f" . treemacs-create-file)
         ("M-d" . treemacs-create-dir)
-        ("C-x C-d" . treemacs-delete)
         ("M-v" . treemacs-visit-node-vertical-split)
         ("M-h" . treemacs-visit-node-horizontal-split)
-        ("R" . treemacs-refresh))
+        ("M-r" . treemacs-rename)
+        ("C-x C-d" . treemacs-delete))
   :custom
   ;; (treemacs-collapse-dirs `(if treemacs-python-executable 3 0))
   (treemacs-sorting 'alphabetic-case-insensitive-desc)
