@@ -44,6 +44,10 @@
 )
 
 
+(use-package expand-region
+  :ensure t
+  :bind ("C-=" . er/expand-region))
+
 ;; An all-in-one comment command to rule them all
 (use-package comment-dwim-2
   :bind

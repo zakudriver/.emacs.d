@@ -8,16 +8,7 @@
   :custom
   (elpamr-default-output-directory "~/.emacs.d/myelpa/"))
 
-;; (use-package expand-region
-;;   :ensure t
-;;   :bind ("C-=" . er/expand-region))
-
 (use-package magit
-  :init
-  (add-hook 'magit-blame-mode-hook
-            (lambda ()
-              ;; heading-format %H %-20a %C %
-              (setq magit-blame--style '(headings (heading-format . "%H %-20a %C\n")))))
   :config
   (defadvice magit-status (around magit-fullscreen activate)
     (window-configuration-to-register :magit-fullscreen)

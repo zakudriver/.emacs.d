@@ -45,11 +45,11 @@
     (when (equal '(4) arg) (delete-other-windows))
     (message "Buffers deleted!"))
 
-(defun kumo-prompt-kill-emacs ()
-  "Prompt to save changed buffers and exit emacs."
-  (interactive)
-  (save-some-buffers)
-  (kill-emacs))
+;; (defun kumo-prompt-kill-emacs ()
+;;   "Prompt to save changed buffers and exit emacs."
+;;   (interactive)
+;;   (save-some-buffers)
+;;   (kill-emacs))
 
 (defun kumo-switch-to-previous-buffer ()
   "Switch to previously open buffer.
@@ -58,25 +58,25 @@ Repeated invocations toggle between the two most recently open buffers."
   (switch-to-buffer (other-buffer (current-buffer) 1)))
 
 
-(defun remove-dos-eol ()
-  "Do not show ^M in files containing mixed UNIX and DOS line endings."
-  (interactive)
-  (setq buffer-display-table (make-display-table))
-  (aset buffer-display-table ?\^M []))
+;; (defun remove-dos-eol ()
+;;   "Do not show ^M in files containing mixed UNIX and DOS line endings."
+;;   (interactive)
+;;   (setq buffer-display-table (make-display-table))
+;;   (aset buffer-display-table ?\^M []))
 
 
-(defun kumo-set-project-directory ()
-  (interactive)
-  (let ((filename (read-directory-name "the project directory is ")))
-    (setq my-saved-launch-directory (expand-file-name filename))
-    (setq current-directory (expand-file-name filename))
-    (setq ffip-project-root (expand-file-name filename))))
+;; (defun kumo-set-project-directory ()
+;;   (interactive)
+;;   (let ((filename (read-directory-name "the project directory is ")))
+;;     (setq my-saved-launch-directory (expand-file-name filename))
+;;     (setq current-directory (expand-file-name filename))
+;;     (setq ffip-project-root (expand-file-name filename))))
 
 
-(defun kumo-relative-line-number ()
-  "Set relative line number."
-  (interactive)
-  (setq-local display-line-numbers 'visual))
+;; (defun kumo-relative-line-number ()
+;;   "Set relative line number."
+;;   (interactive)
+;;   (setq-local display-line-numbers 'visual))
 
 (defvar temp-number 0 "Temp-buffer tag.")
 (defun kumo-new-temp-buffer ()
@@ -221,22 +221,22 @@ Including indent-buffer, which should not be called automatically on save."
 
 
 
-(defun kumo-shell-dir (dir)
-  "Terminal by current directory."
-  (interactive "Directory: ")
-  (let ((default-directory dir))
-         (shell)))
+;; (defun kumo-shell-dir (dir)
+;;   "Terminal by current directory."
+;;   (interactive "Directory: ")
+;;   (let ((default-directory dir))
+;;          (shell)))
 
 
-(setq explicit-shell-file-name "/usr/bin/zsh")
+;; (setq explicit-shell-file-name "/usr/bin/zsh")
 
-(defun kumo-term ()
-  "Term."
-  (interactive)
-  (set-buffer (make-term "terminal" explicit-shell-file-name))
-  (term-mode)
-  (term-char-mode)
-  (switch-to-buffer "*terminal*"))
+;; (defun kumo-term ()
+;;   "Term."
+;;   (interactive)
+;;   (set-buffer (make-term "terminal" explicit-shell-file-name))
+;;   (term-mode)
+;;   (term-char-mode)
+;;   (switch-to-buffer "*terminal*"))
 
 
 
