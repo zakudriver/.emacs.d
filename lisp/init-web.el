@@ -27,6 +27,9 @@
          ("\\.tsx$" . web-mode))
   :hook
   (web-mode . tsx-setup-tide-mode)
+  :bind
+  (:map web-mode-map
+        ("C-/" . web-mode-comment-or-uncomment))
   :custom
   (web-mode-markup-indent-offset 2)
   (web-mode-css-indent-offset 2)
@@ -37,7 +40,11 @@
   (web-mode-enable-auto-pairing nil)
   (web-mode-enable-current-element-highlight t)
   (web-mode-enable-css-colorization t)
-)
+  (web-mode-comment-style 2)
+  (web-mode-enable-comment-annotation t)
+  :config
+  (add-to-list 'web-mode-comment-formats '("tsx" . "//"))
+  (add-to-list 'web-mode-comment-formats '("jsx" . "//")))
 
 
 ;; emmet-mode: dynamic snippets for HTML

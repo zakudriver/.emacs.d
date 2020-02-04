@@ -210,8 +210,8 @@
                           (propertize "%02c" 'face 'font-lock-type-face)
 
                           " "
-                          ;; '(:eval (propertize
-                          ;;          (modeline-vc-branch) 'face '(font-lock-keyword-face (:weight bold))))
+                          '(:eval (propertize
+                                   (modeline-vc-branch) 'face '(font-lock-keyword-face (:weight bold))))
                           ))
 
          (width-left (string-width (format-mode-line modeline-left)))

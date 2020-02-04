@@ -1,5 +1,6 @@
 ;;; Code:
 
+
 (use-package vimrc-mode)
 
 (use-package dockerfile-mode)
@@ -13,6 +14,10 @@
 (use-package protobuf-mode
   :mode
   (("\\.proto$" . protobuf-mode)))
+
+(use-package yaml-mode
+  :mode
+  ("\\.yml$" . bazel-mode))
 
 
 (provide 'init-prog)

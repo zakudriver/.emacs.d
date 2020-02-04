@@ -53,7 +53,7 @@
     (lsp-ui-peek-list-width 50)
     (lsp-ui-peek-fontify 'on-demand)
     (lsp-use-native-json nil)
-   )
+    )
 
   (use-package lsp-ivy
     :after lsp-mode
@@ -80,7 +80,6 @@
       :config
       (dap-ui-mode t)))
 
-
   (use-package lsp-treemacs
     :bind (:map lsp-mode-map
                 ("C-<f8>" . lsp-treemacs-errors-list)
@@ -89,8 +88,30 @@
     (with-eval-after-load 'ace-window
       (when (boundp 'aw-ignored-buffers)
         (push 'lsp-treemacs-symbols-mode aw-ignored-buffers))))
-)
+  )
 
+;; C/C++/Objective-C support
+(use-package ccls
+  :defines projectile-project-root-files-top-down-recurring
+  :hook
+  ((c-mode c++-mode objc-mode cuda-mode) . (lambda ()
+                                             (require 'ccls)
+                                             (lsp)))
+  :custom
+  (lsp-prefer-flymake nil)
+  (ccls-initialization-options
+   '(:clang (:extraArgs ["-isystem/Library/Developer/CommandLineTools/usr/include/c++/v1"
+                         "-isystem/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include"
+                         "-isystem/usr/local/include"]
+                        :resourceDir "/Library/Developer/CommandLineTools/usr/lib/clang/11.0.0")))
+  :config
+  (setq-default flycheck-disabled-checkers '(c/c++-clang c/c++-cppcheck c/c++-gcc))
+
+  (with-eval-after-load 'projectile
+    (setq projectile-project-root-files-top-down-recurring
+          (append '("compile_commands.json"
+                    ".ccls")
+                  projectile-project-root-files-top-down-recurring))))
 
 
 (provide 'init-lsp)

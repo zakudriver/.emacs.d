@@ -38,9 +38,14 @@
     (`(t . _)
      (treemacs-git-mode 'simple)))
 
-  (use-package treemacs-evil
-    :ensure t
-    :after treemacs evil)
+  ;; (use-package treemacs-evil
+  ;;   :ensure t
+  ;;   :after treemacs evil)
+
+  (use-package treemacs-projectile
+    :after projectile
+    :bind (:map projectile-command-map
+                ("h" . treemacs-projectile)))
 
   (use-package treemacs-magit
     :after magit

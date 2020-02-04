@@ -45,6 +45,9 @@
   (typescript-mode . prettier-js-mode)
   (web-mode . prettier-js-mode)
   (ng2-mode . prettier-js-mode)
+  :bind
+  (:map prettier-js-mode
+        ("C-M-i" . prettier-js))
   :custom
   (prettier-js-args '("--single-quote" "true" "--print-width" "120")))
 

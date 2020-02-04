@@ -22,8 +22,9 @@
     (define-fringe-bitmap 'flycheck-fringe-bitmap-double-arrow
       [16 48 112 240 112 48 16] nil nil 'center))
 
-  ;; (use-package flycheck-color-mode-line
-  ;;   :hook (flycheck-mode . flycheck-color-mode-line-mode))
+  (use-package flycheck-color-mode-line
+    :hook (flycheck-mode . flycheck-color-mode-line-mode))
+
   ;; Display Flycheck errors in GUI tooltips
   (if (display-graphic-p)
       (use-package flycheck-posframe
