@@ -204,8 +204,8 @@ Including indent-buffer, which should not be called automatically on save."
 (defun kumo-wrap-with-input (beg end symbol)
   "Wrap selected text by input symbol."
   (interactive "r \nsPlease input symbol: ")
-  (let ((beg-symbol symbol)(end-symbol symbol))
-
+  (let ((beg-symbol symbol)
+        (end-symbol symbol))
     (cl-loop for (i . j) in kumo/symbol-list
              do (cond
                       ((string= symbol j)
@@ -213,30 +213,22 @@ Including indent-buffer, which should not be called automatically on save."
                       ((string= symbol i)
                        (setq end-symbol j))
                        ))
-
     (goto-char beg)
     (insert beg-symbol)
     (goto-char (1+ end))
     (insert end-symbol)))
 
 
-
-;; (defun kumo-shell-dir (dir)
-;;   "Terminal by current directory."
-;;   (interactive "Directory: ")
-;;   (let ((default-directory dir))
-;;          (shell)))
-
-
-;; (setq explicit-shell-file-name "/usr/bin/zsh")
-
-;; (defun kumo-term ()
-;;   "Term."
-;;   (interactive)
-;;   (set-buffer (make-term "terminal" explicit-shell-file-name))
-;;   (term-mode)
-;;   (term-char-mode)
-;;   (switch-to-buffer "*terminal*"))
+(defun newline-indent ()
+  "Return to newline and indent."
+  (interactive)
+  (newline)
+  (save-excursion
+    (back-to-indentation)
+    (when (looking-at-p "\\s)")
+      (newline)
+      (c-indent-line)))
+  (c-indent-line))
 
 
 

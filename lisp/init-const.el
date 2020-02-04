@@ -25,11 +25,11 @@
                     ("{" . "}")
                     ("<" . ">")
                     )
-  "Symbols for wrap ")
+  "Symbols for wrap.")
 
 (defconst kumo/theme-setting-cache
   "~/.emacs.d/.theme"
-  "theme-setting-cache")
+  "Theme-setting-cache.")
 
 (defconst kumo/index-map
   '("a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n"))

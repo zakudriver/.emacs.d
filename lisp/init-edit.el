@@ -9,6 +9,8 @@
 ;; linum-mode
 (global-linum-mode t)
 
+(electric-pair-mode t)
+
 ;; Miscs
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets) ; Show path if names are same
 (setq adaptive-fill-regexp "[ t]+|[ t]*([0-9]+.|*+)[ t]*")
@@ -57,12 +59,17 @@
 
 
 ;; Automatic parenthesis pairing
-(use-package smartparens
-  :ensure t
-  :init (smartparens-global-mode t)
-  :config
-  (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
-  (sp-local-pair 'lisp-interaction-mode "'" nil :actions nil))
+;; (use-package smartparens
+;;   :ensure t
+;;   :init (smartparens-global-mode t)
+;;   :config
+;;   (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
+;;   (sp-local-pair 'lisp-interaction-mode "'" nil :actions nil))
+(use-package elec-pair
+  :ensure nil
+  :hook (after-init . electric-pair-mode)
+  :custom
+  (electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit))
 
 ;; Hungry deletion
 (use-package hungry-delete
