@@ -6,10 +6,8 @@
   :bind
   (:map c-mode-base-map
          ("C-c c" . compile))
-  :hook
-  (c-mode-common . (lambda () (c-set-style "bsd")))
   :custom
-  (c-basic-offset 4)
+  (c-basic-offset 2)
   :config
   (use-package modern-cpp-font-lock
     :diminish

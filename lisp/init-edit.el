@@ -24,7 +24,8 @@
 
 ;; Tab and Space
 ;; Permanently indent with spaces, never with TABs
-(setq-default tab-width        2
+(setq-default tab-width 2
+              c-basic-offset 2
               indent-tabs-mode nil)
 
 ;; Automatically reload files was modified by external program
