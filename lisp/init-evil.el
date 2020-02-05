@@ -154,8 +154,10 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "d" 'dired
  "D" 'docker
  "ww" 'hydra-frame-window/body
- "wv" 'split-window-below
- "wh" 'split-window-right
+ "wv" 'split-window-vertically
+ "wV" 'kumo-window-vertically-selected
+ "wh" 'split-window-horizontally
+ "wH" 'kumo-window-horizontally-selected
  "wt" 'delete-window
  "wo" 'delete-other-windows
  "wb" 'balance-windows

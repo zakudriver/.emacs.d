@@ -45,38 +45,12 @@
     (when (equal '(4) arg) (delete-other-windows))
     (message "Buffers deleted!"))
 
-;; (defun kumo-prompt-kill-emacs ()
-;;   "Prompt to save changed buffers and exit emacs."
-;;   (interactive)
-;;   (save-some-buffers)
-;;   (kill-emacs))
-
 (defun kumo-switch-to-previous-buffer ()
   "Switch to previously open buffer.
 Repeated invocations toggle between the two most recently open buffers."
   (interactive)
   (switch-to-buffer (other-buffer (current-buffer) 1)))
 
-
-;; (defun remove-dos-eol ()
-;;   "Do not show ^M in files containing mixed UNIX and DOS line endings."
-;;   (interactive)
-;;   (setq buffer-display-table (make-display-table))
-;;   (aset buffer-display-table ?\^M []))
-
-
-;; (defun kumo-set-project-directory ()
-;;   (interactive)
-;;   (let ((filename (read-directory-name "the project directory is ")))
-;;     (setq my-saved-launch-directory (expand-file-name filename))
-;;     (setq current-directory (expand-file-name filename))
-;;     (setq ffip-project-root (expand-file-name filename))))
-
-
-;; (defun kumo-relative-line-number ()
-;;   "Set relative line number."
-;;   (interactive)
-;;   (setq-local display-line-numbers 'visual))
 
 (defvar temp-number 0 "Temp-buffer tag.")
 (defun kumo-new-temp-buffer ()
@@ -187,13 +161,13 @@ Including indent-buffer, which should not be called automatically on save."
 
 
 ;; Font
-(defun font-size-increase ()
+(defun kumo-font-size-increase ()
   "Font size increase."
   (interactive)
   (let ((old-face-attribute (face-attribute 'default :height)))
   (set-face-attribute 'default nil :height (+ old-face-attribute 10))))
 
-(defun font-size-decrease ()
+(defun kumo-font-size-decrease ()
   "Font size decrease."
   (interactive)
   (let ((old-face-attribute (face-attribute 'default :height)))
@@ -219,16 +193,19 @@ Including indent-buffer, which should not be called automatically on save."
     (insert end-symbol)))
 
 
-(defun newline-indent ()
-  "Return to newline and indent."
+(defun kumo-window-vertically-selected ()
+  "Split window vertically and selected."
   (interactive)
-  (newline)
-  (save-excursion
-    (back-to-indentation)
-    (when (looking-at-p "\\s)")
-      (newline)
-      (c-indent-line)))
-  (c-indent-line))
+  (split-window-vertically)
+  (other-window 1))
+
+
+(defun kumo-window-horizontally-selected ()
+  "Split window horizontally and selected."
+  (interactive)
+  (split-window-horizontally)
+  (other-window 1))
+
 
 
 
