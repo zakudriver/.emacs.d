@@ -47,7 +47,7 @@
    ((string= "0" str) "०")))
 
 
-(defun modeline-fill (face reserve)
+(defun modeline-fill (reserve)
   "Return empty space using FACE and leaving RESERVE space on the right."
   (unless reserve
     (setq reserve 20))
@@ -55,8 +55,7 @@
     (setq reserve (- reserve 3)))
   (propertize " "
               'display `((space :align-to
-                                (- (+ right right-fringe right-margin) ,reserve)))
-              'face face))
+                                (- (+ right right-fringe right-margin) ,reserve)))))
 
 (defun modeline-buffer-encoding-abbrev ()
   "The line ending convention used in the buffer."
@@ -204,7 +203,7 @@
                            " "
                          ))
          (modeline-right (list
-                          (modeline-fill 'mode-line (if sys/macp 14 16))
+                          (modeline-fill (if sys/macp 14 16))
 
                           ;; global-mode-string goes in mode-line-misc-info
                           mode-line-misc-info
@@ -217,7 +216,6 @@
                           (propertize "%02l" 'face 'font-lock-type-face) ","
                           (propertize "%02c" 'face 'font-lock-type-face)
 
-                          ;; `(vc-mode vc-mode)
                           ;; '(:eval
                           ;;  (if vc-mode
                           ;;      (let* ((noback (replace-regexp-in-string (format "^ %s" (vc-backend buffer-file-name)) " " vc-mode))

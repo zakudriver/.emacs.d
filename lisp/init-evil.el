@@ -170,7 +170,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "ms" 'multi-term-dedicated-select
  "gs" 'magit-status
  "gd" 'magit-dispatch
- ;; "gb"  'magit-blame-echo
+ ;; "gp" 'magit-process-buffer
 )
 
 
