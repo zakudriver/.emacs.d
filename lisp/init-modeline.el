@@ -89,8 +89,16 @@
 ;; vc-mode
 (defun modeline-vc-branch ()
   "Git branch."
-  (let ((backend (vc-backend buffer-file-name)))
-    (substring vc-mode (+ (if (eq backend 'Hg) 2 3) 2))))
+  (if vc-mode
+      (let* ((noback (replace-regexp-in-string (format "^ %s" (vc-backend buffer-file-name)) " " vc-mode))
+             (face (cond ((string-match "^ -" noback) 'mode-line-vc)
+                         ((string-match "^ [:@]" noback) 'mode-line-vc-edit)
+                         ((string-match "^ [!\\?]" noback) 'mode-line-vc-modified))))
+        (format " %s" (substring noback 2))))
+  ;; (let ((backend (vc-backend buffer-file-name)))
+  ;;   (substring vc-mode (+ (if (eq backend 'Hg) 2 3) 2)))
+)
+
 
 (defun modeline-git-status ()
   "Git status."
@@ -209,14 +217,23 @@
                           (propertize "%02l" 'face 'font-lock-type-face) ","
                           (propertize "%02c" 'face 'font-lock-type-face)
 
+                          ;; `(vc-mode vc-mode)
+                          ;; '(:eval
+                          ;;  (if vc-mode
+                          ;;      (let* ((noback (replace-regexp-in-string (format "^ %s" (vc-backend buffer-file-name)) " " vc-mode))
+                          ;;             (face (cond ((string-match "^ -" noback) 'mode-line-vc)
+                          ;;                         ((string-match "^ [:@]" noback) 'mode-line-vc-edit)
+                          ;;                         ((string-match "^ [!\\?]" noback) 'mode-line-vc-modified))))
+                          ;;        (format " %s" (substring noback 2)))))
+
                           " "
-                          '(:eval (propertize
-                                   (modeline-vc-branch) 'face '(font-lock-keyword-face (:weight bold))))
+                          ;; vc-mode
+                          '(:eval (modeline-vc-branch))
                           ))
 
          (width-left (string-width (format-mode-line modeline-left)))
-         (width-left-middle (string-width (format-mode-line (list modeline-left modeline-middle))))
-         (width-fill (string-width (format-mode-line (list modeline-left modeline-middle modeline-right)))))
+         (width-left-middle (string-width (format-mode-line `(list ,modeline-left ,modeline-middle))))
+         (width-fill (string-width (format-mode-line `(list ,modeline-left ,modeline-middle ,modeline-right)))))
 
     (cond
      ((> width-left (window-width)) (list modeline-left))

@@ -9,8 +9,6 @@
 ;; linum-mode
 (global-linum-mode t)
 
-(electric-pair-mode t)
-
 ;; Miscs
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets) ; Show path if names are same
 (setq adaptive-fill-regexp "[ t]+|[ t]*([0-9]+.|*+)[ t]*")

@@ -13,6 +13,11 @@
     :diminish
     :init (modern-c++-font-lock-global-mode t)))
 
+(use-package clang-format
+  :bind
+  (:map c-mode-base-map
+   ("C-M-i" . clang-format-region)))
+
 
 (provide 'init-cpp)
 
