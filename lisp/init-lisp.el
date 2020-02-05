@@ -5,7 +5,7 @@
 ;; Show function arglist or variable docstring
 (use-package eldoc
   :ensure nil
-  :diminish eldoc-mode
+  :diminish
   :init
   ;; Enable Eldoc in lisp modes in 24
   ;; `global-eldoc-mode' is enabled by default in 25.

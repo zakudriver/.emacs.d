@@ -41,13 +41,7 @@
 ;; format
 (use-package prettier-js
   :hook
-  (js2-mode . prettier-js-mode)
-  (typescript-mode . prettier-js-mode)
-  (web-mode . prettier-js-mode)
-  (ng2-mode . prettier-js-mode)
-  :bind
-  (:map prettier-js-mode
-        ("C-M-i" . prettier-js))
+  ((js2-mode web-mode ng2-mode typescript-mode scss-mode) . prettier-js-mode)
   :custom
   (prettier-js-args '("--single-quote" "true" "--print-width" "120")))
 
