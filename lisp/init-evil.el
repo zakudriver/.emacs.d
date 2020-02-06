@@ -161,13 +161,8 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
  "wt" 'delete-window
  "wo" 'delete-other-windows
  "wb" 'balance-windows
- "mo" 'multi-term
- "md" 'kumo-multi-term-dedicated-open
- "mc" 'multi-term-dedicated-close
- "mp" 'multi-term-dedicated-prev
- "mn" 'multi-term-dedicated-next
- "mt" 'multi-term-dedicated-toggle
- "ms" 'multi-term-dedicated-select
+ "vt" 'vterm
+ "vo" 'vterm-other-window
  "gs" 'magit-status
  "gd" 'magit-dispatch
  ;; "gp" 'magit-process-buffer

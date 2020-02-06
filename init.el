@@ -79,7 +79,6 @@ decrease this. If you experience stuttering, increase this.")
   (require 'init-highlight)
   (require 'init-ibuffer)
   (require 'init-treemacs)
-  (require 'init-shell)
   (require 'init-which-key)
 
   (require 'init-window)

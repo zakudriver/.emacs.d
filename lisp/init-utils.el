@@ -28,6 +28,10 @@
   :ensure t)
 
 
+(use-package vterm
+  :ensure t)
+
+
 (provide 'init-utils)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-utils.el ends here
