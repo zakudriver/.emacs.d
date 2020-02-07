@@ -67,7 +67,13 @@
   :ensure nil
   :hook (after-init . electric-pair-mode)
   :custom
+  (electric-pair-pairs
+   '((?\" . ?\")
+     (?\' . ?\')
+     (?\` . ?\`)
+     (?\{ . ?\})))
   (electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit))
+
 
 ;; Hungry deletion
 (use-package hungry-delete

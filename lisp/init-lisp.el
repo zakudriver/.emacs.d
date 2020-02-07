@@ -17,7 +17,7 @@
       (add-hook hook #'eldoc-mode))))
 
 (use-package ielm
-  :config
-  (add-hook 'ielm-mode-hook #'eldoc-mode))
+  :hook
+  (ielm-mode . eldoc-mode))
 
 (provide 'init-lisp)

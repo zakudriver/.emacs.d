@@ -5,7 +5,7 @@
   (require 'init-custom))
 
 ;; Font
-(set-face-attribute 'default nil :height (if sys/macp 120 110))
+(set-face-attribute 'default nil :height (if sys/macp 130 110))
 (set-face-attribute 'default nil :font "Menlo")
 
 
