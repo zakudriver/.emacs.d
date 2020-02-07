@@ -207,6 +207,14 @@ Including indent-buffer, which should not be called automatically on save."
   (other-window 1))
 
 
+(defun kumo-flycheck-list-errors-toggle ()
+  "If flycheck errors list is living, to delete flycheck-errors window."
+  (interactive)
+  (let ((w (get-buffer-window kumo/flycheck-errors-buffer-name)))
+    (if w
+        (delete-window w)
+      (flycheck-list-errors))))
+
 
 
 (provide 'init-funcs)

@@ -34,6 +34,8 @@
 (defconst kumo/index-map
   '("a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n"))
 
+(defconst kumo/flycheck-errors-buffer-name "*Flycheck errors*")
+
 
 (provide 'init-const)
 

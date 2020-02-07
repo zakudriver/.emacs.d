@@ -78,7 +78,7 @@
         return t))
 
 (defun read-theme-cache ()
-  "Read theme for theme cache"
+  "Read theme from theme cache"
   (if (file-exists-p kumo/theme-setting-cache)
       (let ((theme
              (intern (with-temp-buffer (insert-file-contents kumo/theme-setting-cache) (buffer-string))))) 

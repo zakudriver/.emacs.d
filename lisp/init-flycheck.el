@@ -1,13 +1,17 @@
 ;;; Code:
 
+
+(eval-when-compile
+  (require 'init-const))
+
+
 (use-package flycheck
   :diminish
   :hook (after-init . global-flycheck-mode)
   :init
   (add-to-list 'display-buffer-alist
-               `(,(rx bos "*Flycheck errors*" eos)
-                 (display-buffer-reuse-window
-                  display-buffer-in-side-window)
+               `(,(eval `(rx bos ,kumo/flycheck-errors-buffer-name eos))
+                 (display-buffer-reuse-window display-buffer-in-side-window)
                  (side . bottom)
                  (reusable-frames . visible)
                  (window-height . 0.2)))
@@ -22,19 +26,15 @@
     (define-fringe-bitmap 'flycheck-fringe-bitmap-double-arrow
       [16 48 112 240 112 48 16] nil nil 'center))
 
-  (use-package flycheck-color-mode-line
-    :hook (flycheck-mode . flycheck-color-mode-line-mode))
+  (use-package flycheck-posframe
+    :custom-face (flycheck-posframe-border-face ((t (:inherit default))))
+    :hook (flycheck-mode . flycheck-posframe-mode)
+    :init (setq flycheck-posframe-border-width 1
+                flycheck-posframe-inhibit-functions
+                '((lambda (&rest _) (bound-and-true-p company-backend)))))
 
-  ;; Display Flycheck errors in GUI tooltips
-  (if (display-graphic-p)
-      (use-package flycheck-posframe
-        :custom-face (flycheck-posframe-border-face ((t (:inherit default))))
-        :hook (flycheck-mode . flycheck-posframe-mode)
-        :init (setq flycheck-posframe-border-width 1
-                    flycheck-posframe-inhibit-functions
-                    '((lambda (&rest _) (bound-and-true-p company-backend)))))
-    (use-package flycheck-popup-tip
-      :hook (flycheck-mode . flycheck-popup-tip-mode))))
+  (use-package flycheck-popup-tip
+    :hook (flycheck-mode . flycheck-popup-tip-mode)))
 
 
 

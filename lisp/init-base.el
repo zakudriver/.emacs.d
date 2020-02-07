@@ -31,22 +31,6 @@
   :ensure nil
   :hook (after-init . save-place-mode))
 
-;; (use-package recentf
-;;   :ensure nil
-;;   :hook (after-init . recentf-mode)
-;;   :init
-;;   (setq recentf-max-saved-items 25)
-;;   (setq recentf-exclude '((expand-file-name package-user-dir)
-;;                           ".cache"
-;;                           ".cask"
-;;                           ".elfeed"
-;;                           "bookmarks"
-;;                           "cache"
-;;                           "ido.*"
-;;                           "persp-confs"
-;;                           "recentf"
-;;                           "url"
-;;                           "COMMIT_EDITMSG\\'")))
 
 (use-package recentf
   :ensure nil
@@ -82,6 +66,7 @@
   (find-file "~/.emacs.d/init.el"))
 
 (global-set-key (kbd "<f2>") 'open-init-file)
+
 
 
 (provide 'init-base)

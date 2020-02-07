@@ -30,7 +30,7 @@
     (evil-delete beg end type ?_ yank-handler))
 
   (evil-define-operator evil-change-no-yank (beg end type register yank-handler delete-func)
-      "Change text from BEG to END with TYPE.
+    "Change text from BEG to END with TYPE.
     Save in REGISTER or the kill-ring with YANK-HANDLER.
     DELETE-FUNC is a function for deleting text, default `evil-delete'.
     If TYPE is `line', insertion starts on an empty line.
@@ -46,14 +46,14 @@
       ;; (funcall delete-func beg end type register yank-handler)
       (funcall delete-func beg end type ?_ yank-handler)
       (cond
-        ((eq type 'line)
-          (if ( = opoint (point))
+       ((eq type 'line)
+        (if ( = opoint (point))
             (evil-open-above 1)
-            (evil-open-below 1)))
-        ((eq type 'block)
-          (evil-insert 1 nlines))
-        (t
-          (evil-insert 1)))))
+          (evil-open-below 1)))
+       ((eq type 'block)
+        (evil-insert 1 nlines))
+       (t
+        (evil-insert 1)))))
 
   (evil-define-operator evil-change-line-no-yank (beg end type register yank-handler)
     "Change to end of line without yanking."
@@ -87,103 +87,107 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
      ((eq type 'block)
       (evil-apply-on-block #'delete-region beg end nil))
      ((and (eq type 'line)
-         (= end (point-max))
-         (or (= beg end)
-             (/= (char-before end) ?\n))
-         (/= beg (point-min))
-         (=  (char-before beg) ?\n))
+           (= end (point-max))
+           (or (= beg end)
+               (/= (char-before end) ?\n))
+           (/= beg (point-min))
+           (=  (char-before beg) ?\n))
       (delete-region (1- beg) end))
      (t
       (delete-region beg end)))
     ;; place cursor on beginning of line
     (when (and (called-interactively-p 'any)
-             (eq type 'line))
-    (evil-first-non-blank)))
+               (eq type 'line))
+      (evil-first-non-blank)))
 
   (defun evil-paste-after-no-yank ()
     (interactive)
     (let ((evil-this-register ?0))
       (call-interactively 'evil-paste-after)))
-)
+  )
 
 
 (use-package general
   :config
-  (define-key evil-normal-state-map (kbd "SPC") (general-simulate-key "C-c")))
+  (define-key evil-normal-state-map (kbd "SPC") (general-simulate-key "C-c"))
+
+  (general-define-key
+   :states '(normal visual)
+   :prefix ","
+   "," 'counsel-M-x
+   "k" 'symbol-overlay-put
+   "K" 'symbol-overlay-remove-all
+   "u" 'undo-tree-visualize
+   "o" 'overwrite-mode
+   "m" 'counsel-imenu
+   "w" 'avy-goto-char-timer
+   "s" 'save-buffer
+   )
+  
+
+  (general-define-key
+   :prefix "C-c"
+   "q" 'save-buffers-kill-terminal
+   "Q" 'kill-emacs
+   "j" 'avy-goto-line-below
+   "k" 'avy-goto-line-above
+   "R" 'kumo-rename-current-buffer-file
+   "D" 'kumo-delete-current-buffer-file
+   "ts" 'treemacs-select-window
+   "tt" 'treemacs
+   "p" 'projectile-command-map
+   "sr" 'counsel-rg
+   "ss" 'swiper
+   "ff" 'counsel-find-file
+   "fz" 'counsel-fzf
+   "bb" 'counsel-switch-buffer
+   "bi" 'ibuffer
+   "bt" 'kumo-kill-this-buffer
+   "bo" 'kumo-kill-other-buffers
+   "ba" 'kumo-kill-all-buffers
+   "bp" 'kumo-switch-to-previous-buffer
+   "bn" 'kumo-new-temp-buffer
+   "oo" 'org-switchb
+   "oa" 'org-agenda
+   "c" 'kumo-flycheck-errors-toggle
+   "d" 'dired
+   "D" 'docker
+   "ww" 'hydra-frame-window/body
+   "wv" 'split-window-vertically
+   "wV" 'kumo-window-vertically-selected
+   "wh" 'split-window-horizontally
+   "wH" 'kumo-window-horizontally-selected
+   "wt" 'delete-window
+   "wo" 'delete-other-windows
+   "wb" 'balance-windows
+   "vv" 'vterm-toggle
+   "vd" 'vterm-toggle-cd
+   "vp" 'vterm-toggle-forward
+   "vn" 'vterm-toggle-backward
+   "vo" 'vterm-other-window
+   "gs" 'magit-status
+   "gd" 'magit-dispatch
+   ;; "gp" 'magit-process-buffer
+   )
 
 
-(general-define-key
- :states '(normal visual)
- :prefix ","
- "," 'counsel-M-x
- "k" 'symbol-overlay-put
- "K" 'symbol-overlay-remove-all
- "u" 'undo-tree-visualize
- "o" 'overwrite-mode
- "m" 'counsel-imenu
- "w" 'avy-goto-char-timer
-)
-         
-
-(general-define-key
- :prefix "C-c"
- "q" 'save-buffers-kill-terminal
- "Q" 'kill-emacs
- "j" 'avy-goto-line-below
- "k" 'avy-goto-line-above
- "R" 'kumo-rename-current-buffer-file
- "D" 'kumo-delete-current-buffer-file
- "ts" 'treemacs-select-window
- "tt" 'treemacs
- "p" 'projectile-command-map
- "sr" 'counsel-rg
- "ss" 'swiper
- "ff" 'counsel-find-file
- "fz" 'counsel-fzf
- "bb" 'counsel-switch-buffer
- "bi" 'ibuffer
- "bt" 'kumo-kill-this-buffer
- "bo" 'kumo-kill-other-buffers
- "ba" 'kumo-kill-all-buffers
- "bp" 'kumo-switch-to-previous-buffer
- "bs" 'save-buffer
- "bn" 'kumo-new-temp-buffer
- "oo" 'org-switchb
- "oa" 'org-agenda
- "c" 'flycheck-list-errors
- "d" 'dired
- "D" 'docker
- "ww" 'hydra-frame-window/body
- "wv" 'split-window-vertically
- "wV" 'kumo-window-vertically-selected
- "wh" 'split-window-horizontally
- "wH" 'kumo-window-horizontally-selected
- "wt" 'delete-window
- "wo" 'delete-other-windows
- "wb" 'balance-windows
- "vt" 'vterm
- "vo" 'vterm-other-window
- "gs" 'magit-status
- "gd" 'magit-dispatch
- ;; "gp" 'magit-process-buffer
-)
+  (general-define-key
+   :states '(normal visual)
+   "j" 'evil-next-visual-line
+   "k" 'evil-previous-visual-line
+   "H" 'mwim-beginning-of-code-or-line
+   "L" 'mwim-end-of-code-or-line
+   "f" 'avy-goto-char-in-line
+   "gb" 'pop-tag-mark
+   "c" 'evil-change-no-yank
+   "C" 'evil-change-line-no-yank
+   "x" 'evil-delete-char-no-yank
+   "X" 'evil-delete-backward-char-no-yank
+   "s" 'evil-substitute-no-yank
+   "S" 'evil-substitute-whole-line-no-yank
+   ))
 
 
-(general-define-key
- :states '(normal visual)
- "j" 'evil-next-visual-line
- "k" 'evil-previous-visual-line
- "H" 'mwim-beginning-of-code-or-line
- "L" 'mwim-end-of-code-or-line
- "f" 'avy-goto-char-in-line
- "gb" 'pop-tag-mark
- "c" 'evil-change-no-yank
- "C" 'evil-change-line-no-yank
- "x" 'evil-delete-char-no-yank
- "X" 'evil-delete-backward-char-no-yank
- "s" 'evil-substitute-no-yank
- "S" 'evil-substitute-whole-line-no-yank
-)
 
 
 (provide 'init-evil)
