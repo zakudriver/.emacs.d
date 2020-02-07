@@ -149,9 +149,10 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    "bn" 'kumo-new-temp-buffer
    "oo" 'org-switchb
    "oa" 'org-agenda
-   "c" 'kumo-flycheck-errors-toggle
+   "c" 'kumo-flycheck-list-errors-toggle
    "d" 'dired
    "D" 'docker
+   "h" 'kumo-open-dashboard
    "ww" 'hydra-frame-window/body
    "wv" 'split-window-vertically
    "wV" 'kumo-window-vertically-selected

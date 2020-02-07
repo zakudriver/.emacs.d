@@ -41,9 +41,9 @@
   "Kill all other buffers.
    If the universal prefix argument is used then will the windows too."
   (interactive "P")
-    (mapc 'kill-buffer (buffer-list))
-    (when (equal '(4) arg) (delete-other-windows))
-    (message "Buffers deleted!"))
+  (mapc 'kill-buffer (buffer-list))
+  (when (equal '(4) arg) (delete-other-windows))
+  (message "Buffers deleted!"))
 
 (defun kumo-switch-to-previous-buffer ()
   "Switch to previously open buffer.
@@ -165,7 +165,7 @@ Including indent-buffer, which should not be called automatically on save."
   "Font size increase."
   (interactive)
   (let ((old-face-attribute (face-attribute 'default :height)))
-  (set-face-attribute 'default nil :height (+ old-face-attribute 10))))
+    (set-face-attribute 'default nil :height (+ old-face-attribute 10))))
 
 (defun kumo-font-size-decrease ()
   "Font size decrease."
@@ -182,11 +182,11 @@ Including indent-buffer, which should not be called automatically on save."
         (end-symbol symbol))
     (cl-loop for (i . j) in kumo/symbol-list
              do (cond
-                      ((string= symbol j)
-                       (setq beg-symbol i))
-                      ((string= symbol i)
-                       (setq end-symbol j))
-                       ))
+                 ((string= symbol j)
+                  (setq beg-symbol i))
+                 ((string= symbol i)
+                  (setq end-symbol j))
+                 ))
     (goto-char beg)
     (insert beg-symbol)
     (goto-char (1+ end))
@@ -214,6 +214,20 @@ Including indent-buffer, which should not be called automatically on save."
     (if w
         (delete-window w)
       (flycheck-list-errors))))
+
+(defun kumo-open-dashboard ()
+  "Open the *dashboard* buffer and jump to the first widget."
+  (interactive)
+
+  (delete-other-windows)
+  ;; Refresh dashboard buffer
+  (if (get-buffer dashboard-buffer-name)
+      (kill-buffer dashboard-buffer-name))
+  (dashboard-insert-startupify-lists)
+  (switch-to-buffer dashboard-buffer-name)
+
+  ;; Jump to the first section
+  (goto-line kumo/dashboard-position))
 
 
 

@@ -37,6 +37,9 @@
 (defconst kumo/flycheck-errors-buffer-name "*Flycheck errors*")
 
 
+(defconst kumo/dashboard-position 8)
+
+
 (provide 'init-const)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

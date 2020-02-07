@@ -5,15 +5,14 @@
   (require 'init-custom))
 
 ;; Font
-(set-face-attribute 'default nil :height (if sys/macp 120 110) )
-;; (set-face-attribute 'default nil :font "Menlo")
+(set-face-attribute 'default nil :height (if sys/macp 120 110))
+(set-face-attribute 'default nil :font "Menlo")
 
 
 ;;;;;;;;;;;;;;;;
 ;; Dashboard
 ;;;;;;;;;;;;;;;;
 (use-package dashboard
-  :ensure t
   :custom
   (dashboard-banner-logo-title (concat "Happy hacking, " user-login-name " - Emacs ♥ you!"))
   (dashboard-set-file-icons t)
@@ -22,17 +21,21 @@
   (dashboard-center-content t)
   (dashboard-show-shortcuts nil)
   (dashboard-items '((recents  . 10)
-                      (projects . 10)))
+                     (projects . 10)))
   (dashboard-set-footer nil)
+  (dashboard-set-init-info t)
   :init
-  (dashboard-setup-startup-hook))
-
+  ;; init jump to (kumo/dashboard-position) line
+  (add-hook 'emacs-startup-hook '(lambda ()
+                                   (goto-line kumo/dashboard-position)))
+  (dashboard-setup-startup-hook)
+  )
 
 
 ;; Initial scratch message
-(setq-default initial-scratch-message
-              (concat ";; Happy hacking, " user-login-name " - Emacs ♥ you!\n\n"))
-(setq inhibit-startup-message t)
+;; (setq-default initial-scratch-message
+;;               (concat ";; Happy hacking, " user-login-name " - Emacs ♥ you!\n\n"))
+;; (setq inhibit-startup-message t)
 
 
 ;; Title
@@ -50,9 +53,6 @@
   (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
   (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
   (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1)))
-;; (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-;; (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-;; (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'blink-cursor-mode) (blink-cursor-mode -1))
 
 
@@ -62,20 +62,19 @@
 ;;   "Run `after-load-theme-hook'."
 ;;   (run-hooks 'after-load-theme-hook))
 
-
 ;;;;;;;;;;;;;;;;
 ;; Color Theme
 ;;;;;;;;;;;;;;;;
 (defun set-default-theme ()
-  "Write and return default-theme"
+  "Write and return default-theme."
   (progn
-      (write-region (symbol-name kumo/default-theme) nil kumo/theme-setting-cache) kumo/default-theme))
+    (write-region (symbol-name kumo/default-theme) nil kumo/theme-setting-cache) kumo/default-theme))
 
 (defun theme-is-existing (target)
   "Check the theme is exists"
   (cl-loop for i in kumo/theme
-        when (eq (nth 1 i) target)
-        return t))
+           when (eq (nth 1 i) target)
+           return t))
 
 (defun read-theme-cache ()
   "Read theme from theme cache"
@@ -100,10 +99,10 @@
          (setq kumo/current-theme (quote ,load-name))
          ,@config)
     `(progn
-      (disable-theme kumo/current-theme)
-      (load-theme (quote ,load-name) t)
-      (setq kumo/current-theme (quote ,load-name))))
-)
+       (disable-theme kumo/current-theme)
+       (load-theme (quote ,load-name) t)
+       (setq kumo/current-theme (quote ,load-name))))
+  )
 
 
 (defun create-theme-func (theme)
@@ -124,11 +123,11 @@
   "Bind change theme keymap on general."
   (eval
    (let ((keybinds '(general-define-key
-              :prefix "C-c"))
-        (idx 0))
-    (dolist (i kumo/theme keybinds)
-               (setq keybinds (append keybinds `(,(concat "T" (if (> idx 9) (nth (- idx 10) kumo/index-map) (number-to-string idx)))) `((quote ,(nth 1 i)))))
-               (setq idx (+ idx 1))))))
+                     :prefix "C-c"))
+         (idx 0))
+     (dolist (i kumo/theme keybinds)
+       (setq keybinds (append keybinds `(,(concat "T" (if (> idx 9) (nth (- idx 10) kumo/index-map) (number-to-string idx)))) `((quote ,(nth 1 i)))))
+       (setq idx (+ idx 1))))))
 
 
 ;; create-interactive-theme-func
