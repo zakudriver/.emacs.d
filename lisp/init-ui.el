@@ -7,6 +7,8 @@
 ;; Font
 (set-face-attribute 'default nil :height (if sys/macp 130 110))
 (set-face-attribute 'default nil :font "Menlo")
+(setq-default line-spacing 0.3
+              fill-column 80)
 
 
 ;;;;;;;;;;;;;;;;
@@ -30,12 +32,6 @@
                                    (goto-line kumo/dashboard-position)))
   (dashboard-setup-startup-hook)
   )
-
-
-;; Initial scratch message
-;; (setq-default initial-scratch-message
-;;               (concat ";; Happy hacking, " user-login-name " - Emacs ♥ you!\n\n"))
-;; (setq inhibit-startup-message t)
 
 
 ;; Title
@@ -149,11 +145,10 @@
 
 ;; Misc
 (fset 'yes-or-no-p 'y-or-n-p)
-(setq-default fill-column 80)
 (size-indication-mode t)
-(setq inhibit-startup-screen t)
-(setq track-eol t)
-(setq line-move-visual nil)
+(setq inhibit-startup-screen t
+      track-eol t
+      line-move-visual nil )
 
 
 ;; Don't open a file in a new frame

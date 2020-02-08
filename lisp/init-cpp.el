@@ -1,11 +1,7 @@
 ;;; Code:
 
 
-(setq-default c-basic-offset 2)
-
-
-
-;; cpp keyword highlight 
+;; cpp keyword highlight
 (use-package modern-cpp-font-lock
   :diminish
   :hook
@@ -23,6 +19,7 @@
   (c++-mode . (lambda ()
                      (add-hook (make-local-variable 'before-save-hook)
                                'clang-format-buffer))))
+
 
 (use-package irony
   :diminish
@@ -43,8 +40,6 @@
                 (setq flycheck-clang-language-standard "c++11")
                 (setq irony-additional-clang-options '("-std=c++11")))))
 
-
-
 ;;; C/C++ headers completion
 (use-package company-c-headers
   :defer t
@@ -62,7 +57,6 @@
   :defer t
   :hook
   (c++-mode . (lambda () (add-to-list 'company-backends 'company-irony-c-headers))))
-
 
 
 (provide 'init-cpp)

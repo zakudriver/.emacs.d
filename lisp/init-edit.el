@@ -10,23 +10,20 @@
 (global-linum-mode t)
 
 ;; Miscs
-(setq uniquify-buffer-name-style 'post-forward-angle-brackets) ; Show path if names are same
-(setq adaptive-fill-regexp "[ t]+|[ t]*([0-9]+.|*+)[ t]*")
-(setq adaptive-fill-first-line-regexp "^* *$")
-(setq delete-by-moving-to-trash t)         ; Deleting files go to OS's trash folder
-(setq make-backup-files nil)               ; Forbide to make backup files
-(setq auto-save-default nil)               ; Disable auto save
-(setq set-mark-command-repeat-pop t)       ; Repeating C-SPC after popping mark pops it again
-
-(setq-default major-mode 'text-mode)
-
-(add-hook 'abbrev-mode-hook (lambda () (diminish 'abbrev-mode)))
+(setq uniquify-buffer-name-style 'post-forward-angle-brackets  ; Show path if names are same
+      adaptive-fill-regexp "[ t]+|[ t]*([0-9]+.|*+)[ t]*"
+      adaptive-fill-first-line-regexp "^* *$"
+      delete-by-moving-to-trash t    ; Deleting files go to OS's trash folder
+      make-backup-files nil          ; Forbide to make backup files
+      set-mark-command-repeat-pop t  ; Repeating C-SPC after popping mark pops it again
+      auto-save-default nil)
 
 ;; Tab and Space
 ;; Permanently indent with spaces, never with TABs
 (setq-default tab-width 2
               c-basic-offset 2
-              indent-tabs-mode nil)
+              indent-tabs-mode nil
+              major-mode 'text-mode)
 
 ;; Automatically reload files was modified by external program
 (use-package autorevert
@@ -41,8 +38,7 @@
   :hook (after-init . global-undo-tree-mode)
   :bind
   (:map undo-tree-map
-        ("C-/" . nil))
-)
+        ("C-/" . nil)))
 
 
 (use-package expand-region
