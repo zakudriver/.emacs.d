@@ -4,18 +4,20 @@
   (interactive)
   (set-buffer-file-coding-system 'undecided-unix nil))
 
+
 (defun unix2dos ()
   "Convert the current buffer to DOS file format."
   (interactive)
   (set-buffer-file-coding-system 'undecided-dos nil))
 
-;; Save a file as utf-8
+
 (defun save-buffer-as-utf8 (coding-system)
   "Revert a buffer with `CODING-SYSTEM' and save as UTF-8."
   (interactive "zCoding system for visited file (default nil):")
   (revert-buffer-with-coding-system coding-system)
   (set-buffer-file-coding-system 'utf-8)
   (save-buffer))
+
 
 (defun kumo-kill-this-buffer (&optional arg)
   "Kill the current buffer.
@@ -27,6 +29,7 @@
         (kill-buffer-and-window)
       (kill-buffer))))
 
+
 (defun kumo-kill-other-buffers (&optional arg)
   "Kill all other buffers.
    If the universal prefix argument is used then will the windows too."
@@ -37,6 +40,7 @@
     (when (equal '(4) arg) (delete-other-windows))
     (message "Buffers deleted!")))
 
+
 (defun kumo-kill-all-buffers (&optional arg)
   "Kill all other buffers.
    If the universal prefix argument is used then will the windows too."
@@ -44,6 +48,7 @@
   (mapc 'kill-buffer (buffer-list))
   (when (equal '(4) arg) (delete-other-windows))
   (message "Buffers deleted!"))
+
 
 (defun kumo-switch-to-previous-buffer ()
   "Switch to previously open buffer.
@@ -92,6 +97,7 @@ Repeated invocations toggle between the two most recently open buffers."
         (kill-buffer buffer)
         (message "File '%s' successfully removed" filename)))))
 
+
 (defun kumo-cleanup-buffer-safe ()
   "Perform a bunch of safe operations on the whitespace content of a buffer.
 Does not indent buffer, because it is used for a before-save-hook, and that
@@ -101,12 +107,14 @@ might be bad."
   (delete-trailing-whitespace)
   (set-buffer-file-coding-system 'utf-8))
 
+
 (defun kumo-cleanup-buffer ()
   "Perform a bunch of operations on the whitespace content of a buffer.
 Including indent-buffer, which should not be called automatically on save."
   (interactive)
   (kumo-cleanup-buffer-safe)
   (indent-region (point-min) (point-max)))
+
 
 (defun kumo-rotate-window ()
   "Rotate your windows"
@@ -208,12 +216,29 @@ Including indent-buffer, which should not be called automatically on save."
 
 
 (defun kumo-flycheck-list-errors-toggle ()
-  "If flycheck errors list is living, to delete flycheck-errors window."
+  "Open or delete flycheck-errors-list window."
   (interactive)
   (let ((w (get-buffer-window kumo/flycheck-errors-buffer-name)))
     (if w
         (delete-window w)
       (flycheck-list-errors))))
+
+
+(defun kumo-flycheck-list-errors-select-window ()
+  "Select window for flycheck-errors-list."
+  (interactive)
+  (select-window (get-buffer-window kumo/flycheck-errors-buffer-name)))
+
+
+(defun kumo-vterm-select-window ()
+  "Select window for vterm."
+  (interactive)
+  (dolist (i (window-list))
+    (buffer-name (window-buffer i))
+    (let ((name (buffer-name (window-buffer i))))
+      (when (string-match-p "vterm" name)
+        (select-window (get-buffer-window name))))))
+
 
 (defun kumo-open-dashboard ()
   "Open the *dashboard* buffer and jump to the first widget."

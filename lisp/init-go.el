@@ -20,15 +20,18 @@
 (use-package go-mode
   :bind
   (:map go-mode-map
-        ([remap xref-find-definitions] . godef-jump)
-        ("C-r" . go-remove-unused-imports))
+        ([remap xref-find-definitions] . godef-jump))
   :custom
   (gofmt-command "goimports")
   :hook
   (before-save . gofmt-before-save)
   :config
   (use-package company-go
-    :after company)
+    :after company
+    :hook
+    (go-mode . (lambda()
+                 (add-to-list (make-local-variable 'company-backends)
+                              '(company-go company-files company-yasnippet company-capf)))))
 
 
   ;; Install or update tools
@@ -83,6 +86,12 @@
   (use-package go-dlv)
   (use-package go-fill-struct)
   (use-package go-impl)
+
+  (use-package go-eldoc
+    :hook (go-mode . go-eldoc-setup))
+
+  (use-package go-guru
+    :hook (go-mode . go-guru-hl-identifier-mode))
 
   (use-package go-tag
     :bind

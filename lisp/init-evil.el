@@ -149,7 +149,8 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    "bn" 'kumo-new-temp-buffer
    "oo" 'org-switchb
    "oa" 'org-agenda
-   "c" 'kumo-flycheck-list-errors-toggle
+   "cc" 'kumo-flycheck-list-errors-toggle
+   "cs" 'kumo-flycheck-list-errors-select-window
    "d" 'dired
    "D" 'docker
    "h" 'kumo-open-dashboard
@@ -166,6 +167,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    "vp" 'vterm-toggle-forward
    "vn" 'vterm-toggle-backward
    "vo" 'vterm-other-window
+   "vs" 'kumo-vterm-select-window
    "gs" 'magit-status
    "gd" 'magit-dispatch
    ;; "gp" 'magit-process-buffer
