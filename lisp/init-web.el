@@ -24,7 +24,8 @@
 (use-package web-mode
   :mode
   ((".*[^\\(\\.component\\)]\\.html$" . web-mode)
-         ("\\.tsx$" . web-mode))
+   ("\\.tsx$" . web-mode)
+   ("\\.ejs$" . web-mode))
   :hook
   (web-mode . tsx-setup-tide-mode)
   :bind

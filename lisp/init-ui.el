@@ -213,8 +213,7 @@
                '(gfm-mode all-the-icons-octicon "markdown" :face all-the-icons-blue)))
 
 
-
-
 (provide 'init-ui)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-ui.el ends here

@@ -254,6 +254,15 @@ Including indent-buffer, which should not be called automatically on save."
   ;; Jump to the first section
   (goto-line kumo/dashboard-position))
 
+(defun kumo-tab-indent-all ()
+  "Mark whole buffer and tab."
+  (interactive)
+  (let ((point (point)))
+    (mark-whole-buffer)
+    (indent-for-tab-command)
+    (goto-char point)))
+
+(global-set-key (kbd "<C-tab>") 'kumo-tab-indent-all)
 
 
 (provide 'init-funcs)

@@ -59,13 +59,12 @@
                                    extended-command-history)))
 
 
-;; open init.el
-(defun open-init-file()
+(defun kumo-open-init-file()
   "Open init.el file."
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
-(global-set-key (kbd "<f2>") 'open-init-file)
+(global-set-key (kbd "<f2>") 'kumo-open-init-file)
 
 
 
