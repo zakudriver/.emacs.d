@@ -234,10 +234,18 @@ Including indent-buffer, which should not be called automatically on save."
   "Select window for vterm."
   (interactive)
   (dolist (i (window-list))
-    (buffer-name (window-buffer i))
     (let ((name (buffer-name (window-buffer i))))
       (when (string-match-p "vterm" name)
         (select-window (get-buffer-window name))))))
+
+
+(defun kumo-vterm-from-buffer ()
+  "Select buffer for vterm."
+  (interactive)
+  (dolist (i (buffer-list))
+    (let ((name (buffer-name i)))
+      (when (string-match-p "vterm" name)
+        (switch-to-buffer name)))))
 
 
 (defun kumo-open-dashboard ()

@@ -68,7 +68,9 @@ FACE defaults to inheriting from default and highlight."
         ("M-N" . symbol-overlay-switch-forward)
         ("M-P" . symbol-overlay-switch-backward)
         ("M-C" . symbol-overlay-remove-all)
-        ("h" . nil))
+        ("M-s" . symbol-overlay-save-symbol)
+        ("h" . nil)
+        ("w" . nil))
   :hook
   ((prog-mode . symbol-overlay-mode)
    (iedit-mode . turn-off-symbol-overlay)

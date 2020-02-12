@@ -167,7 +167,9 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    "vp" 'vterm-toggle-forward
    "vn" 'vterm-toggle-backward
    "vo" 'vterm-other-window
+   "vt" 'vterm
    "vs" 'kumo-vterm-select-window
+   "vb" 'kumo-vterm-from-buffer
    "gs" 'magit-status
    "gd" 'magit-dispatch
    ;; "gp" 'magit-process-buffer
