@@ -175,6 +175,7 @@ Including indent-buffer, which should not be called automatically on save."
   (let ((old-face-attribute (face-attribute 'default :height)))
     (set-face-attribute 'default nil :height (+ old-face-attribute 10))))
 
+
 (defun kumo-font-size-decrease ()
   "Font size decrease."
   (interactive)
@@ -186,6 +187,12 @@ Including indent-buffer, which should not be called automatically on save."
 (defun kumo-wrap-with-input (beg end symbol)
   "Wrap selected text by input symbol."
   (interactive "r \nsPlease input symbol: ")
+  (let ((map-list '(("''" . "'")
+                    ("\"\"" . "\""))))
+    (cl-loop for (i . j) in map-list
+             do (when (string= symbol i)
+                  (setq symbol j))))
+
   (let ((beg-symbol symbol)
         (end-symbol symbol))
     (cl-loop for (i . j) in kumo/symbol-list
@@ -266,6 +273,7 @@ Including indent-buffer, which should not be called automatically on save."
   (switch-to-buffer dashboard-buffer-name)
   ;; Jump to the first section
   (goto-line kumo/dashboard-position))
+
 
 (defun kumo-tab-indent-all ()
   "Mark whole buffer and tab."

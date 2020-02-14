@@ -29,9 +29,8 @@
   :init
   ;; init jump to (kumo/dashboard-position) line
   (add-hook 'emacs-startup-hook '(lambda ()
-                                   (goto-line kumo/dashboard-position)))
-  (dashboard-setup-startup-hook)
-  )
+                                     (goto-line kumo/dashboard-position)))
+  (dashboard-setup-startup-hook))
 
 
 ;; Title
