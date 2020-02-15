@@ -43,9 +43,10 @@
   (web-mode-enable-css-colorization t)
   (web-mode-comment-style 2)
   (web-mode-enable-comment-annotation t)
-  :config
-  (add-to-list 'web-mode-comment-formats '("tsx" . "//"))
-  (add-to-list 'web-mode-comment-formats '("jsx" . "//")))
+  ;; :config
+  ;; (add-to-list 'web-mode-comment-formats '("tsx" . "//"))
+  ;; (add-to-list 'web-mode-comment-formats '("jsx" . "//"))
+)
 
 
 ;; emmet-mode: dynamic snippets for HTML

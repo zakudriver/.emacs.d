@@ -1,5 +1,6 @@
 ;;; Code:
 
+
 (eval-when-compile
   (require 'init-const)
   (require 'init-custom))
@@ -29,21 +30,19 @@
   :init
   ;; init jump to (kumo/dashboard-position) line
   (add-hook 'emacs-startup-hook '(lambda ()
-                                     (goto-line kumo/dashboard-position)))
+                                   (goto-line kumo/dashboard-position)))
   (dashboard-setup-startup-hook))
 
 
 ;; Title
-(setq frame-title-format
-      '("Emacs " emacs-version "@" user-login-name " : "
-        (:eval (if (buffer-file-name)
-                   (abbreviate-file-name (buffer-file-name))
-                 "%b"))))
-(setq icon-title-format frame-title-format)
+;; (setq frame-title-format
+;;       '((:eval (if (buffer-file-name)
+;;                    (abbreviate-file-name (buffer-file-name))
+;;                  "%b"))))
+(setq frame-title-format nil)
 
 
 ;; Menu/Tool/Scroll bars
-
 (when (version< emacs-version "27")
   (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
   (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
@@ -81,7 +80,7 @@
 
 
 ;; set current theme
-(setq kumo/current-theme (read-theme-cache))
+(setq-default kumo/current-theme (read-theme-cache))
 
 ;; theme factory macro
 (defmacro theme-factory-macro (name load-name &rest config)
@@ -100,7 +99,8 @@
   )
 
 
-(defun create-theme-func (theme)
+(defun theme-func-factory (theme)
+  "Theme function factory."
   `(defun ,(nth 1 theme) ()
      (interactive)
      (theme-factory-macro ,@theme)
@@ -109,8 +109,9 @@
      ))
 
 
-(defmacro create-theme-func-macro ()
-  `(progn ,@(mapcar 'create-theme-func kumo/theme)))
+(defmacro theme-func-macro-factory ()
+  "Theme function macro factory."
+  `(progn ,@(mapcar 'theme-func-factory kumo/theme)))
 
 
 ;; bind theme keymap. 
@@ -125,8 +126,8 @@
        (setq idx (+ idx 1))))))
 
 
-;; create-interactive-theme-func
-(create-theme-func-macro)
+;; create-interactive-theme-function
+(theme-func-macro-factory)
 
 ;; init default theme
 (funcall kumo/current-theme)
