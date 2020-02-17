@@ -258,21 +258,14 @@ Including indent-buffer, which should not be called automatically on save."
 (defun kumo-open-dashboard ()
   "Open the *dashboard* buffer and jump to the first widget."
   (interactive)
-  (if (> (length (window-list-1))
-         ;; exclude `treemacs' window
-         (if (and (fboundp 'treemacs-current-visibility)
-                  (eq (treemacs-current-visibility) 'visible))
-             2
-           1))
-      (setq dashboard-recover-layout-p t))
   (delete-other-windows)
-  ;; Refresh dashboard buffer
   (if (get-buffer dashboard-buffer-name)
       (kill-buffer dashboard-buffer-name))
   (dashboard-insert-startupify-lists)
   (switch-to-buffer dashboard-buffer-name)
-  ;; Jump to the first section
-  (goto-line kumo/dashboard-position))
+  (run-at-time "0.1sec" nil
+               (lambda ()
+                 (goto-line kumo/dashboard-position))))
 
 
 (defun kumo-tab-indent-all ()
