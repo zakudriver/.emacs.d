@@ -176,7 +176,7 @@
                          ;; modeline padding.
                          (propertize " "
                                      'display '(height 1.4))
-                         (propertize " " 'display '(raise -0.5))
+                         (propertize " " 'display '(raise -0.7))
                          
                          ;; nayan cat
                          '(:eval (nyan-create))

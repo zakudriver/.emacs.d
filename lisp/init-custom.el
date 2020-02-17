@@ -36,7 +36,8 @@
     (doom-themes doom-solarized-light)
     (cyberpunk-theme cyberpunk)
     (nil tron-legacy)
-    (snazzy-theme snazzy))
+    (snazzy-theme snazzy)
+    (atom-one-dark-theme atom-one-dark))
   "Theme list.")
 
 
