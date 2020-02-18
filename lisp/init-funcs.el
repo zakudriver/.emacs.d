@@ -84,6 +84,7 @@ Repeated invocations toggle between the two most recently open buffers."
           (message "File '%s' successfully rename to '%s'"
                    name (file-name-nodirecotry new-name)))))))
 
+
 (defun kumo-delete-current-buffer-file ()
   "Removes file connected to current buffer and kill buffer."
   (interactive)
@@ -277,6 +278,11 @@ Including indent-buffer, which should not be called automatically on save."
     (goto-char point)))
 
 (global-set-key (kbd "<C-tab>") 'kumo-tab-indent-all)
+
+
+(defun kumo-home-path-resolve (path)
+  "Return $HOME + path."
+  (concat (getenv "HOME") path))
 
 
 (provide 'init-funcs)

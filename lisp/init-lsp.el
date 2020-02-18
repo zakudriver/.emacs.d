@@ -11,11 +11,11 @@
   :custom
   (lsp-clients-angular-language-server-command
    `("node"
-     ,(expand-file-name ".config/yarn/global/node_modules/@angular/language-server")
+     ,(kumo-home-path-resolve "/.config/yarn/global/node_modules/@angular/language-server")
      "--ngProbeLocations"
-     ,(expand-file-name ".config/yarn/global/node_modules")
+     ,(kumo-home-path-resolve "/.config/yarn/global/node_modules")
      "--tsProbeLocations"
-     ,(expand-file-name ".config/yarn/global/node_modules")
+     ,(kumo-home-path-resolve "/.config/yarn/global/node_modules")
      "--stdio"))
   (lsp-auto-guess-root nil)      ; not Detect project root
   (lsp-prefer-flymake nil)       ; Use lsp-ui and flycheck

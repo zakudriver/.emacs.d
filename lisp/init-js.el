@@ -34,7 +34,13 @@
 ;; major mode for editing *.component.html files
 (use-package ng2-mode
   :mode
-  (".+\\.component\\.html$" . ng2-mode))
+  (".+\\.component\\.html$" . ng2-mode)
+  ("\\.component.ts\\'" . typescript-mode)
+  ("\\.service.ts\\'" . typescript-mode)
+  ("\\.pipe.ts\\'" . typescript-mode)
+  ("\\.directive.ts\\'" . typescript-mode)
+  ("\\.guard.ts\\'" . typescript-mode)
+  ("\\.module.ts\\'" . typescript-mode))
 
 
 ;; format
