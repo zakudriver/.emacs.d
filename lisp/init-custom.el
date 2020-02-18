@@ -43,11 +43,13 @@
 
 ;; temp: '("/home/kumotyou/Code/Go/bin" "/home/kumotyou/Code/Go" "/usr/lib/go/bin" "/home/kumotyou/.yarn/bin" "/home/kumotyou/.config/yarn/global/node_modules")
 (defconst kumo/env-path
-  (split-string (with-temp-buffer
-                  (insert-file-contents kumo/env-path-file)
-                  (buffer-string)) "\n" t)
+  (if (file-exists-p kumo/env-path-file)
+      (split-string (with-temp-buffer
+                      (insert-file-contents kumo/env-path-file)
+                      (buffer-string)) "\n" t)
+    (write-region "" nil kumo/env-path-file)
+    nil)
   "ENV_PATH list.")
-
 
 
 (provide 'init-custom)

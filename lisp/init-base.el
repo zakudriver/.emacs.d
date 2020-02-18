@@ -21,10 +21,11 @@
 
 
 ;; Environment
-(progn
+(when kumo/env-path
   (setenv "PATH" (concat (getenv "PATH") ":" (mapconcat 'identity kumo/env-path ":")))
   (dolist (i kumo/env-path)
     (add-to-list 'exec-path i)))
+
 
 ;; History
 (use-package saveplace
@@ -38,10 +39,10 @@
   :custom
   (recentf-max-saved-items 25)
   (recentf-exclude '("\\.?cache" ".cask" "url" "COMMIT_EDITMSG\\'" "bookmarks"
-                "\\.\\(?:gz\\|gif\\|svg\\|png\\|jpe?g\\|bmp\\|xpm\\)$"
-                "\\.?ido\\.last$" "\\.revive$" "/G?TAGS$" "/.elfeed/"
-                "^/tmp/" "^/var/folders/.+$" ; "^/ssh:"
-                (lambda (file) (file-in-directory-p file package-user-dir))))
+                     "\\.\\(?:gz\\|gif\\|svg\\|png\\|jpe?g\\|bmp\\|xpm\\)$"
+                     "\\.?ido\\.last$" "\\.revive$" "/G?TAGS$" "/.elfeed/"
+                     "^/tmp/" "^/var/folders/.+$" ; "^/ssh:"
+                     (lambda (file) (file-in-directory-p file package-user-dir))))
   :config
   (push (expand-file-name recentf-save-file) recentf-exclude))
 
