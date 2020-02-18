@@ -1,3 +1,11 @@
-# private-emacs.d
+# emacs.d
 
-This is kumo's emacs configuration.
+> _This is kumo's emacs configuration._
+
+## Supported languages / framework
+
+- ### typescript
+- ### angular
+- ### react
+- ### golang
+- ### c++
