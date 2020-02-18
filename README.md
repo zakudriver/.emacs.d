@@ -2,10 +2,10 @@
 
 > _This is kumo's emacs configuration._
 
-## Supported languages / framework
+### Supported languages / framework
 
-- ### typescript
-- ### angular
-- ### react
-- ### golang
-- ### c++
+- typescript
+- angular
+- react
+- golang
+- c++
