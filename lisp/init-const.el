@@ -27,13 +27,16 @@
 
 (defconst kumo/theme-setting-cache
   "~/.emacs.d/.theme"
-  "Theme-setting-cache.")
+  "Theme setting cache.")
+
+(defconst kumo/env-path-file
+  "~/.emacs.d/.path"
+  "Env path file.")
 
 (defconst kumo/index-map
   '("a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n"))
 
 (defconst kumo/flycheck-errors-buffer-name "*Flycheck errors*")
-
 
 (defconst kumo/dashboard-position 8)
 

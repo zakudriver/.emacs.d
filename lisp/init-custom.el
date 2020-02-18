@@ -2,7 +2,7 @@
 
 
 (eval-when-compile
- (require 'init-const))
+  (require 'init-const))
 
 
 (defcustom kumo/package-archives 'emacs-china
@@ -41,12 +41,11 @@
   "Theme list.")
 
 
-;; "/usr/local/go/bin" -- trigger --> go-mode lsp !!!
-;; "/home/kumotyou/.config/yarn/global/node_modules" -- trigger --> ng2-mode lsp
+;; temp: '("/home/kumotyou/Code/Go/bin" "/home/kumotyou/Code/Go" "/usr/lib/go/bin" "/home/kumotyou/.yarn/bin" "/home/kumotyou/.config/yarn/global/node_modules")
 (defconst kumo/env-path
-  (if (and sys/macp)
-    '("/usr/local/bin" "/Users/kumotyou/code/go/bin" "/Users/kumotyou/code/go" "/usr/local/go/bin" "/Users/kumotyou/.config/yarn/global/node_modules")
-    '("/home/kumotyou/Code/Go/bin" "/home/kumotyou/Code/Go" "/usr/lib/go/bin" "/home/kumotyou/.yarn/bin" "/home/kumotyou/.config/yarn/global/node_modules"))
+  (split-string (with-temp-buffer
+                  (insert-file-contents kumo/env-path-file)
+                  (buffer-string)) "\n" t)
   "ENV_PATH list.")
 
 
