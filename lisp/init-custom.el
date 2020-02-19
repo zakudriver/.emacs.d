@@ -46,7 +46,7 @@
   (if (file-exists-p kumo/env-path-file)
       (split-string (with-temp-buffer
                       (insert-file-contents kumo/env-path-file)
-                      (buffer-string)) "\n" t)
+                      (buffer-string)) ":" t)
     (write-region "" nil kumo/env-path-file)
     nil)
   "ENV_PATH list.")

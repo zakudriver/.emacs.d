@@ -30,7 +30,7 @@
   "Theme setting cache.")
 
 (defconst kumo/env-path-file
-  "~/.emacs.d/.path"
+  "~/.emacs.d/.PATH"
   "Env path file.")
 
 (defconst kumo/index-map
