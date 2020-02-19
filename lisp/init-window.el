@@ -13,8 +13,8 @@
       ;; 那样也会导致Mac窗口管理器直接把Emacs窗口扔到单独的工作区, 从而对 `make-frame' 产生同样的Bug.
       ;; 所以, 启动的时候通过 `set-frame-parameter' 和 `maximized' 先设置Emacs为最大化窗口状态, 启动5秒以后再设置成全屏状态,
       ;; Mac就不会移动Emacs窗口到单独的工作区, 最终解决Mac平台下原生全屏窗口导致 `make-frame' 左右滑动闪烁的问题.
-      (setq ns-use-native-fullscreen nil)
-      (setq ns-use-fullscreen-animation nil)
+      (setq ns-use-native-fullscreen nil
+            ns-use-fullscreen-animation nil)
       ;; 默认先最大化。
       (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
       (when (version< emacs-version "27")

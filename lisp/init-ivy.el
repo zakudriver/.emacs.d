@@ -40,7 +40,7 @@
     :custom
     (counsel-projectile-grep-initial-input '(ivy-thing-at-point)))
 
-    ;; Integration with `magit'
+  ;; Integration with `magit'
   (with-eval-after-load 'magit
     (setq magit-completing-read-function 'ivy-completing-read)))
 
@@ -405,7 +405,6 @@
            ((ivy-rich-file-icon)
             (ivy-rich-candidate))
            :delimiter "\t"))))
-
 
 
 (provide 'init-ivy)

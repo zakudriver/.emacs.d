@@ -16,8 +16,8 @@
 
 ;; major mode for editing ts files
 (use-package typescript-mode
-  :config
-  (setq typescript-indent-level 2))
+  :custom
+  (typescript-indent-level 2))
 
 
 ;; major mode for typescript language server

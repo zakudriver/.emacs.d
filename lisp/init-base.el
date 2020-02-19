@@ -5,19 +5,11 @@
   (require 'init-const)
   (require 'init-custom))
 
-(defvar current-directory default-directory
-  "emacs startup directory")
 
-;; Prefers the newest version of a file
-(setq load-prefer-newer t)
-
-;; warn when opening files bigger than 100MB
-(setq large-file-warning-threshold 100000000)
-
-;; disable the annoying bell ring
-(setq ring-bell-function 'ignore)
-
-(setq mouse-drag-copy-region t)
+(setq load-prefer-newer t                     ;; Prefers the newest version of a file
+      large-file-warning-threshold 100000000  ;; Prefers the newest version of a file
+      ring-bell-function 'ignore              ;; disable the annoying bell ring
+      mouse-drag-copy-region t)
 
 
 ;; Environment
@@ -45,6 +37,7 @@
                      (lambda (file) (file-in-directory-p file package-user-dir))))
   :config
   (push (expand-file-name recentf-save-file) recentf-exclude))
+
 
 (use-package savehist
   :ensure nil

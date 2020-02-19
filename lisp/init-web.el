@@ -4,7 +4,8 @@
 ;; CSS mode
 (use-package css-mode
   :ensure nil
-  :init (setq css-indent-offset 2))
+  :custom
+  (css-indent-offset 2))
 
 ;; SCSS mode
 ;; (use-package scss-mode
