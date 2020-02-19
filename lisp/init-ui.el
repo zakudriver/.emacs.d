@@ -39,7 +39,8 @@
 ;;       '((:eval (if (buffer-file-name)
 ;;                    (abbreviate-file-name (buffer-file-name))
 ;;                  "%b"))))
-(setq frame-title-format nil)
+(setq frame-title-format nil
+      frame-resize-pixelwise t)
 
 
 ;; Menu/Tool/Scroll bars

@@ -26,16 +26,11 @@
     (define-fringe-bitmap 'flycheck-fringe-bitmap-double-arrow
       [16 48 112 240 112 48 16] nil nil 'center))
 
-  (use-package flycheck-posframe
-    :custom-face (flycheck-posframe-border-face ((t (:inherit default))))
-    :hook (flycheck-mode . flycheck-posframe-mode)
-    :init (setq flycheck-posframe-border-width 1
-                flycheck-posframe-inhibit-functions
-                '((lambda (&rest _) (bound-and-true-p company-backend)))))
-
   (use-package flycheck-popup-tip
+    :after flycheck
+    :custom
+    (flycheck-popup-tip-error-prefix " \u2717 ")
     :hook (flycheck-mode . flycheck-popup-tip-mode)))
-
 
 
 (provide 'init-flycheck)
