@@ -3,19 +3,22 @@
 
 (use-package company
   :diminish
-  :defines (company-dabbrev-ignore-case company-dabbrev-downcase)
+  :defines
+  (company-dabbrev-ignore-case company-dabbrev-downcase)
   :commands company-abort
-  :bind (("M-/" . company-complete)
-         ("<backtab>" . company-yasnippet)
-         :map company-active-map
-         ("C-p" . company-select-previous)
-         ("C-n" . company-select-next)
-         ("<tab>" . company-complete-common-or-cycle)
-         ("<backtab>" . my-company-yasnippet)
-         :map company-search-map
-         ("C-p" . company-select-previous)
-         ("C-n" . company-select-next))
-  :hook (after-init . global-company-mode)
+  :bind
+  (("M-/" . company-complete)
+   ("<backtab>" . company-yasnippet)
+   :map company-active-map
+   ("C-p" . company-select-previous)
+   ("C-n" . company-select-next)
+   ("<tab>" . company-complete-common-or-cycle)
+   ("<backtab>" . kumo-company-yasnippet)
+   :map company-search-map
+   ("C-p" . company-select-previous)
+   ("C-n" . company-select-next))
+  :hook
+  (after-init . global-company-mode)
   :custom
   (company-tooltip-align-annotations t)
   (company-tooltip-limit 12)
@@ -29,15 +32,10 @@
   (company-backends '(company-capf))
   (company-frontends '(company-pseudo-tooltip-frontend company-echo-metadata-frontend))
   :config
-  (defun my-company-yasnippet ()
-    "Hide the current completeions and show snippets."
-    (interactive)
-    (company-abort)
-    (call-interactively 'company-yasnippet))
-
   ;; Better sorting and filtering
   (use-package company-prescient
-    :init (company-prescient-mode t))
+    :init
+    (company-prescient-mode t))
 
   ;; Icons and quickhelp
   (use-package company-box
@@ -91,8 +89,7 @@
                   (t . nil)))))
       (advice-add #'company-box-icons--elisp :override #'my-company-box-icons--elisp))
 
-    (when (and (display-graphic-p)
-               (require 'all-the-icons nil t))
+    (when (display-graphic-p)
       (declare-function all-the-icons-faicon 'all-the-icons)
       (declare-function all-the-icons-material 'all-the-icons)
       (declare-function all-the-icons-octicon 'all-the-icons)

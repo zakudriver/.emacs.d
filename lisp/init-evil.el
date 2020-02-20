@@ -125,7 +125,6 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    "nd" 'kumo-number-division
    )
   
-
   (general-define-key
    :prefix "C-c"
    "q" 'save-buffers-kill-terminal
@@ -176,7 +175,6 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    ;; "gp" 'magit-process-buffer
    )
 
-
   (general-define-key
    :states '(normal visual)
    "j" 'evil-next-visual-line
@@ -192,7 +190,6 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    "s" 'evil-substitute-no-yank
    "S" 'evil-substitute-whole-line-no-yank
    ))
-
 
 
 

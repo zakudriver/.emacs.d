@@ -1,6 +1,8 @@
 ;;Code:
 
+
 (global-prettify-symbols-mode t)
+
 
 ;; Show function arglist or variable docstring
 (use-package eldoc
@@ -16,8 +18,13 @@
                     eval-expression-minibuffer-setup-hook))
       (add-hook hook #'eldoc-mode))))
 
+
 (use-package ielm
   :hook
   (ielm-mode . eldoc-mode))
 
+
 (provide 'init-lisp)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; init-lisp.el ends here

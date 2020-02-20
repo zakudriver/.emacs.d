@@ -296,6 +296,11 @@ Including indent-buffer, which should not be called automatically on save."
         (insert
          (number-to-string (/ (string-to-number regionp) (float n)))))))
 
+(defun kumo-company-yasnippet ()
+  "Hide the current completeions and show snippets."
+  (interactive)
+  (company-abort)
+  (call-interactively 'company-yasnippet))
 
 
 (provide 'init-funcs)

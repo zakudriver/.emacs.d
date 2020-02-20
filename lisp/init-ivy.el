@@ -13,8 +13,8 @@
    :map swiper-map
    ([escape] . minibuffer-keyboard-quit))
   :hook
-  ((after-init . ivy-mode)
-   (ivy-mode . counsel-mode))
+  (after-init . ivy-mode)
+  (ivy-mode . counsel-mode)
   :custom
   (enable-recursive-minibuffers t) ; Allow commands in minibuffers
   (ivy-use-selectable-prompt t)

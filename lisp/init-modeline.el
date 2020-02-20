@@ -15,19 +15,20 @@
   (nyan-wavy-trail nil))
 
 
-(setq
- evil-normal-state-tag   (propertize "<𝙽>" 'face 'font-lock-preprocessor-face)
- evil-emacs-state-tag    (propertize "<𝙴>" 'face 'font-lock-preprocessor-face)
- evil-insert-state-tag   (propertize "<𝙸>" 'face 'font-lock-preprocessor-face)
- evil-motion-state-tag   (propertize "<𝙼>" 'face 'font-lock-preprocessor-face)
- evil-visual-state-tag   (propertize "<𝚅>" 'face 'font-lock-preprocessor-face)
- evil-operator-state-tag (propertize "<𝙾>" 'face 'font-lock-preprocessor-face))
+(setq evil-normal-state-tag   (propertize "<𝙽>" 'face 'font-lock-preprocessor-face)
+      evil-emacs-state-tag    (propertize "<𝙴>" 'face 'font-lock-preprocessor-face)
+      evil-insert-state-tag   (propertize "<𝙸>" 'face 'font-lock-preprocessor-face)
+      evil-motion-state-tag   (propertize "<𝙼>" 'face 'font-lock-preprocessor-face)
+      evil-visual-state-tag   (propertize "<𝚅>" 'face 'font-lock-preprocessor-face)
+      evil-operator-state-tag (propertize "<𝙾>" 'face 'font-lock-preprocessor-face))
+
 
 (defun modeline-modified-p ()
   "Buffer modified symbol."
   (if (buffer-modified-p)
       "●"
     " "))
+
 
 ;; ⓪ ① ② ③ ④ ⑤ ⑥ ⑦ ⑧ ⑨ ⑩
 ;; Ⅰ Ⅱ Ⅲ Ⅳ Ⅴ Ⅵ Ⅶ Ⅷ Ⅸ Ⅹ
@@ -57,12 +58,14 @@
               'display `((space :align-to
                                 (- (+ right right-fringe right-margin) ,reserve)))))
 
+
 (defun modeline-buffer-encoding-abbrev ()
   "The line ending convention used in the buffer."
   (let ((buf-coding (format "%s" buffer-file-coding-system)))
     (if (string-match "\\(dos\\|unix\\|mac\\)" buf-coding)
         (match-string 1 buf-coding)
       buf-coding)))
+
 
 ;; flycheck
 (defvar modeline-flycheck
@@ -85,6 +88,7 @@
       (`interrupted " -")
       (`suspicious '(propertize " ?" 'face 'warning)))))
 
+
 ;; vc-mode
 (defun modeline-vc-branch ()
   "Git branch."
@@ -96,7 +100,7 @@
         (format " %s" (substring noback 2))))
   ;; (let ((backend (vc-backend buffer-file-name)))
   ;;   (substring vc-mode (+ (if (eq backend 'Hg) 2 3) 2)))
-)
+  )
 
 
 (defun modeline-git-status ()
@@ -127,7 +131,7 @@
        (t
         (setq O (+ 1 O))
         (setq O-files (concat O-files "\n" line)))))
-      
+    
     ;; construct propertized string
     (format " %d / %d / %d " M U O)
     ;; (concat
@@ -165,10 +169,11 @@
                          ;; the buffer name; the file name as a tool tip
                          (propertize "%b " 'face '(font-lock-keyword-face (:weight bold))
                                      'help-echo (buffer-file-name))
+                         " "
                          
                          ;; size
                          (propertize "%I" 'face 'font-lock-constant-face)
-                         "  "
+                         "    "
                          
                          ;; evil state
                          '(:eval evil-mode-line-tag)
@@ -177,10 +182,11 @@
                          (propertize " "
                                      'display '(height 1.4))
                          (propertize " " 'display '(raise -0.7))
+                         "  "
                          
                          ;; nayan cat
                          '(:eval (nyan-create))
-                         "    "
+                         "     "
                          
                          ;; the current major mode for the buffer.
                          (propertize "%m"
@@ -193,7 +199,7 @@
                          ;; " "
                          
                          modeline-flycheck
-                         " "
+                         "      "
                          ))
          (modeline-middle (list
                            ;; git info
@@ -201,18 +207,16 @@
                            (propertize
                             (modeline-git-status) 'face '(font-lock-string-face (:weight bold)))
                            " "
-                         ))
+                           ))
          (modeline-right (list
                           (modeline-fill (if sys/macp 14 16))
 
                           ;; global-mode-string goes in mode-line-misc-info
                           mode-line-misc-info
-                                         
+                          
                           ;; '(:eval (modeline-buffer-encoding-abbrev))
 
                           ;; line and column
-                          ;; '%02' to set to 2 chars at least; prevents flickering
-                          ;; " "
                           (propertize "%02l" 'face 'font-lock-type-face) ","
                           (propertize "%02c" 'face 'font-lock-type-face)
 
@@ -224,7 +228,7 @@
                           ;;                         ((string-match "^ [!\\?]" noback) 'mode-line-vc-modified))))
                           ;;        (format " %s" (substring noback 2)))))
 
-                          " "
+                          "   "
                           ;; vc-mode
                           '(:eval (modeline-vc-branch))
                           ))
@@ -254,6 +258,7 @@
                       :background (face-background 'default))
   (setq x-underline-at-descent-line t)
   (setq auto-revert-check-vc-info t))
+
 
 ;; set modeline style
 (update-modeline-format)

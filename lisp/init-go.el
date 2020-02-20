@@ -101,11 +101,10 @@
     :custom
     (go-tag-args (list "-transform" "camelcase")))
 
-
   ;; Local Golang playground for short snippets
   (use-package go-playground
     :diminish)
-)
+  )
 
 
 
