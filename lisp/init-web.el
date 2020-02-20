@@ -14,21 +14,12 @@
 ;;   (setq scss-compile-at-save nil))
 
 
-(defun tsx-setup-tide-mode ()
-  "Setup tide mode when tsx file."
-  (when (string-equal "tsx" (file-name-extension buffer-file-name))
-    (tide-setup)
-    (tide-hl-identifier-mode)))
-
-
 ;; major-mode for editing multiple web formats
 (use-package web-mode
   :mode
   ((".*[^\\(\\.component\\)]\\.html$" . web-mode)
    ("\\.tsx$" . web-mode)
    ("\\.ejs$" . web-mode))
-  :hook
-  (web-mode . tsx-setup-tide-mode)
   :bind
   (:map web-mode-map
         ("C-/" . web-mode-comment-or-uncomment))
@@ -43,11 +34,7 @@
   (web-mode-enable-current-element-highlight t)
   (web-mode-enable-css-colorization t)
   (web-mode-comment-style 2)
-  (web-mode-enable-comment-annotation t)
-  ;; :config
-  ;; (add-to-list 'web-mode-comment-formats '("tsx" . "//"))
-  ;; (add-to-list 'web-mode-comment-formats '("jsx" . "//"))
-)
+  (web-mode-enable-comment-annotation t))
 
 
 ;; emmet-mode: dynamic snippets for HTML

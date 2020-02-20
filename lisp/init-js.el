@@ -25,6 +25,10 @@
   :hook
   ((typescript-mode js2-mode) . tide-setup)
   ((typescript-mode js2-mode) . tide-hl-identifier-mode)
+  (web-mode . (lambda ()
+                (when (string= "tsx" (file-name-extension buffer-file-name))
+                  (tide-setup)
+                  (tide-hl-identifier-mode))))
   :bind
   (:map tide-mode-map
         ([remap evil-goto-definition] . tide-jump-to-definition)
@@ -46,7 +50,10 @@
 ;; format
 (use-package prettier-js
   :hook
-  ((js2-mode web-mode ng2-mode typescript-mode scss-mode) . prettier-js-mode)
+  ((js2-mode ng2-mode typescript-mode scss-mode) . prettier-js-mode)
+  (web-mode . (lambda ()
+                (when (not (member (file-name-extension buffer-file-name) '("ejs")))
+                  (prettier-js-mode))))
   :custom
   (prettier-js-args '("--single-quote" "true" "--print-width" "120")))
 
