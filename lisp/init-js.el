@@ -52,7 +52,7 @@
   :hook
   ((js2-mode ng2-mode typescript-mode scss-mode) . prettier-js-mode)
   (web-mode . (lambda ()
-                (when (not (member (file-name-extension buffer-file-name) '("ejs")))
+                (unless (member (file-name-extension buffer-file-name) '("ejs"))
                   (prettier-js-mode))))
   :custom
   (prettier-js-args '("--single-quote" "true" "--print-width" "120")))
