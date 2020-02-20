@@ -285,6 +285,19 @@ Including indent-buffer, which should not be called automatically on save."
   (concat (getenv "HOME") path))
 
 
+(defun kumo-number-division (beg end &optional num)
+  "Selected number division."
+  (interactive "r\nsPlease input number: ")
+  (setq num (string-to-number num))
+  (if (use-region-p)
+      (let ((regionp (buffer-substring beg end))
+            (n (if (= num 0) 14 num)))
+        (delete-region beg end)
+        (insert
+         (number-to-string (/ (string-to-number regionp) (float n)))))))
+
+
+
 (provide 'init-funcs)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -122,6 +122,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    "m" 'counsel-imenu
    "w" 'avy-goto-char-timer
    "s" 'save-buffer
+   "nd" 'kumo-number-division
    )
   
 
