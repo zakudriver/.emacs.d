@@ -138,10 +138,12 @@
 
 
 (use-package smooth-scrolling
-  :init (add-hook 'after-init-hook #'smooth-scrolling-mode)
-  :config (setq smooth-scroll-margin 0
-                scroll-conservatively 100000
-                scroll-preserve-screen-position 1))
+  :hook
+  (after-init . smooth-scrolling-mode)
+  :custom
+  (smooth-scroll-margin 0)
+  (scroll-conservatively 100000)
+  (scroll-preserve-screen-position 1))
 
 
 ;; Misc
@@ -167,8 +169,9 @@
 ;;;;;;;;;;;;;;;;
 (use-package all-the-icons
   :if (display-graphic-p)
-  :init (unless (or sys/win32p (member "all-the-icons" (font-family-list)))
-          (all-the-icons-install-fonts t))
+  :init
+  (unless (or sys/win32p (member "all-the-icons" (font-family-list)))
+    (all-the-icons-install-fonts t))
   :config
   (add-to-list 'all-the-icons-mode-icon-alist
                '(vterm-mode all-the-icons-octicon "terminal" :v-adjust 0.2))

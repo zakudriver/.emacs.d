@@ -22,12 +22,14 @@
 ;; History
 (use-package saveplace
   :ensure nil
-  :hook (after-init . save-place-mode))
+  :hook
+  (after-init . save-place-mode))
 
 
 (use-package recentf
   :ensure nil
-  :hook (after-init . recentf-mode)
+  :hook
+  (after-init . recentf-mode)
   :custom
   (recentf-max-saved-items 25)
   (recentf-exclude '("\\.?cache" ".cask" "url" "COMMIT_EDITMSG\\'" "bookmarks"
@@ -41,7 +43,8 @@
 
 (use-package savehist
   :ensure nil
-  :hook (after-init . savehist-mode)
+  :hook
+  (after-init . savehist-mode)
   :custom
   (enable-recursive-minibuffers t)
   (history-length 1000)
@@ -53,13 +56,21 @@
                                    extended-command-history)))
 
 
+;; which-key
+(use-package which-key
+  :hook
+  (after-init . which-key-mode)
+  :custom
+  (which-key-popup-type 'minibuffer)
+  (which-key-sort-order 'which-key-prefix-then-key-order))
+
+
 (defun kumo-open-init-file()
   "Open init.el file."
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 
 (global-set-key (kbd "<f2>") 'kumo-open-init-file)
-
 
 
 (provide 'init-base)

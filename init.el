@@ -19,8 +19,8 @@ decrease this. If you experience stuttering, increase this.")
 
 (defvar default-file-name-handler-alist file-name-handler-alist)
 
-(setq file-name-handler-alist nil)
-(setq gc-cons-threshold centaur-gc-cons-upper-limit)
+(setq file-name-handler-alist nil
+      gc-cons-threshold centaur-gc-cons-upper-limit)
 (add-hook 'emacs-startup-hook
           (lambda ()
             "Restore defalut values after startup."
@@ -31,9 +31,9 @@ decrease this. If you experience stuttering, increase this.")
             ;; `focus-out-hook' is obsolete since 27.1
             (if (boundp 'after-focus-change-function)
                 (add-function :after after-focus-change-function
-                  (lambda ()
-                    (unless (frame-focus-state)
-                      (garbage-collect))))
+                              (lambda ()
+                                (unless (frame-focus-state)
+                                  (garbage-collect))))
               (add-hook 'focus-out-hook 'garbage-collect))
 
             (defun my-minibuffer-setup-hook ()
@@ -79,7 +79,6 @@ decrease this. If you experience stuttering, increase this.")
   (require 'init-highlight)
   (require 'init-ibuffer)
   (require 'init-treemacs)
-  (require 'init-which-key)
 
   (require 'init-window)
   (require 'init-ivy)
@@ -101,7 +100,7 @@ decrease this. If you experience stuttering, increase this.")
   ;; Web
   (require 'init-js)
   (require 'init-web)
-)
+  )
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

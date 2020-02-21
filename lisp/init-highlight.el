@@ -4,13 +4,16 @@
 (eval-when-compile
   (require 'init-const))
 
+
 ;; Highlight the current line
 (global-hl-line-mode t)
+
 
 ;; Highlight matching parens
 (use-package paren
   :ensure nil
-  :hook (after-init . show-paren-mode)
+  :hook
+  (after-init . show-paren-mode)
   :config
   (defun display-line-overlay (pos str &optional face)
     "Display line at POS as STR with FACE.
@@ -58,8 +61,10 @@ FACE defaults to inheriting from default and highlight."
 ;; Highlight symbols
 (use-package symbol-overlay
   :diminish
-  :functions (turn-off-symbol-overlay turn-on-symbol-overlay)
-  :custom-face (symbol-overlay-default-face ((t (:inherit (region bold)))))
+  :functions
+  (turn-off-symbol-overlay turn-on-symbol-overlay)
+  :custom-face
+  (symbol-overlay-default-face ((t (:inherit (region bold)))))
   :bind
   (:map symbol-overlay-map
         ("M-i" . symbol-overlay-put)
@@ -72,9 +77,9 @@ FACE defaults to inheriting from default and highlight."
         ("h" . nil)
         ("w" . nil))
   :hook
-  ((prog-mode . symbol-overlay-mode)
-   (iedit-mode . turn-off-symbol-overlay)
-   (iedit-mode-end . turn-on-symbol-overlay))
+  (prog-mode . symbol-overlay-mode)
+  (iedit-mode . turn-off-symbol-overlay)
+  (iedit-mode-end . turn-on-symbol-overlay)
   :custom
   (symbol-overlay-idle-time 0.1)
   :init 
@@ -103,6 +108,7 @@ FACE defaults to inheriting from default and highlight."
       (symbol-overlay-mode 1)))
   (advice-add #'deactivate-mark :after #'turn-on-symbol-overlay))
 
+
 ;; Highlight indentions
 (use-package highlight-indentation
   :hook
@@ -113,23 +119,28 @@ FACE defaults to inheriting from default and highlight."
 
 ;; Highlight brackets according to their depth
 (use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode))
+  :hook
+  (prog-mode . rainbow-delimiters-mode))
+
 
 (use-package highlight-parentheses
-  :hook (prog-mode . highlight-parentheses-mode)
+  :hook
+  (prog-mode . highlight-parentheses-mode)
   :custom
   (hl-paren-colors '("#73317a"))
   (hl-paren-background-colors '("#F4CCE1")))
 
 ;; Highlight uncommitted changes using VC
 (use-package diff-hl
-  :defines (diff-hl-margin-symbols-alist desktop-minor-mode-table)
   :commands diff-hl-magit-post-refresh
+  :defines
+  (diff-hl-margin-symbols-alist desktop-minor-mode-table)
+  :hook
+  (after-init . global-diff-hl-mode)
+  (dired-mode . diff-hl-dired-mode)
   :bind
   (:map diff-hl-command-map
-        ("SPC" . diff-hl-mark-hunk))
-  :hook ((after-init . global-diff-hl-mode)
-         (dired-mode . diff-hl-dired-mode)))
+        ("SPC" . diff-hl-mark-hunk)))
 
 
 (use-package pulse

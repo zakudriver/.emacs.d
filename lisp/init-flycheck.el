@@ -7,7 +7,8 @@
 
 (use-package flycheck
   :diminish
-  :hook (after-init . global-flycheck-mode)
+  :hook
+  (after-init . global-flycheck-mode)
   :init
   (add-to-list 'display-buffer-alist
                `(,(eval `(rx bos ,kumo/flycheck-errors-buffer-name eos))
@@ -28,9 +29,10 @@
 
   (use-package flycheck-popup-tip
     :after flycheck
+    :hook
+    (flycheck-mode . flycheck-popup-tip-mode)
     :custom
-    (flycheck-popup-tip-error-prefix " \u2717 ")
-    :hook (flycheck-mode . flycheck-popup-tip-mode)))
+    (flycheck-popup-tip-error-prefix " \u2717 ")))
 
 
 (provide 'init-flycheck)
