@@ -52,8 +52,8 @@
   "Return empty space using FACE and leaving RESERVE space on the right."
   (unless reserve
     (setq reserve 20))
-  (when (and window-system (eq 'right (get-scroll-bar-mode)))
-    (setq reserve (- reserve 3)))
+  ;; (when (and window-system (eq 'right (get-scroll-bar-mode)))
+  ;;   (setq reserve (- reserve 3)))
   (propertize " "
               'display `((space :align-to
                                 (- (+ right right-fringe right-margin) ,reserve)))))
@@ -133,27 +133,13 @@
         (setq O-files (concat O-files "\n" line)))))
     
     ;; construct propertized string
-    (format " %d / %d / %d " M U O)
-    ;; (concat
-    ;;  (propertize
-    ;;   (format " 𝚖 %d" M)
-    ;;   'face '(font-lock-type-face)
-    ;;   'help-echo M-files)
-    ;;  (propertize
-    ;;   (format " 𝚞 %d" U)
-    ;;   'face '(font-lock-keyword-face)
-    ;;   'help-echo U-files)
-    ;;  (propertize
-    ;;   (format " 𝚘 %d " O)
-    ;;   'face '(font-lock-preprocessor-face)
-    ;;   'help-echo O-files))
-    ))
-
+    (format " %d / %d / %d " M U O)))
 
 
 (defun modeline-renderer ()
   "Mode line renderer."
-  (let* ((modeline-left (list
+  (let* (
+         (modeline-left (list
                          "  "
                          ;; winum
                          (propertize
@@ -193,54 +179,39 @@
                                      'face '(font-lock-string-face (:weight bold))
                                      'help-echo buffer-file-coding-system)
                          "      "
-
-                         ;; minor modes
-                         ;; minor-mode-alist
-                         ;; " "
-                         
                          modeline-flycheck
-                         "      "
                          ))
          (modeline-middle (list
+                           "      "
                            ;; git info
                            ;; (propertize ,`(vc-mode vc-mode) 'face 'font-lock-keyword-face)
                            (propertize
                             (modeline-git-status) 'face '(font-lock-string-face (:weight bold)))
-                           " "
-                           ))
+                           )) 
          (modeline-right (list
-                          (modeline-fill (if sys/macp 14 16))
-
+                          (modeline-fill (if sys/macp 12 16))
                           ;; global-mode-string goes in mode-line-misc-info
-                          mode-line-misc-info
+                          ;; mode-line-misc-info
                           
-                          ;; '(:eval (modeline-buffer-encoding-abbrev))
-
                           ;; line and column
                           (propertize "%02l" 'face 'font-lock-type-face) ","
                           (propertize "%02c" 'face 'font-lock-type-face)
-
-                          ;; '(:eval
-                          ;;  (if vc-mode
-                          ;;      (let* ((noback (replace-regexp-in-string (format "^ %s" (vc-backend buffer-file-name)) " " vc-mode))
-                          ;;             (face (cond ((string-match "^ -" noback) 'mode-line-vc)
-                          ;;                         ((string-match "^ [:@]" noback) 'mode-line-vc-edit)
-                          ;;                         ((string-match "^ [!\\?]" noback) 'mode-line-vc-modified))))
-                          ;;        (format " %s" (substring noback 2)))))
 
                           "   "
                           ;; vc-mode
                           '(:eval (modeline-vc-branch))
                           ))
-
-         (width-left (string-width (format-mode-line modeline-left)))
-         (width-left-middle (string-width (format-mode-line `(list ,modeline-left ,modeline-middle))))
-         (width-fill (string-width (format-mode-line `(list ,modeline-left ,modeline-middle ,modeline-right)))))
+         (modeline-left-middle (append modeline-left modeline-middle))
+         (modeline-fill (append modeline-left modeline-middle modeline-right))
+         (width-left (length (format-mode-line modeline-left)))
+         (width-left-middle (length (format-mode-line modeline-left-middle)))
+         (width-fill (length (format-mode-line modeline-fill)))
+         (win-with (window-width)))
 
     (cond
-     ((> width-left (window-width)) (list modeline-left))
-     ((> width-left-middle (window-width)) (list modeline-left modeline-middle))
-     (t (list modeline-left modeline-middle modeline-right)))))
+     ((> width-left (win-width)) modeline-left)
+     ((> width-left-middle (win-width)) modeline-left-middle)
+     (t modeline-fill))))
 
 
 (defun update-modeline-format ()
