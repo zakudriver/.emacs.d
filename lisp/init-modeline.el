@@ -180,14 +180,13 @@
                                      'help-echo buffer-file-coding-system)
                          "      "
                          modeline-flycheck
+
+                         "      "
+                         ;; git info
+                         ;; (propertize ,`(vc-mode vc-mode) 'face 'font-lock-keyword-face)
+                         (propertize
+                          (modeline-git-status) 'face '(font-lock-string-face (:weight bold)))
                          ))
-         (modeline-middle (list
-                           "      "
-                           ;; git info
-                           ;; (propertize ,`(vc-mode vc-mode) 'face 'font-lock-keyword-face)
-                           (propertize
-                            (modeline-git-status) 'face '(font-lock-string-face (:weight bold)))
-                           )) 
          (modeline-right (list
                           (modeline-fill (if sys/macp 12 16))
                           ;; global-mode-string goes in mode-line-misc-info
@@ -201,16 +200,15 @@
                           ;; vc-mode
                           '(:eval (modeline-vc-branch))
                           ))
-         (modeline-left-middle (append modeline-left modeline-middle))
-         (modeline-fill (append modeline-left modeline-middle modeline-right))
-         (width-left (length (format-mode-line modeline-left)))
-         (width-left-middle (length (format-mode-line modeline-left-middle)))
-         (width-fill (length (format-mode-line modeline-fill)))
-         (win-with (window-width)))
+
+         (modeline-left-right (append modeline-left modeline-right))
+         (modeline-fill (append modeline-left modeline-right))
+         ;; (width-left (length (format-mode-line modeline-left)))
+         ;; (width-fill (length (format-mode-line modeline-fill)))
+         )
 
     (cond
-     ((> width-left (win-width)) modeline-left)
-     ((> width-left-middle (win-width)) modeline-left-middle)
+     ((> 91 (window-total-width)) modeline-left)
      (t modeline-fill))))
 
 
