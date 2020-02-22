@@ -203,8 +203,6 @@
 
          (modeline-left-right (append modeline-left modeline-right))
          (modeline-fill (append modeline-left modeline-right))
-         ;; (width-left (length (format-mode-line modeline-left)))
-         ;; (width-fill (length (format-mode-line modeline-fill)))
          )
 
     (cond

@@ -51,8 +51,6 @@ decrease this. If you experience stuttering, increase this.")
 ;; Load custom theme file
 (add-to-list 'custom-theme-load-path (expand-file-name "themes" user-emacs-directory))
 
-;; benchmarking
-(require 'init-benchmarking)
 ;; custom-file
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 
