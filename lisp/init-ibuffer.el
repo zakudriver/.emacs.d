@@ -32,15 +32,15 @@
                      (mark " " (name 16 -1) " " filename)))
   :config
   (with-eval-after-load 'counsel
-    (defun my-ibuffer-find-file ()
-      (interactive)
-      (let ((default-directory (let ((buf (ibuffer-current-buffer)))
-                                 (if (buffer-live-p buf)
-                                     (with-current-buffer buf
-                                       default-directory)
-                                   default-directory))))
-        (counsel-find-file default-directory)))
-    (advice-add #'ibuffer-find-file :override #'my-ibuffer-find-file))
+    (advice-add #'ibuffer-find-file :override #'(lambda ()
+                                                  (interactive)
+                                                  (let ((default-directory (let ((buf (ibuffer-current-buffer)))
+                                                                             (if (buffer-live-p buf)
+                                                                                 (with-current-buffer buf
+                                                                                   default-directory)
+                                                                               default-directory))))
+                                                    (counsel-find-file default-directory))
+                                                  )))
 
   ;; Group ibuffer's list by project root
   (use-package ibuffer-projectile

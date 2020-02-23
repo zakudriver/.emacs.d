@@ -162,14 +162,10 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    "wt" 'delete-window
    "wo" 'delete-other-windows
    "wb" 'balance-windows
-   "vv" 'vterm-toggle
-   "vd" 'vterm-toggle-cd
-   "vp" 'vterm-toggle-forward
-   "vn" 'vterm-toggle-backward
    "vo" 'vterm-other-window
-   "vt" 'vterm
+   "vv" 'vterm
+   "vn" 'kumo-new-vterm
    "vs" 'kumo-vterm-select-window
-   "vb" 'kumo-vterm-from-buffer
    "gs" 'magit-status
    "gd" 'magit-dispatch
    ;; "gp" 'magit-process-buffer

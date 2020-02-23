@@ -243,19 +243,38 @@ Including indent-buffer, which should not be called automatically on save."
 (defun kumo-vterm-select-window ()
   "Select window for vterm."
   (interactive)
-  (dolist (i (window-list))
-    (let ((name (buffer-name (window-buffer i))))
-      (when (string-match-p "vterm" name)
-        (select-window (get-buffer-window name))))))
+
+  (catch 'break
+    (dolist (i (window-list))
+      (let ((name (buffer-name (window-buffer i))))
+        (when (string-match-p "vterm" name)
+          (select-window (get-buffer-window name))
+          (throw 'break nil)
+          )))
+    ))
 
 
-(defun kumo-vterm-from-buffer ()
-  "Select buffer for vterm."
+(defun kumo-new-vterm ()
+  "New a vterm."
   (interactive)
-  (dolist (i (buffer-list))
-    (let ((name (buffer-name i)))
-      (when (string-match-p "vterm" name)
-        (switch-to-buffer name)))))
+  (if (fboundp 'vterm-mode)
+      (let ((buffer (generate-new-buffer "vterm")))
+        (with-current-buffer (buffer-name buffer)
+          (vterm-mode))
+        (kumo-bottom-window buffer)
+        )
+    (vterm)))
+
+
+(defun kumo-bottom-window (bufname)
+  "Open a bottom window."
+  (display-buffer-in-side-window
+   bufname
+   '((side . bottom)
+     (dedicated . t)
+     (reusable-frames . visible)
+     (window-height . 0.3)
+     )))
 
 
 (defun kumo-open-dashboard ()
@@ -278,7 +297,6 @@ Including indent-buffer, which should not be called automatically on save."
     (mark-whole-buffer)
     (indent-for-tab-command)
     (goto-char point)))
-
 (global-set-key (kbd "<C-tab>") 'kumo-tab-indent-all)
 
 
