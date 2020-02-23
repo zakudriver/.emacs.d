@@ -18,17 +18,21 @@
   (evil-define-key 'insert global-map (kbd "DEL") 'hungry-delete-backward)
   (evil-define-key 'visual global-map (kbd "z") 'kumo-wrap-with-input)
 
-  ;; redefine evil operator function
+  ;; evil x key
   (evil-define-operator evil-delete-char-no-yank (beg end type register yank-handler)
     "Delete next character without yanking."
     :motion evil-forward-char
     (evil-delete beg end type ?_ yank-handler))
+  (advice-add #'evil-delete-char :override #'evil-delete-char-no-yank)
 
+  ;; evil X key
   (evil-define-operator evil-delete-backward-char-no-yank (beg end type register yank-handler)
     "Delete backward character without yanking."
     :motion evil-backward-char
     (evil-delete beg end type ?_ yank-handler))
+  (advice-add #'evil-delete-backward-char :override #'evil-delete-backward-char-no-yank)
 
+  ;; evil c key
   (evil-define-operator evil-change-no-yank (beg end type register yank-handler delete-func)
     "Change text from BEG to END with TYPE.
     Save in REGISTER or the kill-ring with YANK-HANDLER.
@@ -54,24 +58,31 @@
         (evil-insert 1 nlines))
        (t
         (evil-insert 1)))))
+  (advice-add #'evil-change :override #'evil-change-no-yank)
 
+  ;; evil C key
   (evil-define-operator evil-change-line-no-yank (beg end type register yank-handler)
     "Change to end of line without yanking."
     :motion evil-end-of-line-or-visual-line
     (evil-change beg end type ?_ yank-handler #'evil-delete-line))
+  (advice-add #'evil-change-line :override #'evil-change-line-no-yank)
 
+  ;; evil s key
   (evil-define-operator evil-substitute-no-yank (beg end type register yank-handler)
     "Substitute without yanking."
     :motion evil-forward-char
     (evil-change beg end type ?_ yank-handler))
+  (advice-add #'evil-substitute :override #'evil-substitute-no-yank)
 
+  ;; evil S key
   (evil-define-operator evil-substitute-whole-line-no-yank (beg end type register yank-handler)
     "Change whole line without yanking."
     :motion evil-line-or-visual-line
     ;; (evil-change beg end type register yank-handler #'evil-delete-whole-line)
-    (evil-change beg end type ?_ yank-handler #'evil-delete-whole-line)
-    )
+    (evil-change beg end type ?_ yank-handler #'evil-delete-whole-line))
+  (advice-add #'evil-substitute-whole-line :override #'evil-substitute-whole-line-no-yank)
 
+  ;; evil d key
   (evil-define-operator evil-delete-no-yank (beg end type register yank-handler)
     "Delete text from BEG to END with TYPE.
 Save in REGISTER or in the kill-ring with YANK-HANDLER."
@@ -161,7 +172,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    "wH" 'kumo-window-horizontally-selected
    "wt" 'delete-window
    "wo" 'delete-other-windows
-   "wb" 'balance-windows
+   "wb" 'kumo-current-buffer-bottom-window
    "vo" 'vterm-other-window
    "vv" 'vterm
    "vn" 'kumo-new-vterm
@@ -179,14 +190,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    "L" 'mwim-end-of-code-or-line
    "f" 'avy-goto-char-in-line
    "gb" 'pop-tag-mark
-   "c" 'evil-change-no-yank
-   "C" 'evil-change-line-no-yank
-   "x" 'evil-delete-char-no-yank
-   "X" 'evil-delete-backward-char-no-yank
-   "s" 'evil-substitute-no-yank
-   "S" 'evil-substitute-whole-line-no-yank
    ))
-
 
 
 (provide 'init-evil)

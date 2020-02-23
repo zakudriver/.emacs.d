@@ -1,3 +1,6 @@
+;;; Code:
+
+
 ;; Dos2Unix/Unix2Dos
 (defun dos2unix ()
   "Convert the current buffer to UNIX file format."
@@ -266,15 +269,21 @@ Including indent-buffer, which should not be called automatically on save."
     (vterm)))
 
 
-(defun kumo-bottom-window (bufname)
+(defun kumo-bottom-window (buffer)
   "Open a bottom window."
   (display-buffer-in-side-window
-   bufname
+   buffer
    '((side . bottom)
      (dedicated . t)
      (reusable-frames . visible)
-     (window-height . 0.3)
-     )))
+     (window-height . 0.3))))
+
+
+(defun kumo-current-buffer-bottom-window ()
+  "Current buffer display on then bottom window."
+  (interactive)
+  (delete-window)
+  (kumo-bottom-window (window-buffer)))
 
 
 (defun kumo-open-dashboard ()
