@@ -33,16 +33,6 @@
         ("M-k" . vterm-send-up)
         ("M-p" . vterm-send-down))
   :config
-  (defun kumo-check-vterm-window-live ()
-    (catch 'break
-      (dolist (i (window-list))
-        (let ((name (buffer-name (window-buffer i))))
-          (when (string-match-p "vterm" name)
-            ;; (delete-window name)
-            (throw 'break i)
-            ))))
-    )
-
   (advice-add #'vterm :override #'(lambda ()
                                     "Toggle vterm or create a new vterm."
                                     (interactive)
