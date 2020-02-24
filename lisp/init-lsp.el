@@ -35,6 +35,7 @@
     (lsp-ui-doc-use-webkit nil)
     (lsp-ui-doc-delay 0.2)
     ;; lsp-ui-flycheck
+
     (lsp-ui-flycheck-enable t)
     ;; lsp-ui-sideline
     (lsp-ui-sideline-enable t)
@@ -89,6 +90,7 @@
       (when (boundp 'aw-ignored-buffers)
         (push 'lsp-treemacs-symbols-mode aw-ignored-buffers))))
   )
+
 
 ;; C/C++/Objective-C support
 (use-package ccls
