@@ -21,15 +21,6 @@
    ("p" . ibuffer-jump-to-buffer))
   :custom
   (ibuffer-filter-group-name-face '(:inherit (font-lock-string-face bold)))
-  (ibuffer-formats `((mark modified read-only (locked)
-                           ;; Here you may adjust by replacing :right with :center or :left
-                           ;; According to taste, if you want the icon further from the name
-                           " " (icon 2 2 :left :elide)
-                           ,(propertize " " 'display `(space :align-to 8))
-                           (name 30 40 :left :elide)
-                           " " (size 9 -1 :right)
-                           " " (mode 20 20 :left :elide) " " filename-and-process)
-                     (mark " " (name 16 -1) " " filename)))
   :config
   (with-eval-after-load 'counsel
     (advice-add #'ibuffer-find-file :override #'(lambda ()
@@ -42,24 +33,26 @@
                                                     (counsel-find-file default-directory))
                                                   )))
 
+  (use-package all-the-icons-ibuffer
+    :custom
+    (all-the-icons-ibuffer-mode t))
+
   ;; Group ibuffer's list by project root
   (use-package ibuffer-projectile
     :functions all-the-icons-octicon ibuffer-do-sort-by-alphabetic
     :hook
-    (ibuffer-mode . (lambda ()
-                      (ibuffer-projectile-set-filter-groups)
-                      (unless (eq ibuffer-sorting-mode 'alphabetic)
-                        (ibuffer-do-sort-by-alphabetic))))
+    (ibuffer . (lambda ()
+                 (ibuffer-projectile-set-filter-groups)
+                 (unless (eq ibuffer-sorting-mode 'alphabetic)
+                   (ibuffer-do-sort-by-alphabetic))))
     :custom
     (ibuffer-projectile-prefix
-     (if (display-graphic-p)
-         (concat
-          (all-the-icons-octicon "file-directory"
-                                 :face ibuffer-filter-group-name-face
-                                 :v-adjust -0.05
-                                 :height 1.25)
-          " ")
-       "Project: ")))
+     (concat
+      (all-the-icons-octicon "file-directory"
+                             :face ibuffer-filter-group-name-face
+                             :v-adjust -0.05
+                             :height 1.25)
+      " ")))
   )
 
 

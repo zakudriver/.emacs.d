@@ -22,10 +22,8 @@
                      (lambda ()
                        (toggle-frame-fullscreen)
                        ))))
-
-  ;; 非Mac平台直接全屏
-  (require 'fullscreen)
-  (fullscreen))
+  ;; 非Mac平台直接最大化
+  (toggle-frame-maximized))
 
 
 ;; Quickly switch windows

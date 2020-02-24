@@ -5,9 +5,11 @@
   (require 'init-const)
   (require 'init-custom))
 
+
 ;; Font
 (set-face-attribute 'default nil :height (if sys/macp 130 110))
-(set-face-attribute 'default nil :font "Menlo")
+(when sys/macp
+  (set-face-attribute 'default nil :font "Menlo"))
 (setq-default line-spacing 0.3
               fill-column 80)
 
