@@ -40,13 +40,13 @@
   :diminish undo-tree-mode
   :hook
   (after-init . global-undo-tree-mode)
+  (web-mode . undo-tree-mode)
   :bind
   (:map undo-tree-map
         ("C-/" . nil)))
 
 
 (use-package expand-region
-  :ensure t
   :bind ("C-=" . er/expand-region))
 
 
@@ -57,13 +57,6 @@
   ([remap comment-dwim] . comment-dwim-2))
 
 
-;; Automatic parenthesis pairing
-;; (use-package smartparens
-;;   :ensure t
-;;   :init (smartparens-global-mode t)
-;;   :config
-;;   (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
-;;   (sp-local-pair 'lisp-interaction-mode "'" nil :actions nil))
 (use-package elec-pair
   :ensure nil
   :hook
@@ -88,7 +81,6 @@
 
 ;; Move to the beginning/end of line or code
 (use-package mwim)
-
 
 
 (provide 'init-edit)

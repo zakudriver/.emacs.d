@@ -51,14 +51,6 @@
     :custom
     (amx-history-length 20))
 
-  ;; Better sorting and filtering
-  (use-package prescient
-    :commands prescient-persist-mode
-    :custom
-    (prescient-filter-method '(literal regexp initialism fuzzy))
-    :init
-    (prescient-persist-mode t))
-
   ;; Integrate yasnippet
   (use-package ivy-yasnippet
     :commands ivy-yasnippet--preview
@@ -67,10 +59,18 @@
     :config
     (advice-add #'ivy-yasnippet--preview :override #'ignore))
 
+  ;; Better sorting and filtering
+  (use-package prescient
+    :commands prescient-persist-mode
+    :hook
+    (after-init . prescient-persist-mode)
+    :custom
+    (prescient-filter-method '(literal regexp initialism fuzzy)))
+
   (use-package ivy-prescient
     :commands ivy-prescient-re-builder
-    :custom-face
-    (ivy-minibuffer-match-face-1 ((t (:inherit font-lock-doc-face :foreground nil))))
+    :hook
+    (ivy-mode . ivy-prescient-mode)
     :custom
     (ivy-prescient-retain-classic-highlighting t)
     (ivy-re-builders-alist
@@ -97,16 +97,13 @@
       "Generate an Ivy-formatted non-fuzzy regexp list for the given STR.
 This is for use in `ivy-re-builders-alist'."
       (let ((prescient-filter-method '(literal regexp)))
-        (ivy-prescient-re-builder str)))
-
-    (ivy-prescient-mode t))
-  )
+        (ivy-prescient-re-builder str)))))
 
 
 ;; Better experience with icons
 (use-package all-the-icons-ivy-rich
-  :custom
-  (all-the-icons-ivy-rich-mode t))
+  :hook
+  (ivy-mode . all-the-icons-ivy-rich-mode))
 
 
 (use-package ivy-rich

@@ -34,8 +34,8 @@
                                                   )))
 
   (use-package all-the-icons-ibuffer
-    :custom
-    (all-the-icons-ibuffer-mode t))
+    :hook
+    (ibuffer-mode . all-the-icons-ibuffer-mode))
 
   ;; Group ibuffer's list by project root
   (use-package ibuffer-projectile

@@ -50,7 +50,8 @@
   (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
   (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
   (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1)))
-(if (fboundp 'blink-cursor-mode) (blink-cursor-mode -1))
+(when (fboundp 'blink-cursor-mode)
+  (blink-cursor-mode -1))
 
 
 ;; (defvar after-load-theme-hook nil
@@ -59,9 +60,8 @@
 ;;   "Run `after-load-theme-hook'."
 ;;   (run-hooks 'after-load-theme-hook))
 
-;;;;;;;;;;;;;;;;
+
 ;; Color Theme
-;;;;;;;;;;;;;;;;
 (defun set-default-theme ()
   "Write and return default-theme."
   (progn
@@ -139,15 +139,6 @@
 (bind-change-theme-keymap)
 
 
-(use-package smooth-scrolling
-  :hook
-  (after-init . smooth-scrolling-mode)
-  :custom
-  (smooth-scroll-margin 0)
-  (scroll-conservatively 100000)
-  (scroll-preserve-screen-position 1))
-
-
 ;; Misc
 (fset 'yes-or-no-p 'y-or-n-p)
 (size-indication-mode t)
@@ -166,11 +157,8 @@
   (setq x-gtk-use-system-tooltips nil))
 
 
-;;;;;;;;;;;;;;;;
 ;; icons
-;;;;;;;;;;;;;;;;
 (use-package all-the-icons
-  :if (display-graphic-p)
   :init
   (unless (or sys/win32p (member "all-the-icons" (font-family-list)))
     (all-the-icons-install-fonts t))

@@ -4,7 +4,6 @@
 ;; treemacs
 (use-package treemacs
   :diminish treemacs-mode
-  :ensure t
   :defer
   :bind
   (:map treemacs-mode-map
@@ -23,7 +22,6 @@
   (treemacs-is-never-other-window t)
   (treemacs-silent-filewatch t)
   (treemacs-silent-refresh t)
-  ;; (treemacs-no-png-images t)
   (treemacs-width 30)
   :config
   (treemacs-follow-mode t)
@@ -36,10 +34,6 @@
      (treemacs-git-mode 'deferred))
     (`(t . _)
      (treemacs-git-mode 'simple)))
-
-  ;; (use-package treemacs-evil
-  ;;   :ensure t
-  ;;   :after treemacs evil)
 
   (use-package treemacs-projectile
     :after projectile

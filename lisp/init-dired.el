@@ -48,8 +48,8 @@
 
   ;; Colourful dired
   (use-package diredfl
-    :init
-    (diredfl-global-mode t))
+    :hook
+    (dired-mode . diredfl-global-mode))
 
   ;; Extra Dired functionality
   (use-package dired-aux

@@ -1,5 +1,6 @@
 ;;; Code:
 
+
 (use-package yasnippet
   :diminish yas-minor-mode
   :hook
