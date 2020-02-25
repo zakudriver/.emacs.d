@@ -1,3 +1,6 @@
+;;; Code:
+
+
 (defconst sys/win32p
   (eq system-type 'windows-nt)
   "Are we running on a WinTel system?")

@@ -194,7 +194,8 @@ Including indent-buffer, which should not be called automatically on save."
   "Wrap selected text by input symbol."
   (interactive "r \nsPlease input symbol: ")
   (let ((map-list '(("''" . "'")
-                    ("\"\"" . "\""))))
+                    ("\"\"" . "\"")
+                    ("``" . "`"))))
     (cl-loop for (i . j) in map-list
              do (when (string= symbol i)
                   (setq symbol j))))

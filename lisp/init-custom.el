@@ -43,6 +43,23 @@
   "Theme list.")
 
 
+(defconst kumo/font
+  (if sys/macp
+      "Menlo"
+    "Anonymous Pro")
+  "Font.")
+
+
+(defconst kumo/font-size
+  (if sys/macp 130 105)
+  "Font size.")
+
+
+(defconst kumo/font-weight
+  'bold
+  "Font weight.")
+
+
 (defconst kumo/env-path
   (if (file-exists-p kumo/env-path-file)
       (split-string (with-temp-buffer
@@ -51,6 +68,17 @@
     (write-region "" nil kumo/env-path-file)
     nil)
   "ENV_PATH list.")
+
+
+(defconst kumo/ccls-initialization-options
+  (if sys/macp
+      '(:clang
+        (:extraArgs ["-isystem/Library/Developer/CommandLineTools/usr/include/c++/v1"
+                     "-isystem/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include"
+                     "-isystem/usr/local/include"]
+                    :resourceDir "/Library/Developer/CommandLineTools/usr/lib/clang/11.0.0"))
+    nil)
+  "CCLS initialization options.")
 
 
 (provide 'init-custom)

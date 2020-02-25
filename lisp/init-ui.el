@@ -7,9 +7,9 @@
 
 
 ;; Font
-(set-face-attribute 'default nil :height (if sys/macp 130 110))
-(when sys/macp
-  (set-face-attribute 'default nil :font "Menlo"))
+(set-face-attribute 'default nil :font kumo/font)
+(set-face-attribute 'default nil :height kumo/font-size)
+(set-face-attribute 'default nil :weight kumo/font-weight)
 (setq-default line-spacing 0.3
               fill-column 80)
 
@@ -68,13 +68,13 @@
     (write-region (symbol-name kumo/default-theme) nil kumo/theme-setting-cache) kumo/default-theme))
 
 (defun theme-is-existing (target)
-  "Check the theme is exists"
+  "Check the theme is exists."
   (cl-loop for i in kumo/theme
            when (eq (nth 1 i) target)
            return t))
 
 (defun read-theme-cache ()
-  "Read theme from theme cache"
+  "Read theme from theme cache."
   (if (file-exists-p kumo/theme-setting-cache)
       (let ((theme
              (intern (with-temp-buffer (insert-file-contents kumo/theme-setting-cache) (buffer-string))))) 

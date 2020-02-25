@@ -1,6 +1,10 @@
 ;;; Code
 
 
+(eval-when-compile
+  (require 'init-custom))
+
+
 ;; Emacs client for the Language Server Protocol
 (use-package lsp-mode
   :ensure t
@@ -102,13 +106,8 @@
   :custom
   (lsp-prefer-flymake nil)
   (flycheck-disabled-checkers '(c/c++-clang c/c++-cppcheck c/c++-gcc))
-  (ccls-initialization-options
-   '(:clang (:extraArgs ["-isystem/Library/Developer/CommandLineTools/usr/include/c++/v1"
-                         "-isystem/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include"
-                         "-isystem/usr/local/include"]
-                        :resourceDir "/Library/Developer/CommandLineTools/usr/lib/clang/11.0.0")))
+  (ccls-initialization-options kumo/ccls-initialization-options)
   :config
-  ;; (setq-default flycheck-disabled-checkers '(c/c++-clang c/c++-cppcheck c/c++-gcc))
   (with-eval-after-load 'projectile
     (setq projectile-project-root-files-top-down-recurring
           (append '("compile_commands.json"

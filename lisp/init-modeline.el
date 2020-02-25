@@ -223,8 +223,8 @@
                       :overline nil
                       :underline nil
                       :background (face-background 'default))
-  (setq x-underline-at-descent-line t)
-  (setq auto-revert-check-vc-info t))
+  (setq x-underline-at-descent-line t
+        auto-revert-check-vc-info t))
 
 
 ;; set modeline style

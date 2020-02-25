@@ -20,17 +20,16 @@
 
   ;; Use the faster searcher to handle project files: ripgrep `rg'.
   (setq projectile-generic-command
-          (let ((rg-cmd ""))
-            (dolist (dir projectile-globally-ignored-directories)
-              (setq rg-cmd (format "%s --glob '!%s'" rg-cmd dir)))
-            (concat "rg -0 --files --color=never --hidden" rg-cmd)))
+        (let ((rg-cmd ""))
+          (dolist (dir projectile-globally-ignored-directories)
+            (setq rg-cmd (format "%s --glob '!%s'" rg-cmd dir)))
+          (concat "rg -0 --files --color=never --hidden" rg-cmd)))
 
   ;; Faster searching on Windows
   (when sys/win32p
     (when (or (executable-find "fd") (executable-find "rg"))
       (setq projectile-indexing-method 'alien
             projectile-enable-caching nil))
-
     (setq projectile-git-submodule-command nil))
 
   ;; Support Perforce project
