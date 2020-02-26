@@ -26,7 +26,7 @@
   ((typescript-mode js2-mode) . tide-setup)
   ((typescript-mode js2-mode) . tide-hl-identifier-mode)
   (web-mode . (lambda ()
-                (when (string= "tsx" (file-name-extension buffer-file-name))
+                (when (member (file-name-extension buffer-file-name) '("tsx" "jsx"))
                   (tide-setup)
                   (tide-hl-identifier-mode))))
   :bind

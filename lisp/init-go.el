@@ -105,6 +105,10 @@
 
   ;; Local Golang playground for short snippets
   (use-package go-playground)
+
+  (use-package flycheck-golangci-lint
+    :hook
+    (go-mode . flycheck-golangci-lint-setup))
   )
 
 
