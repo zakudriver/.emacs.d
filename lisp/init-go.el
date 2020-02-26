@@ -88,10 +88,12 @@
   (use-package go-impl)
 
   (use-package go-eldoc
-    :hook (go-mode . go-eldoc-setup))
+    :hook
+    (go-mode . go-eldoc-setup))
 
   (use-package go-guru
-    :hook (go-mode . go-guru-hl-identifier-mode))
+    :hook
+    (go-mode . go-guru-hl-identifier-mode))
 
   (use-package go-tag
     :bind
@@ -102,10 +104,8 @@
     (go-tag-args (list "-transform" "camelcase")))
 
   ;; Local Golang playground for short snippets
-  (use-package go-playground
-    :diminish)
+  (use-package go-playground)
   )
-
 
 
 (provide 'init-go)

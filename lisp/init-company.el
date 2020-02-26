@@ -3,8 +3,6 @@
 
 (use-package company
   :diminish
-  :defines
-  (company-dabbrev-ignore-case company-dabbrev-downcase)
   :commands company-abort
   :bind
   (("M-/" . company-complete)
@@ -13,7 +11,7 @@
    ("C-p" . company-select-previous)
    ("C-n" . company-select-next)
    ("<tab>" . company-complete-common-or-cycle)
-   ("<backtab>" . kumo-company-yasnippet)
+   ("<backtab>" . only-company-yasnippet)
    :map company-search-map
    ("C-p" . company-select-previous)
    ("C-n" . company-select-next))
@@ -26,12 +24,16 @@
   (company-echo-delay (if (display-graphic-p) nil 0))
   (company-minimum-prefix-length 2)
   (company-require-match nil)
-  (company-dabbrev-ignore-case nil)
-  (company-dabbrev-downcase nil)
   (company-global-modes '(not message-mode help-mode shell-mode))
   (company-backends '(company-capf))
   (company-frontends '(company-pseudo-tooltip-frontend company-echo-metadata-frontend))
   :config
+  (defun only-company-yasnippet ()
+    "Hide the current completeions and show snippets."
+    (interactive)
+    (company-abort)
+    (call-interactively 'company-yasnippet))
+
   ;; Better sorting and filtering
   (use-package company-prescient
     :hook

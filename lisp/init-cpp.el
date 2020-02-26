@@ -31,7 +31,6 @@
 
 
 (use-package flycheck-irony
-  :defer t
   :hook
   (flycheck-mode . flycheck-irony-setup)
   (c++-mode . (lambda ()
@@ -41,21 +40,18 @@
 
 ;;; C/C++ headers completion
 (use-package company-c-headers
-  :defer t
   :hook
   (c++-mode . (lambda () (add-to-list 'company-backends 'company-c-headers))))
 
 
 ;;; backends for irony
 (use-package company-irony
-  :defer t
   :hook
   (c++-mode . (lambda () (add-to-list 'company-backends 'company-irony))))
 
 
 ;;; backends for irony-c-header
 (use-package company-irony-c-headers
-  :defer t
   :hook
   (c++-mode . (lambda () (add-to-list 'company-backends 'company-irony-c-headers))))
 

@@ -3,8 +3,6 @@
 
 ;; treemacs
 (use-package treemacs
-  :diminish treemacs-mode
-  :defer
   :bind
   (:map treemacs-mode-map
         ("M-o" . treemacs-visit-node-no-split)

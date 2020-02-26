@@ -11,6 +11,9 @@
   (org-catch-invisible-edits 'show)
   (org-fast-tag-selection-single-key 'expert)
   (org-tags-column 80)
+  (org-startup-with-inline-images t)
+  (org-image-actual-width nil)
+  (org-src-fontify-natively t)
   (org-todo-keywords
    '((sequence "TODO(t)" "DOING(i)" "HANGUP(h)" "|" "DONE(d)" "CANCEL(c)")
      (sequence "⚑(T)" "🏴(I)" "❓(H)" "|" "✔(D)" "✘(C)")))
@@ -39,6 +42,12 @@
     (:map org-agenda-mode-map
           ("P" . org-pomodoro)))
   )
+
+
+;; (use-package evil-org
+;;   :after org
+;;   :hook
+;;   (org-mode . evil-org-mode))
 
 
 (provide 'init-org)

@@ -51,14 +51,6 @@
     :custom
     (amx-history-length 20))
 
-  ;; Integrate yasnippet
-  (use-package ivy-yasnippet
-    :commands ivy-yasnippet--preview
-    :bind
-    ("C-c C-y" . ivy-yasnippet)
-    :config
-    (advice-add #'ivy-yasnippet--preview :override #'ignore))
-
   ;; Better sorting and filtering
   (use-package prescient
     :commands prescient-persist-mode

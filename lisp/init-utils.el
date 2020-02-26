@@ -22,7 +22,8 @@
     (delete-other-windows)))
 
 
-(use-package docker)
+(use-package docker
+  :commands docker)
 
 
 (use-package vterm
