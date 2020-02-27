@@ -142,8 +142,6 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    "Q" 'kill-emacs
    "j" 'avy-goto-line-below
    "k" 'avy-goto-line-above
-   "R" 'kumo-rename-current-buffer-file
-   "D" 'kumo-delete-current-buffer-file
    "ts" 'treemacs-select-window
    "tt" 'treemacs
    "p" 'projectile-command-map
@@ -158,6 +156,8 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    "ba" 'kumo-kill-all-buffers
    "bp" 'kumo-switch-to-previous-buffer
    "bn" 'kumo-new-temp-buffer
+   "bR" 'kumo-rename-current-buffer-file
+   "bD" 'kumo-delete-current-buffer-file
    "oo" 'org-switchb
    "oa" 'org-agenda
    "cc" 'kumo-flycheck-list-errors-toggle
@@ -179,7 +179,6 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    "vs" 'kumo-vterm-select-window
    "gs" 'magit-status
    "gd" 'magit-dispatch
-   ;; "gp" 'magit-process-buffer
    )
 
   (general-define-key

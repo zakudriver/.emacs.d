@@ -6,8 +6,10 @@
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 
+
 ;; linum-mode
 (global-linum-mode t)
+
 
 ;; Miscs
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets  ; Show path if names are same
@@ -16,15 +18,26 @@
       delete-by-moving-to-trash t    ; Deleting files go to OS's trash folder
       make-backup-files nil          ; Forbide to make backup files
       set-mark-command-repeat-pop t  ; Repeating C-SPC after popping mark pops it again
-      auto-save-default nil)
+      auto-save-default nil
+      prettify-symbols-unprettify-at-point 'right-edg)
 
 
-;; Tab and Space
 ;; Permanently indent with spaces, never with TABs
 (setq-default tab-width 2
               c-basic-offset 2
               indent-tabs-mode nil
               major-mode 'text-mode)
+
+
+;; prettify-symbols
+(use-package prog-mode
+  :ensure nil
+  :hook
+  (prog-mode . prettify-symbols-mode)
+  :custom
+  (prettify-symbols-unprettify-at-point 'right-edge)
+  :init
+  (setq-default prettify-symbols-alist kumo/prettify-symbols-alist))
 
 
 ;; Automatically reload files was modified by external program

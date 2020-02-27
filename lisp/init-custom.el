@@ -22,8 +22,8 @@
 (defconst kumo/theme '((monokai-theme monokai)
                        (dracula-theme dracula)
                        (lab-themes lab-dark)
+                       (doom-themes doom-one-light)
                        (doom-themes doom-vibrant)
-                       (doom-themes doom-city-lights)
                        (doom-themes doom-nord)
                        (doom-themes doom-palenight)
                        (doom-themes doom-tomorrow-night)
@@ -35,7 +35,10 @@
                        (doom-themes doom-solarized-light)
                        (cyberpunk-theme cyberpunk)
                        (snazzy-theme snazzy)
-                       (atom-one-dark-theme atom-one-dark))
+                       (atom-one-dark-theme atom-one-dark)
+                       (spacemacs-theme spacemacs-light)
+                       (spacemacs-theme spacemacs-dark)
+                       (zenburn-theme zenburn))
   "Theme list.")
 
 
@@ -75,6 +78,28 @@
                     :resourceDir "/Library/Developer/CommandLineTools/usr/lib/clang/11.0.0"))
     nil)
   "CCLS initialization options.")
+
+
+(defconst kumo/prettify-symbols-alist
+  '(("lambda" . ?λ)
+    ("<-" . ?←)
+    ("->" . ?→)
+    ("->>" . ?↠)
+    ("=>" . ?⇒)
+    ("map" . ?↦)
+    ("/=" . ?≠)
+    ("!=" . ?≠)
+    ("==" . ?≡)
+    ("<=" . ?≤)
+    (">=" . ?≥)
+    ("=<<" . (?= (Br . Bl) ?≪))
+    (">>=" . (?≫ (Br . Bl) ?=))
+    ("<=<" . ?↢)
+    (">=>" . ?↣)
+    ("&&" . ?∧)
+    ("||" . ?∨)
+    ("not" . ?¬))
+  "Alist of symbol prettifications.")
 
 
 (provide 'init-custom)

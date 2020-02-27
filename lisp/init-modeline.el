@@ -196,7 +196,7 @@
                           (propertize "%02l" 'face 'font-lock-type-face) ","
                           (propertize "%02c" 'face 'font-lock-type-face)
 
-                          "   "
+                          "  "
                           ;; vc-mode
                           '(:eval (modeline-vc-branch))
                           ))

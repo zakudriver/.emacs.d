@@ -1,19 +1,22 @@
 ;;; Code:
 
 
-
 (use-package org
+  :bind
+  (:map org-mode-map
+        ("C-c l" . font-lock-mode))
   :custom
   (org-startup-indented t)
+  (org-startup-with-inline-images t)
   (org-log-done t)
   (org-edit-timestamp-down-means-later t)
   (org-hide-emphasis-markers t)
   (org-catch-invisible-edits 'show)
   (org-fast-tag-selection-single-key 'expert)
   (org-tags-column 80)
-  (org-startup-with-inline-images t)
   (org-image-actual-width nil)
   (org-src-fontify-natively t)
+  (org-list-allow-alphabetical t)
   (org-todo-keywords
    '((sequence "TODO(t)" "DOING(i)" "HANGUP(h)" "|" "DONE(d)" "CANCEL(c)")
      (sequence "⚑(T)" "🏴(I)" "❓(H)" "|" "✔(D)" "✘(C)")))
