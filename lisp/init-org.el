@@ -53,18 +53,20 @@
 ;;   (org-mode . evil-org-mode))
 
 
-(defvar org-load-language-list '((emacs-lisp . t)))
+(defvar org-load-language-list '((emacs-lisp . t)
+                                 (css . t)
+                                 (sass . t)
+                                 (go . t)
+                                 (typescript . t)))
 
 (org-babel-do-load-languages 'org-babel-load-languages
                              org-load-language-list)
 
 
-(use-package ob-go
-  :init (cl-pushnew '(go . t) org-load-language-list))
+(use-package ob-go)
 
 
-(use-package ob-typescript
-  :init (cl-pushnew '(typescript . t) org-load-language-list))
+(use-package ob-typescript)
 
 
 

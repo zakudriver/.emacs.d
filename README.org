@@ -1,8 +1,8 @@
 * emacs.d
 
- /_This is kumo's emacs configuration._/
+ /This is kumo's emacs configuration./
 
-** Supported languages / framework
+*supported languages / framework*
 
 - typescript
 - angular
