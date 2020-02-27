@@ -53,6 +53,28 @@
 ;;   (org-mode . evil-org-mode))
 
 
+(defvar org-load-language-list '((emacs-lisp . t)))
+
+(org-babel-do-load-languages 'org-babel-load-languages
+                             org-load-language-list)
+
+
+(use-package ob-go
+  :init (cl-pushnew '(go . t) org-load-language-list))
+
+
+(use-package ob-typescript
+  :init (cl-pushnew '(typescript . t) org-load-language-list))
+
+
+
+(use-package org-download
+  :hook
+  (dired-mode . org-download-enable)
+  :custom
+  (org-download-image-dir "./img"))
+
+
 (provide 'init-org)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
