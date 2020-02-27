@@ -87,8 +87,8 @@ Repeated invocations toggle between the two most recently open buffers."
           (set-visited-file-name new-name)
           (set-buffer-modified-p nil)
           (message "File '%s' successfully rename to '%s'"
-                   name new-name))))))
-;; TODO
+                   name (file-name-nondirectory new-name)))))))
+
 
 (defun kumo-delete-current-buffer-file ()
   "Removes file connected to current buffer and kill buffer."
