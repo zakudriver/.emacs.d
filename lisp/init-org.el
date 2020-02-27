@@ -69,7 +69,6 @@
 (use-package ob-typescript)
 
 
-
 (use-package org-download
   :hook
   (dired-mode . org-download-enable)

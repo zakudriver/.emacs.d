@@ -327,6 +327,12 @@ Including indent-buffer, which should not be called automatically on save."
          (number-to-string (/ (string-to-number regionp) (float n)))))))
 
 
+(defun kumo-timestamp ()
+  "Timestamp.
+eg: 2020-02-22T22:22:22."
+  (interactive)
+  (insert (format-time-string "%Y-%m-%dT%H:%M:%S")))
+
 
 (provide 'init-funcs)
 
