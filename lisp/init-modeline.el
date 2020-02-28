@@ -11,8 +11,9 @@
   :init
   (nyan-mode t)
   :custom
-  (nyan-animate-nyancat nil)
-  (nyan-wavy-trail nil))
+  (nyan-animate-nyancat t)
+  (nyan-wavy-trail nil)
+  (nyan-animation-frame-interval 0.4))
 
 
 (setq evil-normal-state-tag   (propertize "<𝙽>" 'face 'font-lock-preprocessor-face)

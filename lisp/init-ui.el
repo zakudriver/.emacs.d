@@ -14,6 +14,16 @@
               fill-column 80)
 
 
+;; emoji
+(use-package emojify
+  :hook
+  (after-init . (lambda ()
+                  (when sys/linuxp
+                    (global-emojify-mode)))))
+(when sys/macp
+  (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") nil 'prepend))
+
+
 ;;;;;;;;;;;;;;;;
 ;; Dashboard
 ;;;;;;;;;;;;;;;;
@@ -157,12 +167,6 @@
   (setq x-gtk-use-system-tooltips nil))
 
 
-;; emoji
-(use-package emojify
-  :hook
-  (after-init . (lambda ()
-                  (when sys/linuxp
-                    (global-emojify-mode)))))
 
 
 ;; icons
