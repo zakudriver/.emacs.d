@@ -14,7 +14,7 @@
               fill-column 80)
 
 
-;; emoji
+;; Emoji
 (use-package emojify
   :hook
   (after-init . (lambda ()
@@ -24,9 +24,7 @@
   (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") nil 'prepend))
 
 
-;;;;;;;;;;;;;;;;
 ;; Dashboard
-;;;;;;;;;;;;;;;;
 (use-package dashboard
   :custom
   (dashboard-banner-logo-title (concat "Happy hacking, " user-login-name " - Emacs ♥ you!"))
