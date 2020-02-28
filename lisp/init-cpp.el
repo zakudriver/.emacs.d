@@ -9,7 +9,7 @@
 
 (use-package clang-format
   :bind
-  (:map c-mode-base-map
+  (:map c++-mode-map
         ("C-x f" . clang-format-buffer))
   :custom
   (clang-format-style-option "llvm")

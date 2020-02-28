@@ -157,6 +157,14 @@
   (setq x-gtk-use-system-tooltips nil))
 
 
+;; emoji
+(use-package emojify
+  :hook
+  (after-init . (lambda ()
+                  (when sys/linuxp
+                    (global-emojify-mode)))))
+
+
 ;; icons
 (use-package all-the-icons
   :init

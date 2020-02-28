@@ -22,10 +22,10 @@
   "Username.")
 
 (defconst kumo/symbol-list '(
-                    ("(" . ")")
-                    ("[" . "]")
-                    ("{" . "}")
-                    ("<" . ">"))
+                             ("(" . ")")
+                             ("[" . "]")
+                             ("{" . "}")
+                             ("<" . ">"))
   "Symbols for wrap.")
 
 (defconst kumo/theme-setting-cache

@@ -32,8 +32,9 @@
 
   (use-package org-bullets
     :hook
-    (org-mode . org-bullets-mode))
-
+    (org-mode . org-bullets-mode)
+    :custom
+    (org-bullets-bullet-list '("🍔" "🍟" "🍕" "🌭")))
 
   (use-package org-pomodoro
     :custom-face
