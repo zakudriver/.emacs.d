@@ -247,14 +247,12 @@ Including indent-buffer, which should not be called automatically on save."
 (defun kumo-vterm-select-window ()
   "Select window for vterm."
   (interactive)
-
   (catch 'break
     (dolist (i (window-list))
       (let ((name (buffer-name (window-buffer i))))
         (when (string-match-p "vterm" name)
           (select-window (get-buffer-window name))
-          (throw 'break nil)
-          )))
+          (throw 'break nil))))
     ))
 
 
@@ -265,8 +263,7 @@ Including indent-buffer, which should not be called automatically on save."
       (let ((buffer (generate-new-buffer "vterm")))
         (with-current-buffer (buffer-name buffer)
           (vterm-mode))
-        (kumo-bottom-window buffer)
-        )
+        (kumo-bottom-window buffer))
     (vterm)))
 
 
@@ -332,6 +329,12 @@ Including indent-buffer, which should not be called automatically on save."
 eg: 2020-02-22T22:22:22."
   (interactive)
   (insert (format-time-string "%Y-%m-%dT%H:%M:%S")))
+
+
+(defun kumo-select-minibuffer-window ()
+  "Select minibuffer window."
+  (interactive)
+  (select-window (active-minibuffer-window)))
 
 
 (provide 'init-funcs)

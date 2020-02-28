@@ -173,10 +173,13 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    "wt" 'delete-window
    "wo" 'delete-other-windows
    "wb" 'kumo-current-buffer-bottom-window
+   "ws" 'kumo-select-minibuffer-window
    "vo" 'vterm-other-window
    "vv" 'vterm
-   "vn" 'kumo-new-vterm
+   "vN" 'kumo-new-vterm
    "vs" 'kumo-vterm-select-window
+   "vp" 'kumo-vterm-previous
+   "vn" 'kumo-vterm-next
    "gs" 'magit-status
    "gd" 'magit-dispatch
    )

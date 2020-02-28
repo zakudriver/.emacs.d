@@ -54,6 +54,7 @@
 
 
 (defvar org-load-language-list '((emacs-lisp . t)
+                                 (shell . t)
                                  (css . t)
                                  (sass . t)
                                  (go . t)

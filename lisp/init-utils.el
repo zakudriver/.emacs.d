@@ -63,10 +63,47 @@
                                           (vterm-mode))
                                         (kumo-bottom-window buffer)
                                         )
-                                      ))
-              )
-  )
+                                      )))
 
+  (defvar kumo/vterm-buffer-list nil
+    "Vterm buffer list.")
+
+  (defun vterm-exit-hook()
+    "Vterm exit hook."
+    (when (derived-mode-p 'vterm-mode)
+      (setq kumo/vterm-buffer-list
+	          (delq (current-buffer) kumo/vterm-buffer-list))))
+  (add-hook 'kill-buffer-hook #'vterm-exit-hook)
+
+  (defun vterm-mode-hook()
+    "Hook for `vterm-mode-hook'."
+    (add-to-list 'kumo/vterm-buffer-list (current-buffer)))
+  (add-hook 'vterm-mode-hook #'vterm-mode-hook)
+
+  (defun kumo-vterm-switch (direction offset)
+    (if kumo/vterm-buffer-list
+        (let ((len (length kumo/vterm-buffer-list))
+	            (index (cl-position (current-buffer) kumo/vterm-buffer-list)))
+	        (if index
+	            (let ((target-index (if (eq direction 'previous)
+				                              (mod (+ index offset) len)
+				                            (mod (- index offset) len))))
+	              (switch-to-buffer (nth target-index kumo/vterm-buffer-list)))
+	          (switch-to-buffer (car kumo/vterm-buffer-list))))
+      nil))
+
+  (defun kumo-vterm-previous (&optional offset)
+    "Go to the previous term buffer.
+If OFFSET is `non-nil', will goto next term buffer with OFFSET."
+    (interactive "P")
+    (kumo-vterm-switch 'previous (or offset 1)))
+
+  (defun kumo-vterm-next (&optional offset)
+    "Go to the next term buffer.
+If OFFSET is `non-nil', will goto next term buffer with OFFSET."
+    (interactive "P")
+    (kumo-vterm-switch 'next (or offset 1)))
+  )
 
 (provide 'init-utils)
 
