@@ -16,8 +16,9 @@
   (define-key evil-visual-state-map (kbd "d") 'evil-delete)
   ;; redefine evil operator
   (evil-define-key 'insert global-map (kbd "DEL") 'hungry-delete-backward)
+  (evil-define-key 'insert global-map (kbd "<C-backspace>") 'evil-delete-backward-char-and-join)
   (evil-define-key 'visual global-map (kbd "z") 'kumo-wrap-with-input)
-
+  
   ;; evil x key
   (evil-define-operator evil-delete-char-no-yank (beg end type register yank-handler)
     "Delete next character without yanking."

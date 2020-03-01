@@ -34,7 +34,7 @@
     :hook
     (org-mode . org-bullets-mode)
     :custom
-    (org-bullets-bullet-list '("🍔" "🍟" "🍕" "🌭")))
+    (org-bullets-bullet-list '("🌞" "🌤" "⛈" "🌈")))
 
   (use-package org-pomodoro
     :custom-face
@@ -46,12 +46,6 @@
     (:map org-agenda-mode-map
           ("P" . org-pomodoro)))
   )
-
-
-;; (use-package evil-org
-;;   :after org
-;;   :hook
-;;   (org-mode . evil-org-mode))
 
 
 (use-package org-download

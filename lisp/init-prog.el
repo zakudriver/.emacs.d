@@ -15,9 +15,7 @@
   :mode
   (("\\.proto$" . protobuf-mode)))
 
-(use-package yaml-mode
-  :mode
-  ("\\.yml$" . bazel-mode))
+(use-package yaml-mode)
 
 
 (provide 'init-prog)

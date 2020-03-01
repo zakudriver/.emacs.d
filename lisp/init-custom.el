@@ -44,6 +44,7 @@
 
 (defconst kumo/font
   (if sys/macp
+      ;; "Roboto Mono"
       "Menlo"
     "Anonymous Pro")
   "Font.")
