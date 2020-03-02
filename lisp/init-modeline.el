@@ -168,7 +168,7 @@
                          ;; modeline padding.
                          (propertize " "
                                      'display '(height 1.4))
-                         (propertize " " 'display '(raise -0.7))
+                         (propertize " " 'display '(raise -0.6))
                          "  "
                          
                          ;; nayan cat

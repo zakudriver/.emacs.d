@@ -43,7 +43,11 @@
 
 
 (defconst kumo/font-list
-  '(Menlo Roboto\ Mono Anonymous\ Pro)
+  '(
+    Menlo
+    Roboto\ Mono
+    Anonymous\ Pro
+    )
   "Font list.")
 
 
