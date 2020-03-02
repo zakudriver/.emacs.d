@@ -2,6 +2,7 @@
 
 
 (eval-when-compile
+
   (require 'init-const)
   (require 'init-custom))
 
@@ -22,7 +23,7 @@
   "Check the font is exists and system font is exists.
 TARGET is a symbol."
   (cl-loop for i in kumo/current-font-list
-           when (and (eq i target))
+           when (and (eq i target) (find-font (font-spec :name (symbol-name target))))
            return t))
 
 
@@ -77,14 +78,19 @@ FONT is a symbol."
 
 
 ;; create interactive font function
-(font-func-macro-factory)
+(when kumo/current-font-list
+  (font-func-macro-factory))
+
 
 ;; init default font
 (when kumo/current-font
   (funcall kumo/current-font))
 
+
 ;; bind change font keymap
-(bind-change-font-keymap)
+(when kumo/current-font-list
+  (bind-change-font-keymap))
+
 
 (set-face-attribute 'default nil :height kumo/font-size)
 (set-face-attribute 'default nil :weight kumo/font-weight)
