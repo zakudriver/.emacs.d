@@ -268,7 +268,8 @@ Including indent-buffer, which should not be called automatically on save."
 
 
 (defun kumo-bottom-window (buffer)
-  "Open a bottom window."
+  "Open a bottom window.
+BUFFER is the symbol."
   (display-buffer-in-side-window
    buffer
    '((side . bottom)

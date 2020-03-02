@@ -19,35 +19,32 @@
 (defconst kumo/default-theme 'monokai)
 
 
-(defconst kumo/theme '((monokai-theme monokai)
-                       (dracula-theme dracula)
-                       (lab-themes lab-dark)
-                       (doom-themes doom-one-light)
-                       (doom-themes doom-vibrant)
-                       (doom-themes doom-nord)
-                       (doom-themes doom-palenight)
-                       (doom-themes doom-tomorrow-night)
-                       (doom-themes doom-spacegrey)
-                       (doom-themes doom-fairy-floss)
-                       (doom-themes doom-challenger-deep)
-                       (doom-themes doom-sourcerer)
-                       (doom-themes doom-solarized-dark)
-                       (doom-themes doom-solarized-light)
-                       (cyberpunk-theme cyberpunk)
-                       (snazzy-theme snazzy)
-                       (atom-one-dark-theme atom-one-dark)
-                       (spacemacs-theme spacemacs-light)
-                       (spacemacs-theme spacemacs-dark)
-                       (zenburn-theme zenburn))
+(defconst kumo/theme-list '((monokai-theme monokai)
+                            (dracula-theme dracula)
+                            (lab-themes lab-dark)
+                            (doom-themes doom-one-light)
+                            (doom-themes doom-vibrant)
+                            (doom-themes doom-nord)
+                            (doom-themes doom-palenight)
+                            (doom-themes doom-tomorrow-night)
+                            (doom-themes doom-spacegrey)
+                            (doom-themes doom-fairy-floss)
+                            (doom-themes doom-challenger-deep)
+                            (doom-themes doom-sourcerer)
+                            (doom-themes doom-solarized-dark)
+                            (doom-themes doom-solarized-light)
+                            (cyberpunk-theme cyberpunk)
+                            (snazzy-theme snazzy)
+                            (atom-one-dark-theme atom-one-dark)
+                            (spacemacs-theme spacemacs-light)
+                            (spacemacs-theme spacemacs-dark)
+                            (zenburn-theme zenburn))
   "Theme list.")
 
 
-(defconst kumo/font
-  (if sys/macp
-      ;; "Roboto Mono"
-      "Menlo"
-    "Anonymous Pro")
-  "Font.")
+(defconst kumo/font-list
+  '(Menlo Roboto\ Mono Anonymous\ Pro)
+  "Font list.")
 
 
 (defconst kumo/font-size

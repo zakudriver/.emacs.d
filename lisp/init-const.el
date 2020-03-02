@@ -32,6 +32,12 @@
   "~/.emacs.d/.theme"
   "Theme setting cache.")
 
+
+(defconst kumo/font-setting-cache
+  "~/.emacs.d/.font"
+  "Font setting cache.")
+
+
 (defconst kumo/env-path-file
   "~/.emacs.d/.PATH"
   "Env path file.")
@@ -41,7 +47,8 @@
 
 (defconst kumo/flycheck-errors-buffer-name "*Flycheck errors*")
 
-(defconst kumo/dashboard-position 8)
+(defconst kumo/dashboard-position 8
+  "Dashboard position.")
 
 
 (provide 'init-const)

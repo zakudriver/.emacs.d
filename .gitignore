@@ -60,6 +60,7 @@ README.html
 .dap-*
 /.extension
 .theme
+.font
 /transient
 /irony
 .PATH
