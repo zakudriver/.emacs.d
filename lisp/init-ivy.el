@@ -92,7 +92,7 @@ This is for use in `ivy-re-builders-alist'."
         (ivy-prescient-re-builder str)))))
 
 
-;; Better experience with icons
+;; ivy icons
 (use-package all-the-icons-ivy-rich
   :hook
   (ivy-mode . all-the-icons-ivy-rich-mode))

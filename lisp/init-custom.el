@@ -37,8 +37,7 @@
                             (snazzy-theme snazzy)
                             (atom-one-dark-theme atom-one-dark)
                             (spacemacs-theme spacemacs-light)
-                            (spacemacs-theme spacemacs-dark)
-                            (zenburn-theme zenburn))
+                            (spacemacs-theme spacemacs-dark))
   "Theme list.")
 
 
