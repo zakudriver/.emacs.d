@@ -88,8 +88,8 @@
 	            (let ((target-index (if (eq direction 'previous)
 				                              (mod (+ index offset) len)
 				                            (mod (- index offset) len))))
-	              (switch-to-buffer (nth target-index kumo/vterm-buffer-list)))
-	          (switch-to-buffer (car kumo/vterm-buffer-list))))
+	              (switch-to-buffer (nth target-index kumo/vterm-buffer-list) nil t))
+	          (switch-to-buffer (car kumo/vterm-buffer-list) nil t)))
       nil))
 
   (defun kumo-vterm-previous (&optional offset)

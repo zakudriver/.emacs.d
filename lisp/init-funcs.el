@@ -298,14 +298,14 @@ BUFFER is the symbol."
                  (goto-line kumo/dashboard-position))))
 
 
-(defun kumo-tab-indent-all ()
-  "Mark whole buffer and tab."
+(defun kumo-indent-all ()
+  "Mark whole buffer."
   (interactive)
   (let ((point (point)))
     (mark-whole-buffer)
     (indent-for-tab-command)
     (goto-char point)))
-(global-set-key (kbd "<C-tab>") 'kumo-tab-indent-all)
+(global-set-key (kbd "<C-tab>") 'kumo-indent-all)
 
 
 (defun kumo-home-path-resolve (path)

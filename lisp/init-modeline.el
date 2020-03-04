@@ -8,10 +8,10 @@
 
 ;; nyan-mode
 (use-package nyan-mode
-  :init
-  (nyan-mode t)
+  :hook
+  (after-init . nyan-mode)
   :custom
-  (nyan-animate-nyancat t)
+  (nyan-animate-nyancat nil)
   (nyan-wavy-trail nil)
   (nyan-animation-frame-interval 0.4))
 
@@ -169,20 +169,20 @@
                          (propertize " "
                                      'display '(height 1.4))
                          (propertize " " 'display '(raise -0.6))
-                         "  "
+                         " "
                          
                          ;; nayan cat
                          '(:eval (nyan-create))
-                         "     "
+                         "    "
                          
                          ;; the current major mode for the buffer.
                          (propertize "%m"
                                      'face '(font-lock-string-face (:weight bold))
                                      'help-echo buffer-file-coding-system)
-                         "      "
+                         "     "
                          modeline-flycheck
 
-                         "      "
+                         "     "
                          ;; git info
                          ;; (propertize ,`(vc-mode vc-mode) 'face 'font-lock-keyword-face)
                          (propertize

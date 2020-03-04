@@ -174,7 +174,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    "wt" 'delete-window
    "wo" 'delete-other-windows
    "wb" 'kumo-current-buffer-bottom-window
-   "ws" 'kumo-select-minibuffer-window
+   "wm" 'kumo-select-minibuffer-window
    "vo" 'vterm-other-window
    "vv" 'vterm
    "vN" 'kumo-new-vterm

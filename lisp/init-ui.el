@@ -111,6 +111,9 @@ FONT is a symbol."
 
 ;; Dashboard
 (use-package dashboard
+  :bind
+  (:map dashboard-mode-map
+        ("C-x g" . dashboard-refresh-buffer))
   :custom
   (dashboard-banner-logo-title (concat "Happy hacking, " user-login-name " - Emacs ♥ you!"))
   (dashboard-set-file-icons t)
@@ -119,9 +122,10 @@ FONT is a symbol."
   (dashboard-center-content t)
   (dashboard-show-shortcuts nil)
   (dashboard-items '((recents  . 10)
-                     (projects . 10)))
+                     (projects . 10)
+                     (bookmarks . 5)))
   (dashboard-set-footer nil)
-  (dashboard-set-init-info t)
+  ;; (dashboard-set-init-info t)
   :init
   ;; init jump to (kumo/dashboard-position) line
   (add-hook 'emacs-startup-hook '(lambda ()
