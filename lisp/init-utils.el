@@ -32,7 +32,7 @@
         ("M-p" . vterm-send-prior)
         ("M-n" . vterm-send-next)
         ("M-k" . vterm-send-up)
-        ("M-p" . vterm-send-down))
+        ("M-j" . vterm-send-down))
   :config
   (advice-add #'vterm :override #'(lambda ()
                                     "Toggle vterm or create a new vterm."

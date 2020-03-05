@@ -62,9 +62,10 @@
 
   (use-package lsp-ivy
     :after lsp-mode
-    :bind (:map lsp-mode-map
-                ([remap xref-find-apropos] . lsp-ivy-workspace-symbol)
-                ("C-s-." . lsp-ivy-global-workspace-symbol)))
+    :bind
+    (:map lsp-mode-map
+          ([remap xref-find-apropos] . lsp-ivy-workspace-symbol)
+          ("C-s-." . lsp-ivy-global-workspace-symbol)))
 
   (use-package company-lsp
     :custom
@@ -72,23 +73,26 @@
 
   ;; dap
   (use-package dap-mode
-    :bind (:map lsp-mode-map
-                ("<f5>" . dap-debug)
-                ("M-<f5>" . dap-hydra))
     :hook
-    (go-mode . (require 'dap-go))
+    (lsp-mode . dap-mode)
+    :bind
+    (:map lsp-mode-map
+          ("<f5>" . dap-debug)
+          ("M-<f5>" . dap-hydra))
     :init
     (require 'dap-hydra)
+    (require 'dap-go)
     :config
     (use-package dap-ui
       :ensure nil
-      :config
-      (dap-ui-mode t)))
+      :hook
+      (dap-mode . dap-ui-mode)))
 
   (use-package lsp-treemacs
-    :bind (:map lsp-mode-map
-                ("C-<f8>" . lsp-treemacs-errors-list)
-                ("M-<f8>" . lsp-treemacs-symbols))
+    :bind
+    (:map lsp-mode-map
+          ("C-<f8>" . lsp-treemacs-errors-list)
+          ("M-<f8>" . lsp-treemacs-symbols))
     :config
     (with-eval-after-load 'ace-window
       (when (boundp 'aw-ignored-buffers)
