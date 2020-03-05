@@ -81,21 +81,21 @@
   "CCLS initialization options.")
 
 
-(defconst kumo/prettify-symbols-alist
-  '(("lambda" . ?λ)
-    ("<-" . ?←)
-    ("->" . ?→)
-    ("->>" . ?↠)
-    ("=>" . ?⇒)
-    ("map" . ?↦)
-    ("/=" . ?≠)
-    ("!=" . ?≠)
-    ("==" . ?≡)
-    ("<=" . ?≤)
-    (">=" . ?≥)
-    ("<=<" . ?↢)
-    (">=>" . ?↣))
-  "Alist of symbol prettifications.")
+;; (defconst kumo/prettify-symbols-alist
+;;   '(("lambda" . ?λ)
+;;     ("<-" . ?←)
+;;     ("->" . ?→)
+;;     ("->>" . ?↠)
+;;     ("=>" . ?⇒)
+;;     ("map" . ?↦)
+;;     ("/=" . ?≠)
+;;     ("!=" . ?≠)
+;;     ("==" . ?≡)
+;;     ("<=" . ?≤)
+;;     (">=" . ?≥)
+;;     ("<=<" . ?↢)
+;;     (">=>" . ?↣))
+;;   "Alist of symbol prettifications.")
 
 
 (provide 'init-custom)
