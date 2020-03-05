@@ -91,8 +91,8 @@
   (use-package lsp-treemacs
     :bind
     (:map lsp-mode-map
-          ("C-<f8>" . lsp-treemacs-errors-list)
-          ("M-<f8>" . lsp-treemacs-symbols))
+          ("M-l" . lsp-treemacs-errors-list)
+          ("M-s" . lsp-treemacs-symbols))
     :config
     (with-eval-after-load 'ace-window
       (when (boundp 'aw-ignored-buffers)

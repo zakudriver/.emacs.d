@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: switch-assert
+# key: switch
+# --
+
+switch $1 := $2.(type) {
+  case $3:
+    $4
+  default:
+    $5
+}

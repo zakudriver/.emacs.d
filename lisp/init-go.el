@@ -25,6 +25,8 @@
   (gofmt-command "goimports")
   :hook
   (before-save . gofmt-before-save)
+  :init
+  (setenv "GO111MODULE" "on")
   :config
   (use-package company-go
     :after company
@@ -107,6 +109,7 @@
   (use-package go-playground)
 
   (use-package flycheck-golangci-lint
+    :after flycheck
     :hook
     (go-mode . flycheck-golangci-lint-setup))
   )
