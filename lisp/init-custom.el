@@ -48,7 +48,11 @@
   '(Menlo
     Roboto\ Mono
     Anonymous\ Pro
-    FantasqueSansMono)
+    FantasqueSansMono
+    FiraMono
+    Operator\ Mono
+    Inconsolata
+    )
   "Font list.")
 
 
