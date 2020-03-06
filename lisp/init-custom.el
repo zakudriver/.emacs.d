@@ -37,7 +37,10 @@
                             (snazzy-theme snazzy)
                             (atom-one-dark-theme atom-one-dark)
                             (spacemacs-theme spacemacs-light)
-                            (spacemacs-theme spacemacs-dark))
+                            (spacemacs-theme spacemacs-dark)
+                            (afternoon-theme afternoon)
+                            (gruvbox-theme gruvbox-dark-soft)
+                            (gruvbox-theme gruvbox-light-soft))
   "Theme list.")
 
 
@@ -46,6 +49,8 @@
     Menlo
     Roboto\ Mono
     Anonymous\ Pro
+    FantasqueSansMono
+    FiraMono
     )
   "Font list.")
 
