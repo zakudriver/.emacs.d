@@ -50,6 +50,7 @@
     Anonymous\ Pro
     FantasqueSansMono
     FiraMono
+    Fira\ Code
     Operator\ Mono
     Inconsolata
     )

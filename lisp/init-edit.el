@@ -12,7 +12,7 @@
 
 
 ;; prettify-symbols-mod
-(global-prettify-symbols-mode t)
+;; (global-prettify-symbols-mode t)
 
 
 ;; Miscs
