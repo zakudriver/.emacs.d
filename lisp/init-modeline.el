@@ -16,12 +16,12 @@
   (nyan-animation-frame-interval 0.4))
 
 
-(setq evil-normal-state-tag   (propertize "<𝙽>" 'face 'font-lock-preprocessor-face)
-      evil-emacs-state-tag    (propertize "<𝙴>" 'face 'font-lock-preprocessor-face)
-      evil-insert-state-tag   (propertize "<𝙸>" 'face 'font-lock-preprocessor-face)
-      evil-motion-state-tag   (propertize "<𝙼>" 'face 'font-lock-preprocessor-face)
-      evil-visual-state-tag   (propertize "<𝚅>" 'face 'font-lock-preprocessor-face)
-      evil-operator-state-tag (propertize "<𝙾>" 'face 'font-lock-preprocessor-face))
+;; (setq evil-normal-state-tag   (propertize "<𝙽>" 'face 'font-lock-preprocessor-face)
+;;       evil-emacs-state-tag    (propertize "<𝙴>" 'face 'font-lock-preprocessor-face)
+;;       evil-insert-state-tag   (propertize "<𝙸>" 'face 'font-lock-preprocessor-face)
+;;       evil-motion-state-tag   (propertize "<𝙼>" 'face 'font-lock-preprocessor-face)
+;;       evil-visual-state-tag   (propertize "<𝚅>" 'face 'font-lock-preprocessor-face)
+;;       evil-operator-state-tag (propertize "<𝙾>" 'face 'font-lock-preprocessor-face))
 
 
 (defun modeline-modified-p ()
@@ -187,6 +187,27 @@
                          ;; (propertize ,`(vc-mode vc-mode) 'face 'font-lock-keyword-face)
                          (propertize
                           (modeline-git-status) 'face '(font-lock-string-face (:weight bold)))
+
+
+                         ;;                (propertize " " 'display
+                         ;;                            '(image :type xpm :data "/* XPM */
+                         ;; static char * close_tab_xpm[] = {
+                         ;; \"14 11 3 1\",
+                         ;; \"       c None\",
+                         ;; \".      c #000000\",
+                         ;; \"+      c #FFFFFF\",
+                         ;; \"     .....    \",
+                         ;; \"    .......   \",
+                         ;; \"   .........  \",
+                         ;; \"  ...+...+... \",
+                         ;; \"  ....+.+.... \",
+                         ;; \"  .....+..... \",
+                         ;; \"  ....+.+.... \",
+                         ;; \"  ...+...+... \",
+                         ;; \"   .........  \",
+                         ;; \"    .......   \",
+                         ;; \"     .....    \"};" :ascent center :mask (heuristic t) :margin 0))
+
                          ))
          (modeline-right (list
                           (modeline-fill (if sys/macp 12 16))
@@ -236,3 +257,71 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-modeline.el ends here
+
+;; (setq-default mode-line-format
+;;               '(:eval
+;;                 (list
+;;                  (propertize " " 'display
+;;                              '(image :type xpm :data "/* XPM */
+;;           static char * close_tab_xpm[] = {
+;;           \"20 11 3 1\",
+;;           \"       c None\",
+;;           \".      c #000000\",
+;;           \"+      c #FFFFFF\",
+;;           \"     .....          \",
+;;           \"    .......         \",
+;;           \"   .........        \",
+;;           \"  ...+...+...       \",
+;;           \"  ....+.+....       \",
+;;           \"  .....+.....       \",
+;;           \"  ....+.+....       \",
+;;           \"  ...+...+...       \",
+;;           \"   .........        \",
+;;           \"    .......         \",
+;;           \"     .....          \"};"
+;;                                      :mask (heuristic t) :margin 0))
+;;                  )
+;;                 )
+;;               )
+
+(defvar moody--cache nil)
+
+(defcustom moody-mode-line-height
+  (let ((font (face-font 'mode-line)))
+    (if font
+        (ceiling (* (if (< emacs-major-version 27) 2 1.5)
+                    (aref (font-info font) 2)))
+      30))
+  "When using `moody', height of the mode line in pixels.
+This should be an even number."
+  :type 'integer
+  :group 'mode-line)
+
+
+(defun moody-slant (direction c1 c2 c3 &optional height)
+  (unless height
+    (setq height moody-mode-line-height))
+  (unless (cl-evenp height)
+    (cl-incf height))
+  (let ((key (list direction c1 c2 c3 height)))
+    (or (cdr (assoc key moody--cache))
+        (let* ((width (/ height 2))
+               (image
+                (create-image
+                 (format "/* XPM */ static char * image[] = {
+ \"%s %s 3 1\",\n \"0 c %s\",\n \"1 c %s\",\n \"2 c %s\",%s\n};"
+                         width height c1 c2 c3
+                         (cl-loop
+                          for i from 1 to height concat
+                          (format " \"%s\",\n"
+                                  (let* ((x (/ i 2))
+                                         (a (make-string x ?0))
+                                         (b (make-string 1 ?1))
+                                         (c (make-string
+                                             (max 0 (- width x)) ?2)))
+                                    (if (eq direction 'down)
+                                        (concat a b c)
+                                      (concat c b a))))))
+                 'xpm t :ascent 'center)))
+          (push (cons key image) moody--cache)
+          image))))
