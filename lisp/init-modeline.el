@@ -6,6 +6,104 @@
   (require 'init-custom))
 
 
+(defvar modeline--cache nil)
+
+
+(defun modeline-slant (direction c1 c2 c3)
+  (let ((key (list direction c1 c2 c3 kumo/modeline-height)))
+    (or (cdr (assoc key modeline--cache))
+        (let* ((width (/ kumo/modeline-height 2))
+               (image
+                (create-image
+                 (format "/* XPM */ static char * image[] = {
+ \"%s %s 3 1\",\n \"0 c %s\",\n \"1 c %s\",\n \"2 c %s\",%s\n};"
+                         width kumo/modeline-height c1 c2 c3
+                         (cl-loop
+                          for i from 1 to kumo/modeline-height concat
+                          (format " \"%s\",\n"
+                                  (let* ((x (/ i 2))
+                                         (a (make-string x ?0))
+                                         (b (make-string 1 ?1))
+                                         (c (make-string
+                                             (max 0 (- width x)) ?2)))
+                                    (if (eq direction 'down)
+                                        (concat a b c)
+                                      (concat c b a))))))
+                 'xpm t :ascent 'center)))
+          (push (cons key image) modeline--cache)
+          image))))
+
+
+;;; Active Window
+(defvar modeline--active-window (selected-window))
+
+
+(defun modeline-window-active-p ()
+  "Return t if the selected window is the active window.
+Or put differently, return t if the possibly only temporarily
+selected window is still going to be selected when we return
+to the command loop."
+  (if (fboundp 'old-selected-window)
+      (or (eq (selected-window)
+              (old-selected-window))
+          (and (not (zerop (minibuffer-depth)))
+	             (eq (selected-window)
+	                 (with-selected-window (minibuffer-window)
+	                   (minibuffer-selected-window)))))
+    (eq (selected-window) modeline--active-window)))
+
+
+(defun modeline-wrap (string &optional width direction type line-position)
+  (unless direction
+    (setq direction 'down))
+  (let* ((base  (if (modeline-window-active-p) 'mode-line 'mode-line-inactive))
+         (outer (face-attribute base :background))
+         ;; (line  (face-attribute base :underline))
+         (line (face-attribute base :background))
+         (line (if (listp line) (plist-get line :color) line))
+         (line (if (eq line 'unspecified) outer line))
+         (inner (face-attribute 'default :background))
+         (slant (if (eq direction 'down)
+                    (list outer line inner)
+                  (list inner line outer)))
+         (face (if (eq line-position 'top)
+                   (list :overline line
+                         :underline nil
+                         :background inner)
+                 (list :overline nil
+                       :underline line
+                       :background inner)))
+         (pad (max (- (or width 0) (length string)) 2)))
+
+    (unless line-position
+      (setq face
+            (list :overline line
+                  :underline line
+                  :background inner)))
+    (setq string
+          (concat (make-string (ceiling pad 2) ?\s)
+                  (substring string 0)
+                  (make-string (floor pad 2) ?\s)))
+    (add-face-text-property 0 (length string) face nil string)
+    (list
+     (propertize " " 'face face 'display
+                 (apply 'modeline-slant
+                        (if (eq direction 'down) 'down 'up)
+                        slant))
+     string
+     (if type
+         (propertize " " 'face face 'display
+                     (apply 'modeline-slant
+                            (if (eq direction 'down) 'down 'up)
+                            (if (eq direction 'down)
+                                (list inner line outer)
+                              (list outer line inner))))
+       (propertize " " 'face face 'display
+                   (apply 'modeline-slant
+                          (if (eq direction 'down) 'up 'down) slant)))
+     )))
+
+
 ;; nyan-mode
 (use-package nyan-mode
   :hook
@@ -14,14 +112,6 @@
   (nyan-animate-nyancat nil)
   (nyan-wavy-trail nil)
   (nyan-animation-frame-interval 0.4))
-
-
-;; (setq evil-normal-state-tag   (propertize "<𝙽>" 'face 'font-lock-preprocessor-face)
-;;       evil-emacs-state-tag    (propertize "<𝙴>" 'face 'font-lock-preprocessor-face)
-;;       evil-insert-state-tag   (propertize "<𝙸>" 'face 'font-lock-preprocessor-face)
-;;       evil-motion-state-tag   (propertize "<𝙼>" 'face 'font-lock-preprocessor-face)
-;;       evil-visual-state-tag   (propertize "<𝚅>" 'face 'font-lock-preprocessor-face)
-;;       evil-operator-state-tag (propertize "<𝙾>" 'face 'font-lock-preprocessor-face))
 
 
 (defun modeline-modified-p ()
@@ -69,25 +159,29 @@
 
 
 ;; flycheck
-(defvar modeline-flycheck
-  '(:eval
-    (pcase flycheck-last-status-change
-      (`not-checked nil)
-      (`no-checker (propertize " -" 'face 'warning))
-      (`running (propertize " ✷" 'face 'success))
-      (`errored (propertize " !" 'face 'error))
-      (`finished
-       (let* ((error-counts (flycheck-count-errors flycheck-current-errors))
-              (no-errors (cdr (assq 'error error-counts)))
-              (no-warnings (cdr (assq 'warning error-counts)))
-              (face (cond (no-errors 'error)
-                          (no-warnings 'warning)
-                          (t 'success))))
+(defun modeline-flycheck ()
+  "Modeline flycheck."
+  (when flycheck-last-status-change
+    (modeline-wrap
+     (pcase flycheck-last-status-change
+       (`not-checked nil)
+       ;; (`no-checker (propertize " -" 'face 'warning))
+       ;; (`running (propertize " ✷" 'face 'success))
+       ;; (`errored (propertize " !" 'face 'error))
+       (`finished
+        (let* ((error-counts (flycheck-count-errors flycheck-current-errors))
+               (no-errors (cdr (assq 'error error-counts)))
+               (no-warnings (cdr (assq 'warning error-counts)))
+               (face (cond (no-errors 'error)
+                           (no-warnings 'warning)
+                           (t 'success))))
 
-         (propertize (format " † %s ‡ %s " (or no-warnings 0) (or no-errors 0))
-                     'face `(,face (:weight bold)))))
-      (`interrupted " -")
-      (`suspicious '(propertize " ?" 'face 'warning)))))
+          (propertize (format " † %s ‡ %s " (or no-warnings 0) (or no-errors 0))
+                      'face `(,face (:weight bold)))))
+       ;; (`interrupted " -")
+       ;; (`suspicious '(propertize " ?" 'face 'warning))
+       )
+     10 'up)))
 
 
 ;; vc-mode
@@ -108,7 +202,6 @@
   "Git status."
   (let ((U 0)   ; untracked files
         (M 0)   ; modified files
-
         (O 0)   ; other files
         (U-files "")
         (M-files "")
@@ -166,54 +259,32 @@
                          '(:eval evil-mode-line-tag)
 
                          ;; modeline padding.
-                         (propertize " "
-                                     'display '(height 1.4))
-                         (propertize " " 'display '(raise -0.6))
-                         " "
-                         
-                         ;; nayan cat
-                         '(:eval (nyan-create))
-                         "    "
-                         
-                         ;; the current major mode for the buffer.
-                         (propertize "%m"
-                                     'face '(font-lock-string-face (:weight bold))
-                                     'help-echo buffer-file-coding-system)
-                         "     "
-                         modeline-flycheck
+                         ;; (propertize " "
+                         ;;             'display '(height 1.4))
+                         ;; (propertize " " 'display '(raise -0.6))
 
-                         "     "
+
+                         (modeline-wrap
+                          (propertize "%m" 'face '(font-lock-string-face (:weight bold)))
+                          10 'down nil 'bottom)
+                         
+                         '(:eval (nyan-create))
+
+                         '(:eval (modeline-flycheck))
+
                          ;; git info
                          ;; (propertize ,`(vc-mode vc-mode) 'face 'font-lock-keyword-face)
                          (propertize
                           (modeline-git-status) 'face '(font-lock-string-face (:weight bold)))
-
-
-                         ;;                (propertize " " 'display
-                         ;;                            '(image :type xpm :data "/* XPM */
-                         ;; static char * close_tab_xpm[] = {
-                         ;; \"14 11 3 1\",
-                         ;; \"       c None\",
-                         ;; \".      c #000000\",
-                         ;; \"+      c #FFFFFF\",
-                         ;; \"     .....    \",
-                         ;; \"    .......   \",
-                         ;; \"   .........  \",
-                         ;; \"  ...+...+... \",
-                         ;; \"  ....+.+.... \",
-                         ;; \"  .....+..... \",
-                         ;; \"  ....+.+.... \",
-                         ;; \"  ...+...+... \",
-                         ;; \"   .........  \",
-                         ;; \"    .......   \",
-                         ;; \"     .....    \"};" :ascent center :mask (heuristic t) :margin 0))
-
                          ))
          (modeline-right (list
-                          (modeline-fill (if sys/macp 12 16))
+                          ;; (modeline-fill (if sys/macp 12 16))
+                          (modeline-wrap (modeline-fill (if sys/macp 12 16)) 0 'up t)
+
                           ;; global-mode-string goes in mode-line-misc-info
                           ;; mode-line-misc-info
                           
+                          " "
                           ;; line and column
                           (propertize "%02l" 'face 'font-lock-type-face) ","
                           (propertize "%02c" 'face 'font-lock-type-face)
@@ -239,14 +310,22 @@
                       :family "SF Pro Text"
                       :height 100
                       :overline nil
-                      :underline nil)
+                      :underline nil
+                      :background (face-attribute 'mode-line :background)
+                      :box nil
+                      )
   (set-face-attribute 'mode-line-inactive  nil
                       :height 90
                       :overline nil
                       :underline nil
-                      :background (face-background 'default))
-  (setq x-underline-at-descent-line t
-        auto-revert-check-vc-info t))
+                      :background (face-background 'default)
+                      :box nil
+                      ))
+
+
+(setq x-underline-at-descent-line t
+      auto-revert-check-vc-info t
+      ns-use-srgb-colorspace nil)
 
 
 ;; set modeline style
@@ -257,71 +336,3 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-modeline.el ends here
-
-;; (setq-default mode-line-format
-;;               '(:eval
-;;                 (list
-;;                  (propertize " " 'display
-;;                              '(image :type xpm :data "/* XPM */
-;;           static char * close_tab_xpm[] = {
-;;           \"20 11 3 1\",
-;;           \"       c None\",
-;;           \".      c #000000\",
-;;           \"+      c #FFFFFF\",
-;;           \"     .....          \",
-;;           \"    .......         \",
-;;           \"   .........        \",
-;;           \"  ...+...+...       \",
-;;           \"  ....+.+....       \",
-;;           \"  .....+.....       \",
-;;           \"  ....+.+....       \",
-;;           \"  ...+...+...       \",
-;;           \"   .........        \",
-;;           \"    .......         \",
-;;           \"     .....          \"};"
-;;                                      :mask (heuristic t) :margin 0))
-;;                  )
-;;                 )
-;;               )
-
-(defvar moody--cache nil)
-
-(defcustom moody-mode-line-height
-  (let ((font (face-font 'mode-line)))
-    (if font
-        (ceiling (* (if (< emacs-major-version 27) 2 1.5)
-                    (aref (font-info font) 2)))
-      30))
-  "When using `moody', height of the mode line in pixels.
-This should be an even number."
-  :type 'integer
-  :group 'mode-line)
-
-
-(defun moody-slant (direction c1 c2 c3 &optional height)
-  (unless height
-    (setq height moody-mode-line-height))
-  (unless (cl-evenp height)
-    (cl-incf height))
-  (let ((key (list direction c1 c2 c3 height)))
-    (or (cdr (assoc key moody--cache))
-        (let* ((width (/ height 2))
-               (image
-                (create-image
-                 (format "/* XPM */ static char * image[] = {
- \"%s %s 3 1\",\n \"0 c %s\",\n \"1 c %s\",\n \"2 c %s\",%s\n};"
-                         width height c1 c2 c3
-                         (cl-loop
-                          for i from 1 to height concat
-                          (format " \"%s\",\n"
-                                  (let* ((x (/ i 2))
-                                         (a (make-string x ?0))
-                                         (b (make-string 1 ?1))
-                                         (c (make-string
-                                             (max 0 (- width x)) ?2)))
-                                    (if (eq direction 'down)
-                                        (concat a b c)
-                                      (concat c b a))))))
-                 'xpm t :ascent 'center)))
-          (push (cons key image) moody--cache)
-          image))))

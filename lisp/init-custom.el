@@ -88,6 +88,10 @@
   "CCLS initialization options.")
 
 
+(defconst kumo/modeline-height 25
+  "Modeline height.")
+
+
 ;; (defconst kumo/prettify-symbols-alist
 ;;   '(("lambda" . ?λ)
 ;;     ("<-" . ?←)
