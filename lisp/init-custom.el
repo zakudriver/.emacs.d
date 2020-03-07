@@ -58,12 +58,12 @@
 
 
 (defconst kumo/font-size
-  (if sys/macp 130 105)
+  (if sys/macp 135 105)
   "Font size.")
 
 
 (defconst kumo/font-weight
-  'bold
+  'normal
   "Font weight.")
 
 
