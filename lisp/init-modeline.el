@@ -194,14 +194,12 @@ to the command loop."
 ;; vc-mode
 (defun modeline-vc-branch ()
   "Git branch."
-  (if vc-mode
-      (let* ((noback (replace-regexp-in-string (format "^ %s" (vc-backend buffer-file-name)) " " vc-mode))
-             (face (cond ((string-match "^ -" noback) 'mode-line-vc)
-                         ((string-match "^ [:@]" noback) 'mode-line-vc-edit)
-                         ((string-match "^ [!\\?]" noback) 'mode-line-vc-modified))))
-        (format " %s" (substring noback 2))))
-  ;; (let ((backend (vc-backend buffer-file-name)))
-  ;;   (substring vc-mode (+ (if (eq backend 'Hg) 2 3) 2)))
+  (when vc-mode
+    (let* ((noback (replace-regexp-in-string (format "^ %s" (vc-backend buffer-file-name)) " " vc-mode))
+           (face (cond ((string-match "^ -" noback) 'mode-line-vc)
+                       ((string-match "^ [:@]" noback) 'mode-line-vc-edit)
+                       ((string-match "^ [!\\?]" noback) 'mode-line-vc-modified))))
+      (substring noback 2)))
   )
 
 
@@ -261,16 +259,11 @@ to the command loop."
                          ;; size
                          (propertize "%I" 'face 'font-lock-constant-face)
                          "    "
-                         
+
                          ;; evil state
                          '(:eval evil-mode-line-tag)
 
-                         ;; modeline padding.
-                         ;; (propertize " "
-                         ;;             'display '(height 1.4))
-                         ;; (propertize " " 'display '(raise -0.6))
-
-
+                         ;; major mode
                          (modeline-wrap
                           (propertize "%m" 'face '(font-lock-string-face (:weight bold)))
                           10 'down nil 'bottom)
@@ -280,13 +273,11 @@ to the command loop."
                          '(:eval (modeline-flycheck))
 
                          ;; git info
-                         ;; (propertize ,`(vc-mode vc-mode) 'face 'font-lock-keyword-face)
                          (propertize
                           (modeline-git-status) 'face '(font-lock-string-face (:weight bold)))
                          ))
          (modeline-right (list
-                          ;; (modeline-fill (if sys/macp 12 16))
-                          (modeline-wrap (modeline-fill (if sys/macp 12 16)) 0 'up t)
+                          (modeline-wrap (modeline-fill 14) 0 'up t)
 
                           ;; global-mode-string goes in mode-line-misc-info
                           ;; mode-line-misc-info
@@ -297,7 +288,6 @@ to the command loop."
                           (propertize "%02c" 'face 'font-lock-type-face)
 
                           "  "
-                          ;; vc-mode
                           '(:eval (modeline-vc-branch))
                           ))
 
