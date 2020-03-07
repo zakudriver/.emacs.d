@@ -161,26 +161,33 @@ to the command loop."
 ;; flycheck
 (defun modeline-flycheck ()
   "Modeline flycheck."
-  (when flycheck-last-status-change
+  (when (and flycheck-last-status-change (eq flycheck-last-status-change 'finished))
     (modeline-wrap
-     (pcase flycheck-last-status-change
-       (`not-checked nil)
-       ;; (`no-checker (propertize " -" 'face 'warning))
-       ;; (`running (propertize " ✷" 'face 'success))
-       ;; (`errored (propertize " !" 'face 'error))
-       (`finished
-        (let* ((error-counts (flycheck-count-errors flycheck-current-errors))
-               (no-errors (cdr (assq 'error error-counts)))
-               (no-warnings (cdr (assq 'warning error-counts)))
-               (face (cond (no-errors 'error)
-                           (no-warnings 'warning)
-                           (t 'success))))
-
-          (propertize (format " † %s ‡ %s " (or no-warnings 0) (or no-errors 0))
-                      'face `(,face (:weight bold)))))
-       ;; (`interrupted " -")
-       ;; (`suspicious '(propertize " ?" 'face 'warning))
-       )
+     (let* ((error-counts (flycheck-count-errors flycheck-current-errors))
+            (no-errors (cdr (assq 'error error-counts)))
+            (no-warnings (cdr (assq 'warning error-counts)))
+            (face (cond (no-errors 'error)
+                        (no-warnings 'warning)
+                        (t 'success))))
+       (propertize (format " † %s ‡ %s " (or no-warnings 0) (or no-errors 0))
+                   'face `(,face (:weight bold))))
+     ;; (pcase flycheck-last-status-change
+     ;;   (`not-checked nil)
+     ;;   (`no-checker (propertize " -" 'face 'warning))
+     ;;   (`running (propertize " ✷" 'face 'success))
+     ;;   (`errored (propertize " !" 'face 'error))
+     ;;   (`finished
+     ;;    (let* ((error-counts (flycheck-count-errors flycheck-current-errors))
+     ;;           (no-errors (cdr (assq 'error error-counts)))
+     ;;           (no-warnings (cdr (assq 'warning error-counts)))
+     ;;           (face (cond (no-errors 'error)
+     ;;                       (no-warnings 'warning)
+     ;;                       (t 'success))))
+     ;;      (propertize (format " † %s ‡ %s " (or no-warnings 0) (or no-errors 0))
+     ;;                  'face `(,face (:weight bold)))))
+     ;;   (`interrupted " -")
+     ;;   (`suspicious '(propertize " ?" 'face 'warning))
+     ;;   )
      10 'up)))
 
 
