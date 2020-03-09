@@ -22,37 +22,30 @@
   (save-buffer))
 
 
-(defun kumo-kill-this-buffer (&optional arg)
-  "Kill the current buffer.
-   If the universal prefix argument is used then kill also the window."
-  (interactive "P")
+(defun kumo-kill-this-buffer ()
+  "Kill the current buffer."
+  (interactive)
   (if (window-minibuffer-p)
       (abort-recursive-edit)
-    (if (equal '(4) arg)
-        (kill-buffer-and-window)
-      (kill-buffer))))
+    (kill-buffer-and-window))
+  (message "Buffers deleted!"))
 
 
-(defun kumo-kill-other-buffers (&optional arg)
-  "Kill other buffers.
-   If the universal prefix argument is used then will the windows too."
-  (interactive "P")
+(defun kumo-kill-other-buffers ()
+  "Kill other buffers."
+  (interactive)
   (when (yes-or-no-p (format "Killing all buffers except \"%s\"? "
                              (buffer-name)))
     (mapc 'kill-buffer
           (delq (current-buffer) (buffer-list)))
-    (when (equal '(4) arg)
-      (delete-other-windows))
     (message "Buffers deleted!")))
 
 
-(defun kumo-kill-all-buffers (&optional arg)
-  "Kill all buffers.
-   If the universal prefix argument is used then will the windows too."
-  (interactive "P")
+(defun kumo-kill-all-buffers ()
+  "Kill all buffers."
+  (interactive)
   (mapc 'kill-buffer (buffer-list))
   (kumo-open-dashboard)
-  (when (equal '(4) arg) (delete-other-windows))
   (message "Buffers deleted!"))
 
 

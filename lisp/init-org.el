@@ -45,14 +45,14 @@
     :bind
     (:map org-agenda-mode-map
           ("P" . org-pomodoro)))
+
+  (use-package org-download
+    :hook
+    (dired-mode . org-download-enable)
+    :custom
+    (org-download-image-dir "./img")
+    (org-download-backend "curl \"%s\" -o \"%s\""))
   )
-
-
-(use-package org-download
-  :hook
-  (dired-mode . org-download-enable)
-  :custom
-  (org-download-image-dir "./img"))
 
 
 (use-package ob-go)
