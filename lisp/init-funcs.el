@@ -51,6 +51,7 @@
    If the universal prefix argument is used then will the windows too."
   (interactive "P")
   (mapc 'kill-buffer (buffer-list))
+  (kumo-open-dashboard)
   (when (equal '(4) arg) (delete-other-windows))
   (message "Buffers deleted!"))
 
