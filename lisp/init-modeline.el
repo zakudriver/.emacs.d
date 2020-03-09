@@ -10,6 +10,11 @@
 
 
 (defun modeline-slant (direction c1 c2 c3)
+  "Modeline split line.
+DIRECTION is 'left or 'right.
+C1 is right color.
+C2 is line color.
+C3 is left color."
   (let ((key (list direction c1 c2 c3 kumo/modeline-height)))
     (or (cdr (assoc key modeline--cache))
         (let* ((width (/ kumo/modeline-height 2))
@@ -54,6 +59,12 @@ to the command loop."
 
 
 (defun modeline-wrap (string &optional width direction type line-position)
+  "Modeline element wrapper.
+STRING is the element.
+WIDTH is white space.
+DIRECTION is 'up or 'down.
+TYPE is a bool, direction of dip.
+LINE-POSITION is 'top or 'bottom."
   (unless direction
     (setq direction 'down))
   (let* ((base  (if (modeline-window-active-p) 'mode-line 'mode-line-inactive))

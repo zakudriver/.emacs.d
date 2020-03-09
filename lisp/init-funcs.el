@@ -309,12 +309,16 @@ BUFFER is the symbol."
 
 
 (defun kumo-home-path-resolve (path)
-  "Return $HOME + path."
+  "Return $HOME + path.
+PATH is a string."
   (concat (getenv "HOME") path))
 
 
 (defun kumo-number-division (beg end &optional num)
-  "Selected number division."
+  "Selected number division.
+BEG is begin point.
+END is end point.
+NUM is a number."
   (interactive "r\nsPlease input number: ")
   (setq num (string-to-number num))
   (if (use-region-p)

@@ -2,7 +2,6 @@
 
 
 (eval-when-compile
-
   (require 'init-const)
   (require 'init-custom))
 
@@ -18,6 +17,7 @@
                                                          t nil)
                                                      )) kumo/font-list)
   "Filter kumo/font-list by syetem fonts.")
+
 
 (defun font-is-existing (target)
   "Check the font is exists and system font is exists.
