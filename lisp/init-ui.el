@@ -7,7 +7,8 @@
 
 
 (defvar kumo/C-c-keybinds '(general-define-key
-                            :prefix "C-c"))
+                            :prefix "C-c")
+  "General <C>-<c> prefix key.")
 
 
 ;; Font
@@ -18,7 +19,6 @@
                                                      )) kumo/font-list)
   "Filter kumo/font-list by syetem fonts.")
 
-
 (defun font-is-existing (target)
   "Check the font is exists and system font is exists.
 TARGET is a symbol."
@@ -26,12 +26,10 @@ TARGET is a symbol."
            when (and (eq i target) (find-font (font-spec :name (symbol-name target))))
            return t))
 
-
 (defun set-default-font ()
   "Write and return default-font."
   (progn
     (write-region (symbol-name nil) nil kumo/font-setting-cache) nil))
-
 
 (defun read-font-cache ()
   "Read font from font cache."
@@ -43,10 +41,8 @@ TARGET is a symbol."
           (set-default-font)))
     (set-default-font)))
 
-
 ;; set current font
 (setq-default kumo/current-font (read-font-cache))
-
 
 (defun font-func-factory (font)
   "Font function factory.
@@ -55,42 +51,44 @@ FONT is a symbol."
     `(defun ,font ()
        (interactive)
        (set-face-attribute 'default nil :font ,(symbol-name font))
-       (write-region ,(symbol-name font) nil kumo/font-setting-cache)))
-  )
-
+       (write-region ,(symbol-name font) nil kumo/font-setting-cache))))
 
 (defmacro font-func-macro-factory ()
   "Font function macro factory."
   `(progn ,@(mapcar 'font-func-factory kumo/current-font-list)))
 
+(defun kumo-current-font ()
+  "Current font."
+  (interactive)
+  (message "Current font: %s" (symbol-name kumo/current-font)))
 
 (defun bind-change-font-keymap ()
   "Bind change font keymap on general."
-  (eval
-   (let ((idx 0))
-     (dolist (i kumo/current-font-list kumo/C-c-keybinds)
-       (setq kumo/C-c-keybinds
-             (append kumo/C-c-keybinds
-                     `(,(concat "F" (if (> idx 9) (nth (- idx 10) kumo/index-map) (number-to-string idx))))
-                     `((quote ,i))
-                     ))
-       (setq idx (+ idx 1))))))
+  (let ((idx 0))
+    (dolist (i kumo/current-font-list kumo/C-c-keybinds)
+      (setq kumo/C-c-keybinds
+            (append kumo/C-c-keybinds
+                    `(,(concat "F" (if (> idx 9) (nth (- idx 10) kumo/index-map) (number-to-string idx))))
+                    `((quote ,i))
+                    ))
+      (setq idx (+ idx 1)))
+
+    (setq kumo/C-c-keybinds
+          (append kumo/C-c-keybinds
+                  '("FF" 'kumo-current-font)))))
 
 
 ;; create interactive font function
 (when kumo/current-font-list
   (font-func-macro-factory))
 
-
 ;; init default font
 (when kumo/current-font
   (funcall kumo/current-font))
 
-
 ;; bind change font keymap
 (when kumo/current-font-list
   (bind-change-font-keymap))
-
 
 (set-face-attribute 'default nil :height kumo/font-size)
 (set-face-attribute 'default nil :weight kumo/font-weight)
@@ -165,13 +163,12 @@ TARGET is a symbol."
   (progn
     (write-region (symbol-name kumo/default-theme) nil kumo/theme-setting-cache) kumo/default-theme))
 
-
 (defun theme-is-existing (target)
-  "Check the theme is exists."
+  "Check the theme is exists.
+TARGET is theme mame."
   (cl-loop for i in kumo/theme-list
            when (eq (nth 1 i) target)
            return t))
-
 
 (defun read-theme-cache ()
   "Read theme from theme cache."
@@ -181,14 +178,14 @@ TARGET is a symbol."
         (if (theme-is-existing theme) theme (set-default-theme)))
     (set-default-theme)))
 
-
 ;; set current theme
 (setq-default kumo/current-theme (read-theme-cache))
 
-
-;; theme factory macro
 (defmacro theme-factory-macro (name load-name &rest config)
-  "Theme factory macro."
+  "Theme factory macro.
+NAME is theme package name.
+LOAD-NAME is theme name.
+CONFIG is theme config."
   (if name
       `(use-package ,name
          :init
@@ -199,38 +196,41 @@ TARGET is a symbol."
     `(progn
        (disable-theme kumo/current-theme)
        (load-theme (quote ,load-name) t)
-       (setq kumo/current-theme (quote ,load-name))))
-  )
-
+       (setq kumo/current-theme (quote ,load-name)))))
 
 (defun theme-func-factory (theme)
-  "Theme function factory."
+  "Theme function factory.
+THEME is '(theme-package-name theme name)."
   `(defun ,(nth 1 theme) ()
      (interactive)
      (theme-factory-macro ,@theme)
      (write-region (symbol-name (quote ,(nth 1 theme))) nil kumo/theme-setting-cache)
-     (update-modeline-format)
-     ))
-
+     (update-modeline-format)))
 
 (defmacro theme-func-macro-factory ()
   "Theme function macro factory."
   `(progn ,@(mapcar 'theme-func-factory kumo/theme-list)))
 
+(defun kumo-current-theme ()
+  "Current theme."
+  (interactive)
+  (message "Current theme: %s" (symbol-name kumo/current-theme)))
 
-;; bind theme keymap. 
 (defun bind-change-theme-keymap ()
   "Bind change theme keymap on general."
-  (eval
-   (let ((idx 0))
-     (dolist (i kumo/theme-list kumo/C-c-keybinds)
-       (setq kumo/C-c-keybinds
-             (append kumo/C-c-keybinds
-                     `(,(concat "T" (if (> idx 9) (nth (- idx 10) kumo/index-map) (number-to-string idx))))
-                     `((quote,(nth 1 i)))
-                     ))
-       (setq idx (+ idx 1))))))
+  (let ((idx 0))
+    (dolist (i kumo/theme-list kumo/C-c-keybinds)
+      (setq kumo/C-c-keybinds
+            (append kumo/C-c-keybinds
+                    `(,(concat "T" (if (> idx 9) (nth (- idx 10) kumo/index-map) (number-to-string idx))))
+                    `((quote,(nth 1 i)))
+                    ))
+      (setq idx (+ idx 1)))
 
+    (setq kumo/C-c-keybinds
+          (append kumo/C-c-keybinds
+                  '("TT" 'kumo-current-theme))))
+  )
 
 ;; create interactive theme function
 (theme-func-macro-factory)
@@ -240,6 +240,11 @@ TARGET is a symbol."
 
 ;; bind change theme keymap
 (bind-change-theme-keymap)
+
+
+;; Call Bind keymap ;;
+(eval kumo/C-c-keybinds)
+;;;;;;;;;;;;;;;;;;;;;;
 
 
 ;; Misc
