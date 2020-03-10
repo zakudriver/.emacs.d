@@ -64,7 +64,7 @@ FONT is a symbol."
 
 (defun bind-change-font-keymap ()
   "Bind change font keymap on general."
-  (let ((idx 0))
+  (let ((idx 1))
     (dolist (i kumo/current-font-list kumo/C-c-keybinds)
       (setq kumo/C-c-keybinds
             (append kumo/C-c-keybinds
@@ -75,7 +75,7 @@ FONT is a symbol."
 
     (setq kumo/C-c-keybinds
           (append kumo/C-c-keybinds
-                  '("FF" 'kumo-current-font)))))
+                  '("F0" 'kumo-current-font)))))
 
 
 ;; create interactive font function
@@ -123,7 +123,6 @@ FONT is a symbol."
                      (projects . 10)
                      (bookmarks . 5)))
   (dashboard-set-footer nil)
-  ;; (dashboard-set-init-info t)
   :init
   ;; init jump to (kumo/dashboard-position) line
   (add-hook 'emacs-startup-hook '(lambda ()
@@ -218,7 +217,7 @@ THEME is '(theme-package-name theme name)."
 
 (defun bind-change-theme-keymap ()
   "Bind change theme keymap on general."
-  (let ((idx 0))
+  (let ((idx 1))
     (dolist (i kumo/theme-list kumo/C-c-keybinds)
       (setq kumo/C-c-keybinds
             (append kumo/C-c-keybinds
@@ -229,7 +228,7 @@ THEME is '(theme-package-name theme name)."
 
     (setq kumo/C-c-keybinds
           (append kumo/C-c-keybinds
-                  '("TT" 'kumo-current-theme))))
+                  '("T0" 'kumo-current-theme))))
   )
 
 ;; create interactive theme function

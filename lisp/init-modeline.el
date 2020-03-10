@@ -258,7 +258,6 @@ LINE-POSITION is 'top or 'bottom."
                          " "
 
                          ;; is Modified
-                         ;; (propertize "%*" 'face 'font-lock-string-face)
                          (propertize (modeline-modified-p) 'face 'font-lock-string-face)
                          " "
                          
@@ -269,7 +268,7 @@ LINE-POSITION is 'top or 'bottom."
                          
                          ;; size
                          (propertize "%I" 'face 'font-lock-constant-face)
-                         "    "
+                         "  "
 
                          ;; evil state
                          '(:eval evil-mode-line-tag)
@@ -288,11 +287,8 @@ LINE-POSITION is 'top or 'bottom."
                           (modeline-git-status) 'face '(font-lock-string-face (:weight bold)))
                          ))
          (modeline-right (list
-                          (modeline-wrap (modeline-fill 14) 0 'up t)
+                          (modeline-wrap (modeline-fill 18) 0 'up t)
 
-                          ;; global-mode-string goes in mode-line-misc-info
-                          ;; mode-line-misc-info
-                          
                           " "
                           ;; line and column
                           (propertize "%02l" 'face 'font-lock-type-face) ","
