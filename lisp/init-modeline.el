@@ -235,40 +235,48 @@ LINE-POSITION is 'top or 'bottom."
 
        ((string-match "^ M" line)
         (setq M (+ 1 M))
-        (setq M-files (concat M-files "\n" line))
-        )
+        (setq M-files (concat M-files "\n" line)))
 
        (t
         (setq O (+ 1 O))
         (setq O-files (concat O-files "\n" line)))))
-    
     ;; construct propertized string
     (format " %d / %d / %d " M U O)))
+
+
+(defvar modeline-space
+  (if sys/macp "    " " ")
+  "Mac or Linux space size.")
 
 
 (defun modeline-renderer ()
   "Mode line renderer."
   (let* (
          (modeline-left (list
-                         "  "
+                         modeline-space
+
                          ;; winum
                          (propertize
                           (modeline-unicode-number (winum-get-number-string))
                           'face 'font-lock-preprocessor-face)
-                         " "
+
+                         modeline-space
 
                          ;; is Modified
                          (propertize (modeline-modified-p) 'face 'font-lock-string-face)
-                         " "
+
+                         modeline-space
                          
                          ;; the buffer name; the file name as a tool tip
                          (propertize "%b " 'face '(font-lock-keyword-face (:weight bold))
                                      'help-echo (buffer-file-name))
-                         " "
+
+                         modeline-space
                          
                          ;; size
                          (propertize "%I" 'face 'font-lock-constant-face)
-                         "  "
+
+                         modeline-space
 
                          ;; evil state
                          '(:eval evil-mode-line-tag)
@@ -287,14 +295,16 @@ LINE-POSITION is 'top or 'bottom."
                           (modeline-git-status) 'face '(font-lock-string-face (:weight bold)))
                          ))
          (modeline-right (list
-                          (modeline-wrap (modeline-fill 18) 0 'up t)
+                          (modeline-wrap (modeline-fill (if sys/macp 14 20)) 0 'up t)
 
-                          " "
+                          modeline-space
+
                           ;; line and column
                           (propertize "%02l" 'face 'font-lock-type-face) ","
                           (propertize "%02c" 'face 'font-lock-type-face)
 
-                          "  "
+                          modeline-space
+
                           '(:eval (modeline-vc-branch))
                           ))
 
@@ -303,7 +313,7 @@ LINE-POSITION is 'top or 'bottom."
          )
 
     (cond
-     ((> 91 (window-total-width)) modeline-left)
+     ((> 95 (window-total-width)) modeline-left)
      (t modeline-fill))))
 
 
@@ -340,3 +350,4 @@ LINE-POSITION is 'top or 'bottom."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-modeline.el ends here
+
