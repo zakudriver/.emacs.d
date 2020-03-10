@@ -1,27 +1,34 @@
 ;;; Code:
 
+
 (eval-when-compile
   (require 'init-const)
   (require 'init-custom))
+
 
 (use-package elpa-mirror
   :custom
   (elpamr-default-output-directory "~/.emacs.d/myelpa/"))
 
-(use-package magit
-  :bind
-  (:map magit-status-mode-map
-        ("q" . (lambda ()
-                 (interactive)
-                 (kill-buffer)
-                 (jump-to-register :magit-fullscreen))))
-  :config
-  (defadvice magit-status (around magit-fullscreen activate)
-    (window-configuration-to-register :magit-fullscreen)
-    ad-do-it
-    (delete-other-windows))
 
-  (use-package evil-magit))
+(use-package magit
+  :config
+  (use-package evil-magit
+    :hook
+    (magit-mode . evil-magit-init)
+    :bind
+    (:map magit-status-mode-map
+          ("M-0" . nil)
+          ("M-1" . nil)
+          ("M-2" . nil)
+          ("M-3" . nil)
+          ("M-4" . nil)
+          ("M-5" . nil)
+          ("M-6" . nil)
+          ("M-7" . nil)
+          ("M-8" . nil)
+          ("M-9" . nil)
+          ("M-u" . nil))))
 
 
 (use-package docker

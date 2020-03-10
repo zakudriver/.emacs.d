@@ -200,8 +200,8 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
 ;; global keys
 (global-set-key (kbd "<f2>") 'kumo-open-init-file)
 (global-set-key (kbd "<C-tab>") 'kumo-indent-all)
-;; C-u ---> M-p
-(global-set-key (kbd "M-p") 'universal-argument)
+;; C-u ---> M-u
+(global-set-key (kbd "M-u") 'universal-argument)
 
 (provide 'init-keys)
 

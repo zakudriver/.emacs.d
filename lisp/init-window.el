@@ -31,7 +31,6 @@
   :hook
   (after-init . winum-mode)
   :bind (
-         :map winum-keymap
          ("M-0" . 'winum-select-window-0)
          ("M-1" . 'winum-select-window-1)
          ("M-2" . 'winum-select-window-2)
