@@ -1,7 +1,12 @@
 ;;; Code:
 
 
-;; Dos2Unix/Unix2Dos
+(defun kumo-open-init-file()
+  "Open init.el file."
+  (interactive)
+  (find-file "~/.emacs.d/init.el"))
+
+
 (defun dos2unix ()
   "Convert the current buffer to UNIX file format."
   (interactive)
@@ -22,28 +27,33 @@
   (save-buffer))
 
 
-(defun kumo-kill-this-buffer ()
-  "Kill the current buffer."
-  (interactive)
+(defun kumo-kill-this-buffer (&optional arg)
+  "Kill the current buffer.
+ARG: If the universal prefix argument is used then kill also the window."
+  (interactive "P")
   (if (window-minibuffer-p)
       (abort-recursive-edit)
-    (kill-buffer-and-window))
+    (if arg
+        (kill-buffer-and-window)
+      (kill-buffer)))
   (message "Buffers deleted!"))
 
 
-(defun kumo-kill-other-buffers ()
-  "Kill other buffers."
-  (interactive)
+(defun kumo-kill-other-buffers (&optional arg)
+  "Kill other buffers.
+ARG: If the universal prefix argument is used then will the windows too."
+  (interactive "P")
   (when (yes-or-no-p (format "Killing all buffers except \"%s\"? "
                              (buffer-name)))
     (mapc 'kill-buffer
           (delq (current-buffer) (buffer-list)))
+    (when arg (delete-other-windows))
     (message "Buffers deleted!")))
 
 
 (defun kumo-kill-all-buffers ()
   "Kill all buffers."
-  (interactive)
+  (interactive "P")
   (mapc 'kill-buffer (buffer-list))
   (kumo-open-dashboard)
   (message "Buffers deleted!"))
@@ -299,7 +309,6 @@ BUFFER is the symbol."
     (mark-whole-buffer)
     (indent-for-tab-command)
     (goto-char point)))
-(global-set-key (kbd "<C-tab>") 'kumo-indent-all)
 
 
 (defun kumo-home-path-resolve (path)

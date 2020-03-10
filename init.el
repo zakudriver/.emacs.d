@@ -69,7 +69,7 @@ decrease this. If you experience stuttering, increase this.")
   (require 'init-base)
   (require 'init-funcs)
   (require 'init-utils)
-  (require 'init-evil)
+  (require 'init-keys)
   (require 'init-modeline)
   (require 'init-ui)
 

@@ -19,7 +19,9 @@
   (defadvice magit-status (around magit-fullscreen activate)
     (window-configuration-to-register :magit-fullscreen)
     ad-do-it
-    (delete-other-windows)))
+    (delete-other-windows))
+
+  (use-package evil-magit))
 
 
 (use-package docker

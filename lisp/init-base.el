@@ -65,14 +65,6 @@
   (which-key-sort-order 'which-key-prefix-then-key-order))
 
 
-(defun kumo-open-init-file()
-  "Open init.el file."
-  (interactive)
-  (find-file "~/.emacs.d/init.el"))
-
-(global-set-key (kbd "<f2>") 'kumo-open-init-file)
-
-
 (provide 'init-base)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -40,7 +40,9 @@
                             (spacemacs-theme spacemacs-dark)
                             (afternoon-theme afternoon)
                             (gruvbox-theme gruvbox-dark-soft)
-                            (gruvbox-theme gruvbox-light-soft))
+                            (gruvbox-theme gruvbox-light-soft)
+                            (apropospriate-theme apropospriate-dark)
+                            (apropospriate-theme apropospriate-light))
   "Theme list.")
 
 

@@ -225,11 +225,9 @@ THEME is '(theme-package-name theme name)."
                     `((quote,(nth 1 i)))
                     ))
       (setq idx (+ idx 1)))
-
     (setq kumo/C-c-keybinds
           (append kumo/C-c-keybinds
-                  '("T0" 'kumo-current-theme))))
-  )
+                  '("T0" 'kumo-current-theme)))))
 
 ;; create interactive theme function
 (theme-func-macro-factory)

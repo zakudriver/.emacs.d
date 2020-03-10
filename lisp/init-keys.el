@@ -1,6 +1,6 @@
 ;;; Code:
 
-
+;; evil keys
 (use-package evil
   :init
   (evil-mode t)
@@ -119,6 +119,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
   )
 
 
+;; general keys 
 (use-package general
   :config
   (define-key evil-normal-state-map (kbd "SPC") (general-simulate-key "C-c"))
@@ -196,7 +197,13 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    ))
 
 
-(provide 'init-evil)
+;; global keys
+(global-set-key (kbd "<f2>") 'kumo-open-init-file)
+(global-set-key (kbd "<C-tab>") 'kumo-indent-all)
+;; C-u ---> M-p
+(global-set-key (kbd "M-p") 'universal-argument)
+
+(provide 'init-keys)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; init-evil.el ends here
+;;; init-keys.el ends here
