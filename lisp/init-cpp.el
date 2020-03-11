@@ -43,19 +43,19 @@
                 (setq irony-additional-clang-options '("-std=c++11")))))
 
 
-;;; C/C++ headers completion
+;; C/C++ headers completion
 (use-package company-c-headers
   :hook
   ((c-mode c++-mode) . (lambda () (add-to-list 'company-backends 'company-c-headers))))
 
 
-;;; backends for irony
+;; backends for irony
 (use-package company-irony
   :hook
   ((c-mode c++-mode) . (lambda () (add-to-list 'company-backends 'company-irony))))
 
 
-;;; backends for irony-c-header
+;; backends for irony-c-header
 (use-package company-irony-c-headers
   :hook
   ((c-mode c++-mode) . (lambda () (add-to-list 'company-backends 'company-irony-c-headers))))

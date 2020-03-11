@@ -30,19 +30,30 @@
 (use-package winum
   :hook
   (after-init . winum-mode)
-  :bind (
-         ("M-0" . 'winum-select-window-0)
-         ("M-1" . 'winum-select-window-1)
-         ("M-2" . 'winum-select-window-2)
-         ("M-3" . 'winum-select-window-3)
-         ("M-4" . 'winum-select-window-4)
-         ("M-5" . 'winum-select-window-5)
-         ("M-6" . 'winum-select-window-6)
-         ("M-7" . 'winum-select-window-7)
-         ("M-8" . 'winum-select-window-8)
-         ("M-9" . 'winum-select-window-9))
+  :bind (("M-0" . winum-select-window-0)
+         ("M-1" . winum-select-window-1)
+         ("M-2" . winum-select-window-2)
+         ("M-3" . winum-select-window-3)
+         ("M-4" . winum-select-window-4)
+         ("M-5" . winum-select-window-5)
+         ("M-6" . winum-select-window-6)
+         ("M-7" . winum-select-window-7)
+         ("M-8" . winum-select-window-8)
+         ("M-9" . winum-select-window-9)
+         ("C-x M-0" . winum-delete-window-0)
+         ("C-x M-1" . winum-delete-window-1)
+         ("C-x M-2" . winum-delete-window-2)
+         ("C-x M-3" . winum-delete-window-3)
+         ("C-x M-4" . winum-delete-window-4)
+         ("C-x M-5" . winum-delete-window-5)
+         ("C-x M-6" . winum-delete-window-6)
+         ("C-x M-7" . winum-delete-window-7)
+         ("C-x M-8" . winum-delete-window-8)
+         ("C-x M-9" . winum-delete-window-9))
   :custom
-  (winum-auto-setup-mode-line nil))
+  (winum-auto-setup-mode-line nil)
+  :config
+  (kumo-winum-delete-window-macro-factory))
 
 
 (use-package hydra

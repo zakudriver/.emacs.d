@@ -345,6 +345,19 @@ eg: 2020-02-22T22:22:22."
   (select-window (active-minibuffer-window)))
 
 
+(defun kumo-winum-delete-window-factory (num)
+  "Winum delete window function macro factory.
+NUM is the window number."
+  `(defun ,(intern (concat "winum-delete-window-" (number-to-string num))) ()
+     (interactive)
+     (,(intern-soft (concat "winum-select-window-" (number-to-string num))) t)))
+
+
+(defmacro kumo-winum-delete-window-macro-factory ()
+  "Winum delete window function macro factory."
+  `(progn ,@(mapcar 'kumo-winum-delete-window-factory '(0 1 2 3 4 5 6 7 8 9))))
+
+
 (provide 'init-funcs)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
