@@ -25,6 +25,7 @@
                             (doom-themes doom-one-light)
                             (doom-themes doom-vibrant)
                             (doom-themes doom-nord)
+                            (doom-themes doom-nord-light)
                             (doom-themes doom-palenight)
                             (doom-themes doom-tomorrow-night)
                             (doom-themes doom-spacegrey)
@@ -33,12 +34,16 @@
                             (doom-themes doom-sourcerer)
                             (doom-themes doom-solarized-dark)
                             (doom-themes doom-solarized-light)
+                            (doom-themes doom-molokai)
+                            (doom-themes doom-gruvbox)
+                            (doom-themes doom-horizon)
+                            (doom-themes doom-wilmersdorf)
+                            (doom-themes doom-acario-dark)
                             (cyberpunk-theme cyberpunk)
                             (snazzy-theme snazzy)
                             (atom-one-dark-theme atom-one-dark)
                             (spacemacs-theme spacemacs-light)
                             (spacemacs-theme spacemacs-dark)
-                            (afternoon-theme afternoon)
                             (gruvbox-theme gruvbox-dark-soft)
                             (gruvbox-theme gruvbox-light-soft))
   "Theme list.")
@@ -88,7 +93,7 @@
   "CCLS initialization options.")
 
 
-(defconst kumo/modeline-height 25
+(defconst kumo/modeline-height 26
   "Modeline height.")
 
 

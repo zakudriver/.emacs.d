@@ -6,7 +6,15 @@
   (require 'init-custom))
 
 
+(defconst modeline-space
+  (if sys/macp "    " " ")
+  "Mac or Linux space size.")
+
+
 (defvar modeline--cache nil)
+
+
+(defvar modeline--active-window (selected-window))
 
 
 (defun modeline-slant (direction c1 c2 c3)
@@ -37,10 +45,6 @@ C3 is left color."
                  'xpm t :ascent 'center)))
           (push (cons key image) modeline--cache)
           image))))
-
-
-;;; Active Window
-(defvar modeline--active-window (selected-window))
 
 
 (defun modeline-window-active-p ()
@@ -199,7 +203,7 @@ LINE-POSITION is 'top or 'bottom."
      ;;   (`interrupted " -")
      ;;   (`suspicious '(propertize " ?" 'face 'warning))
      ;;   )
-     10 'up)))
+     0 'up)))
 
 
 ;; vc-mode
@@ -244,11 +248,6 @@ LINE-POSITION is 'top or 'bottom."
     (format " %d / %d / %d " M U O)))
 
 
-(defvar modeline-space
-  (if sys/macp "    " " ")
-  "Mac or Linux space size.")
-
-
 (defun modeline-renderer ()
   "Mode line renderer."
   (let* (
@@ -284,7 +283,7 @@ LINE-POSITION is 'top or 'bottom."
                          ;; major mode
                          (modeline-wrap
                           (propertize "%m" 'face '(font-lock-string-face (:weight bold)))
-                          10 'down nil 'bottom)
+                          6 'down nil 'bottom)
                          
                          '(:eval (nyan-create))
 
@@ -295,7 +294,7 @@ LINE-POSITION is 'top or 'bottom."
                           (modeline-git-status) 'face '(font-lock-string-face (:weight bold)))
                          ))
          (modeline-right (list
-                          (modeline-wrap (modeline-fill (if sys/macp 14 20)) 0 'up t)
+                          (modeline-wrap (modeline-fill (if sys/macp 14 18)) 0 'up t)
 
                           modeline-space
 
@@ -350,4 +349,3 @@ LINE-POSITION is 'top or 'bottom."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-modeline.el ends here
-
