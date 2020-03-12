@@ -95,7 +95,7 @@ Repeated invocations toggle between the two most recently open buffers."
 
 
 (defun kumo-delete-current-buffer-file ()
-  "Removes file connected to current buffer and kill buffer."
+  "Delete file connected to current buffer and kill buffer."
   (interactive)
   (let ((filename (buffer-file-name))
         (buffer (current-buffer))
@@ -110,8 +110,7 @@ Repeated invocations toggle between the two most recently open buffers."
 
 (defun kumo-cleanup-buffer-safe ()
   "Perform a bunch of safe operations on the whitespace content of a buffer.
-Does not indent buffer, because it is used for a before-save-hook, and that
-might be bad."
+Does not indent buffer, because it is used for a 'before-save-hook, and that might be bad."
   (interactive)
   (untabify (point-min) (point-max))
   (delete-trailing-whitespace)
