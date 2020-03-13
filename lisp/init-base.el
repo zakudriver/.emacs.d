@@ -6,6 +6,7 @@
   (require 'init-custom))
 
 
+ ;; utf-8 group
 (setq locale-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 (set-language-environment 'utf-8)
