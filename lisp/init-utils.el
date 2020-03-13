@@ -123,6 +123,7 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
     (kumo-vterm-switch 'next (or offset 1)))
   )
 
+
 (provide 'init-utils)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
