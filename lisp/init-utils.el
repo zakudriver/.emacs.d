@@ -13,6 +13,15 @@
 
 (use-package magit
   :config
+  (advice-add #'magit-mode-bury-buffer :override #'(lambda ()
+                                                     "Quit and kill magit buffer, then restore window configuration."
+                                                     (interactive)
+                                                     (let ((current (current-buffer)))
+                                                       (dolist (buf (magit-mode-get-buffers))
+                                                         (unless (eq buf current)
+                                                           (kill-buffer buf))))
+                                                     (funcall magit-bury-buffer-function t)))
+
   (use-package evil-magit
     :hook
     (magit-mode . evil-magit-init)
