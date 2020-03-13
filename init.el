@@ -49,6 +49,7 @@ If you experience stuttering, increase this.")
 
 ;; Load path
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+
 ;; Load custom theme file
 (add-to-list 'custom-theme-load-path (expand-file-name "themes" user-emacs-directory))
 
