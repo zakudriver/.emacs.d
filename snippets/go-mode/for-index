@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: for-index
+# key: fori
+# --
+
+for i := 0; i < ${1:len}; i++ {
+  $0
+}
