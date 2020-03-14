@@ -4,7 +4,7 @@
 (use-package org
   :bind
   (:map org-mode-map
-        ("C-c l" . font-lock-mode))
+        ("C-, l" . font-lock-mode))
   :custom
   (org-startup-indented t)
   (org-startup-with-inline-images t)
@@ -44,7 +44,7 @@
     (org-pomodoro-keep-killed-pomodoro-time t)
     :bind
     (:map org-agenda-mode-map
-          ("P" . org-pomodoro)))
+          ("C-. p" . org-pomodoro)))
 
   (use-package org-download
     :hook

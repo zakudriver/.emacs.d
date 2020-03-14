@@ -4,9 +4,7 @@
 (use-package counsel
   :diminish ivy-mode counsel-mode
   :bind
-  (("C-s" . 'swiper)
-   ("C-x C-r" . 'counsel-recentf)
-   ("C-h f" . 'counsel-describe-function)
+  (("C-h f" . 'counsel-describe-function)
    ("C-h v" . 'counsel-describe-variable)
    :map ivy-minibuffer-map
    ([escape] . minibuffer-keyboard-quit)

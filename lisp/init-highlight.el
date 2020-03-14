@@ -66,13 +66,13 @@ FACE defaults to inheriting from default and highlight."
   (symbol-overlay-default-face ((t (:inherit (region bold)))))
   :bind
   (:map symbol-overlay-map
-        ("M-i" . symbol-overlay-put)
         ("M-n" . symbol-overlay-jump-next)
         ("M-p" . symbol-overlay-jump-prev)
         ("M-N" . symbol-overlay-switch-forward)
         ("M-P" . symbol-overlay-switch-backward)
-        ("M-C" . symbol-overlay-remove-all)
-        ("M-s" . symbol-overlay-save-symbol)
+        ("C-. p" . symbol-overlay-put)
+        ("M-. c" . symbol-overlay-remove-all)
+        ("M-. s" . symbol-overlay-save-symbol)
         ("h" . nil)
         ("w" . nil))
   :hook
@@ -139,7 +139,7 @@ FACE defaults to inheriting from default and highlight."
   (dired-mode . diff-hl-dired-mode)
   :bind
   (:map diff-hl-command-map
-        ("SPC" . diff-hl-mark-hunk)))
+        ("C-. c" . diff-hl-mark-hunk)))
 
 
 (use-package pulse

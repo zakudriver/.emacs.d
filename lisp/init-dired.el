@@ -32,19 +32,19 @@
     (use-package dired-quick-sort
       :bind
       (:map dired-mode-map
-            ("S" . hydra-dired-quick-sort/body))))
+            ("C-. s" . hydra-dired-quick-sort/body))))
 
   ;; Show git info in dired
   (use-package dired-git-info
     :bind
     (:map dired-mode-map
-          (")" . dired-git-info-mode)))
+          ("C-. g" . dired-git-info-mode)))
 
   ;; Allow rsync from dired buffers
   (use-package dired-rsync
     :bind
     (:map dired-mode-map
-          ("C-c C-r" . dired-rsync)))
+          ("C-. r" . dired-rsync)))
 
   ;; Colourful dired
   (use-package diredfl

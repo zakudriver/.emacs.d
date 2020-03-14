@@ -20,7 +20,9 @@
 (use-package go-mode
   :bind
   (:map go-mode-map
-        ([remap xref-find-definitions] . godef-jump))
+        ([remap xref-find-definitions] . godef-jump)
+        ("C-, a" .  go-improt-add)
+        ("C-, f" . gofmt))
   :custom
   (gofmt-command "goimports")
   :hook
@@ -100,8 +102,8 @@
   (use-package go-tag
     :bind
     (:map go-mode-map
-          ("C-t a" . go-tag-add)
-          ("C-t r" . go-tag-remove))
+          ("C-. t a" . go-tag-add)
+          ("C-. t r" . go-tag-remove))
     :custom
     (go-tag-args (list "-transform" "camelcase")))
 

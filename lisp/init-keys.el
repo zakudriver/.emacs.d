@@ -7,18 +7,21 @@
   :custom
   (evil-want-C-u-scroll t)
   (x-select-enable-clipboard t)
+  (evil-kill-on-visual-paste nil)
   :config
-  ;; (evil-set-initial-state 'treemacs-mode 'emacs)
-  ;; normal no yank
-  (define-key evil-normal-state-map (kbd "d") 'evil-delete-no-yank)
-  ;; (define-key evil-normal-state-map (kbd "p") 'evil-paste-after-no-yank)
-  ;; visual yank
-  (define-key evil-visual-state-map (kbd "d") 'evil-delete)
   ;; redefine evil operator
-  (evil-define-key 'insert global-map (kbd "DEL") 'hungry-delete-backward)
-  (evil-define-key 'insert global-map (kbd "<C-backspace>") 'evil-delete-backward-char-and-join)
-  (evil-define-key 'visual global-map (kbd "z") 'kumo-wrap-with-input)
-  
+  (evil-define-key nil evil-normal-state-map
+    "d" 'evil-delete-no-yank
+    (kbd "C-.") nil)
+
+  (evil-define-key nil evil-insert-state-map
+    (kbd "DEL") 'hungry-delete-backward
+    (kbd "<C-backspace>") 'backward-char)
+
+  (evil-define-key nil evil-visual-state-map
+    "z" 'kumo-wrap-with-input
+    "d" 'evil-delete)
+
   ;; evil x key
   (evil-define-operator evil-delete-char-no-yank (beg end type register yank-handler)
     "Delete next character without yanking."
@@ -111,11 +114,6 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
     (when (and (called-interactively-p 'any)
                (eq type 'line))
       (evil-first-non-blank)))
-
-  (defun evil-paste-after-no-yank ()
-    (interactive)
-    (let ((evil-this-register ?0))
-      (call-interactively 'evil-paste-after)))
   )
 
 
@@ -150,6 +148,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    "sr" 'counsel-rg
    "ss" 'swiper
    "ff" 'counsel-find-file
+   "fr" 'counsel-recentf
    "fz" 'counsel-fzf
    "bb" 'counsel-switch-buffer
    "bi" 'ibuffer
@@ -188,8 +187,6 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
 
   (general-define-key
    :states '(normal visual)
-   "j" 'evil-next-visual-line
-   "k" 'evil-previous-visual-line
    "H" 'mwim-beginning-of-code-or-line
    "L" 'mwim-end-of-code-or-line
    "f" 'avy-goto-char-in-line
@@ -200,8 +197,8 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
 ;; global keys
 (global-set-key (kbd "<f2>") 'kumo-open-init-file)
 (global-set-key (kbd "<C-tab>") 'kumo-indent-all)
-;; C-u ---> M-u
-(global-set-key (kbd "M-u") 'universal-argument)
+(global-set-key (kbd "M-u") 'universal-argument)    ;; C-u ---> M-u
+
 
 (provide 'init-keys)
 

@@ -6,13 +6,14 @@
   :bind
   (:map treemacs-mode-map
         ("M-o" . treemacs-visit-node-no-split)
-        ("M-c" . treemacs-collapse-parent-node)
-        ("M-f" . treemacs-create-file)
-        ("M-d" . treemacs-create-dir)
         ("M-v" . treemacs-visit-node-vertical-split)
         ("M-h" . treemacs-visit-node-horizontal-split)
-        ("M-r" . treemacs-rename)
-        ("C-x C-d" . treemacs-delete))
+        ("C-, c" . treemacs-collapse-parent-node)
+        ("C-, f" . treemacs-create-file)
+        ("C-, d" . treemacs-create-dir)
+        ("C-, r" . treemacs-rename)
+        ("C-, g" . treemacs-refresh)
+        ("C-, C-d" . treemacs-delete))
   :custom
   ;; (treemacs-collapse-dirs `(if treemacs-python-executable 3 0))
   (treemacs-sorting 'alphabetic-case-insensitive-desc)
@@ -36,7 +37,7 @@
   (use-package treemacs-projectile
     :after projectile
     :bind (:map projectile-command-map
-                ("h" . treemacs-projectile)))
+                ("C-. p" . treemacs-projectile)))
 
   (use-package treemacs-magit
     :after magit

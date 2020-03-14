@@ -64,8 +64,8 @@
     :after lsp-mode
     :bind
     (:map lsp-mode-map
-          ([remap xref-find-apropos] . lsp-ivy-workspace-symbol)
-          ("C-s-." . lsp-ivy-global-workspace-symbol)))
+          ("C-. w w" . lsp-ivy-workspace-symbol)
+          ("C-. w g" . lsp-ivy-global-workspace-symbol)))
 
   (use-package company-lsp
     :custom
@@ -77,8 +77,8 @@
     (lsp-mode . dap-mode)
     :bind
     (:map lsp-mode-map
-          ("<f5>" . dap-debug)
-          ("M-<f5>" . dap-hydra))
+          ("C-. d d" . dap-debug)
+          ("C-. d h" . dap-hydra))
     :init
     (require 'dap-hydra)
     (require 'dap-go)
@@ -91,8 +91,8 @@
   (use-package lsp-treemacs
     :bind
     (:map lsp-mode-map
-          ("M-l" . lsp-treemacs-errors-list)
-          ("M-s" . lsp-treemacs-symbols))
+          ("C-. t e" . lsp-treemacs-errors-list)
+          ("C-. t s" . lsp-treemacs-symbols))
     :config
     (with-eval-after-load 'ace-window
       (when (boundp 'aw-ignored-buffers)

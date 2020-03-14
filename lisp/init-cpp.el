@@ -10,10 +10,9 @@
 (use-package clang-format
   :bind
   (:map c-mode-map 
-        ("C-x f" . clang-format-buffer)
+        ("C-. f" . clang-format-buffer)
         :map c++-mode-map
-        ("C-x f" . clang-format-buffer)
-        )
+        ("C-. f" . clang-format-buffer))
   :custom
   (clang-format-style-option "llvm")
   :hook

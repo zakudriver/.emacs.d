@@ -1,14 +1,13 @@
 ;;; Code:
 
+
 (eval-when-compile
   (require 'init-const))
+
 
 ;; Manage and navigate projects
 (use-package projectile
   :diminish
-  :bind
-  (:map projectile-mode-map
-        ("C-x p" . projectile-command-map))
   :hook
   (after-init . projectile-mode)
   :custom
@@ -35,6 +34,7 @@
   ;; Support Perforce project
   (let ((val (or (getenv "P4CONFIG") ".p4config")))
     (add-to-list 'projectile-project-root-files-bottom-up val)))
+
 
 (provide 'init-projectile)
 

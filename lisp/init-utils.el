@@ -26,7 +26,7 @@
     :hook
     (magit-mode . evil-magit-init)
     :bind
-    (:map magit-status-mode-map
+    (:map magit-mode-map
           ("M-0" . nil)
           ("M-1" . nil)
           ("M-2" . nil)

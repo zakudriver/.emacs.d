@@ -6,6 +6,30 @@
   (require 'init-custom))
 
 
+;; Dashboard
+(use-package dashboard
+  :bind
+  (:map dashboard-mode-map
+        ("C-, g" . dashboard-refresh-buffer))
+  :custom
+  ;; (dashboard-banner-logo-title (concat "Happy hacking, " user-login-name " - Emacs ♥ you!"))
+  (dashboard-banner-logo-title "Help poor children in Uganda!")
+  (dashboard-set-file-icons t)
+  (dashboard-set-heading-icons t)
+  (dashboard-startup-banner (or kumo/logo 'official))
+  (dashboard-center-content t)
+  (dashboard-show-shortcuts nil)
+  (dashboard-items '((recents  . 10)
+                     (projects . 12)))
+  (dashboard-init-info (concat "Happy hacking, " user-login-name " - Emacs ♥ you!"))
+  (dashboard-set-footer nil)
+  :init
+  ;; init jump to (kumo/dashboard-position) line
+  (add-hook 'emacs-startup-hook '(lambda ()
+                                   (goto-line kumo/dashboard-position)))
+  (dashboard-setup-startup-hook))
+
+
 (defvar kumo/C-c-keybinds '(general-define-key
                             :prefix "C-c")
   "General <C>-<c> prefix key.")
@@ -107,34 +131,7 @@ FONT is a symbol."
   (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") nil 'prepend))
 
 
-;; Dashboard
-(use-package dashboard
-  :bind
-  (:map dashboard-mode-map
-        ("C-x g" . dashboard-refresh-buffer))
-  :custom
-  (dashboard-banner-logo-title (concat "Happy hacking, " user-login-name " - Emacs ♥ you!"))
-  (dashboard-set-file-icons t)
-  (dashboard-set-heading-icons t)
-  (dashboard-startup-banner (or kumo/logo 'official))
-  (dashboard-center-content t)
-  (dashboard-show-shortcuts nil)
-  (dashboard-items '((recents  . 10)
-                     (projects . 10)
-                     (bookmarks . 5)))
-  (dashboard-set-footer nil)
-  :init
-  ;; init jump to (kumo/dashboard-position) line
-  (add-hook 'emacs-startup-hook '(lambda ()
-                                   (goto-line kumo/dashboard-position)))
-  (dashboard-setup-startup-hook))
-
-
 ;; Title
-;; (setq frame-title-format
-;;       '((:eval (if (buffer-file-name)
-;;                    (abbreviate-file-name (buffer-file-name))
-;;                  "%b"))))
 (setq frame-title-format nil
       frame-resize-pixelwise t)
 
