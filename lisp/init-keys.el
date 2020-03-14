@@ -1,5 +1,12 @@
 ;;; Code:
 
+
+;; global keys
+(global-set-key (kbd "<f2>") 'kumo-open-init-file)
+(global-set-key (kbd "<C-tab>") 'kumo-indent-all)
+(global-set-key (kbd "M-u") 'universal-argument)
+
+
 ;; evil keys
 (use-package evil
   :init
@@ -192,12 +199,6 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    "f" 'avy-goto-char-in-line
    "gb" 'pop-tag-mark
    ))
-
-
-;; global keys
-(global-set-key (kbd "<f2>") 'kumo-open-init-file)
-(global-set-key (kbd "<C-tab>") 'kumo-indent-all)
-(global-set-key (kbd "M-u") 'universal-argument)    ;; C-u ---> M-u
 
 
 (provide 'init-keys)

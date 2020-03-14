@@ -4,7 +4,9 @@
 (use-package org
   :bind
   (:map org-mode-map
-        ("C-, l" . font-lock-mode))
+        ("C-," . nil)
+        ("C-, l" . font-lock-mode)
+        ("C-, c" . org-cycle-agenda-files))
   :custom
   (org-startup-indented t)
   (org-startup-with-inline-images t)
