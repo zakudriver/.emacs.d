@@ -2,6 +2,7 @@
 
  /This is kumo's emacs configuration./
 
+
 *supported languages / framework*
 
 - typescript
@@ -9,3 +10,19 @@
 - react
 - golang
 - c++
+  
+
+*dependent program*
+
+- [[https://github.com/BurntSushi/ripgrep][ripgrep]]
+- [[https://github.com/junegunn/fzf][fzf]] 
+- [[https://github.com/golang/tools/tree/master/gopls][gopls]]
+- [[https://github.com/golang/go/tree/master/src/cmd/gofmt][gofmt]]
+- [[https://github.com/MaskRay/ccls][ccls]]
+- [[https://clang.llvm.org/docs/ClangFormat.html][clang-format]]
+- [[https://github.com/Sarcasm/irony-mode][irony-server]]
+- [[https://github.com/nodejs/node][node]]
+- [[https://github.com/microsoft/TypeScript][typescript]]
+- [[https://github.com/theia-ide/typescript-language-server][typescript-language-server]]
+- [[https://github.com/angular/angular][angular]]
+- [[https://github.com/prettier/prettier][prettier]]
