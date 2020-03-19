@@ -126,17 +126,17 @@ Including indent-buffer, which should not be called automatically on save."
 
 
 (defun kumo-rotate-window ()
-  "Rotate your windows"
+  "Rotate your windows."
   (interactive)
   (cond ((not (> (count-windows)1))
          (message "You can't rotate a single window!"))
         (t
          (setq i 1)
-         (setq numWindows (count-windows))
-         (while  (< i numWindows)
+         (setq n (count-windows))
+         (while  (< i n)
            (let* (
                   (w1 (elt (window-list) i))
-                  (w2 (elt (window-list) (+ (% i numWindows) 1)))
+                  (w2 (elt (window-list) (+ (% i n) 1)))
 
                   (b1 (window-buffer w1))
                   (b2 (window-buffer w2))
