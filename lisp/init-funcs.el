@@ -126,7 +126,7 @@ Including indent-buffer, which should not be called automatically on save."
 
 
 (defun kumo-rotate-window ()
-  "Rotate your windows."
+  "Rotate windows."
   (interactive)
   (cond ((not (> (count-windows)1))
          (message "You can't rotate a single window!"))
@@ -152,29 +152,30 @@ Including indent-buffer, which should not be called automatically on save."
 
 
 (defun kumo-toggle-window-split ()
+  "Toggle windows."
   (interactive)
   (if (= (count-windows) 2)
-      (let* ((this-win-buffer (window-buffer))
-             (next-win-buffer (window-buffer (next-window)))
-             (this-win-edges (window-edges (selected-window)))
+      (let* ((current-buffer (window-buffer))
+             (next-buffer (window-buffer (next-window)))
+             (current-win-edges (window-edges (selected-window)))
              (next-win-edges (window-edges (next-window)))
-             (this-win-2nd (not (and (<= (car this-win-edges)
+             (current-win-2nd (not (and (<= (car current-win-edges)
                                          (car next-win-edges))
-                                     (<= (cadr this-win-edges)
+                                     (<= (cadr current-win-edges)
                                          (cadr next-win-edges)))))
              (splitter
-              (if (= (car this-win-edges)
+              (if (= (car current-win-edges)
                      (car (window-edges (next-window))))
                   'split-window-horizontally
                 'split-window-vertically)))
         (delete-other-windows)
         (let ((first-win (selected-window)))
           (funcall splitter)
-          (if this-win-2nd (other-window 1))
-          (set-window-buffer (selected-window) this-win-buffer)
-          (set-window-buffer (next-window) next-win-buffer)
+          (if current-win-2nd (other-window 1))
+          (set-window-buffer (selected-window) current-buffer)
+          (set-window-buffer (next-window) next-buffer)
           (select-window first-win)
-          (if this-win-2nd (other-window 1))))))
+          (if current-win-2nd (other-window 1))))))
 
 
 ;; Font
