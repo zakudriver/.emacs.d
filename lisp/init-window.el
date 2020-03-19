@@ -58,30 +58,42 @@
 
 (use-package hydra
   :init
-  (defhydra hydra-frame-window (:color red :hint nil)
+  (defhydra hydra-frame-window (:color pink :hint nil)
     "
- ^Window^             Frame^              ^^Window Size^^^      ^Text Zoom^               
- _0_: delete          _2_: delete              ^ ^ _k_ ^ ^            _=_                   
- _1_: delete others   _3_: delete others       _h_ ^+^ _l_            ^+^             
- _t_oggle             _4_: new                 ^ ^ _j_ ^ ^            _-_            
- _s_wap               _F_ullscreen            ^_b_alance^^^^          ^ ^        
+ ^Window^                              Frame^                       ^^Window Size^^^      ^Text Zoom^               
+ _w1_: delete                          _f1_: delete                     ^ ^ _k_ ^ ^            _=_                   
+ _w2_: delete others                   _f2_: delete others              _h_ ^+^ _l_            ^+^             
+ _s_wap x-direction and y-direction    _f3_: new                        ^ ^ _j_ ^ ^            _-_            
+ Flip _v_erticall                                                   _F_ullscreen       ^^^_b_alance
+ Flip _v_ertically
+ Flop _h_orizontally
+ Rotate 180 _d_egrees
+ Rotate 90  degrees _c_lockwise
+ Rotate 90  degrees _a_nti-clockwise
 "
-    ("0" delete-window)
-    ("1" delete-other-windows)
-    ("2" delete-frame :exit t)
-    ("3" delete-other-frames :exit t)
-    ("4" make-frame  :exit t)
+    ("w1" delete-window)
+    ("w2" delete-other-windows)
+    ("f1" delete-frame :exit t)
+    ("f2" delete-other-frames :exit t)
+    ("f3" make-frame  :exit t)
     ("b" balance-windows)
-    ("s" kumo-toggle-window-split)
+    ("s" transpose-frame)
     ("F" toggle-frame-fullscreen)
-    ("t" kumo-rotate-window)
     ("=" kumo-font-size-increase)
     ("-" kumo-font-size-decrease)
     ("h" shrink-window-horizontally)
     ("k" shrink-window)
     ("j" enlarge-window)
     ("l" enlarge-window-horizontally)
+    ("v" flip-frame)
+    ("h" flop-frame)
+    ("d" rotate-frame)
+    ("c" rotate-frame-clockwise)
+    ("a" rotate-frame-anti-clockwise)
     ("q" nil "quit")))
+
+
+(use-package transpose-frame)
 
 
 (provide 'init-window)

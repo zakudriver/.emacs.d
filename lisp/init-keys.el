@@ -23,8 +23,8 @@
 
   (evil-define-key nil evil-insert-state-map
     (kbd "DEL") 'hungry-delete-backward
-    (kbd "<C-backspace>") 'backward-char)
-
+    (kbd "<C-backspace>") 'backward-delete-char-untabify)
+  
   (evil-define-key nil evil-visual-state-map
     "z" 'kumo-wrap-with-input
     "d" 'evil-delete)
@@ -163,7 +163,6 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    "bo" 'kumo-kill-other-buffers
    "ba" 'kumo-kill-all-buffers
    "bp" 'kumo-switch-to-previous-buffer
-   "bn" 'kumo-new-temp-buffer
    "bR" 'kumo-rename-current-buffer-file
    "bD" 'kumo-delete-current-buffer-file
    "oo" 'org-switchb
@@ -182,6 +181,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    "wo" 'delete-other-windows
    "wb" 'kumo-current-buffer-bottom-window
    "wm" 'kumo-select-minibuffer-window
+   "wn" 'evil-window-new
    "vo" 'vterm-other-window
    "vv" 'vterm
    "vN" 'kumo-new-vterm

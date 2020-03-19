@@ -63,7 +63,7 @@
 
 
 (defconst kumo/font-size
-  (if sys/macp 135 105)
+  (if sys/macp 135 100)
   "Font size.")
 
 
