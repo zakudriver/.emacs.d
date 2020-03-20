@@ -34,7 +34,8 @@
   (web-mode-enable-current-element-highlight t)
   (web-mode-enable-css-colorization t)
   (web-mode-comment-style 2)
-  (web-mode-enable-comment-annotation t))
+  (web-mode-enable-comment-annotation t)
+  (web-mode-enable-comment-interpolation t))
 
 
 ;; emmet-mode: dynamic snippets for HTML

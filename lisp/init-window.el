@@ -65,7 +65,6 @@
  _w2_: delete others                   _f2_: delete others              _h_ ^+^ _l_            ^+^             
  _s_wap x-direction and y-direction    _f3_: new                        ^ ^ _j_ ^ ^            _-_            
  Flip _v_erticall                                                   _F_ullscreen       ^^^_b_alance
- Flip _v_ertically
  Flop _h_orizontally
  Rotate 180 _d_egrees
  Rotate 90  degrees _c_lockwise
