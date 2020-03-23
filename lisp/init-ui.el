@@ -20,7 +20,7 @@
   (dashboard-center-content t)
   (dashboard-show-shortcuts nil)
   (dashboard-items '((recents  . 10)
-                     (projects . 12)))
+                     (projects . 10)))
   (dashboard-init-info (concat "Happy hacking, " user-login-name " - Emacs ♥ you!"))
   (dashboard-set-footer nil)
   :init
