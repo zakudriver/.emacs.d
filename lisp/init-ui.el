@@ -6,6 +6,20 @@
   (require 'init-custom))
 
 
+;; Title
+(setq frame-title-format nil
+      frame-resize-pixelwise t)
+
+
+;; Menu/Tool/Scroll bars
+(when (version< emacs-version "27")
+  (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+  (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+  (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1)))
+(when (fboundp 'blink-cursor-mode)
+  (blink-cursor-mode -1))
+
+
 ;; Dashboard
 (use-package dashboard
   :bind
@@ -43,6 +57,7 @@
                                                      )) kumo/font-list)
   "Filter kumo/font-list by syetem fonts.")
 
+
 (defun font-is-existing (target)
   "Check the font is exists and system font is exists.
 TARGET is a symbol."
@@ -50,37 +65,51 @@ TARGET is a symbol."
            when (and (eq i target) (find-font (font-spec :name (symbol-name target))))
            return t))
 
+
 (defun set-default-font-cache ()
   "Write and return default-font."
   (write-region (symbol-name nil) nil kumo/font-setting-cache) nil)
 
+
 (defun read-font-cache ()
   "Read font from font cache."
-  (if (file-exists-p kumo/font-setting-cache)
-      (let* ((string-list (split-string (with-temp-buffer
-                                          (insert-file-contents kumo/font-setting-cache)
-                                          (buffer-string)) ":" t))
-             (font-list (list (intern (nth 0 string-list)) (string-to-number (nth 1 string-list)))))
-        (if (font-is-existing (nth 0 font-list))
-            font-list
-          nil))
-    nil))
-
-(defun set-font-cache ()
-  "Write font cache file."
-  (write-region (format "%s:%d" (or kumo/current-font "") (or kumo/current-font-size kumo/default-font-size)) nil kumo/font-setting-cache))
-
-
-;; set current font setting
-(defvar kumo/current-font-setting (or (read-font-cache) nil))
-
-;; current font family
-(defvar kumo/current-font (or (nth 0 kumo/current-font-setting) nil))
-;; current font size
-(defvar kumo/current-font-size (or (nth 1 kumo/current-font-setting) kumo/default-font-size))
+  (when (file-exists-p kumo/font-setting-cache)
+    (let ((cache (with-temp-buffer
+                   (insert-file-contents kumo/font-setting-cache)
+                   (buffer-string))))
+      (when cache
+        (let ((string-list (split-string cache ":" t)))
+          (when (= (length string-list) 2)
+            (let ((font-list (list (intern (nth 0 string-list)) (string-to-number (nth 1 string-list)))))
+              (if (font-is-existing (nth 0 font-list))
+                  font-list
+                nil)))
+          ))))
+  )
 
 
+(defun set-font-cache (&optional font-name font-size)
+  "Write font cache file.
+FONT-NAME: symbol.
+FONT-SIZE: number."
+  (when font-name
+    (setq kumo/current-font font-name))
+  (when font-size
+    (setq kumo/current-font-size font-size))
+  (write-region
+   (format "%s:%d"
+           (symbol-name kumo/current-font)
+           kumo/current-font-size) nil kumo/font-setting-cache))
+
+
+(defvar kumo/current-font-setting (or (read-font-cache) nil)
+  "Current font setting.")
+(defvar kumo/current-font (or (nth 0 kumo/current-font-setting) nil)
+  "Current font family.")
+(defvar kumo/current-font-size (or (nth 1 kumo/current-font-setting) kumo/default-font-size)
+  "Current font size.")
 (set-face-attribute 'default nil :height kumo/current-font-size)
+
 
 (defun font-func-factory (font)
   "Font function factory.
@@ -89,17 +118,19 @@ FONT is a symbol."
     `(defun ,font ()
        (interactive)
        (set-face-attribute 'default nil :font ,(symbol-name font))
-       (setq kumo/current-font font)
-       (set-font-cache))))
+       (set-font-cache (quote ,font)))))
+
 
 (defmacro font-func-macro-factory ()
   "Font function macro factory."
   `(progn ,@(mapcar 'font-func-factory kumo/current-font-list)))
 
+
 (defun kumo-current-font ()
   "Current font."
   (interactive)
   (message "Current font: %s" (symbol-name kumo/current-font)))
+
 
 (defun bind-change-font-keymap ()
   "Bind change font keymap on general."
@@ -121,13 +152,16 @@ FONT is a symbol."
 (when kumo/current-font-list
   (font-func-macro-factory))
 
+
 ;; init default font
 (when kumo/current-font
   (funcall kumo/current-font))
 
+
 ;; bind change font keymap
 (when kumo/current-font-list
   (bind-change-font-keymap))
+
 
 (set-face-attribute 'default nil :weight kumo/font-weight)
 (setq-default line-spacing 0.3
@@ -145,32 +179,12 @@ FONT is a symbol."
   (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") nil 'prepend))
 
 
-;; Title
-(setq frame-title-format nil
-      frame-resize-pixelwise t)
-
-
-;; Menu/Tool/Scroll bars
-(when (version< emacs-version "27")
-  (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-  (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-  (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1)))
-(when (fboundp 'blink-cursor-mode)
-  (blink-cursor-mode -1))
-
-
-;; (defvar after-load-theme-hook nil
-;;   "Hook run after a color theme is loaded using `load-theme'.")
-;; (defadvice load-theme (after run-after-load-theme-hook activate)
-;;   "Run `after-load-theme-hook'."
-;;   (run-hooks 'after-load-theme-hook))
-
-
 ;; Color Theme
 (defun set-default-theme ()
   "Write and return default-theme.
 TARGET is a symbol."
   (write-region (symbol-name kumo/default-theme) nil kumo/theme-setting-cache) kumo/default-theme)
+
 
 (defun theme-is-existing (target)
   "Check the theme is exists.
@@ -178,6 +192,7 @@ TARGET is theme mame."
   (cl-loop for i in kumo/theme-list
            when (eq (nth 1 i) target)
            return t))
+
 
 (defun read-theme-cache ()
   "Read theme from theme cache."
@@ -187,8 +202,10 @@ TARGET is theme mame."
         (if (theme-is-existing theme) theme (set-default-theme)))
     (set-default-theme)))
 
-;; set current theme
-(setq-default kumo/current-theme (or (read-theme-cache) kumo/default-theme))
+
+(defvar kumo/current-theme (or (read-theme-cache) kumo/default-theme)
+  "Current theme.")
+
 
 (defmacro theme-factory-macro (name load-name &rest config)
   "Theme factory macro.
@@ -207,6 +224,7 @@ CONFIG is theme config."
        (load-theme (quote ,load-name) t)
        (setq kumo/current-theme (quote ,load-name)))))
 
+
 (defun theme-func-factory (theme)
   "Theme function factory.
 THEME is '(theme-package-name theme name)."
@@ -216,14 +234,17 @@ THEME is '(theme-package-name theme name)."
      (write-region (symbol-name (quote ,(nth 1 theme))) nil kumo/theme-setting-cache)
      (update-modeline-format)))
 
+
 (defmacro theme-func-macro-factory ()
   "Theme function macro factory."
   `(progn ,@(mapcar 'theme-func-factory kumo/theme-list)))
+
 
 (defun kumo-current-theme ()
   "Current theme."
   (interactive)
   (message "Current theme: %s" (symbol-name kumo/current-theme)))
+
 
 (defun bind-change-theme-keymap ()
   "Bind change theme keymap on general."
@@ -239,11 +260,14 @@ THEME is '(theme-package-name theme name)."
           (append kumo/C-c-keybinds
                   '("T0" 'kumo-current-theme)))))
 
+
 ;; create interactive theme function
 (theme-func-macro-factory)
 
+
 ;; init default theme
 (funcall kumo/current-theme)
+
 
 ;; bind change theme keymap
 (bind-change-theme-keymap)
