@@ -62,7 +62,7 @@
   "Font list.")
 
 
-(defconst kumo/font-size
+(defconst kumo/default-font-size
   (if sys/macp 135 100)
   "Font size.")
 

@@ -124,9 +124,9 @@ Including indent-buffer, which should not be called automatically on save."
              (current-win-edges (window-edges (selected-window)))
              (next-win-edges (window-edges (next-window)))
              (current-win-2nd (not (and (<= (car current-win-edges)
-                                         (car next-win-edges))
-                                     (<= (cadr current-win-edges)
-                                         (cadr next-win-edges)))))
+                                            (car next-win-edges))
+                                        (<= (cadr current-win-edges)
+                                            (cadr next-win-edges)))))
              (splitter
               (if (= (car current-win-edges)
                      (car (window-edges (next-window))))
@@ -146,15 +146,18 @@ Including indent-buffer, which should not be called automatically on save."
 (defun kumo-font-size-increase ()
   "Font size increase."
   (interactive)
-  (let ((old-face-attribute (face-attribute 'default :height)))
-    (set-face-attribute 'default nil :height (+ old-face-attribute 10))))
+  (setq kumo/current-font-size (+ kumo/current-font-size 1))
+  (set-face-attribute 'default nil :height kumo/current-font-size)
+  (set-font-cache))
 
 
 (defun kumo-font-size-decrease ()
   "Font size decrease."
   (interactive)
-  (let ((old-face-attribute (face-attribute 'default :height)))
-    (set-face-attribute 'default nil :height (- old-face-attribute 10))))
+  (let* ((old-face-attribute (face-attribute 'default :height))
+         (current-size (- old-face-attribute 1)))
+    (set-face-attribute 'default nil :height current-size)
+    (set-font-cache)))
 
 
 ;; Wrap selected text by input symbol.

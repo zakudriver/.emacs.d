@@ -50,23 +50,37 @@ TARGET is a symbol."
            when (and (eq i target) (find-font (font-spec :name (symbol-name target))))
            return t))
 
-(defun set-default-font ()
+(defun set-default-font-cache ()
   "Write and return default-font."
-  (progn
-    (write-region (symbol-name nil) nil kumo/font-setting-cache) nil))
+  (write-region (symbol-name nil) nil kumo/font-setting-cache) nil)
 
 (defun read-font-cache ()
   "Read font from font cache."
   (if (file-exists-p kumo/font-setting-cache)
-      (let ((font
-             (intern (with-temp-buffer (insert-file-contents kumo/font-setting-cache) (buffer-string)))))
-        (if (font-is-existing font)
-            font
-          (set-default-font)))
-    (set-default-font)))
+      (let* ((string-list (split-string (with-temp-buffer
+                                          (insert-file-contents kumo/font-setting-cache)
+                                          (buffer-string)) ":" t))
+             (font-list (list (intern (nth 0 string-list)) (string-to-number (nth 1 string-list)))))
+        (if (font-is-existing (nth 0 font-list))
+            font-list
+          nil))
+    nil))
 
-;; set current font
-(setq-default kumo/current-font (read-font-cache))
+(defun set-font-cache ()
+  "Write font cache file."
+  (write-region (format "%s:%d" (or kumo/current-font "") (or kumo/current-font-size kumo/default-font-size)) nil kumo/font-setting-cache))
+
+
+;; set current font setting
+(defvar kumo/current-font-setting (or (read-font-cache) nil))
+
+;; current font family
+(defvar kumo/current-font (or (nth 0 kumo/current-font-setting) nil))
+;; current font size
+(defvar kumo/current-font-size (or (nth 1 kumo/current-font-setting) kumo/default-font-size))
+
+
+(set-face-attribute 'default nil :height kumo/current-font-size)
 
 (defun font-func-factory (font)
   "Font function factory.
@@ -75,7 +89,8 @@ FONT is a symbol."
     `(defun ,font ()
        (interactive)
        (set-face-attribute 'default nil :font ,(symbol-name font))
-       (write-region ,(symbol-name font) nil kumo/font-setting-cache))))
+       (setq kumo/current-font font)
+       (set-font-cache))))
 
 (defmacro font-func-macro-factory ()
   "Font function macro factory."
@@ -114,7 +129,6 @@ FONT is a symbol."
 (when kumo/current-font-list
   (bind-change-font-keymap))
 
-(set-face-attribute 'default nil :height kumo/font-size)
 (set-face-attribute 'default nil :weight kumo/font-weight)
 (setq-default line-spacing 0.3
               fill-column 80)
@@ -156,8 +170,7 @@ FONT is a symbol."
 (defun set-default-theme ()
   "Write and return default-theme.
 TARGET is a symbol."
-  (progn
-    (write-region (symbol-name kumo/default-theme) nil kumo/theme-setting-cache) kumo/default-theme))
+  (write-region (symbol-name kumo/default-theme) nil kumo/theme-setting-cache) kumo/default-theme)
 
 (defun theme-is-existing (target)
   "Check the theme is exists.
@@ -175,7 +188,7 @@ TARGET is theme mame."
     (set-default-theme)))
 
 ;; set current theme
-(setq-default kumo/current-theme (read-theme-cache))
+(setq-default kumo/current-theme (or (read-theme-cache) kumo/default-theme))
 
 (defmacro theme-factory-macro (name load-name &rest config)
   "Theme factory macro.
