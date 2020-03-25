@@ -66,11 +66,6 @@ TARGET is a symbol."
            return t))
 
 
-(defun set-default-font-cache ()
-  "Write and return default-font."
-  (write-region (symbol-name nil) nil kumo/font-setting-cache) nil)
-
-
 (defun read-font-cache ()
   "Read font from font cache."
   (when (file-exists-p kumo/font-setting-cache)
@@ -84,8 +79,16 @@ TARGET is a symbol."
               (if (font-is-existing (nth 0 font-list))
                   font-list
                 nil)))
-          ))))
-  )
+          )))))
+
+
+(defvar kumo/current-font-setting (or (read-font-cache) nil)
+  "Current font setting.")
+(defvar kumo/current-font (or (nth 0 kumo/current-font-setting) nil)
+  "Current font family.")
+(defvar kumo/current-font-size (or (nth 1 kumo/current-font-setting) kumo/default-font-size)
+  "Current font size.")
+(set-face-attribute 'default nil :height kumo/current-font-size)
 
 
 (defun set-font-cache (&optional font-name font-size)
@@ -100,15 +103,6 @@ FONT-SIZE: number."
    (format "%s:%d"
            (symbol-name kumo/current-font)
            kumo/current-font-size) nil kumo/font-setting-cache))
-
-
-(defvar kumo/current-font-setting (or (read-font-cache) nil)
-  "Current font setting.")
-(defvar kumo/current-font (or (nth 0 kumo/current-font-setting) nil)
-  "Current font family.")
-(defvar kumo/current-font-size (or (nth 1 kumo/current-font-setting) kumo/default-font-size)
-  "Current font size.")
-(set-face-attribute 'default nil :height kumo/current-font-size)
 
 
 (defun font-func-factory (font)
