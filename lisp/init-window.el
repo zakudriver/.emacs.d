@@ -88,7 +88,7 @@
     ("h" flop-frame)
     ("d" rotate-frame)
     ("c" rotate-frame-clockwise)
-    ("a" rotate-frame-anti-clockwise)
+    ("a" rotate-frame-anticlockwise)
     ("q" nil "quit")))
 
 
