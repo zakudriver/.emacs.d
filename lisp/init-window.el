@@ -61,9 +61,9 @@
   (defhydra hydra-frame-window (:color pink :hint nil)
     "
  ^Window^                              Frame^                       ^^Window Size^^^      ^Text Zoom^               
- _w1_: delete                          _f1_: delete                     ^ ^ _k_ ^ ^            _=_                   
- _w2_: delete others                   _f2_: delete others              _h_ ^+^ _l_            ^+^             
- _s_wap x-direction and y-direction    _f3_: new                        ^ ^ _j_ ^ ^            _-_            
+ _w1_: delete                          _f1_: delete                     ^ ^ _K_ ^ ^            _=_                   
+ _w2_: delete others                   _f2_: delete others              _H_ ^+^ _L_            ^+^             
+ _s_wap x-direction and y-direction    _f3_: new                        ^ ^ _J_ ^ ^            _-_            
  Flip _v_erticall                                                   _F_ullscreen       ^^^_b_alance
  Flop _h_orizontally
  Rotate 180 _d_egrees
@@ -80,10 +80,10 @@
     ("F" toggle-frame-fullscreen)
     ("=" kumo-font-size-increase)
     ("-" kumo-font-size-decrease)
-    ("h" shrink-window-horizontally)
-    ("k" shrink-window)
-    ("j" enlarge-window)
-    ("l" enlarge-window-horizontally)
+    ("H" shrink-window-horizontally)
+    ("K" shrink-window)
+    ("J" enlarge-window)
+    ("L" enlarge-window-horizontally)
     ("v" flip-frame)
     ("h" flop-frame)
     ("d" rotate-frame)
