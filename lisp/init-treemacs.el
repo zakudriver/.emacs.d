@@ -13,7 +13,8 @@
         ("C-, d" . treemacs-create-dir)
         ("C-, r" . treemacs-rename)
         ("C-, g" . treemacs-refresh)
-        ("C-, C-d" . treemacs-delete))
+        ("C-, C-d" . treemacs-delete)
+        ("C-, C-D" . treemacs-remove-project-from-workspace))
   :custom
   ;; (treemacs-collapse-dirs `(if treemacs-python-executable 3 0))
   (treemacs-sorting 'alphabetic-case-insensitive-desc)
