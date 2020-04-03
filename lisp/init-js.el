@@ -1,7 +1,6 @@
 ;;; Code:
 
 
-;; major mode for editing js files
 (use-package js2-mode
   :mode (("\\.js$" . js2-mode))
   :custom
@@ -14,13 +13,11 @@
   (js2-strict-missing-semi-warning nil))
 
 
-;; major mode for editing ts files
 (use-package typescript-mode
   :custom
   (typescript-indent-level 2))
 
 
-;; major mode for typescript language server
 (use-package tide
   :hook
   ((typescript-mode js2-mode) . tide-setup)
@@ -35,7 +32,6 @@
         ([remap pop-tag-mark] . tide-jump-back)))
 
 
-;; major mode for editing *.component.html files
 (use-package ng2-mode
   :mode
   (".+\\.component\\.html$" . ng2-mode)
@@ -47,7 +43,6 @@
   ("\\.module.ts\\'" . typescript-mode))
 
 
-;; format
 (use-package prettier-js
   :hook
   ((js2-mode ng2-mode typescript-mode scss-mode css-mode json-mode) . prettier-js-mode)
