@@ -6,6 +6,7 @@
   :bind
   (("C-h f" . 'counsel-describe-function)
    ("C-h v" . 'counsel-describe-variable)
+   ("C-s" . swiper)
    :map ivy-minibuffer-map
    ([escape] . minibuffer-keyboard-quit)
    :map swiper-map

@@ -19,6 +19,14 @@
   (set-buffer-file-coding-system 'undecided-dos nil))
 
 
+(defun quit-and-kill-window ()
+  "Quit and kill current window."
+  (interactive)
+  (with-current-buffer (current-buffer)
+    (run-hooks 'quit-window-hook))
+  (quit-restore-window nil 'kill))
+
+
 (defun save-buffer-as-utf8 (coding-system)
   "Revert a buffer with `CODING-SYSTEM' and save as UTF-8."
   (interactive "zCoding system for visited file (default nil):")

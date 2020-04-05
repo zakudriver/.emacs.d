@@ -45,6 +45,7 @@
   (after-init . global-auto-revert-mode))
 
 
+
 ;; Treat undo history as a tree
 (use-package undo-tree
   :diminish undo-tree-mode
@@ -81,12 +82,11 @@
 
 
 ;; Hungry deletion
-;; (use-package hungry-delete
-;;   :diminish
-;;   :hook
-;;   (after-init . global-hungry-delete-mode)
-;;   :custom
-;;   (hungry-delete-chars-to-skip " \t\f\v"))
+(use-package hungry-delete
+  :hook
+  (after-init . global-hungry-delete-mode)
+  :custom
+  (hungry-delete-chars-to-skip " \t\f\v"))
 
 
 ;; Move to the beginning/end of line or code

@@ -152,6 +152,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    "ts" 'treemacs-select-window
    "tt" 'treemacs
    "p" 'projectile-command-map
+   "P" 'proced
    "sr" 'counsel-rg
    "ss" 'swiper
    "ff" 'counsel-find-file

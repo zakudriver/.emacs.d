@@ -137,6 +137,17 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
   )
 
 
+(use-package proced
+  :bind
+  (:map proced-mode-map
+        ("k" . previous-line)
+        ("j" . next-line)
+        ("q" . quit-and-kill-window)
+        ("G" . proced-toggle-auto-update))
+  :custom
+  (proced-auto-update-flag t))
+
+
 (provide 'init-utils)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
