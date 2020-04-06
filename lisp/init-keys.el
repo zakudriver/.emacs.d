@@ -147,8 +147,6 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    :prefix "C-c"
    "q" 'save-buffers-kill-terminal
    "Q" 'kill-emacs
-   "j" 'avy-goto-line-below
-   "k" 'avy-goto-line-above
    "ts" 'treemacs-select-window
    "tt" 'treemacs
    "p" 'projectile-command-map
@@ -197,6 +195,8 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    :states '(normal visual)
    "H" 'mwim-beginning-of-code-or-line
    "L" 'mwim-end-of-code-or-line
+   "J" 'avy-goto-line-below
+   "K" 'avy-goto-line-above
    "f" 'avy-goto-char-in-line
    "gb" 'pop-tag-mark
    ))
