@@ -30,14 +30,6 @@
   :init
   (setenv "GO111MODULE" "on")
   :config
-  (use-package company-go
-    :after company
-    :hook
-    (go-mode . (lambda()
-                 (add-to-list (make-local-variable 'company-backends)
-                              '(company-go company-files company-yasnippet company-capf)))))
-
-
   ;; Install or update tools
   (defvar go--tools '("golang.org/x/tools/cmd/goimports"
                       "golang.org/x/tools/cmd/gorename"

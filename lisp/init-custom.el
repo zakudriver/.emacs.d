@@ -88,7 +88,7 @@
         (:extraArgs ["-isystem/Library/Developer/CommandLineTools/usr/include/c++/v1"
                      "-isystem/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include"
                      "-isystem/usr/local/include"]
-                    :resourceDir "/Library/Developer/CommandLineTools/usr/lib/clang/11.0.0"))
+                    :resourceDir "/Library/Developer/CommandLineTools/usr/lib/clang/11.0.3"))
     nil)
   "CCLS initialization options.")
 
