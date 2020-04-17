@@ -189,6 +189,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    "vn" 'kumo-vterm-next
    "gs" 'magit-status
    "gd" 'magit-dispatch
+   "gb" 'magit-log-buffer-file
    )
 
   (general-define-key
