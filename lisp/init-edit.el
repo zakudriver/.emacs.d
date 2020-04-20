@@ -16,7 +16,8 @@
       delete-by-moving-to-trash t    ; Deleting files go to OS's trash folder
       make-backup-files nil          ; Forbide to make backup files
       set-mark-command-repeat-pop t  ; Repeating C-SPC after popping mark pops it again
-      auto-save-default nil)
+      auto-save-default nil
+      completion-ignore-case t)
 
 
 ;; Permanently indent with spaces, never with TABs
