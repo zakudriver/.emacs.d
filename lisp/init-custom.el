@@ -45,7 +45,8 @@
                             (spacemacs-theme spacemacs-light)
                             (spacemacs-theme spacemacs-dark)
                             (gruvbox-theme gruvbox-dark-soft)
-                            (gruvbox-theme gruvbox-light-soft))
+                            (gruvbox-theme gruvbox-light-soft)
+                            (srcery-theme srcery))
   "Theme list.")
 
 
