@@ -34,10 +34,13 @@
   (set-buffer-file-coding-system 'utf-8)
   (save-buffer))
 
+
 (defun kumo-save-some-buffers ()
   "Save some buffers without prompting."
   (interactive)
-  (save-some-buffers t))
+  (if (y-or-n-p (format "Really save buffers? "))
+      (save-some-buffers t)
+    (message "Canceled save.")))
 
 
 (defun kumo-kill-this-buffer (&optional arg)
