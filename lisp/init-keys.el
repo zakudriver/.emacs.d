@@ -132,14 +132,13 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
   (general-define-key
    :states '(normal visual)
    :prefix ","
-   "," 'counsel-M-x
    "k" 'symbol-overlay-put
    "K" 'symbol-overlay-remove-all
    "u" 'undo-tree-visualize
    "o" 'overwrite-mode
    "m" 'counsel-imenu
    "w" 'avy-goto-char-timer
-   "s" 'save-buffer
+   "s" 'kumo-save-some-buffers
    "nd" 'kumo-number-division
    )
   

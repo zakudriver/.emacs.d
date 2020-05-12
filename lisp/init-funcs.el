@@ -34,6 +34,11 @@
   (set-buffer-file-coding-system 'utf-8)
   (save-buffer))
 
+(defun kumo-save-some-buffers ()
+  "Save some buffers without prompting."
+  (interactive)
+  (save-some-buffers t))
+
 
 (defun kumo-kill-this-buffer (&optional arg)
   "Kill the current buffer.
