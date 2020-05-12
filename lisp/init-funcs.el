@@ -38,7 +38,7 @@
 (defun kumo-save-some-buffers ()
   "Save some buffers without prompting."
   (interactive)
-  (if (y-or-n-p (format "Really save buffers? "))
+  (if (y-or-n-p (format "Really save buffers?"))
       (save-some-buffers t)
     (message "Canceled save.")))
 
