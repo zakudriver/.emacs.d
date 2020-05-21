@@ -93,6 +93,7 @@ If you experience stuttering, increase this.")
   (require 'init-prog)
   (require 'init-org)
   (require 'init-go)
+  (require 'init-dart)
   (require 'init-cpp)
   (require 'init-lisp)
 

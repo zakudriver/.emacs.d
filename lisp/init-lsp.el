@@ -88,6 +88,7 @@
       :hook
       (dap-mode . dap-ui-mode)))
 
+
   (use-package lsp-treemacs
     :bind
     (:map lsp-mode-map
@@ -117,6 +118,11 @@
           (append '("compile_commands.json"
                     ".ccls")
                   projectile-project-root-files-top-down-recurring))))
+
+
+;; dart
+(use-package lsp-dart
+  :hook (dart-mode . lsp))
 
 
 (provide 'init-lsp)
