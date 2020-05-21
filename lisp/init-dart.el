@@ -4,6 +4,8 @@
 (use-package dart-mode
   :defines
   (projectile-project-root-files-bottom-up)
+  :custom
+  (dart-format-on-save t)
   :config
   (with-eval-after-load 'projectile
     (add-to-list 'projectile-project-root-files-bottom-up "pubspec.yaml")
