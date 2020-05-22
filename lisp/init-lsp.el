@@ -11,7 +11,7 @@
   :commands
   (lsp lsp-deferred)
   :hook
-  ((go-mode ng2-html-mode) . lsp-deferred)
+  ((go-mode ng2-html-mode dart-mode) . lsp-deferred)
   :custom
   (lsp-clients-angular-language-server-command
    `("node"
@@ -30,7 +30,7 @@
     :after lsp-mode
     :custom
     ;; lsp-ui-doc
-    (lsp-ui-doc-enable t)
+    (lsp-ui-doc-enable nil)
     (lsp-ui-doc-header nil)
     (lsp-ui-doc-position 'bottom) ;; top, bottom, or at-point
     (lsp-ui-doc-max-width 120)
@@ -82,11 +82,10 @@
     :init
     (require 'dap-hydra)
     (require 'dap-go)
-    :config
-    (use-package dap-ui
-      :ensure nil
-      :hook
-      (dap-mode . dap-ui-mode)))
+    ;; :config
+    ;; (use-package dap-ui
+    ;;   :after dap-mode)
+    )
 
 
   (use-package lsp-treemacs
@@ -122,7 +121,10 @@
 
 ;; dart
 (use-package lsp-dart
-  :hook (dart-mode . lsp))
+  :hook
+  (dart-mode . lsp)
+  :custom
+  (lsp-dart-sdk-dir "/home/kumotyou/opt/flutter/bin/cache/dart-sdk/"))
 
 
 (provide 'init-lsp)

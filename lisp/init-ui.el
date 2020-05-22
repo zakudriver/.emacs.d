@@ -164,7 +164,6 @@ FONT is a symbol."
 
 ;; Emoji
 (use-package emojify
-  :ensure nil
   :hook
   (after-init . (lambda ()
                   (when sys/linuxp
