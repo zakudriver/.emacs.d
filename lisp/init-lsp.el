@@ -124,7 +124,10 @@
   :hook
   (dart-mode . lsp)
   :custom
-  (lsp-dart-sdk-dir "/home/kumotyou/opt/flutter/bin/cache/dart-sdk/"))
+  (lsp-dart-outline nil)
+  (lsp-dart-sdk-dir "/home/kumotyou/opt/flutter/bin/cache/dart-sdk/")
+  (lsp-dart-flutter-sdk-dir  "/home/kumotyou/opt/flutter/")
+  )
 
 
 (provide 'init-lsp)
