@@ -20,6 +20,7 @@
 
 
 (defconst kumo/theme-list '((monokai-theme monokai)
+                            (monokai-pro-theme monokai-pro)
                             (dracula-theme dracula)
                             (lab-themes lab-dark)
                             (doom-themes doom-one-light)
