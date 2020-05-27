@@ -26,3 +26,5 @@
 - [[https://github.com/theia-ide/typescript-language-server][typescript-language-server]]
 - [[https://github.com/angular/angular][angular]]
 - [[https://github.com/prettier/prettier][prettier]]
+- [[https://github.com/bash-lsp/bash-language-server][bash-language-server]]
+- [[https://github.com/dart-lang/sdk][dart-sdk]]

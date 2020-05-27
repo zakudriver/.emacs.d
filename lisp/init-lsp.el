@@ -11,7 +11,7 @@
   :commands
   (lsp lsp-deferred)
   :hook
-  ((go-mode ng2-html-mode dart-mode) . lsp-deferred)
+  ((go-mode ng2-html-mode dart-mode sh-mode) . lsp-deferred)
   :custom
   (lsp-clients-angular-language-server-command
    `("node"
