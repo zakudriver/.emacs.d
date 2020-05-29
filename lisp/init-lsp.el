@@ -39,7 +39,6 @@
     (lsp-ui-doc-use-webkit nil)
     (lsp-ui-doc-delay 0.2)
     ;; lsp-ui-flycheck
-
     (lsp-ui-flycheck-enable t)
     ;; lsp-ui-sideline
     (lsp-ui-sideline-enable nil)
@@ -57,8 +56,8 @@
     (lsp-ui-peek-peek-height 20)
     (lsp-ui-peek-list-width 50)
     (lsp-ui-peek-fontify 'on-demand)
-    (lsp-use-native-json nil)
-    )
+    (lsp-use-native-json nil))
+
 
   (use-package lsp-ivy
     :after lsp-mode
@@ -67,10 +66,12 @@
           ("C-. w w" . lsp-ivy-workspace-symbol)
           ("C-. w g" . lsp-ivy-global-workspace-symbol)))
 
+
   (use-package company-lsp
     :custom
     (company-lsp-cache-candidates 'auto)
     (company-lsp-filter-candidates t))
+
 
   ;; dap
   (use-package dap-mode
