@@ -30,7 +30,7 @@
     :after lsp-mode
     :custom
     ;; lsp-ui-doc
-    (lsp-ui-doc-enable nil)
+    (lsp-ui-doc-enable t)
     (lsp-ui-doc-header nil)
     (lsp-ui-doc-position 'bottom) ;; top, bottom, or at-point
     (lsp-ui-doc-max-width 120)
@@ -42,13 +42,13 @@
 
     (lsp-ui-flycheck-enable t)
     ;; lsp-ui-sideline
-    (lsp-ui-sideline-enable t)
+    (lsp-ui-sideline-enable nil)
     (lsp-ui-sideline-ignore-duplicate t)
     (lsp-ui-sideline-show-symbol t)
     (lsp-ui-sideline-show-hover nil)
     (lsp-ui-sideline-show-diagnostics nil)
     (lsp-ui-sideline-show-code-actions t)
-    (lsp-ui-sideline-code-actions-prefix " ")
+    (lsp-ui-sideline-code-actions-prefix "💡 ")
     ;; lsp-ui-imenu
     (lsp-ui-imenu-enable nil)
     (lsp-ui-imenu-kind-position 'top)
@@ -123,7 +123,7 @@
 ;; dart
 (use-package lsp-dart
   :custom
-  (lsp-dart-outline nil)
+  ;; (lsp-dart-outline nil)
   (lsp-dart-sdk-dir (kumo-home-path-resolve "/opt/flutter/bin/cache/dart-sdk/"))
   (lsp-dart-flutter-sdk-dir (kumo-home-path-resolve "/opt/flutter/bin/cache/dart-sdk/")))
 
