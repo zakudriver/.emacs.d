@@ -122,8 +122,6 @@
 
 ;; dart
 (use-package lsp-dart
-  :hook
-  (dart-mode . lsp)
   :custom
   (lsp-dart-outline nil)
   (lsp-dart-sdk-dir (kumo-home-path-resolve "/opt/flutter/bin/cache/dart-sdk/"))
