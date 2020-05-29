@@ -27,7 +27,6 @@
   (company-dabbrev-ignore-case nil)
   (company-dabbrev-downcase nil)
   (company-global-modes '(not message-mode help-mode shell-mode))
-  ;; (company-backends '(company-capf))
   (company-frontends '(company-pseudo-tooltip-frontend company-echo-metadata-frontend))
   :config
   (defun only-company-yasnippet ()

@@ -68,9 +68,13 @@
 
 
   (use-package company-lsp
+    :after (lsp-mode company)
     :custom
-    (company-lsp-cache-candidates 'auto)
-    (company-lsp-filter-candidates t))
+    (company-lsp-cache-candidates t)
+    (company-lsp-filter-candidates t)
+    (company-lsp-async t)
+    :config
+    (push 'company-lsp company-backends))
 
 
   ;; dap
@@ -124,9 +128,10 @@
 ;; dart
 (use-package lsp-dart
   :custom
-  ;; (lsp-dart-outline nil)
-  (lsp-dart-sdk-dir (kumo-home-path-resolve "/opt/flutter/bin/cache/dart-sdk/"))
-  (lsp-dart-flutter-sdk-dir (kumo-home-path-resolve "/opt/flutter/bin/cache/dart-sdk/")))
+  (lsp-dart-outline nil)
+  (lsp-enable-on-type-formatting t)
+  (lsp-dart-sdk-dir (kumo-home-path-resolve "/opt/flutter/bin/cache/dart-sdk"))
+  (lsp-dart-flutter-sdk-dir (kumo-home-path-resolve "/opt/flutter")))
 
 
 (provide 'init-lsp)
