@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: header
+# key: header
+# --
+
+#+TITLE: ${1:title}
+#+AUTHOR: ${2:author}
+#+DATE: ${3:date}
+
+
+* $0
