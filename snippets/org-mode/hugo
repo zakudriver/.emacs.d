@@ -2,7 +2,8 @@
 # name: hugo
 # key: hugo
 # --
-#+HUGO_BASE_DIR: ../
+#+HUGO_BASE_DIR: ~/blog
+#+HUGO_SECTION: posts
 #+TITLE: $1
 #+DATE: `(format-time-string "%Y-%m-%d")`
 #+HUGO_AUTO_SET_LASTMOD: t

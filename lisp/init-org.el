@@ -54,6 +54,11 @@
     :custom
     (org-download-image-dir "./img")
     (org-download-backend "curl \"%s\" -o \"%s\""))
+
+  (use-package easy-hugo)
+
+  (use-package ox-hugo
+    :after ox)
   )
 
 

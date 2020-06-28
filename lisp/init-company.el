@@ -6,7 +6,7 @@
   :commands company-abort
   :bind
   (("M-/" . company-complete)
-   ("<backtab>" . company-yasnippet)
+   ("s-/" . company-yasnippet)
    :map company-active-map
    ("C-p" . company-select-previous)
    ("C-n" . company-select-next)
