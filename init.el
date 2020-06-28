@@ -87,6 +87,7 @@ If you experience stuttering, increase this.")
   (require 'init-flycheck)
   (require 'init-yasnippet)
   (require 'init-projectile)
+  (require 'init-hugo)
 
   ;; Programming
   (require 'init-lsp)

@@ -1,11 +1,14 @@
 # -*- mode: snippet -*-
-# name: header
-# key: header
+# name: hugo
+# key: hugo
 # --
+#+HUGO_BASE_DIR: ../
+#+TITLE: $1
+#+DATE: `(format-time-string "%Y-%m-%d")`
+#+HUGO_AUTO_SET_LASTMOD: t
+#+HUGO_TAGS: $2
+#+HUGO_CATEGORIES: $3
+#+HUGO_DRAFT: false
 
-#+TITLE: ${1:title}
-#+AUTHOR: ${2:author}
-#+DATE: ${3:date}
 
-
-* $0
+$0
