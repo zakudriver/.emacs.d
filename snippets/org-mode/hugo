@@ -4,13 +4,15 @@
 # --
 
 #+TITLE: $1
+#+AUTHOR: $2
 #+DATE: `(format-time-string "%Y-%m-%d")`
+#+DESCRIPTION: $3
 #+HUGO_AUTO_SET_LASTMOD: t
-#+HUGO_TAGS: $2
-#+HUGO_CATEGORIES: $3
+#+HUGO_TAGS: $4
+#+HUGO_CATEGORIES: $5
 #+HUGO_DRAFT: false
 #+HUGO_BASE_DIR: ~/WWW-BUILDER
-#+HUGO_SECTION: posts/$3
+#+HUGO_SECTION: post/$5
 
 
 $0
