@@ -2,7 +2,7 @@
 # name: hugo
 # key: hugo
 # --
-#+HUGO_BASE_DIR: ~/blog
+#+HUGO_BASE_DIR: ~/WWW-BUILDER
 #+HUGO_SECTION: posts
 #+TITLE: $1
 #+DATE: `(format-time-string "%Y-%m-%d")`
