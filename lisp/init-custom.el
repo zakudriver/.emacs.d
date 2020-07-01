@@ -99,6 +99,18 @@
   "Modeline height.")
 
 
+(defconst kumo/easy-hugo-basedir "~/WWW-BUILDER/"
+  "Hugo basedir.")
+
+
+(defconst kumo/easy-hugo-postdir "NOTE_BOOKS"
+  "Hugo postdir.")
+
+
+(defconst kumo/easy-hugo-url "https://rx-78-kum0.github.io"
+  "Hugo site url.")
+
+
 ;; (defconst kumo/prettify-symbols-alist
 ;;   '(("lambda" . ?λ)
 ;;     ("<-" . ?←)

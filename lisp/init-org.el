@@ -1,6 +1,10 @@
 ;;; Code:
 
 
+(eval-when-compile
+  (require 'init-custom))
+
+
 (use-package org
   :bind
   (:map org-mode-map
@@ -55,7 +59,12 @@
     (org-download-image-dir "./img")
     (org-download-backend "curl \"%s\" -o \"%s\""))
 
-  (use-package easy-hugo)
+  (use-package easy-hugo
+    :custom
+    (easy-hugo-basedir kumo/easy-hugo-basedir)
+    (easy-hugo-postdir kumo/easy-hugo-postdir)
+    (easy-hugo-url kumo/easy-hugo-url)
+    (easy-hugo-default-ext ".org"))
 
   (use-package ox-hugo
     :after ox)
