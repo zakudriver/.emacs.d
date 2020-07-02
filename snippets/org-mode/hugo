@@ -12,7 +12,7 @@
 #+HUGO_CATEGORIES: $5
 #+HUGO_DRAFT: false
 #+HUGO_BASE_DIR: ~/WWW-BUILDER
-#+HUGO_SECTION: post/$5
+#+HUGO_SECTION: posts
 
 
 $0

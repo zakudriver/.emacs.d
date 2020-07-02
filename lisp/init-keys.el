@@ -170,6 +170,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    "d" 'dired
    "D" 'docker
    "h" 'kumo-open-dashboard
+   "H" 'easy-hugo
    "ww" 'hydra-frame-window/body
    "wv" 'split-window-vertically
    "wV" 'kumo-window-vertically-selected

@@ -60,11 +60,20 @@
     (org-download-backend "curl \"%s\" -o \"%s\""))
 
   (use-package easy-hugo
+    :commands easy-hugo
+    :bind
+    (:map easy-hugo-mode-map
+          ("SPC" . general-simulate-C-c))
     :custom
     (easy-hugo-basedir kumo/easy-hugo-basedir)
     (easy-hugo-postdir kumo/easy-hugo-postdir)
     (easy-hugo-url kumo/easy-hugo-url)
-    (easy-hugo-default-ext ".org"))
+    (easy-hugo-preview-url kumo/easy-hugo-preview-url)
+    (easy-hugo-default-ext ".org")
+    :hook
+    (easy-hugo-mode . (lambda ()
+                        (evil-set-initial-state 'easy-hugo-mode 'emacs)))
+    )
 
   (use-package ox-hugo
     :after ox)

@@ -107,8 +107,12 @@
   "Hugo postdir.")
 
 
-(defconst kumo/easy-hugo-url "https://rx-78-kum0.github.io"
+(defconst kumo/easy-hugo-url "https://rx-78-kum0.github.io/"
   "Hugo site url.")
+
+
+(defconst kumo/easy-hugo-preview-url "http://localhost:1313/"
+  "Hugo preview url.")
 
 
 ;; (defconst kumo/prettify-symbols-alist
