@@ -340,6 +340,25 @@ NUM is the window number."
   `(progn ,@(mapcar 'kumo-winum-delete-window-factory '(0 1 2 3 4 5 6 7 8 9))))
 
 
+(defun kumo-hugo-github-deploy ()
+  "Execute `easy-hugo-github-deploy-script' script locate at `easy-hugo-basedir'."
+  (interactive)
+  (let ((deployscript (file-truename (expand-file-name
+				                              "deploy.sh"
+				                              easy-hugo-basedir))))
+    (unless (executable-find deployscript)
+      (error "%s do not execute" deployscript))
+    (let ((ret (call-process deployscript nil "*hugo-github-deploy*" t)))
+      (unless (zerop ret)
+	      (switch-to-buffer (get-buffer "*hugo-github-deploy*"))
+	      (error "%s command does not end normally" deployscript)))
+    (when (get-buffer "*hugo-github-deploy*")
+      (kill-buffer "*hugo-github-deploy*"))
+    (message "Blog deployed")
+    (when easy-hugo-url
+      (browse-url easy-hugo-url))))
+
+
 (provide 'init-funcs)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
