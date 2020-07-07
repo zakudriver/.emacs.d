@@ -83,7 +83,8 @@
   :commands easy-hugo
   :bind
   (:map easy-hugo-mode-map
-        ("SPC" . general-simulate-C-c))
+        ("SPC" . general-simulate-C-c)
+        ("G" . kumo-easy-hugo-github-deploy))
   :custom
   (easy-hugo-basedir kumo/easy-hugo-basedir)
   (easy-hugo-postdir kumo/easy-hugo-postdir)

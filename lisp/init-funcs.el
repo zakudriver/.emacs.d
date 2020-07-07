@@ -1,6 +1,10 @@
 ;;; Code:
 
 
+(eval-when-compile
+  (require 'init-custom))
+
+
 (defun kumo-open-init-file()
   "Open init.el file."
   (interactive)
@@ -338,6 +342,15 @@ NUM is the window number."
 (defmacro kumo-winum-delete-window-macro-factory ()
   "Winum delete window function macro factory."
   `(progn ,@(mapcar 'kumo-winum-delete-window-factory '(0 1 2 3 4 5 6 7 8 9))))
+
+
+(defun kumo-easy-hugo-github-deploy ()
+  "Easy-Hugo deploy github page."
+  (interactive)
+  (let* ((output-buffer (get-buffer-create kumo/easy-hugo-github-deploy-buffer-name))
+         (command-window (async-shell-command (expand-file-name (concat kumo/easy-hugo-basedir kumo/easy-hugo-github-deploy-script)) output-buffer nil)))
+    (select-window command-window)
+    (local-set-key (kbd "q") 'kill-buffer-and-window)))
 
 
 (provide 'init-funcs)

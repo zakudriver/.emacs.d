@@ -115,6 +115,9 @@
 (defconst kumo/easy-hugo-github-deploy-script "publish.sh"
   "Hugo github deploy script.")
 
+(defconst kumo/easy-hugo-github-deploy-buffer-name "*Hugo Github Deploy*"
+  "Hugo github deploy buffer name.")
+
 
 ;; (defconst kumo/prettify-symbols-alist
 ;;   '(("lambda" . ?λ)
