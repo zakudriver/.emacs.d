@@ -89,6 +89,7 @@
   (easy-hugo-postdir kumo/easy-hugo-postdir)
   (easy-hugo-url kumo/easy-hugo-url)
   (easy-hugo-preview-url kumo/easy-hugo-preview-url)
+  (easy-hugo-github-deploy-script kumo/easy-hugo-github-deploy-script)
   (easy-hugo-default-ext ".org")
   :hook
   (easy-hugo-mode . (lambda ()
