@@ -350,7 +350,7 @@ NUM is the window number."
   (let* ((output-buffer (get-buffer-create kumo/easy-hugo-github-deploy-buffer-name))
          (command-window (async-shell-command (expand-file-name (concat kumo/easy-hugo-basedir kumo/easy-hugo-github-deploy-script)) output-buffer nil)))
     (select-window command-window)
-    (local-set-key (kbd "q") 'kill-buffer-and-window)))
+    (local-set-key (kbd "C-q") 'kill-buffer-and-window)))
 
 
 (provide 'init-funcs)
