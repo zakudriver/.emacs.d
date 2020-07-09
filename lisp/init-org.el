@@ -86,6 +86,7 @@
         ("SPC" . general-simulate-C-c)
         ("G" . kumo-easy-hugo-github-deploy))
   :custom
+  (easy-hugo-org-header t)
   (easy-hugo-basedir kumo/easy-hugo-basedir)
   (easy-hugo-postdir kumo/easy-hugo-postdir)
   (easy-hugo-url kumo/easy-hugo-url)

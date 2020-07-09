@@ -103,7 +103,7 @@
 (defconst kumo/easy-hugo-basedir "~/WWW-BUILDER/"
   "Hugo basedir.")
 
-(defconst kumo/easy-hugo-postdir "NOTE_BOOKS"
+(defconst kumo/easy-hugo-postdir "notebook-org"
   "Hugo postdir.")
 
 (defconst kumo/easy-hugo-url "https://rx-78-kum0.github.io/"
