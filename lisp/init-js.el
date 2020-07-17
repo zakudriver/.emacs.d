@@ -45,7 +45,7 @@
 
 (use-package prettier-js
   :hook
-  ((js2-mode ng2-mode typescript-mode scss-mode css-mode json-mode) . prettier-js-mode)
+  ((js2-mode ng2-mode typescript-mode scss-mode css-mode json-mode html-mode ng2-html-mode) . prettier-js-mode)
   (web-mode . (lambda ()
                 (unless (member (file-name-extension buffer-file-name) '("ejs"))
                   (prettier-js-mode))))
