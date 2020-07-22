@@ -64,7 +64,8 @@
         ("M-n" . vterm-send-next)
         ("M-k" . vterm-send-up)
         ("M-j" . vterm-send-down)
-        ("M-y" . vterm-yank))
+        ("M-p" . vterm-yank)
+        ("M-u" . vterm-undo))
   :config
   (advice-add #'vterm :override #'(lambda ()
                                     "Toggle vterm or create a new vterm."
