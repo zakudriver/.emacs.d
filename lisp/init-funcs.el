@@ -303,6 +303,8 @@ PATH is a string."
   (concat (getenv "HOME") path))
 
 
+(defvar kumo/divisor-cache 14
+  "Divisor cache.")
 (defun kumo-number-division (beg end &optional num)
   "Selected number division.
 BEG is begin point.
@@ -310,12 +312,12 @@ END is end point.
 NUM is a number."
   (interactive "r\nsPlease input number: ")
   (setq num (string-to-number num))
+  (setq kumo/divisor-cache (if (= num 0) kumo/divisor-cache num))
   (if (use-region-p)
-      (let ((regionp (buffer-substring beg end))
-            (n (if (= num 0) 14 num)))
+      (let ((regionp (string-to-number (buffer-substring beg end))))
         (delete-region beg end)
         (insert
-         (number-to-string (/ (string-to-number regionp) (float n)))))))
+         (number-to-string (/ (float regionp) (float kumo/divisor-cache)))))))
 
 
 (defun kumo-timestamp ()
