@@ -34,11 +34,6 @@
   (with-eval-after-load 'magit
     (setq magit-completing-read-function 'ivy-completing-read))
 
-  (when (and sys/macp (executable-find "gls"))
-    (setq counsel-find-file-occur-use-find nil
-          counsel-find-file-occur-cmd
-          "gls -a | grep -i -E '%s' | tr '\\n' '\\0' | xargs -0 gls -d --group-directories-first"))
-
   ;; Ivy integration for Projectile
   (use-package counsel-projectile
     :hook

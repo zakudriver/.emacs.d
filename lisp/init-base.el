@@ -18,13 +18,13 @@
 (set-terminal-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
 (modify-coding-system-alist 'process "*" 'utf-8)
-(setq create-lockfiles nil)
 
 
 (setq load-prefer-newer t                     ;; Prefers the newest version of a file
       large-file-warning-threshold 100000000  ;; Prefers the newest version of a file
       ring-bell-function 'ignore              ;; disable the annoying bell ring
-      mouse-drag-copy-region t)
+      mouse-drag-copy-region t
+      create-lockfiles nil)
 
 
 ;; Environment
@@ -78,6 +78,15 @@
   :custom
   (which-key-popup-type 'minibuffer)
   (which-key-sort-order 'which-key-prefix-then-key-order))
+
+
+;; so-long emacs/>=27p
+(use-package so-long
+  :ensure nil
+  :hook
+  (after-init . global-so-long-mode)
+  :custom
+  (so-long-threshold 400))
 
 
 (provide 'init-base)

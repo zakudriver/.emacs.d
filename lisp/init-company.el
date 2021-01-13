@@ -3,7 +3,7 @@
 
 (use-package company
   :diminish
-  :commands company-abort
+  :commands company-cancel
   :bind
   (("M-/" . company-complete)
    ("s-/" . company-yasnippet)
@@ -26,8 +26,11 @@
   (company-require-match nil)
   (company-dabbrev-ignore-case nil)
   (company-dabbrev-downcase nil)
-  (company-global-modes '(not message-mode help-mode shell-mode))
+  (company-global-modes '(not erc-mode message-mode help-mode shell-mode))
   (company-frontends '(company-pseudo-tooltip-frontend company-echo-metadata-frontend))
+  (company-backends '((company-capf :with company-yasnippet)
+                      (company-dabbrev-code company-keywords company-files)
+                      company-dabbrev))
   :config
   (defun only-company-yasnippet ()
     "Hide the current completeions and show snippets."
@@ -49,35 +52,8 @@
     (company-box-backends-colors nil)
     (company-box-show-single-candidate t)
     (company-box-max-candidates 50)
-    (company-box-doc-delay 0.5)
+    (company-box-doc-delay 0.3)
     :config
-    ;; Highlight `company-common'
-    (advice-add #'company-box--make-line :override #'(lambda (candidate)
-                                                       (-let* (((candidate annotation len-c len-a backend) candidate)
-                                                               (color (company-box--get-color backend))
-                                                               ((c-color a-color i-color s-color) (company-box--resolve-colors color))
-                                                               (icon-string (and company-box--with-icons-p (company-box--add-icon candidate)))
-                                                               (candidate-string (concat (propertize (or company-common "") 'face 'company-tooltip-common)
-                                                                                         (substring (propertize candidate 'face 'company-box-candidate)
-                                                                                                    (length company-common) nil)))
-                                                               (align-string (when annotation
-                                                                               (concat " " (and company-tooltip-align-annotations
-                                                                                                (propertize " " 'display `(space :align-to (- right-fringe ,(or len-a 0) 1)))))))
-                                                               (space company-box--space)
-                                                               (icon-p company-box-enable-icon)
-                                                               (annotation-string (and annotation (propertize annotation 'face 'company-box-annotation)))
-                                                               (line (concat (unless (or (and (= space 2) icon-p) (= space 0))
-                                                                               (propertize " " 'display `(space :width ,(if (or (= space 1) (not icon-p)) 1 0.75))))
-                                                                             (company-box--apply-color icon-string i-color)
-                                                                             (company-box--apply-color candidate-string c-color)
-                                                                             align-string
-                                                                             (company-box--apply-color annotation-string a-color)))
-                                                               (len (length line)))
-                                                         (add-text-properties 0 len (list 'company-box--len (+ len-c len-a)
-                                                                                          'company-box--color s-color)
-                                                                              line)
-                                                         line)))
-
     ;; Prettify icons
     (advice-add #'company-box-icons--elisp :override #'(lambda (candidate)
                                                          (when (derived-mode-p 'emacs-lisp-mode)

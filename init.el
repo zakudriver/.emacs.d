@@ -48,13 +48,21 @@ If you experience stuttering, increase this.")
 
 
 ;; Load path
-(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+;; Optimize: Force "lisp"" and "site-lisp" at the head to reduce the startup time.
+(defun update-load-path (&rest _)
+  "Update `load-path'."
+  (dolist (dir '("site-lisp" "lisp"))
+    (push (expand-file-name dir user-emacs-directory) load-path)))
 
-;; Load custom theme file
-(add-to-list 'custom-theme-load-path (expand-file-name "themes" user-emacs-directory))
+(defun add-subdirs-to-load-path (&rest _)
+  "Add subdirectories to `load-path'."
+  (let ((default-directory (expand-file-name "site-lisp" user-emacs-directory)))
+    (normal-top-level-add-subdirs-to-load-path)))
 
-;; custom-file
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(advice-add #'package-initialize :after #'update-load-path)
+;; (advice-add #'package-initialize :after #'add-subdirs-to-load-path)
+
+(update-load-path)
 
 ;; set my own configuration
 (with-temp-message ""
@@ -78,7 +86,6 @@ If you experience stuttering, increase this.")
   (require 'init-edit)
   (require 'init-highlight)
   (require 'init-ibuffer)
-  (require 'init-treemacs)
 
   (require 'init-window)
   (require 'init-ivy)

@@ -17,6 +17,9 @@
                  (reusable-frames . visible)
                  (window-height . 0.2)))
   :custom
+  (flycheck-global-modes
+   '(not text-mode outline-mode fundamental-mode lisp-interaction-mode
+         org-mode diff-mode shell-mode eshell-mode term-mode vterm-mode))
   (flycheck-emacs-lisp-load-path 'inherit)
   ;; Only check while saving and opening files
   (flycheck-check-syntax-automatically '(save mode-enabled))
@@ -28,7 +31,6 @@
       [16 48 112 240 112 48 16] nil nil 'center))
 
   (use-package flycheck-popup-tip
-    :after flycheck
     :hook
     (flycheck-mode . flycheck-popup-tip-mode)
     :custom

@@ -80,29 +80,23 @@
   ;; dap
   (use-package dap-mode
     :hook
-    (lsp-mode . dap-mode)
+    ((lsp-mode . dap-auto-configure-mode)
+     (dap-stopped . (lambda (_args) (dap-hydra)))
+     (dap-terminated . (lambda (_args) (dap-hydra/nil)))
+     (go-mode . (lambda () (require 'dap-go)))
+     ((c-mode c++-mode objc-mode swift-mode) . (lambda () (require 'dap-lldb)))
+     (elixir-mode . (lambda () (require 'dap-elixir)))
+     ((js-mode js2-mode) . (lambda () (require 'dap-chrome))))
     :bind
     (:map lsp-mode-map
           ("C-. d d" . dap-debug)
           ("C-. d h" . dap-hydra))
     :init
     (require 'dap-hydra)
-    (require 'dap-go)
     ;; :config
     ;; (use-package dap-ui
     ;;   :after dap-mode)
     )
-
-
-  (use-package lsp-treemacs
-    :bind
-    (:map lsp-mode-map
-          ("C-. t e" . lsp-treemacs-errors-list)
-          ("C-. t s" . lsp-treemacs-symbols))
-    :config
-    (with-eval-after-load 'ace-window
-      (when (boundp 'aw-ignored-buffers)
-        (push 'lsp-treemacs-symbols-mode aw-ignored-buffers))))
   )
 
 

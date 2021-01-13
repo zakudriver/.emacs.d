@@ -58,6 +58,17 @@
         ("C-/" . nil)))
 
 
+;; Show number of matches in mode-line while searching
+(use-package anzu
+  :diminish
+  :bind (([remap query-replace] . anzu-query-replace)
+         ([remap query-replace-regexp] . anzu-query-replace-regexp)
+         :map isearch-mode-map
+         ([remap isearch-query-replace] . anzu-isearch-query-replace)
+         ([remap isearch-query-replace-regexp] . anzu-isearch-query-replace-regexp))
+  :hook (after-init . global-anzu-mode))
+
+
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
 
@@ -69,6 +80,7 @@
   ([remap comment-dwim] . comment-dwim-2))
 
 
+;; Automatic parenthesis pairing
 (use-package elec-pair
   :ensure nil
   :hook
@@ -82,6 +94,11 @@
   (electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit))
 
 
+;; Smartly select region, rectangle, multi cursors
+(use-package smart-region
+  :hook (after-init . smart-region-on))
+
+
 ;; Hungry deletion
 (use-package hungry-delete
   :hook
@@ -92,6 +109,7 @@
 
 ;; Move to the beginning/end of line or code
 (use-package mwim)
+
 
 
 (provide 'init-edit)
