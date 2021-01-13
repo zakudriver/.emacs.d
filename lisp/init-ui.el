@@ -416,7 +416,12 @@ THEME is '(theme-package-name theme name)."
   (add-to-list 'all-the-icons-mode-icon-alist
                '(nov-mode all-the-icons-faicon "book" :height 1.0 :v-adjust -0.1 :face all-the-icons-green))
   (add-to-list 'all-the-icons-mode-icon-alist
-               '(gfm-mode all-the-icons-octicon "markdown" :face all-the-icons-lblue)))
+               '(gfm-mode all-the-icons-octicon "markdown" :face all-the-icons-lblue))
+  (add-to-list 'all-the-icons-icon-alist
+               '("\\.tsx$" all-the-icons-fileicon "typescript" :height 0.9 :face all-the-icons-dblue))
+  (add-to-list 'all-the-icons-mode-icon-alist
+               '(typescript-mode all-the-icons-fileicon "typescript" :height 0.9 :face all-the-icons-blue))
+  )
 
 
 
