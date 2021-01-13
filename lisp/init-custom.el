@@ -13,7 +13,7 @@
           (const :tag "Tuna" tuna)))
 
 
-(defconst kumo/logo (expand-file-name "logo2.png" user-emacs-directory))
+(defconst kumo/logo (expand-file-name "logo.png" user-emacs-directory))
 
 
 (defconst kumo/default-theme 'monokai)
