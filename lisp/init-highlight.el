@@ -131,18 +131,18 @@ FACE defaults to inheriting from default and highlight."
 
 ;; Highlight uncommitted changes using VC
 (use-package diff-hl
-  :commands diff-hl-magit-post-refresh
-  :defines
-  (diff-hl-margin-symbols-alist desktop-minor-mode-table)
   :hook
   (after-init . global-diff-hl-mode)
   (dired-mode . diff-hl-dired-mode)
+  :custom
+  (diff-hl-draw-borders nil)
   :bind
   (:map diff-hl-command-map
         ("C-. c" . diff-hl-mark-hunk)))
 
 
 (use-package pulse
+  :ensure nil
   :custom-face
   (pulse-highlight-start-face ((t (:inherit region))))
   (pulse-highlight-face ((t (:inherit region)))))

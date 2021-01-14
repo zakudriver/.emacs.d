@@ -52,7 +52,7 @@
   :diminish undo-tree-mode
   :hook
   (after-init . global-undo-tree-mode)
-  (web-mode . undo-tree-mode)
+  (web-mode . undo-tree-mode) ;; web-mode
   :bind
   (:map undo-tree-map
         ("C-/" . nil)))
@@ -61,12 +61,14 @@
 ;; Show number of matches in mode-line while searching
 (use-package anzu
   :diminish
-  :bind (([remap query-replace] . anzu-query-replace)
-         ([remap query-replace-regexp] . anzu-query-replace-regexp)
-         :map isearch-mode-map
-         ([remap isearch-query-replace] . anzu-isearch-query-replace)
-         ([remap isearch-query-replace-regexp] . anzu-isearch-query-replace-regexp))
-  :hook (after-init . global-anzu-mode))
+  :bind
+  (([remap query-replace] . anzu-query-replace)
+   ([remap query-replace-regexp] . anzu-query-replace-regexp)
+   :map isearch-mode-map
+   ([remap isearch-query-replace] . anzu-isearch-query-replace)
+   ([remap isearch-query-replace-regexp] . anzu-isearch-query-replace-regexp))
+  :hook
+  (after-init . global-anzu-mode))
 
 
 (use-package expand-region
@@ -96,7 +98,8 @@
 
 ;; Smartly select region, rectangle, multi cursors
 (use-package smart-region
-  :hook (after-init . smart-region-on))
+  :hook
+  (after-init . smart-region-on))
 
 
 ;; Hungry deletion

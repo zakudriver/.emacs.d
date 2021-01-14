@@ -16,6 +16,7 @@
   (x-select-enable-clipboard t)
   (evil-kill-on-visual-paste nil)
   :config
+  (evil-set-undo-system 'undo-tree)
   ;; redefine evil operator
   (evil-define-key nil evil-normal-state-map
     "d" 'evil-delete-no-yank
@@ -146,10 +147,15 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    :prefix "C-c"
    "q" 'save-buffers-kill-terminal
    "Q" 'kill-emacs
-   "ts" 'treemacs-select-window
-   "tt" 'treemacs
    "p" 'projectile-command-map
    "P" 'proced
+   "d" 'dired
+   "D" 'docker
+   "h" 'kumo-open-dashboard
+   "H" 'easy-hugo
+   "yy" 'youdao-dictionary-search-at-point-posframe
+   "yY" 'youdao-dictionary-search-at-point
+   "yi" 'youdao-dictionary-search-from-input
    "sr" 'counsel-rg
    "ss" 'swiper
    "ff" 'counsel-find-file
@@ -167,10 +173,6 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    "oa" 'org-agenda
    "cc" 'kumo-flycheck-list-errors-toggle
    "cs" 'kumo-flycheck-list-errors-select-window
-   "d" 'dired
-   "D" 'docker
-   "h" 'kumo-open-dashboard
-   "H" 'easy-hugo
    "ww" 'hydra-frame-window/body
    "wv" 'split-window-vertically
    "wV" 'kumo-window-vertically-selected

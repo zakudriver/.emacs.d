@@ -50,6 +50,8 @@
                      (projects . 10)))
   (dashboard-init-info (concat "Happy hacking, " user-login-name " - Emacs ♥ you!"))
   (dashboard-set-footer nil)
+  :custom-face
+  (dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
   :init
   ;; init jump to (kumo/dashboard-position) line
   (add-hook 'emacs-startup-hook '(lambda ()

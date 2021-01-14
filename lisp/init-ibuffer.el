@@ -3,12 +3,6 @@
 
 (use-package ibuffer
   :ensure nil
-  :functions
-  (all-the-icons-icon-for-file
-   all-the-icons-icon-for-mode
-   all-the-icons-auto-mode-match?
-   all-the-icons-faicon
-   my-ibuffer-find-file)
   :commands
   (ibuffer-find-file
    ibuffer-current-buffer)

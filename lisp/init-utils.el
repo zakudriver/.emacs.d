@@ -6,12 +6,8 @@
   (require 'init-custom))
 
 
-(use-package elpa-mirror
-  :custom
-  (elpamr-default-output-directory "~/.emacs.d/myelpa/"))
-
-
 (use-package magit
+  :ensure nil
   :config
   (advice-add #'magit-mode-bury-buffer :override #'(lambda ()
                                                      "Quit and kill magit buffer, then restore window configuration."
@@ -54,10 +50,12 @@
 
 
 (use-package docker
+  :ensure nil
   :commands docker)
 
 
 (use-package vterm
+  :ensure nil
   :bind
   (:map vterm-mode-map
         ("M-p" . vterm-send-prior)
@@ -139,7 +137,9 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
   )
 
 
+;; process view
 (use-package proced
+  :ensure nil
   :bind
   (:map proced-mode-map
         ("k" . previous-line)
@@ -147,7 +147,22 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
         ("q" . quit-and-kill-window)
         ("G" . proced-toggle-auto-update))
   :custom
-  (proced-auto-update-flag t))
+  (proced-auto-update-flag t)
+  (proced-auto-update-interval 3)
+  :init
+  (setq-default proced-format 'verbose))
+
+
+;; Youdao Dictionary
+(use-package youdao-dictionary
+  :bind
+  (:map youdao-dictionary-mode-map
+   ("Q" . quit-window)
+   ("?" . youdao-dictionary-hydra/body))
+  :custom
+  (url-automatic-caching t)
+  (youdao-dictionary-use-chinese-word-segmentation t) ; 中文分词
+  )
 
 
 (provide 'init-utils)

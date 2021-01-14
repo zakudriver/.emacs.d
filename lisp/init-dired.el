@@ -48,6 +48,7 @@
 
   ;; Colourful dired
   (use-package diredfl
+    :ensure nil
     :hook
     (dired-mode . diredfl-global-mode))
 
