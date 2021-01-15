@@ -7,6 +7,7 @@
 
 ;; Manage and navigate projects
 (use-package projectile
+  :ensure nil
   :diminish
   :hook
   (after-init . projectile-mode)

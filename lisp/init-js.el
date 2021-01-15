@@ -2,6 +2,7 @@
 
 
 (use-package js2-mode
+  :ensure nil
   :mode (("\\.js$" . js2-mode))
   :custom
   (js-indent-level 2)
@@ -14,11 +15,13 @@
 
 
 (use-package typescript-mode
+  :ensure nil
   :custom
   (typescript-indent-level 2))
 
 
 (use-package tide
+  :ensure nil
   :hook
   ((typescript-mode js2-mode) . tide-setup)
   ((typescript-mode js2-mode) . tide-hl-identifier-mode)
@@ -33,6 +36,7 @@
 
 
 (use-package ng2-mode
+  :ensure nil
   :mode
   (".+\\.component\\.html$" . ng2-mode)
   ("\\.component.ts\\'" . typescript-mode)
@@ -44,6 +48,7 @@
 
 
 (use-package prettier-js
+  :ensure nil
   :hook
   ((js2-mode ng2-mode typescript-mode scss-mode css-mode json-mode html-mode ng2-html-mode) . prettier-js-mode)
   (web-mode . (lambda ()

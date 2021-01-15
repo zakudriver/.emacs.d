@@ -154,6 +154,7 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
 
 ;; Youdao Dictionary
 (use-package youdao-dictionary
+  :ensure nil
   :bind
   (:map youdao-dictionary-mode-map
    ("?" . youdao-dictionary-hydra/body))

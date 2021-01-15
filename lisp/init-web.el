@@ -16,6 +16,7 @@
 
 ;; major-mode for editing multiple web formats
 (use-package web-mode
+  :ensure nil
   :mode
   ((".*[^\\(\\.component\\)]\\.html$" . web-mode)
    ("\\.tsx$" . web-mode)
@@ -41,6 +42,7 @@
 
 ;; emmet-mode: dynamic snippets for HTML
 (use-package emmet-mode
+  :ensure nil
   :bind
   ((:map emmet-mode-keymap
          ("C-. [" . emmet-prev-edit-point)
