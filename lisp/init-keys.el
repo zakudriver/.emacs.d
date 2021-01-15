@@ -184,6 +184,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    "wh" 'split-window-horizontally
    "wH" 'kumo-window-horizontally-selected
    "wt" 'delete-window
+   "wq" 'quit-window
    "wo" 'delete-other-windows
    "wb" 'kumo-current-buffer-bottom-window
    "wm" 'kumo-select-minibuffer-window
