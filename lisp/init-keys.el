@@ -13,10 +13,17 @@
   (evil-mode t)
   :custom
   (evil-want-C-u-scroll t)
+  (evil-want-Y-yank-to-eol t)
   (x-select-enable-clipboard t)
   (evil-kill-on-visual-paste nil)
   :config
   (evil-set-undo-system 'undo-tree)
+  ;; evil-record-macro key q -> Q
+  (evil-global-set-key 'normal
+                       (kbd "q") nil)
+  (evil-global-set-key 'normal
+                       (kbd "Q") 'evil-record-macro)
+
   ;; redefine evil operator
   (evil-define-key nil evil-normal-state-map
     "d" 'evil-delete-no-yank
@@ -145,8 +152,6 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
   
   (general-define-key
    :prefix "C-c"
-   "q" 'save-buffers-kill-terminal
-   "Q" 'kill-emacs
    "p" 'projectile-command-map
    "P" 'proced
    "d" 'dired

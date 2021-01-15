@@ -144,7 +144,6 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
   (:map proced-mode-map
         ("k" . previous-line)
         ("j" . next-line)
-        ("q" . quit-and-kill-window)
         ("G" . proced-toggle-auto-update))
   :custom
   (proced-auto-update-flag t)
@@ -157,7 +156,6 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
 (use-package youdao-dictionary
   :bind
   (:map youdao-dictionary-mode-map
-   ("Q" . quit-window)
    ("?" . youdao-dictionary-hydra/body))
   :custom
   (url-automatic-caching t)
