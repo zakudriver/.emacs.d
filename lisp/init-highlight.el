@@ -59,6 +59,7 @@ FACE defaults to inheriting from default and highlight."
 
 ;; Highlight symbols
 (use-package symbol-overlay
+  :ensure nil
   :diminish
   :functions
   (turn-off-symbol-overlay turn-on-symbol-overlay)
