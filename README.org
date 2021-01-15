@@ -3,7 +3,7 @@
  /This is kumo's emacs configuration. (only GUI)/
 
 
-*supported languages / framework*
+*supported languages / framework / tools*
 
 - typescript
 - angular
@@ -11,6 +11,12 @@
 - golang
 - c++
 - dart
+- org
+- hugo
+- docker
+- vterm
+- youdao-dictionary
+- magit
   
 
 *dependent program*
@@ -29,3 +35,4 @@
 - [[https://github.com/prettier/prettier][prettier]]
 - [[https://github.com/bash-lsp/bash-language-server][bash-language-server]]
 - [[https://github.com/dart-lang/sdk][dart-sdk]]
+- [[https://github.com/gohugoio/hugo][hugo]]
