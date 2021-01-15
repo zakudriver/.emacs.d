@@ -62,6 +62,11 @@
   "Dashboard init cursor position.")
 
 
+(defvar kumo/C-c-keybinds '(general-define-key
+                            :prefix "C-c")
+  "General <C>-<c> prefix key.")
+
+
 (provide 'init-const)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

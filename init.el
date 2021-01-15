@@ -81,6 +81,8 @@ If you experience stuttering, increase this.")
   (require 'init-utils)
   (require 'init-keys)
   (require 'init-modeline)
+  (require 'init-font)
+  (require 'init-theme)
   (require 'init-ui)
 
   (require 'init-edit)
