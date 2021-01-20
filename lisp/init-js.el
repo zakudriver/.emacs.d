@@ -54,8 +54,9 @@
   (web-mode . (lambda ()
                 (unless (member (file-name-extension buffer-file-name) '("ejs"))
                   (prettier-js-mode))))
-  :custom
-  (prettier-js-args '("--single-quote" "true" "--print-width" "120")))
+  ;; :custom
+  ;; (prettier-js-args '("--single-quote" "true")) ;; "--print-width" "120"
+  )
 
 
 

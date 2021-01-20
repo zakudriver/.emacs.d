@@ -36,6 +36,7 @@
   (dashboard-set-file-icons t)
   (dashboard-set-heading-icons t)
   (dashboard-startup-banner (or kumo/logo 'official))
+  (dashboard-image-banner-max-width 200)
   (dashboard-center-content t)
   (dashboard-show-shortcuts nil)
   (dashboard-items '((recents  . 10)
