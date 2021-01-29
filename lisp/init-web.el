@@ -8,10 +8,11 @@
   (css-indent-offset 2))
 
 ;; SCSS mode
-;; (use-package scss-mode
-;;   :init
-;;   ;; Disable complilation on save
-;;   (setq scss-compile-at-save nil))
+(use-package scss-mode
+  :ensure nil
+  :custom
+  ;; Disable complilation on save
+  (scss-compile-at-save nil))
 
 
 ;; major-mode for editing multiple web formats
@@ -43,18 +44,17 @@
 ;; emmet-mode: dynamic snippets for HTML
 (use-package emmet-mode
   :ensure nil
+  :hook
+  ((web-mode ng2-html-mode) . emmet-mode)
   :bind
   ((:map emmet-mode-keymap
          ("C-. [" . emmet-prev-edit-point)
          ("C-. ]" . emmet-next-edit-point)
          ("<backtab>" . emmet-expand-yas)))
-  :hook
-  ((web-mode ng2-html-mode) . emmet-mode)
   :custom
   (emmet-move-cursor-between-quotes t)
   (emmet-indentation 2)
   (emmet-expand-jsx-className? t))
-
 
 
 (provide 'init-web)

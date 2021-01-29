@@ -2,12 +2,25 @@
 
 
 (use-package polymode
+  :ensure nil
   :mode
-  ("\.ts$" . poly-typescript-styled-mode)
+  ("\\.ts$" . poly-typescript-mode)
+  ("\\.tsx$" . poly-tsx-jsx-mode)
+  ("\\.jsx$" . poly-tsx-jsx-mode)
   :config
-  ;; css in ts (styled-components)
+  ;; == typescript ==
   (define-hostmode poly-typescript-hostmode :mode 'typescript-mode)
+  (define-polymode poly-typescript-mode
+    :hostmode 'poly-typescript-hostmode
+    :innermodes '(poly-typescript-styled-innermode poly-typescript-graphql-innermode))
 
+  ;; == tsx/jsx ==
+  (define-hostmode poly-web-hostmode :mode 'web-mode)
+  (define-polymode poly-tsx-jsx-mode
+    :hostmode 'poly-web-hostmode
+    :innermodes '(poly-typescript-graphql-innermode))
+
+  ;; css in ts (styled-components)
   (define-innermode poly-typescript-styled-innermode
     :mode 'css-mode
     :head-matcher "\\(styled\\|css\\)[.()<>[:alnum:]]?+`"
@@ -15,9 +28,14 @@
     :head-mode 'host
     :tail-mode 'host)
 
-  (define-polymode poly-typescript-styled-mode
-    :hostmode 'poly-typescript-hostmode
-    :innermodes '(poly-typescript-styled-innermode)))
+  ;; graphql
+  (define-innermode poly-typescript-graphql-innermode
+    :mode 'graphql-mode
+    :head-matcher "gr?a?p?h?ql`"
+    :tail-matcher "`;"
+    :head-mode 'host
+    :tail-mode 'host)
+  )
 
 
 (provide 'init-polymode)

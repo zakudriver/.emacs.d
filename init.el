@@ -97,6 +97,9 @@ If you experience stuttering, increase this.")
   (require 'init-yasnippet)
   (require 'init-projectile)
 
+  ;; polymode
+  (require 'init-polymode)
+
   ;; Programming
   (require 'init-lsp)
   (require 'init-prog)
@@ -110,8 +113,6 @@ If you experience stuttering, increase this.")
   (require 'init-js)
   (require 'init-web)
 
-  ;; polymode
-  (require 'init-polymode)
   )
 
 

@@ -27,6 +27,10 @@
   :ensure nil)
 
 
+(use-package graphql-mode
+  :ensure nil)
+
+
 (provide 'init-prog)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
