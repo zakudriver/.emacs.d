@@ -109,6 +109,9 @@ If you experience stuttering, increase this.")
   ;; Web
   (require 'init-js)
   (require 'init-web)
+
+  ;; polymode
+  (require 'init-polymode)
   )
 
 
