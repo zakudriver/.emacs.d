@@ -158,6 +158,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    "D" 'docker
    "h" 'kumo-open-dashboard
    "H" 'easy-hugo
+   "R" 'rg-menu
    "yy" 'youdao-dictionary-search-at-point-posframe
    "yY" 'youdao-dictionary-search-at-point
    "yi" 'youdao-dictionary-search-from-input

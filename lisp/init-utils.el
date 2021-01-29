@@ -157,11 +157,41 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
   :ensure nil
   :bind
   (:map youdao-dictionary-mode-map
-   ("?" . youdao-dictionary-hydra/body))
+        ("?" . youdao-dictionary-hydra/body))
   :custom
   (url-automatic-caching t)
   (youdao-dictionary-use-chinese-word-segmentation t) ; 中文分词
   )
+
+
+;; Fast search tool `ripgrep'
+(use-package rg
+  :ensure nil
+  :defines projectile-command-map
+  :hook
+  (rg-mode . rg-enable-default-bindings)
+  :bind
+  (:map rg-global-map
+        ("c" . rg-dwim-current-dir)
+        ("f" . rg-dwim-current-file)
+        :map rg-mode-map
+        ("m" . rg-menu))
+  :custom
+  (rg-keymap-prefix "\C-cR")
+  (rg-group-result t)
+  (rg-show-columns t)
+  :config
+  (cl-pushnew '("tmpl" . "*.tmpl") rg-custom-type-aliases)
+
+  (with-eval-after-load 'projectile
+    (defalias 'projectile-ripgrep #'rg-project)
+    (bind-key "s R" #'rg-project projectile-command-map))
+
+  (with-eval-after-load 'counsel
+    (bind-keys
+     :map rg-global-map
+     ("R" . counsel-rg)
+     ("F" . counsel-fzf))))
 
 
 (provide 'init-utils)
