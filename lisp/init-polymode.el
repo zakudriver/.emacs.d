@@ -5,11 +5,19 @@
   :ensure nil
   :mode
   ("\\.ts$" . poly-typescript-mode)
+  ("\\.tsx$" . poly-web-mode)
+  ("\\.jsx$" . poly-web-mode)
   :config
   ;; == typescript ==
   (define-hostmode poly-typescript-hostmode :mode 'typescript-mode)
   (define-polymode poly-typescript-mode
     :hostmode 'poly-typescript-hostmode
+    :innermodes '(poly-typescript-styled-innermode poly-typescript-graphql-innermode))
+
+  ;; == tsx/jsx ==
+  (define-hostmode poly-web-hostmode :mode 'web-mode)
+  (define-polymode poly-web-mode
+    :hostmode 'poly-web-hostmode
     :innermodes '(poly-typescript-styled-innermode poly-typescript-graphql-innermode))
 
   ;; css in ts (styled-components)
