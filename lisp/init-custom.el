@@ -124,6 +124,10 @@
   "Hugo github deploy buffer name.")
 
 
+(defconst kumo/lsp-major-mode '(go-mode ng2-html-mode sh-mode ruby-mode css-mode scss-mode sass-mode
+                                        "lsp-mode support."))
+
+
 ;; (defconst kumo/prettify-symbols-alist
 ;;   '(("lambda" . ?λ)
 ;;     ("<-" . ?←)

@@ -107,12 +107,12 @@ If you experience stuttering, increase this.")
   (require 'init-go)
   (require 'init-dart)
   (require 'init-cpp)
+  (require 'init-ruby)
   (require 'init-lisp)
 
   ;; Web
   (require 'init-js)
   (require 'init-web)
-
   )
 
 

@@ -11,7 +11,7 @@
   :commands
   (lsp lsp-deferred)
   :hook
-  ((go-mode ng2-html-mode sh-mode) . lsp-deferred)
+  (kumo/lsp-major-mode . lsp-deferred)
   :custom
   (lsp-clients-angular-language-server-command
    `("node"
@@ -24,6 +24,7 @@
   (lsp-auto-guess-root nil)      ; not Detect project root
   (lsp-prefer-flymake nil)       ; Use lsp-ui and flycheck
   (lsp-enable-snippet t)
+  (lsp-solargraph-use-bundler t)
   :config
   (use-package lsp-ui
     :commands lsp-ui

@@ -23,12 +23,16 @@
 (use-package tide
   :ensure nil
   :hook
-  ((typescript-mode js2-mode) . tide-setup)
-  ((typescript-mode js2-mode) . tide-hl-identifier-mode)
+  ((typescript-mode js2-mode) . (lambda ()
+                                  (tide-setup)
+                                  (tide-hl-identifier-mode)
+                                  ))
   (web-mode . (lambda ()
                 (when (member (file-name-extension buffer-file-name) '("tsx" "jsx"))
                   (tide-setup)
-                  (tide-hl-identifier-mode))))
+                  (tide-hl-identifier-mode)
+                  (flycheck-add-mode 'typescript-tslint 'web-mode)
+                  )))
   :bind
   (:map tide-mode-map
         ([remap evil-goto-definition] . tide-jump-to-definition)

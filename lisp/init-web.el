@@ -20,6 +20,8 @@
   :ensure nil
   :mode
   ((".*[^\\(\\.component\\)]\\.html$" . web-mode)
+   ("\\.jsx$" . web-mode)
+   ("\\.tsx$" . web-mode)
    ("\\.ejs$" . web-mode))
   :bind
   (:map web-mode-map

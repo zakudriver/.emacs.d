@@ -114,6 +114,20 @@
 (use-package mwim)
 
 
+;; Flexible text folding
+(use-package origami
+  :hook
+  (prog-mode . origami-mode)
+  :bind
+  (:map origami-mode-map
+        ("C-. o" . origami-open-node)
+        ("C-. c" . origami-close-node))
+  :custom
+  (origami-show-fold-header t)
+  :config
+  (face-spec-reset-face 'origami-fold-header-face))
+
+
 
 (provide 'init-edit)
 

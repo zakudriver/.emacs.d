@@ -5,8 +5,6 @@
   :ensure nil
   :mode
   ("\\.ts$" . poly-typescript-mode)
-  ("\\.tsx$" . poly-web-mode)
-  ("\\.jsx$" . poly-web-mode)
   :config
   ;; == typescript ==
   (define-hostmode poly-typescript-hostmode :mode 'typescript-mode)
@@ -22,7 +20,7 @@
 
   ;; css in ts (styled-components)
   (define-innermode poly-typescript-styled-innermode
-    :mode 'css-mode
+    :mode 'scss-mode
     :head-matcher "\\(styled\\|css\\)[.()<>[:alnum:]]?+`"
     :tail-matcher "`;"
     :head-mode 'host
