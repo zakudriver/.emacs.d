@@ -11,7 +11,12 @@
   :commands
   (lsp lsp-deferred)
   :hook
-  (kumo/lsp-major-mode . lsp-deferred)
+  (prog-mode . (lambda ()
+                 (if (apply #'derived-mode-p kumo/lsp-major-mode)
+                     (lsp-deferred))))
+  (lsp-mode . (lambda ()
+                (if (apply #'derived-mode-p kumo/lsp-on-save-major-mode)
+                    (add-hook 'before-save-hook #'lsp-format-buffer t t))))
   :custom
   (lsp-clients-angular-language-server-command
    `("node"
@@ -24,7 +29,6 @@
   (lsp-auto-guess-root nil)      ; not Detect project root
   (lsp-prefer-flymake nil)       ; Use lsp-ui and flycheck
   (lsp-enable-snippet t)
-  (lsp-solargraph-use-bundler t)
   :config
   (use-package lsp-ui
     :commands lsp-ui
@@ -87,7 +91,8 @@
      (go-mode . (lambda () (require 'dap-go)))
      ((c-mode c++-mode objc-mode swift-mode) . (lambda () (require 'dap-lldb)))
      (elixir-mode . (lambda () (require 'dap-elixir)))
-     ((js-mode js2-mode) . (lambda () (require 'dap-chrome))))
+     ((js-mode js2-mode) . (lambda () (require 'dap-chrome)))
+     (ruby-mode . (lambda () (require 'dap-ruby))))
     :bind
     (:map lsp-mode-map
           ("C-. d d" . dap-debug)
