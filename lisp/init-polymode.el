@@ -20,7 +20,7 @@
 
   ;; css in ts (styled-components)
   (define-innermode poly-typescript-styled-innermode
-    :mode 'scss-mode
+    :mode 'css-mode
     :head-matcher "\\(styled\\|css\\)[.()<>[:alnum:]]?+`"
     :tail-matcher "`;"
     :head-mode 'host

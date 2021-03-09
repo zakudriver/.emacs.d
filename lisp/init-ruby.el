@@ -16,6 +16,7 @@
 
 ;; Run a Ruby process in a buffer
 (use-package inf-ruby
+  :ensure nil
   :hook
   ((ruby-mode . inf-ruby-minor-mode)
    (compilation-filter . inf-ruby-auto-enter)))
@@ -23,6 +24,7 @@
 
 ;; Ruby YARD comments
 (use-package yard-mode
+  :ensure nil
   :diminish
   :hook
   (ruby-mode . yard-mode))

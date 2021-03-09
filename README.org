@@ -17,6 +17,7 @@
 - react
 - golang
 - c++
+- ruby
 - dart
 - org
 - hugo
@@ -43,3 +44,4 @@
 - [[https://github.com/bash-lsp/bash-language-server][bash-language-server]]
 - [[https://github.com/dart-lang/sdk][dart-sdk]]
 - [[https://github.com/gohugoio/hugo][hugo]]
+- [[https://github.com/castwide/solargraph][solargraph]]

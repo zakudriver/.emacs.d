@@ -7,9 +7,9 @@
 
 ;; Emacs client for the Language Server Protocol
 (use-package lsp-mode
-  :ensure t
+  :ensure nil
   :commands
-  (lsp lsp-deferred)
+  (lsp-deferred)
   :hook
   (prog-mode . (lambda ()
                  (if (apply #'derived-mode-p kumo/lsp-major-mode)
