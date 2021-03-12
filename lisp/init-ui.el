@@ -31,8 +31,8 @@
   (:map dashboard-mode-map
         ("C-, g" . dashboard-refresh-buffer))
   :custom
-  ;; (dashboard-banner-logo-title (concat "Happy hacking, " user-login-name " - Emacs ♥ you!"))
-  (dashboard-banner-logo-title "Help poor children in Uganda!")
+  ;; (dashboard-banner-logo-title "Help poor children in Uganda!")
+  (dashboard-banner-logo-title (concat "Happy hacking, " user-login-name " - Emacs ♥ you!"))
   (dashboard-set-file-icons t)
   (dashboard-set-heading-icons t)
   (dashboard-startup-banner (or kumo/logo 'official))
@@ -41,16 +41,15 @@
   (dashboard-show-shortcuts nil)
   (dashboard-items '((recents  . 10)
                      (projects . 10)))
-  (dashboard-init-info (concat "Happy hacking, " user-login-name " - Emacs ♥ you!"))
+  ;; (dashboard-init-info (concat "Happy hacking, " user-login-name " - Emacs ♥ you!"))
   (dashboard-set-footer nil)
   :custom-face
   (dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
   :init
   ;; init jump to (kumo/dashboard-position) line
-  (add-hook 'emacs-startup-hook '(lambda ()
+  (add-hook 'emacs-startup-hook #'(lambda ()
                                    (goto-line kumo/dashboard-position)))
   (dashboard-setup-startup-hook))
-
 
 
 ;; Emoji
@@ -69,7 +68,7 @@
       use-dialog-box nil
       inhibit-startup-echo-area-message t
       track-eol t
-      line-move-visual nil )
+      line-move-visual nil)
 
 
 ;; Display dividers between windows

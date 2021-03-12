@@ -16,6 +16,7 @@
   (evil-want-Y-yank-to-eol t)
   (x-select-enable-clipboard t)
   (evil-kill-on-visual-paste nil)
+  (evil-want-keybinding nil)
   :config
   (evil-set-undo-system 'undo-tree)
   ;; evil-record-macro key q -> Q
@@ -130,6 +131,14 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
                (eq type 'line))
       (evil-first-non-blank)))
   )
+
+
+(use-package evil-collection
+  :after evil
+  :custom
+  (evil-collection-setup-minibuffer t)
+  :init
+  (evil-collection-init))
 
 
 ;; general keys 

@@ -21,7 +21,6 @@
 
 
 (use-package tide
-  :ensure nil
   :hook
   ((typescript-mode js2-mode) . (lambda ()
                                   (tide-setup)

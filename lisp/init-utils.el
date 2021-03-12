@@ -16,37 +16,7 @@
                                                        (dolist (buf (magit-mode-get-buffers))
                                                          (unless (eq buf current)
                                                            (kill-buffer buf))))
-                                                     (funcall magit-bury-buffer-function t)))
-
-  (use-package evil-magit
-    :hook
-    (magit-mode . evil-magit-init)
-    :bind
-    (:map magit-mode-map
-          ("M-0" . nil)
-          ("M-1" . nil)
-          ("M-2" . nil)
-          ("M-3" . nil)
-          ("M-4" . nil)
-          ("M-5" . nil)
-          ("M-6" . nil)
-          ("M-7" . nil)
-          ("M-8" . nil)
-          ("M-9" . nil)
-          ("M-u" . nil)
-          :map magit-revision-mode-map
-          ("M-0" . nil)
-          ("M-1" . nil)
-          ("M-2" . nil)
-          ("M-3" . nil)
-          ("M-4" . nil)
-          ("M-5" . nil)
-          ("M-6" . nil)
-          ("M-7" . nil)
-          ("M-8" . nil)
-          ("M-9" . nil)
-          ("M-u" . nil)
-          )))
+                                                     (funcall magit-bury-buffer-function t))))
 
 
 (use-package docker
@@ -154,7 +124,6 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
 
 ;; Youdao Dictionary
 (use-package youdao-dictionary
-  :ensure nil
   :bind
   (:map youdao-dictionary-mode-map
         ("?" . youdao-dictionary-hydra/body))

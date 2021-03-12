@@ -49,7 +49,6 @@
 
 ;; Treat undo history as a tree
 (use-package undo-tree
-  :diminish undo-tree-mode
   :hook
   (after-init . global-undo-tree-mode)
   (web-mode . undo-tree-mode) ;; web-mode
@@ -107,7 +106,10 @@
   :hook
   (after-init . global-hungry-delete-mode)
   :custom
-  (hungry-delete-chars-to-skip " \t\f\v"))
+  (hungry-delete-chars-to-skip " \t\f\v")
+  :config
+  (add-hook 'minibuffer-setup-hook (lambda () (hungry-delete-mode 0))) ;; minibuffer hungry-delete -1
+  )
 
 
 ;; Move to the beginning/end of line or code
@@ -128,8 +130,6 @@
   (face-spec-reset-face 'origami-fold-header-face))
 
 
-
 (provide 'init-edit)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-edit.el ends here

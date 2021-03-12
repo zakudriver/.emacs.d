@@ -72,14 +72,14 @@
           ("C-. w g" . lsp-ivy-global-workspace-symbol)))
 
 
-  (use-package company-lsp
-    :after (lsp-mode company)
-    :custom
-    (company-lsp-cache-candidates t)
-    (company-lsp-filter-candidates t)
-    (company-lsp-async t)
-    :config
-    (push 'company-lsp company-backends))
+  ;; (use-package company-lsp
+  ;;   :after (lsp-mode company)
+  ;;   :custom
+  ;;   (company-lsp-cache-candidates t)
+  ;;   (company-lsp-filter-candidates t)
+  ;;   (company-lsp-async t)
+  ;;   :config
+  ;;   (push 'company-lsp company-backends))
 
 
   ;; dap
