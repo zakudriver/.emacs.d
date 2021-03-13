@@ -60,6 +60,7 @@
     Fira\ Code
     Operator\ Mono
     Inconsolata
+    Iosevka
     )
   "Font list.")
 

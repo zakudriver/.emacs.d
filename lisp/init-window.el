@@ -65,7 +65,7 @@
  _w2_: delete others                   _f2_: delete others              _H_ ^+^ _L_            ^+^             
  _s_wap x-direction and y-direction    _f3_: new                        ^ ^ _J_ ^ ^            _-_            
  Flip _v_erticall                                                   _F_ullscreen       ^^^_b_alance
- Flop _h_orizontally
+ Flop _h_orizontally                                                _M_aximized
  Rotate 180 _d_egrees
  Rotate 90  degrees _c_lockwise
  Rotate 90  degrees _a_nti-clockwise
@@ -78,6 +78,7 @@
     ("b" balance-windows)
     ("s" transpose-frame)
     ("F" toggle-frame-fullscreen)
+    ("M" toggle-frame-maximized)
     ("=" kumo-font-size-increase)
     ("-" kumo-font-size-decrease)
     ("H" shrink-window-horizontally)
