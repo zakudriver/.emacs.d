@@ -135,10 +135,8 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
 
 (use-package evil-collection
   :after evil
-  :custom
-  (evil-collection-setup-minibuffer t)
   :init
-  (evil-collection-init))
+  (evil-collection-init '(magit ibuffer)))
 
 
 ;; general keys 

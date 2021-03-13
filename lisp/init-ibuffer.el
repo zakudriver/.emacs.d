@@ -6,12 +6,12 @@
   :commands
   (ibuffer-find-file
    ibuffer-current-buffer)
-  :bind
-  (:map ibuffer-mode-map
-        ("j" . ibuffer-forward-line)
-        ("k" . ibuffer-backward-line)
-        ("h" . ibuffer-do-kill-lines)
-        ("p" . ibuffer-jump-to-buffer))
+  ;; :bind
+  ;; (:map ibuffer-mode-map
+  ;;       ("j" . ibuffer-forward-line)
+  ;;       ("k" . ibuffer-backward-line)
+  ;;       ("h" . ibuffer-do-kill-lines)
+  ;;       ("p" . ibuffer-jump-to-buffer))
   :custom
   (ibuffer-filter-group-name-face '(:inherit (font-lock-string-face bold)))
   :config
