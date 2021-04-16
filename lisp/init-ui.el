@@ -48,7 +48,7 @@
   :init
   ;; init jump to (kumo/dashboard-position) line
   (add-hook 'emacs-startup-hook #'(lambda ()
-                                   (goto-line kumo/dashboard-position)))
+                                    (goto-line kumo/dashboard-position)))
   (dashboard-setup-startup-hook))
 
 
@@ -112,13 +112,9 @@
   (add-to-list 'all-the-icons-icon-alist
                '("^Rakefile$" all-the-icons-alltheicon "ruby-alt" :face all-the-icons-red))
   (add-to-list 'all-the-icons-icon-alist
-               '("\\.go$" all-the-icons-fileicon "go" :face all-the-icons-blue))
-  (add-to-list 'all-the-icons-icon-alist
                '("\\go.mod$" all-the-icons-fileicon "go" :face all-the-icons-dblue))
   (add-to-list 'all-the-icons-icon-alist
                '("\\go.sum$" all-the-icons-fileicon "go" :face all-the-icons-dpurple))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(go-mode all-the-icons-fileicon "go" :face all-the-icons-blue))
   (add-to-list 'all-the-icons-mode-icon-alist
                '(xwidget-webkit-mode all-the-icons-faicon "chrome" :v-adjust -0.1 :face all-the-icons-blue))
   (add-to-list 'all-the-icons-mode-icon-alist

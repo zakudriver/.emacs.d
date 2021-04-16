@@ -186,7 +186,10 @@ Including indent-buffer, which should not be called automatically on save."
 
 ;; Wrap selected text by input symbol.
 (defun kumo-wrap-with-input (beg end symbol)
-  "Wrap selected text by input symbol."
+  "Wrap selected text by input symbol.
+BEG is begin point.
+END is end point.
+SYMBOL is input string."
   (interactive "r \nsPlease input symbol: ")
   (let ((map-list '(("''" . "'")
                     ("\"\"" . "\"")
@@ -358,6 +361,26 @@ NUM is the window number."
          (command-window (async-shell-command (expand-file-name (concat kumo/easy-hugo-basedir kumo/easy-hugo-github-deploy-script)) output-buffer nil)))
     (select-window command-window)
     (local-set-key (kbd "C-q") 'kill-buffer-and-window)))
+
+
+(defun kumo-put-file-name-on-clipboard (&optional arg)
+  "Put the current file name on the clipboard.
+ARG: If the universal prefix argument is used then put file full name."
+  (interactive "P")
+  (let ((filename (if arg (buffer-file-name)
+                    (file-name-nondirectory (buffer-file-name)))))
+    (when filename
+      (with-temp-buffer
+        (insert filename)
+        (clipboard-kill-region (point-min) (point-max)))
+      (message filename))))
+
+
+(defun kumo-open-current-file-in-finder ()
+  "Open current file in mac finder."
+  (interactive)
+  (when sys/macp
+    (shell-command (concat "open -R " buffer-file-name))))
 
 
 (provide 'init-funcs)

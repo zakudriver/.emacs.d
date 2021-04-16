@@ -7,6 +7,10 @@
 ;; Directory operations
 (use-package dired
   :ensure nil
+  :bind
+  (:map dired-mode-map
+        ("k" . dired-previous-line)
+        ("j" . dired-next-line))
   :custom
   ;; Always delete and copy recursively
   (dired-recursive-deletes 'always)

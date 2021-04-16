@@ -19,6 +19,7 @@
   (evil-want-keybinding nil)
   :config
   (evil-set-undo-system 'undo-tree)
+  (evil-set-initial-state 'dired-mode 'emacs)
   ;; evil-record-macro key q -> Q
   (evil-global-set-key 'normal
                        (kbd "q") nil)
@@ -174,6 +175,8 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    "ff" 'counsel-find-file
    "fr" 'counsel-recentf
    "fz" 'counsel-fzf
+   "fn" 'kumo-put-file-name-on-clipboard
+   "fd" 'kumo-open-current-file-in-finder
    "bb" 'counsel-switch-buffer
    "bi" 'ibuffer
    "bt" 'kumo-kill-this-buffer
