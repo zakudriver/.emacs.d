@@ -136,7 +136,12 @@
   "Lsp Supported major mode.")
 
 
-(defconst kumo/lsp-on-save-major-mode '(ruby-mode) "Lsp Supported major mode.")
+(defconst kumo/lsp-on-save-major-mode '(ruby-mode)
+  "Lsp Supported major mode.")
+
+
+(defconst kumo/org-mode-export-html-css "/org/style.css"
+  "Insert inline css file when org export html.")
 
 
 ;; (defconst kumo/prettify-symbols-alist

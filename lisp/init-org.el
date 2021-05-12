@@ -32,9 +32,11 @@
                         (?B . warning)
                         (?C . success)))
   :config
+  ;; Embed inline CSS read from a file.
+  (add-hook 'org-export-before-processing-hook 'kumo-org-inline-css-hook)
+
   (with-eval-after-load 'counsel
     (bind-key [remap org-set-tags-command] #'counsel-org-tag org-mode-map))
-
 
   (use-package org-bullets
     :hook

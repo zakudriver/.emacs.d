@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: css for html export
+# key: css
+# --
+#+TITLE: ${1:`(file-name-base buffer-file-name)`}
+#+OPTIONS: toc:nil num:3 H:4 ^:nil pri:t
+
+$0

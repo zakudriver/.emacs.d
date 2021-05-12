@@ -8,7 +8,7 @@
 (defun kumo-open-init-file()
   "Open init.el file."
   (interactive)
-  (find-file "~/.emacs.d/init.el"))
+  (find-file (concat user-emacs-directory "init.el")))
 
 
 (defun dos2unix ()
@@ -381,6 +381,24 @@ ARG: If the universal prefix argument is used then put file full name."
   (interactive)
   (when sys/macp
     (shell-command (concat "open -R " buffer-file-name))))
+
+
+(defun kumo-org-inline-css-hook (exporter)
+  "Insert custom inline css when org export html.
+EXPORTER: export way."
+  (when (eq exporter 'html)
+    (let ((path (concat user-emacs-directory kumo/org-mode-export-html-css)))
+      (if (file-exists-p path)
+          (progn
+            (setq-local org-html-head-include-default-style nil)
+            (setq-local org-html-head (concat
+                                       "<style type=\"text/css\">\n"
+                                       "<!--/*--><![CDATA[/*><!--*/\n"
+                                       (with-temp-buffer
+                                         (insert-file-contents path)
+                                         (buffer-string))
+                                       "/*]]>*/-->\n"
+                                       "</style>\n")))))))
 
 
 (provide 'init-funcs)
