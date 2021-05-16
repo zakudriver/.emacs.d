@@ -8,7 +8,7 @@ import React from 'react';
 interface Props {
 }
 
-export const ${1:NAME}: React.SFC<Props> = ({ children }) => {
+export const ${1:NAME}: React.FC<Props> = ({ children }) => {
 	return (
 		<div>Function Component</div>
   );
