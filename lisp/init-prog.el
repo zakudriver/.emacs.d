@@ -1,12 +1,10 @@
 ;;; Code:
 
 
-(use-package vimrc-mode
-  :ensure nil)
+(use-package vimrc-mode)
 
 
-(use-package dockerfile-mode
-  :ensure nil)
+(use-package dockerfile-mode)
 
 
 (use-package bazel-mode
@@ -18,17 +16,14 @@
 
 
 (use-package protobuf-mode
-  :ensure nil
   :mode
   (("\\.proto$" . protobuf-mode)))
 
 
-(use-package yaml-mode
-  :ensure nil)
+(use-package yaml-mode)
 
 
-(use-package graphql-mode
-  :ensure nil)
+(use-package graphql-mode)
 
 
 (provide 'init-prog)

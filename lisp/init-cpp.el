@@ -3,13 +3,11 @@
 
 ;; cpp keyword highlight
 (use-package modern-cpp-font-lock
-  :ensure nil
   :hook
   (c++-mode . modern-c++-font-lock-mode))
 
 
 (use-package clang-format
-  :ensure nil
   :bind
   (:map c-mode-map 
         ("C-. f" . clang-format-buffer)
@@ -24,7 +22,6 @@
 
 
 (use-package irony
-  :ensure nil
   :hook
   ((c-mode c++-mode) . irony-mode)
   :bind
@@ -36,7 +33,6 @@
 
 
 (use-package flycheck-irony
-  :ensure nil
   :after flycheck
   :hook
   (c-mode . flycheck-irony-setup)
@@ -48,21 +44,18 @@
 
 ;; C/C++ headers completion
 (use-package company-c-headers
-  :ensure nil
   :hook
   ((c-mode c++-mode) . (lambda () (add-to-list 'company-backends 'company-c-headers))))
 
 
 ;; backends for irony
 (use-package company-irony
-  :ensure nil
   :hook
   ((c-mode c++-mode) . (lambda () (add-to-list 'company-backends 'company-irony))))
 
 
 ;; backends for irony-c-header
 (use-package company-irony-c-headers
-  :ensure nil
   :hook
   ((c-mode c++-mode) . (lambda () (add-to-list 'company-backends 'company-irony-c-headers))))
 

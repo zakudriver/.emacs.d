@@ -2,7 +2,6 @@
 
 
 (use-package dart-mode
-  :ensure nil
   :defines
   (projectile-project-root-files-bottom-up)
   :custom

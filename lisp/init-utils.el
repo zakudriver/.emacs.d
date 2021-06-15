@@ -7,7 +7,6 @@
 
 
 (use-package magit
-  :ensure nil
   :config
   (advice-add #'magit-mode-bury-buffer :override #'(lambda ()
                                                      "Quit and kill magit buffer, then restore window configuration."
@@ -20,12 +19,10 @@
 
 
 (use-package docker
-  :ensure nil
   :commands docker)
 
 
 (use-package vterm
-  :ensure nil
   :bind
   (:map vterm-mode-map
         ("M-p" . vterm-send-prior)
@@ -109,7 +106,6 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
 
 ;; process view
 (use-package proced
-  :ensure nil
   :bind
   (:map proced-mode-map
         ("k" . previous-line)
@@ -135,7 +131,6 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
 
 ;; Fast search tool `ripgrep'
 (use-package rg
-  :ensure nil
   :defines projectile-command-map
   :hook
   (rg-mode . rg-enable-default-bindings)

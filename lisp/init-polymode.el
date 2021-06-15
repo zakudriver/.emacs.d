@@ -2,7 +2,6 @@
 
 
 (use-package polymode
-  :ensure nil
   :mode
   ("\\.ts$" . poly-typescript-mode)
   :config

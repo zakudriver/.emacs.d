@@ -2,7 +2,6 @@
 
 
 (use-package ibuffer
-  :ensure nil
   :commands
   (ibuffer-find-file
    ibuffer-current-buffer)

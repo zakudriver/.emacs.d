@@ -23,6 +23,7 @@
   (org-image-actual-width nil)
   (org-src-fontify-natively t)
   (org-list-allow-alphabetical t)
+  (truncate-lines nil)
   (org-todo-keywords
    '((sequence "TODO(t)" "DOING(i)" "HANGUP(h)" "|" "DONE(d)" "CANCEL(c)")
      (sequence "⚑(T)" "🏴(I)" "❓(H)" "|" "✔(D)" "✘(C)")))

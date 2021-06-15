@@ -2,7 +2,6 @@
 
 
 (use-package counsel
-  :ensure nil
   :diminish ivy-mode counsel-mode
   :bind
   (("C-h f" . 'counsel-describe-function)
@@ -89,13 +88,11 @@ This is for use in `ivy-re-builders-alist'."
 
 ;; ivy icons
 (use-package all-the-icons-ivy-rich
-  :ensure nil
   :hook
   (ivy-mode . all-the-icons-ivy-rich-mode))
 
 
 (use-package ivy-rich
-  :ensure nil
   :hook
   (counsel-projectile-mode . ivy-rich-mode)
   (ivy-rich-mode . (lambda ()

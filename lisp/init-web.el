@@ -3,13 +3,11 @@
 
 ;; CSS mode
 (use-package css-mode
-  :ensure nil
   :custom
   (css-indent-offset 2))
 
 ;; SCSS mode
 (use-package scss-mode
-  :ensure nil
   :custom
   ;; Disable complilation on save
   (scss-compile-at-save nil))
@@ -17,7 +15,6 @@
 
 ;; major-mode for editing multiple web formats
 (use-package web-mode
-  :ensure nil
   :mode
   ((".*[^\\(\\.component\\)]\\.html$" . web-mode)
    ("\\.jsx$" . web-mode)
@@ -43,7 +40,6 @@
 
 ;; emmet-mode: dynamic snippets for HTML
 (use-package emmet-mode
-  :ensure nil
   :hook
   ((web-mode ng2-html-mode) . emmet-mode)
   :bind

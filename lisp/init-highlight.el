@@ -59,7 +59,6 @@ FACE defaults to inheriting from default and highlight."
 
 ;; Highlight symbols
 (use-package symbol-overlay
-  :ensure nil
   :diminish
   :functions
   (turn-off-symbol-overlay turn-on-symbol-overlay)
@@ -143,7 +142,6 @@ FACE defaults to inheriting from default and highlight."
 
 
 (use-package pulse
-  :ensure nil
   :custom-face
   (pulse-highlight-start-face ((t (:inherit region))))
   (pulse-highlight-face ((t (:inherit region)))))

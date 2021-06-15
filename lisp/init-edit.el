@@ -29,7 +29,6 @@
 
 ;; prettify-symbols
 ;; (use-package prog-mode
-;;   :ensure nil
 ;;   :hook
 ;;   (prog-mode . prettify-symbols-mode)
 ;;   :custom
@@ -40,7 +39,6 @@
 
 ;; Automatically reload files was modified by external program
 (use-package autorevert
-  :ensure nil
   :diminish auto-revert-mode
   :hook
   (after-init . global-auto-revert-mode))
@@ -83,7 +81,6 @@
 
 ;; Automatic parenthesis pairing
 (use-package elec-pair
-  :ensure nil
   :hook
   (after-init . electric-pair-mode)
   :custom

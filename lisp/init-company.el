@@ -2,7 +2,6 @@
 
 
 (use-package company
-  :ensure nil
   :diminish
   :commands company-cancel
   :bind

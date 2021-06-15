@@ -36,13 +36,11 @@
 
 ;; History
 (use-package saveplace
-  :ensure nil
   :hook
   (after-init . save-place-mode))
 
 
 (use-package recentf
-  :ensure nil
   :hook
   (after-init . recentf-mode)
   :custom
@@ -57,7 +55,6 @@
 
 
 (use-package savehist
-  :ensure nil
   :hook
   (after-init . savehist-mode)
   :custom
@@ -82,7 +79,6 @@
 
 ;; so-long emacs/>=27p
 (use-package so-long
-  :ensure nil
   :hook
   (after-init . global-so-long-mode)
   :custom

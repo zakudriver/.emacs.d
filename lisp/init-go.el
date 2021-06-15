@@ -18,7 +18,6 @@
 ;;
 
 (use-package go-mode
-  :ensure nil
   :bind
   (:map go-mode-map
         ([remap xref-find-definitions] . godef-jump)

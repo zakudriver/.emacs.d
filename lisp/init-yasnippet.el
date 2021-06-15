@@ -2,13 +2,11 @@
 
 
 (use-package yasnippet
-  :ensure nil
   :hook
   (after-init . yas-global-mode))
 
 
-(use-package yasnippet-snippets
-  :ensure nil)
+(use-package yasnippet-snippets)
 
 
 (provide 'init-yasnippet)

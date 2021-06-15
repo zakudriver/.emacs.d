@@ -7,7 +7,6 @@
 
 ;; Emacs client for the Language Server Protocol
 (use-package lsp-mode
-  :ensure nil
   :commands
   (lsp-deferred)
   :hook

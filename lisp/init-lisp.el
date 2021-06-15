@@ -3,7 +3,6 @@
 
 ;; Show function arglist or variable docstring
 (use-package eldoc
-  :ensure nil
   :diminish
   :init
   ;; Enable Eldoc in lisp modes in 24
