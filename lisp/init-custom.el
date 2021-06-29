@@ -144,6 +144,10 @@
   "Insert inline css file when org export html.")
 
 
+(defconst kumo/perspective-state-file "/.perspective"
+  "Perspective state cache file.")
+
+
 ;; (defconst kumo/prettify-symbols-alist
 ;;   '(("lambda" . ?λ)
 ;;     ("<-" . ?←)

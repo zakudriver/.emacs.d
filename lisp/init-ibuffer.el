@@ -1,16 +1,21 @@
 ;;; Code:
 
 
+(eval-when-compile
+  (require 'init-const)
+  (require 'init-custom))
+
+
 (use-package ibuffer
   :commands
   (ibuffer-find-file
    ibuffer-current-buffer)
-  ;; :bind
-  ;; (:map ibuffer-mode-map
-  ;;       ("j" . ibuffer-forward-line)
-  ;;       ("k" . ibuffer-backward-line)
-  ;;       ("h" . ibuffer-do-kill-lines)
-  ;;       ("p" . ibuffer-jump-to-buffer))
+  :hook
+  (ibuffer .
+           (lambda ()
+             (persp-ibuffer-set-filter-groups)
+             (unless (eq ibuffer-sorting-mode 'alphabetic)
+               (ibuffer-do-sort-by-alphabetic))))
   :custom
   (ibuffer-filter-group-name-face '(:inherit (font-lock-string-face bold)))
   :config
@@ -45,6 +50,14 @@
                              :v-adjust -0.05
                              :height 1.25)
       " ")))
+
+  (use-package perspective
+    :custom
+    (persp-state-default-file (concat user-emacs-directory kumo/perspective-state-file))
+    :hook
+    (kill-emacs . persp-state-save)
+    :init
+    (persp-mode))
   )
 
 
