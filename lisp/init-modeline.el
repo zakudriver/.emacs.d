@@ -124,6 +124,7 @@ LINE-POSITION is 'top or 'bottom."
   :hook
   (after-init . nyan-mode)
   :custom
+  (nyan-bar-length 24)
   (nyan-animate-nyancat nil)
   (nyan-wavy-trail nil)
   (nyan-animation-frame-interval 0.4))
@@ -267,8 +268,10 @@ LINE-POSITION is 'top or 'bottom."
                          modeline-space
                          
                          ;; the buffer name; the file name as a tool tip
-                         (propertize "%b " 'face '(font-lock-keyword-face (:weight bold))
-                                     'help-echo (buffer-file-name))
+                         (modeline-wrap
+                          (propertize "%b " 'face '(font-lock-keyword-face (:weight bold))
+                                      'help-echo (buffer-file-name))
+                          6 'down nil 'bottom)
 
                          modeline-space
                          
@@ -283,8 +286,9 @@ LINE-POSITION is 'top or 'bottom."
                          ;; major mode
                          (modeline-wrap
                           (propertize "%m" 'face '(font-lock-string-face (:weight bold)))
-                          6 'down nil 'bottom)
-                         
+                          6 'down nil 'up)
+
+
                          '(:eval (nyan-create))
 
                          '(:eval (modeline-flycheck))
@@ -294,7 +298,7 @@ LINE-POSITION is 'top or 'bottom."
                           (modeline-git-status) 'face '(font-lock-string-face (:weight bold)))
                          ))
          (modeline-right (list
-                          (modeline-wrap (modeline-fill (if sys/macp 14 18)) 0 'up t)
+                          (modeline-wrap (modeline-fill (if sys/macp 16 18)) 0 'up t)
 
                           modeline-space
 
