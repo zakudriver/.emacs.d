@@ -68,7 +68,7 @@ STRING is the element.
 WIDTH is white space.
 DIRECTION is 'up or 'down.
 TYPE is a bool, direction of dip.
-LINE-POSITION is 'top or 'bottom."
+LINE-POSITION is 'top or 'bottom or 'all."
   (unless direction
     (setq direction 'down))
   (let* ((base  (if (modeline-window-active-p) 'mode-line 'mode-line-inactive))
@@ -81,20 +81,35 @@ LINE-POSITION is 'top or 'bottom."
          (slant (if (eq direction 'down)
                     (list outer line inner)
                   (list inner line outer)))
-         (face (if (eq line-position 'top)
-                   (list :overline line
-                         :underline nil
-                         :background inner)
-                 (list :overline nil
-                       :underline line
-                       :background inner)))
+         (face (list :overline nil
+                     :underline nil
+                     :background inner))
          (pad (max (- (or width 0) (length string)) 2)))
 
-    (unless line-position
-      (setq face
-            (list :overline line
-                  :underline line
-                  :background inner)))
+    ;; (when (eq line-position 'all)
+    ;;   (setq face
+    ;;         (list :overline line
+    ;;               :underline line
+    ;;               :background inner)))
+
+    ;; (when (eq line-position 'top)
+    ;;   (setq face
+    ;;         (list :overline line
+    ;;               :underline nil
+    ;;               :background inner)))
+
+    ;; (when (eq line-position 'bottom)
+    ;;   (setq face
+    ;;         (list :overline nil
+    ;;               :underline line
+    ;;               :background inner)))
+
+    ;; (unless line-position
+    ;;   (setq face
+    ;;         (list :overline nil
+    ;;               :underline nil
+    ;;               :background inner)))
+
     (setq string
           (concat (make-string (ceiling pad 2) ?\s)
                   (substring string 0)
@@ -204,7 +219,7 @@ LINE-POSITION is 'top or 'bottom."
      ;;   (`interrupted " -")
      ;;   (`suspicious '(propertize " ?" 'face 'warning))
      ;;   )
-     0 'up)))
+     0 'up nil 'all)))
 
 
 ;; vc-mode
@@ -271,7 +286,7 @@ LINE-POSITION is 'top or 'bottom."
                          (modeline-wrap
                           (propertize "%b " 'face '(font-lock-keyword-face (:weight bold))
                                       'help-echo (buffer-file-name))
-                          6 'down nil 'bottom)
+                          6 'down nil 'all)
 
                          modeline-space
                          
@@ -286,7 +301,7 @@ LINE-POSITION is 'top or 'bottom."
                          ;; major mode
                          (modeline-wrap
                           (propertize "%m" 'face '(font-lock-string-face (:weight bold)))
-                          6 'down nil 'up)
+                          6 'down nil 'all)
 
 
                          '(:eval (nyan-create))
@@ -298,7 +313,7 @@ LINE-POSITION is 'top or 'bottom."
                           (modeline-git-status) 'face '(font-lock-string-face (:weight bold)))
                          ))
          (modeline-right (list
-                          (modeline-wrap (modeline-fill (if sys/macp 16 18)) 0 'up t)
+                          (modeline-wrap (modeline-fill (if sys/macp 16 18)) 0 'up t 'all)
 
                           modeline-space
 
@@ -311,12 +326,12 @@ LINE-POSITION is 'top or 'bottom."
                           '(:eval (modeline-vc-branch))
                           ))
 
-         (modeline-left-right (append modeline-left modeline-right))
          (modeline-fill (append modeline-left modeline-right))
+         (width (string-width (format-mode-line modeline-fill)))
          )
 
     (cond
-     ((> 95 (window-total-width)) modeline-left)
+     ((> width (window-total-width)) modeline-left)
      (t modeline-fill))))
 
 
@@ -332,6 +347,7 @@ LINE-POSITION is 'top or 'bottom."
                       :box nil
                       )
   (set-face-attribute 'mode-line-inactive  nil
+                      :family "SF Pro Text"
                       :height 90
                       :overline nil
                       :underline nil

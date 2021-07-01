@@ -52,6 +52,51 @@
   (dashboard-setup-startup-hook))
 
 
+(use-package doom-modeline
+  :custom
+  (doom-modeline-project-detection 'projectile)
+  (doom-modeline-buffer-file-name-style 'auto)
+  (doom-modeline-height 1)
+  (doom-modeline-bar-width 3)
+  ;; (inhibit-compacting-font-caches t)
+  ;; (find-file-visit-truename t)
+  (auto-revert-check-vc-info t)
+  :hook
+  (after-init . (lambda ()
+                  (doom-modeline-mode t)
+                  (setup-custom-doom-modeline)))
+  :config
+  (set-face-attribute 'mode-line nil :height 120)
+  (set-face-attribute 'mode-line-inactive nil :height 120)
+
+  (doom-modeline-def-modeline 'my-simple-line
+    '(bar matches buffer-info remote-host buffer-position parrot)
+    '(misc-info input-method buffer-encoding major-mode process vcs checker))
+
+  (defun setup-custom-doom-modeline ()
+    (doom-modeline-set-modeline 'my-simple-line 'default))
+  )
+
+
+;; nyan-mode
+;; (use-package nyan-mode
+;;   :hook
+;;   (after-init . nyan-mode)
+;;   :custom
+;;   (nyan-bar-length 24)
+;;   (nyan-animate-nyancat nil)
+;;   (nyan-wavy-trail nil)
+;;   (nyan-animation-frame-interval 0.4))
+
+;; poke line
+(use-package poke-line
+  :custom
+  (poke-line-bar-length 24)
+  (poke-line-pokemon "gengar")
+  :hook
+  (after-init . poke-line-global-mode))
+
+
 ;; Emoji
 (use-package emojify
   :hook
