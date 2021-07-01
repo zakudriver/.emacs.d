@@ -185,12 +185,6 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
    "bp" 'kumo-switch-to-previous-buffer
    "bR" 'kumo-rename-current-buffer-file
    "bD" 'kumo-delete-current-buffer-file
-   "Bl" 'persp-state-load
-   "Bk" 'persp-kill-buffer*
-   "Bw" 'persp-switch
-   "Bb" 'persp-ivy-switch-buffer
-   "Br" 'persp-rename
-   "BK" 'persp-kill
    "oo" 'org-switchb
    "oa" 'org-agenda
    "cc" 'kumo-flycheck-list-errors-toggle
