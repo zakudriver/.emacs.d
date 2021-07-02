@@ -79,22 +79,22 @@
 
 
 ;; nyan-mode
-;; (use-package nyan-mode
-;;   :hook
-;;   (after-init . nyan-mode)
-;;   :custom
-;;   (nyan-bar-length 24)
-;;   (nyan-animate-nyancat nil)
-;;   (nyan-wavy-trail nil)
-;;   (nyan-animation-frame-interval 0.4))
+(use-package nyan-mode
+  :hook
+  (after-init . nyan-mode)
+  :custom
+  (nyan-bar-length 24)
+  (nyan-animate-nyancat nil)
+  (nyan-wavy-trail nil)
+  (nyan-animation-frame-interval 0.4))
 
 ;; poke line
-(use-package poke-line
-  :custom
-  (poke-line-bar-length 24)
-  (poke-line-pokemon "gengar")
-  :hook
-  (after-init . poke-line-global-mode))
+;; (use-package poke-line
+;;   :hook
+;;   (after-init . poke-line-global-mode)
+;;   :custom
+;;   (poke-line-bar-length 24)
+;;   (poke-line-pokemon "gengar"))
 
 
 ;; Emoji
