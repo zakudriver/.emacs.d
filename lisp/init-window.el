@@ -60,11 +60,11 @@
   :init
   (defhydra hydra-frame-window (:color pink :hint nil)
     "
- ^Window^                              Frame^                       ^^Window Size^^^      ^Text Zoom^               
- _w1_: delete                          _f1_: delete                     ^ ^ _K_ ^ ^            _=_                   
- _w2_: delete others                   _f2_: delete others              _H_ ^+^ _L_            ^+^             
- _s_wap x-direction and y-direction    _f3_: new                        ^ ^ _J_ ^ ^            _-_            
- Flip _v_erticall                                                   _F_ullscreen       ^^^_b_alance
+ ^Window^                              Frame^                       ^^Window Size^^^      ^Text Zoom^    ^Opacity^              
+ _w1_: delete                          _f1_: delete                     ^ ^ _K_ ^ ^            _=_           _u_         
+ _w2_: delete others                   _f2_: delete others              _H_ ^+^ _L_            ^+^           ^+^
+ _s_wap x-direction and y-direction    _f3_: new                        ^ ^ _J_ ^ ^            _-_           _d_  
+ Flip _v_erticall                                                   _F_ullscreen       ^^^_b_alance       ^^^_m_ax
  Flop _h_orizontally                                                _M_aximized
  Rotate 180 _d_egrees
  Rotate 90  degrees _c_lockwise
@@ -90,6 +90,9 @@
     ("d" rotate-frame)
     ("c" rotate-frame-clockwise)
     ("a" rotate-frame-anticlockwise)
+    ("d" kumo-adjust-opacity-down)
+    ("u" kumo-adjust-opacity-up)
+    ("m" kumo-adjust-opacity-max)
     ("q" nil "quit")))
 
 

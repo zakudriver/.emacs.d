@@ -11,6 +11,10 @@
       frame-resize-pixelwise t)
 
 
+;; 透明背景
+(modify-frame-parameters nil `((alpha . 85)))
+
+
 ;; Menu/Tool/Scroll bars
 (when (version< emacs-version "27")
   (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))

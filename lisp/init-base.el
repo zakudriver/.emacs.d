@@ -18,7 +18,6 @@
 (set-terminal-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
 (modify-coding-system-alist 'process "*" 'utf-8)
-(set-frame-parameter nil 'alpha '(85 . 60)) ;; 透明背景
 
 
 (setq load-prefer-newer t                     ;; Prefers the newest version of a file
