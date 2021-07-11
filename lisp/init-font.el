@@ -2,6 +2,7 @@
 
 
 (eval-when-compile
+  (require 'cl)
   (require 'init-const)
   (require 'init-custom))
 
@@ -100,7 +101,7 @@ FONT is a symbol."
       (global-set-key (kbd
                        (concat "C-c F " (if (> idx 9) (nth (- idx 10) kumo/index-map) (number-to-string idx))))
                       i)
-      (setq idx (+ idx 1))
+      (incf idx)
       )))
 
 
