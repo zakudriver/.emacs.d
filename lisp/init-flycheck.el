@@ -6,7 +6,6 @@
 
 
 (use-package flycheck
-  :diminish
   :hook
   (after-init . global-flycheck-mode)
   :init

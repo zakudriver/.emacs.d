@@ -64,8 +64,8 @@ FACE defaults to inheriting from default and highlight."
   :custom-face
   (symbol-overlay-default-face ((t (:inherit (region bold)))))
   :bind
-  (("C-c m" . symbol-overlay-put)
-   ("C-c M" . symbol-overlay-remove-all)
+  (("C-c l m" . symbol-overlay-put)
+   ("C-c l M" . symbol-overlay-remove-all)
    :map symbol-overlay-map
    ("M-n" . symbol-overlay-jump-next)
    ("M-p" . symbol-overlay-jump-prev)

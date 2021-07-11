@@ -7,7 +7,8 @@
 
 ;; Manage and navigate projects
 (use-package projectile
-  :diminish
+  :bind
+  ("C-c p P" . projectile-command-map)
   :hook
   (after-init . projectile-mode)
   :custom
@@ -37,11 +38,12 @@
 
 
 (use-package find-file-in-project
+  :bind
+  ("C-c p f" . find-file-in-project-by-selected)
+  ("C-c p F" . find-file-with-similar-name)
+  ("C-c p d" . find-directory-in-project-by-selected)
   :custom
-  (ffip-use-rust-fd t)
-  :init
-  (ivy-mode 1)
-  )
+  (ffip-use-rust-fd t))
 
 
 (provide 'init-projectile)

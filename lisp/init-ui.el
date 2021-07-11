@@ -32,8 +32,9 @@
 ;; Dashboard
 (use-package dashboard
   :bind
-  (:map dashboard-mode-map
-        ("C-, g" . dashboard-refresh-buffer))
+  (("C-c h" . kumo-open-dashboard)
+   :map dashboard-mode-map
+   ("C-, g" . dashboard-refresh-buffer))
   :custom
   ;; (dashboard-banner-logo-title "Help poor children in Uganda!")
   (dashboard-banner-logo-title (concat "Happy hacking, " user-login-name " - Emacs ♥ you!"))
@@ -49,10 +50,11 @@
   (dashboard-set-footer nil)
   :custom-face
   (dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
+  :hook
+  (emacs-with-setup .
+                    (lambda ()
+                      (goto-line kumo/dashboard-position)))
   :init
-  ;; init jump to (kumo/dashboard-position) line
-  (add-hook 'emacs-startup-hook #'(lambda ()
-                                    (goto-line kumo/dashboard-position)))
   (dashboard-setup-startup-hook))
 
 

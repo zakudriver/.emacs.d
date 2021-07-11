@@ -96,16 +96,12 @@ FONT is a symbol."
 (defun bind-change-font-keymap ()
   "Bind change font keymap on general."
   (let ((idx 1))
-    (dolist (i kumo/current-font-list kumo/C-c-keybinds)
-      (setq kumo/C-c-keybinds
-            (append kumo/C-c-keybinds
-                    `(,(concat "F" (if (> idx 9) (nth (- idx 10) kumo/index-map) (number-to-string idx))))
-                    `((quote ,i))
-                    ))
-      (setq idx (+ idx 1)))
-    (setq kumo/C-c-keybinds
-          (append kumo/C-c-keybinds
-                  '("F0" 'kumo-current-font)))))
+    (dolist (i kumo/current-font-list)
+      (global-set-key (kbd
+                       (concat "C-c F " (if (> idx 9) (nth (- idx 10) kumo/index-map) (number-to-string idx))))
+                      i)
+      (setq idx (+ idx 1))
+      )))
 
 
 ;; create interactive font function

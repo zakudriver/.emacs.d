@@ -359,8 +359,7 @@ NUM is the window number."
   (interactive)
   (let* ((output-buffer (get-buffer-create kumo/easy-hugo-github-deploy-buffer-name))
          (command-window (async-shell-command (expand-file-name (concat kumo/easy-hugo-basedir kumo/easy-hugo-github-deploy-script)) output-buffer nil)))
-    (select-window command-window)
-    (local-set-key (kbd "C-q") 'kill-buffer-and-window)))
+    (select-window command-window)))
 
 
 (defun kumo-put-file-name-on-clipboard (&optional arg)
@@ -431,16 +430,14 @@ EXPORTER: export way."
 
 
 
-(defun kumo-copy-whole-line ()
+(defun kumo-kill-and-save-whole-line ()
   "Copy region or whole line."
   (interactive)
   (if mark-active
       (kill-ring-save (region-beginning)
                       (region-end))
-    (progn
-      (kill-ring-save (line-beginning-position)
-                      (line-end-position))
-      (message "copied line"))))
+    (kill-ring-save (line-beginning-position)
+                    (line-end-position))))
 
 
 (defun kumo-kill-whole-line ()
@@ -449,26 +446,45 @@ EXPORTER: export way."
   (if mark-active
       (kill-region (region-beginning)
                    (region-end))
-    (progn
-      (kill-region (line-beginning-position)
-                   (line-end-position))
-      (message "killed line"))))
+    (kill-region (line-beginning-position)
+                 (line-end-position))))
 
 
-(defun kumo-newline-above-current()
+(defun kumo-newline-above-current ()
   "Add a line above current line like vim O."
   (interactive)
   (progn (beginning-of-line)
-         (open-line 1)
-         (indent-according-to-mode)))
+         (newline)
+         (previous-line)))
 
 
-(defun kumo-newline-next-current()
+(defun kumo-newline-next-current ()
   "Add a line next current line like vim o."
   (interactive)
   (progn (end-of-line)
          (newline-and-indent)))
 
+
+(defun kumo-kill-line ()
+  "Kill line like vim dd."
+  (interactive)
+  (progn (beginning-of-line)
+         (kill-line)))
+
+
+(defun kumo-yank ()
+  "Yank like vim yank."
+  (interactive)
+  (progn (yank)
+         (newline-and-indent)))
+
+
+(defun kumo-backward-kill-word ()
+  "Yank like vim yank."
+  (interactive)
+  (progn
+    (yank)
+    (newline)))
 
 
 (provide 'init-funcs)

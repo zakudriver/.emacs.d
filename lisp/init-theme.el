@@ -76,16 +76,12 @@ THEME is '(theme-package-name theme name)."
 (defun bind-change-theme-keymap ()
   "Bind change theme keymap on general."
   (let ((idx 1))
-    (dolist (i kumo/theme-list kumo/C-c-keybinds)
-      (setq kumo/C-c-keybinds
-            (append kumo/C-c-keybinds
-                    `(,(concat "T" (if (> idx 9) (nth (- idx 10) kumo/index-map) (number-to-string idx))))
-                    `((quote,(nth 1 i)))
-                    ))
-      (setq idx (+ idx 1)))
-    (setq kumo/C-c-keybinds
-          (append kumo/C-c-keybinds
-                  '("T0" 'kumo-current-theme)))))
+    (dolist (i kumo/theme-list)
+      (global-set-key (kbd
+                       (concat "C-c T " (if (> idx 9) (nth (- idx 10) kumo/index-map) (number-to-string idx))))
+                      (nth 1 i))
+      (setq idx (+ idx 1))
+      )))
 
 
 ;; create interactive theme function
@@ -99,10 +95,6 @@ THEME is '(theme-package-name theme name)."
 ;; bind change theme keymap
 (bind-change-theme-keymap)
 
-
-;; Call Bind keymap ;;
-(eval kumo/C-c-keybinds)
-;;;;;;;;;;;;;;;;;;;;;;
 
 (provide 'init-theme)
 

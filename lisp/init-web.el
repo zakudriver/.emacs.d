@@ -22,7 +22,7 @@
    ("\\.ejs$" . web-mode))
   :bind
   (:map web-mode-map
-        ("C-/" . web-mode-comment-or-uncomment))
+        ("M-;" . web-mode-comment-or-uncomment))
   :custom
   (web-mode-markup-indent-offset 2)
   (web-mode-css-indent-offset 2)

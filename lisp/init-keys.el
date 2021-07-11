@@ -4,9 +4,9 @@
 ;; global keys
 (global-set-key (kbd "<f2>") 'kumo-open-init-file)
 (global-set-key (kbd "<C-tab>") 'kumo-indent-all)
-(global-set-key (kbd "M-u") 'universal-argument)
 (global-set-key (kbd "C-<return>") 'smart-region)
 (global-set-key (kbd "C-x s") 'kumo-save-some-buffers) ;; replace 'save-some-buffer
+
 (global-set-key (kbd "C-c w w") 'hydra-frame-window/body)
 (global-set-key (kbd "C-c w v") 'split-window-vertically)
 (global-set-key (kbd "C-c w V") 'kumo-window-vertically-selected)
@@ -18,56 +18,42 @@
 (global-set-key (kbd "C-c w b") 'kumo-current-buffer-bottom-window)
 (global-set-key (kbd "C-c w m") 'kumo-select-minibuffer-window)
 
+(global-set-key (kbd "C-c n d") 'kumo-number-division)
 
-;;(global-set-key (kbd "C-<return>") 'smart-region)
+(global-set-key (kbd "C-o") 'kumo-newline-next-current)
+(global-set-key (kbd "C-S-o") 'kumo-newline-above-current)
 
-;; general keys
-;; (use-package generala
-;;   :config
-;;   (general-define-key
-;;    :prefix "C-c"
+;; (global-set-key (kbd "C-k") 'kumo-kill-line) ;; replace 'kill-line
+;; (global-set-key (kbd "C-S-w") 'kumo-kill-and-save-whole-line)
+;; (global-set-key (kbd "C-w") 'kill-ring-save) ;; replace 'kill-region
+;; (global-set-key (kbd "M-w") 'kill-region) ;; replace 'kill-ring-save
+;; (global-set-key (kbd "M-W") 'kumo-kill-whole-line)
+
+(global-set-key (kbd "M-p") 'beginning-of-buffer)
+(global-set-key (kbd "M-n") 'end-of-buffer)
+
+;; (global-set-key (kbd "C-y") 'yank)
+;; (global-set-key (kbd "C-S-y") 'kumo-yank)
+
+(global-set-key (kbd "C-c f n") 'kumo-put-file-name-on-clipboard)
+(global-set-key (kbd "C-c f d") 'kumo-open-current-file-in-finder)
+
+(global-set-key (kbd "C-c b t") 'kumo-kill-this-buffer)
+(global-set-key (kbd "C-c b o") 'kumo-kill-other-buffers)
+(global-set-key (kbd "C-c b a") 'kumo-kill-all-buffers)
+(global-set-key (kbd "C-c b p") 'kumo-switch-to-previous-buffer)
+(global-set-key (kbd "C-c b R") 'kumo-rename-current-buffer-file)
+(global-set-key (kbd "C-c b D") 'kumo-delete-current-buffer-file)
+
+(global-set-key (kbd "C-c c c") 'kumo-flycheck-list-errors-toggle)
+(global-set-key (kbd "C-c c s") 'kumo-flycheck-list-errors-select-window)
+
+(global-set-key (kbd "C-c T 0") 'kumo-current-theme)
+(global-set-key (kbd "C-c F 0") 'kumo-current-font)
 
 
 ;;    "u" 'undo-tree-visualize
-;;    "o" 'overwrite-mode
-;;    "m" 'counsel-imenu
 
-
-;;    "nd" 'kumo-number-division
-;;    )
-
-;;   (general-define-key
-;;    :prefix "C-c"
-;;    "P" 'projectile-command-map
-;;    "pf" 'find-file-in-project-by-selected
-;;    "pF" 'find-file-with-similar-name
-;;    "pd" 'find-directory-in-project-by-selected
-;;    "pp" 'proced
-;;    "d" 'dired
-;;    "D" 'docker
-;;    "h" 'kumo-open-dashboard
-;;    "H" 'easy-hugo
-
-;;    "yy" 'youdao-dictionary-search-at-point-posframe
-;;    "yY" 'youdao-dictionary-search-at-point
-;;    "yi" 'youdao-dictionary-search-from-input
-
-;;    "ff" 'counsel-find-file
-
-;;    "fn" 'kumo-put-file-name-on-clipboard
-;;    "fd" 'kumo-open-current-file-in-finder
-;;    "bb" 'counsel-switch-buffer
-;;    "bi" 'ibuffer
-;;    "bt" 'kumo-kill-this-buffer
-;;    "bo" 'kumo-kill-other-buffers
-;;    "ba" 'kumo-kill-all-buffers
-;;    "bp" 'kumo-switch-to-previous-buffer
-;;    "bR" 'kumo-rename-current-buffer-file
-;;    "bD" 'kumo-delete-current-buffer-file
-;;    "oo" 'org-switchb
-;;    "oa" 'org-agenda
-;;    "cc" 'kumo-flycheck-list-errors-toggle
-;;    "cs" 'kumo-flycheck-list-errors-select-window
 ;;    "vo" 'vterm-other-window
 ;;    "vv" 'vterm
 ;;    "vN" 'kumo-new-vterm
@@ -75,15 +61,8 @@
 ;;    "vp" 'kumo-vterm-previous
 ;;    "vn" 'kumo-vterm-next
 
-;;    "gd" 'magit-dispatch
-;;    "gb" 'magit-log-buffer-file
-;;    )
-
-
 
 (provide 'init-keys)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-keys.el ends here
-
-(global-set-key (kbd "C-<return>") 'smart-region)

@@ -19,6 +19,7 @@
 
    ("C-c c z" . counsel-fzf)
    ("C-c c p" . counsel-pt)
+   ("C-c c m" . counsel-imenu)
    ("C-c r" . counsel-rg)
    
    :map ivy-minibuffer-map

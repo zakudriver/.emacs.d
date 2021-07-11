@@ -7,10 +7,12 @@
 
 (use-package org
   :bind
-  (:map org-mode-map
-        ("C-," . nil)
-        ("C-, l" . font-lock-mode)
-        ("C-, c" . org-cycle-agenda-files))
+  (("C-c o o" . org-switch)
+   ("C-c o a" . org-agenda)
+   :map org-mode-map
+   ("C-," . nil)
+   ("C-, l" . font-lock-mode)
+   ("C-, c" . org-cycle-agenda-files))
   :custom
   (org-startup-indented t)
   (org-startup-with-inline-images t)
@@ -85,9 +87,9 @@
 (use-package easy-hugo
   :commands easy-hugo
   :bind
-  (:map easy-hugo-mode-map
-        ("SPC" . general-simulate-C-c)
-        ("G" . kumo-easy-hugo-github-deploy))
+  (("C-c H" . easy-hugo)
+   :map easy-hugo-mode-map
+   ("G" . kumo-easy-hugo-github-deploy))
   :custom
   (easy-hugo-org-header t)
   (easy-hugo-basedir kumo/easy-hugo-basedir)

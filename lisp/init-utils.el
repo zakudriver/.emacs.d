@@ -19,7 +19,8 @@
 
 
 (use-package docker
-  :commands docker)
+  :bind
+  ("C-c D". docker))
 
 
 (use-package vterm
@@ -107,22 +108,21 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
 ;; process view
 (use-package proced
   :bind
-  (:map proced-mode-map
-        ("k" . previous-line)
-        ("j" . next-line)
-        ("G" . proced-toggle-auto-update))
+  ("C-c p p" . 'proced)
   :custom
   (proced-auto-update-flag t)
   (proced-auto-update-interval 3)
-  :init
-  (setq-default proced-format 'verbose))
+  (proced-format 'verbose))
 
 
 ;; Youdao Dictionary
 (use-package youdao-dictionary
   :bind
-  (:map youdao-dictionary-mode-map
-        ("?" . youdao-dictionary-hydra/body))
+  (("C-c y y" . youdao-dictionary-search-at-point-posframe)
+   ("C-c y Y" . youdao-dictionary-search-at-point)
+   ("C-c y i" . youdao-dictionary-search-from-input)
+   :map youdao-dictionary-mode-map
+   ("?" . youdao-dictionary-hydra/body))
   :custom
   (url-automatic-caching t)
   (youdao-dictionary-use-chinese-word-segmentation t) ; 中文分词
