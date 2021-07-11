@@ -47,7 +47,7 @@
 (defun kumo-save-some-buffers ()
   "Save some buffers without prompting."
   (interactive)
-  (if (y-or-n-p (format "Really save buffers?"))
+  (if (y-or-n-p (format "Really save buffers? "))
       (save-some-buffers t)
     (message "Canceled save.")))
 
@@ -428,6 +428,47 @@ EXPORTER: export way."
   "Adjust the background opacity to max."
   (interactive)
   (modify-frame-parameters nil `((alpha . 100))))
+
+
+
+(defun kumo-copy-whole-line ()
+  "Copy region or whole line."
+  (interactive)
+  (if mark-active
+      (kill-ring-save (region-beginning)
+                      (region-end))
+    (progn
+      (kill-ring-save (line-beginning-position)
+                      (line-end-position))
+      (message "copied line"))))
+
+
+(defun kumo-kill-whole-line ()
+  "Kill region or whole line."
+  (interactive)
+  (if mark-active
+      (kill-region (region-beginning)
+                   (region-end))
+    (progn
+      (kill-region (line-beginning-position)
+                   (line-end-position))
+      (message "killed line"))))
+
+
+(defun kumo-newline-above-current()
+  "Add a line above current line like vim O."
+  (interactive)
+  (progn (beginning-of-line)
+         (open-line 1)
+         (indent-according-to-mode)))
+
+
+(defun kumo-newline-next-current()
+  "Add a line next current line like vim o."
+  (interactive)
+  (progn (end-of-line)
+         (newline-and-indent)))
+
 
 
 (provide 'init-funcs)

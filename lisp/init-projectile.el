@@ -36,6 +36,14 @@
     (add-to-list 'projectile-project-root-files-bottom-up val)))
 
 
+(use-package find-file-in-project
+  :custom
+  (ffip-use-rust-fd t)
+  :init
+  (ivy-mode 1)
+  )
+
+
 (provide 'init-projectile)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

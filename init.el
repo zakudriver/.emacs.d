@@ -80,6 +80,7 @@ If you experience stuttering, increase this.")
   (require 'init-funcs)
   (require 'init-utils)
   (require 'init-keys)
+  ;; (require 'init-evil)
   ;; (require 'init-modeline)
   (require 'init-font)
   (require 'init-theme)
@@ -118,3 +119,4 @@ If you experience stuttering, increase this.")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init.el ends here
+(put 'downcase-region 'disabled nil)

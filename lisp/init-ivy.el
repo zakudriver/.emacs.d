@@ -4,9 +4,23 @@
 (use-package counsel
   :diminish ivy-mode counsel-mode
   :bind
-  (("C-h f" . 'counsel-describe-function)
-   ("C-h v" . 'counsel-describe-variable)
-   ("C-s" . swiper)
+  (("C-h f" . counsel-describe-function)
+   ("C-h v" . counsel-describe-variable)
+   ("C-s" . swiper-isearch)
+   ("C-S-s" . swiper-all)
+   ("C-r" . swiper-isearch-backward)
+   :map counsel-mode-map
+   ([remap swiper] . counsel-grep-or-swiper)
+   ([remap swiper-backward] . counsel-grep-or-swiper-backward)
+   ([remap dired] . counsel-dired)
+   ([remap set-variable] . counsel-set-variable)
+   ([remap insert-char] . counsel-unicode-char)
+   ([remap recentf-open-files] . counsel-recentf)
+
+   ("C-c c z" . counsel-fzf)
+   ("C-c c p" . counsel-pt)
+   ("C-c r" . counsel-rg)
+   
    :map ivy-minibuffer-map
    ([escape] . minibuffer-keyboard-quit)
    :map swiper-map

@@ -59,22 +59,21 @@ FACE defaults to inheriting from default and highlight."
 
 ;; Highlight symbols
 (use-package symbol-overlay
-  :diminish
   :functions
   (turn-off-symbol-overlay turn-on-symbol-overlay)
   :custom-face
   (symbol-overlay-default-face ((t (:inherit (region bold)))))
   :bind
-  (:map symbol-overlay-map
-        ("M-n" . symbol-overlay-jump-next)
-        ("M-p" . symbol-overlay-jump-prev)
-        ("M-N" . symbol-overlay-switch-forward)
-        ("M-P" . symbol-overlay-switch-backward)
-        ("C-. p" . symbol-overlay-put)
-        ("M-. c" . symbol-overlay-remove-all)
-        ("M-. s" . symbol-overlay-save-symbol)
-        ("h" . nil)
-        ("w" . nil))
+  (("C-c m" . symbol-overlay-put)
+   ("C-c M" . symbol-overlay-remove-all)
+   :map symbol-overlay-map
+   ("M-n" . symbol-overlay-jump-next)
+   ("M-p" . symbol-overlay-jump-prev)
+   ("M-N" . symbol-overlay-switch-forward)
+   ("M-P" . symbol-overlay-switch-backward)
+   ("M-. s" . symbol-overlay-save-symbol)
+   ("h" . nil)
+   ("w" . nil))
   :hook
   (prog-mode . symbol-overlay-mode)
   (iedit-mode . turn-off-symbol-overlay)

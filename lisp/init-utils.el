@@ -135,11 +135,12 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
   :hook
   (rg-mode . rg-enable-default-bindings)
   :bind
-  (:map rg-global-map
-        ("c" . rg-dwim-current-dir)
-        ("f" . rg-dwim-current-file)
-        :map rg-mode-map
-        ("m" . rg-menu))
+  (("C-c R" . rg-menu)
+   :map rg-global-map
+   ("c" . rg-dwim-current-dir)
+   ("f" . rg-dwim-current-file)
+   :map rg-mode-map
+   ("m" . rg-menu))
   :custom
   (rg-keymap-prefix "\C-cR")
   (rg-group-result t)

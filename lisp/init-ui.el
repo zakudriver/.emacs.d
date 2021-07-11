@@ -88,7 +88,7 @@
   (after-init . nyan-mode)
   :custom
   (nyan-bar-length 24)
-  (nyan-animate-nyancat nil)
+  (nyan-animate-nyancat t)
   (nyan-wavy-trail nil)
   (nyan-animation-frame-interval 0.4))
 

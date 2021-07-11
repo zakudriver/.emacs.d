@@ -39,20 +39,18 @@
 
 ;; Automatically reload files was modified by external program
 (use-package autorevert
-  :diminish auto-revert-mode
   :hook
   (after-init . global-auto-revert-mode))
 
 
-
 ;; Treat undo history as a tree
-(use-package undo-tree
-  :hook
-  (after-init . global-undo-tree-mode)
-  (web-mode . undo-tree-mode) ;; web-mode
-  :bind
-  (:map undo-tree-map
-        ("C-/" . nil)))
+;; (use-package undo-tree
+;;   :hook
+;;   (after-init . global-undo-tree-mode)
+;;   (web-mode . undo-tree-mode) ;; web-mode
+;;   :bind
+;;   (:map undo-tree-map
+;;         ("C-/" . nil)))
 
 
 ;; Show number of matches in mode-line while searching
@@ -68,6 +66,7 @@
   (after-init . global-anzu-mode))
 
 
+;; Increase selected region by semantic units
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
 
@@ -75,8 +74,22 @@
 ;; An all-in-one comment command to rule them all
 (use-package comment-dwim-2
   :bind
-  ("C-/" . comment-dwim-2)
+  ;; ("C-/" . comment-dwim-2)
   ([remap comment-dwim] . comment-dwim-2))
+
+
+;; Multiple cursors
+(use-package multiple-cursors
+  :bind (("C-S-c C-S-c"   . mc/edit-lines)
+         ("C->"           . mc/mark-next-like-this)
+         ("C-<"           . mc/mark-previous-like-this)
+         ("C-c C-<"       . mc/mark-all-like-this)
+         ("C-M->"         . mc/skip-to-next-like-this)
+         ("C-M-<"         . mc/skip-to-previous-like-this)
+         ("s-<mouse-1>"   . mc/add-cursor-on-click)
+         ("C-S-<mouse-1>" . mc/add-cursor-on-click)
+         :map mc/keymap
+         ("C-|" . mc/vertical-align-with-space)))
 
 
 ;; Automatic parenthesis pairing
@@ -99,18 +112,25 @@
 
 
 ;; Hungry deletion
-(use-package hungry-delete
-  :hook
-  (after-init . global-hungry-delete-mode)
-  :custom
-  (hungry-delete-chars-to-skip " \t\f\v")
-  :config
-  (add-hook 'minibuffer-setup-hook (lambda () (hungry-delete-mode 0))) ;; minibuffer hungry-delete -1
-  )
+;; (use-package hungry-delete
+;;   :hook
+;;   (after-init . global-hungry-delete-mode)
+;;   :custom
+;;   (hungry-delete-chars-to-skip " \t\f\v")
+;;   :config
+;;   (add-hook 'minibuffer-setup-hook (lambda () (hungry-delete-mode nil))) ;; minibuffer hungry-delete -1
+;;   )
 
 
-;; Move to the beginning/end of line or code
-(use-package mwim)
+;; move to the beginning/end of line or code
+(use-package mwim
+  :bind
+  ("C-c p w" . 'avy-goto-char-timer)
+  ("C-c p l" . 'avy-goto-char-in-line)
+  ("C-c p f" . 'mwim-end-of-code-or-line)
+  ("C-c p b" . 'mwim-beginning-of-code-or-line)
+  ("C-c p n" . 'avy-goto-line-below)
+  ("C-c p p" . 'avy-goto-line-above))
 
 
 ;; Flexible text folding
