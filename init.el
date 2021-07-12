@@ -119,32 +119,3 @@ If you experience stuttering, increase this.")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init.el ends here
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(highlight-parentheses-background-colors '("#F4CCE1") nil nil "Customized with use-package highlight-parentheses")
- '(highlight-parentheses-colors '("#73317a") nil nil "Customized with use-package highlight-parentheses")
- '(safe-local-variable-values
-   '((eval progn
-           (require 'find-file-in-project)
-           (setq ffip-prune-patterns
-                 `("*/@querycap-canary/*" ,@ffip-prune-patterns)))
-     (ffip-find-options . "-not -size +64k -not -iwholename '*/dist/*'")
-     (ffip-project-root . "/Users/rx-78-kum0/code/rockontrol/webapp/"))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
- '(org-pomodoro-keep-killed-pomodoro-time t)
- '(org-pomodoro-mode-line ((t (:inherit warning))))
- '(org-pomodoro-mode-line-break ((t (:inherit success))))
- '(org-pomodoro-mode-line-overtime ((t (:inherit error))))
- '(pulse-highlight-face ((t (:inherit region))))
- '(pulse-highlight-start-face ((t (:inherit region))))
- '(symbol-overlay-default-face ((t (:inherit (region bold))))))
