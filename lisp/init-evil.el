@@ -20,7 +20,7 @@
   (evil-kill-on-visual-paste nil)
   (evil-want-keybinding nil)
   :config
-  (evil-set-undo-system 'undo-tree)
+  ;; (evil-set-undo-system 'undo-tree)
   ;; evil-record-macro key q -> Q
   (evil-global-set-key 'normal
                        (kbd "q") nil)
