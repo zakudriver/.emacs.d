@@ -159,6 +159,14 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
      ("F" . counsel-fzf))))
 
 
+(use-package fireplace
+  :init
+  (setq zone-timer (run-with-idle-timer 6 t (lambda ()
+                                              (delete-other-windows)
+                                              (fireplace))))
+  )
+
+
 (provide 'init-utils)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

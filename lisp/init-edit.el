@@ -118,7 +118,7 @@
   :custom
   (hungry-delete-chars-to-skip " \t\f\v")
   :hook
-  (minibuffer-with-setup . (lambda () (hungry-delete-mode nil))))
+  (minibuffer-with-setup . (lambda () (hungry-delete-mode 0))))
 
 
 ;; move to the beginning/end of line or code
@@ -161,6 +161,11 @@
         ("C-c @ d" . 'hs-hide-block)
         ("C-c @ s" . 'hs-show-block)
         ("C-c @ t" . 'hs-toggle-hiding)))
+
+
+(use-package selectric-mode
+  :hook
+  (after-init . selectric-mode))
 
 
 (provide 'init-edit)
