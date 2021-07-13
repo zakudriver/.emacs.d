@@ -1,4 +1,4 @@
-;;; Code
+;;; Code:
 
 
 (eval-when-compile
@@ -11,10 +11,10 @@
   (lsp-deferred)
   :hook
   (prog-mode . (lambda ()
-                 (if (apply #'derived-mode-p kumo/lsp-major-mode)
+                 (when (apply 'derived-mode-p kumo/lsp-major-mode)
                      (lsp-deferred))))
   (lsp-mode . (lambda ()
-                (if (apply #'derived-mode-p kumo/lsp-on-save-major-mode)
+                (when (apply 'derived-mode-p kumo/lsp-on-save-major-mode)
                     (add-hook 'before-save-hook #'lsp-format-buffer t t))))
   :custom
   (lsp-clients-angular-language-server-command

@@ -148,6 +148,10 @@
   "Perspective state cache file.")
 
 
+(defconst kumo/evil-local-mode '(web-mode typescript-mode js2-mode go-mode ruby-mode css-mode scss-mode)
+  "Start evil-local-mode list.")
+
+
 ;; (defconst kumo/prettify-symbols-alist
 ;;   '(("lambda" . ?λ)
 ;;     ("<-" . ?←)

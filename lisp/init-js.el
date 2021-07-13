@@ -2,7 +2,8 @@
 
 
 (use-package js2-mode
-  :mode (("\\.js$" . js2-mode))
+  :mode
+  (("\\.js$" . js2-mode))
   :custom
   (js-indent-level 2)
   (js2-basic-offset 2)

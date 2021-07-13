@@ -1,16 +1,18 @@
 ;;; Code:
 
 
-;; global keys
-(global-set-key (kbd "<f2>") 'kumo-open-init-file)
-(global-set-key (kbd "<C-tab>") 'kumo-indent-all)
-(global-set-key (kbd "M-u") 'universal-argument)
+(eval-when-compile
+  (require 'init-const)
+  (require 'init-custom))
 
 
 ;; evil keys
 (use-package evil
-  :init
-  (evil-mode t)
+  :commands evil-local-mode
+  :hook
+  (prog-mode . (lambda ()
+                 (when (apply 'derived-mode-p kumo/evil-local-mode)
+                   (evil-local-mode t))))
   :custom
   (evil-want-C-u-scroll t)
   (evil-want-Y-yank-to-eol t)
@@ -19,7 +21,6 @@
   (evil-want-keybinding nil)
   :config
   (evil-set-undo-system 'undo-tree)
-  (evil-set-initial-state 'dired-mode 'emacs)
   ;; evil-record-macro key q -> Q
   (evil-global-set-key 'normal
                        (kbd "q") nil)
@@ -131,99 +132,23 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
     (when (and (called-interactively-p 'any)
                (eq type 'line))
       (evil-first-non-blank)))
-  )
 
+  (use-package general
+    :config
+    (define-key evil-normal-state-map (kbd "SPC") (general-simulate-key "C-c"))
 
-(use-package evil-collection
-  :after evil
-  :init
-  (evil-collection-init '(magit ibuffer)))
-
-
-;; general keys 
-(use-package general
-  :config
-  (define-key evil-normal-state-map (kbd "SPC") (general-simulate-key "C-c"))
-
-  (general-define-key
-   :states '(normal visual)
-   :prefix ","
-   "k" 'symbol-overlay-put
-   "K" 'symbol-overlay-remove-all
-   "u" 'undo-tree-visualize
-   "o" 'overwrite-mode
-   "m" 'counsel-imenu
-   "w" 'avy-goto-char-timer
-   "s" 'kumo-save-some-buffers
-   "nd" 'kumo-number-division
-   )
+    (general-define-key
+     :states '(normal visual)
+     "H" 'mwim-beginning-of-code-or-line
+     "L" 'mwim-end-of-code-or-line
+     "J" 'avy-goto-line-below
+     "K" 'avy-goto-line-above
+     "f" 'avy-goto-char-in-line
+     "gb" 'pop-tag-mark
+     "/" 'swiper
+     ))
   
-  (general-define-key
-   :prefix "C-c"
-   "P" 'projectile-command-map
-   "pf" 'find-file-in-project-by-selected
-   "pF" 'find-file-with-similar-name
-   "pd" 'find-directory-in-project-by-selected
-   "pp" 'proced
-   "d" 'dired
-   "D" 'docker
-   "h" 'kumo-open-dashboard
-   "H" 'easy-hugo
-   "R" 'rg-menu
-   "yy" 'youdao-dictionary-search-at-point-posframe
-   "yY" 'youdao-dictionary-search-at-point
-   "yi" 'youdao-dictionary-search-from-input
-   "sr" 'counsel-rg
-   "ss" 'swiper
-   "ff" 'counsel-find-file
-   "fr" 'counsel-recentf
-   "fz" 'counsel-fzf
-   "fn" 'kumo-put-file-name-on-clipboard
-   "fd" 'kumo-open-current-file-in-finder
-   "bb" 'counsel-switch-buffer
-   "bi" 'ibuffer
-   "bt" 'kumo-kill-this-buffer
-   "bo" 'kumo-kill-other-buffers
-   "ba" 'kumo-kill-all-buffers
-   "bp" 'kumo-switch-to-previous-buffer
-   "bR" 'kumo-rename-current-buffer-file
-   "bD" 'kumo-delete-current-buffer-file
-   "oo" 'org-switchb
-   "oa" 'org-agenda
-   "cc" 'kumo-flycheck-list-errors-toggle
-   "cs" 'kumo-flycheck-list-errors-select-window
-   "ww" 'hydra-frame-window/body
-   "wv" 'split-window-vertically
-   "wV" 'kumo-window-vertically-selected
-   "wh" 'split-window-horizontally
-   "wH" 'kumo-window-horizontally-selected
-   "wt" 'delete-window
-   "wq" 'quit-window
-   "wo" 'delete-other-windows
-   "wb" 'kumo-current-buffer-bottom-window
-   "wm" 'kumo-select-minibuffer-window
-   "wn" 'evil-window-new
-   "vo" 'vterm-other-window
-   "vv" 'vterm
-   "vN" 'kumo-new-vterm
-   "vs" 'kumo-vterm-select-window
-   "vp" 'kumo-vterm-previous
-   "vn" 'kumo-vterm-next
-   "gs" 'magit-status
-   "gd" 'magit-dispatch
-   "gb" 'magit-log-buffer-file
-   )
-
-  (general-define-key
-   :states '(normal visual)
-   "H" 'mwim-beginning-of-code-or-line
-   "L" 'mwim-end-of-code-or-line
-   "J" 'avy-goto-line-below
-   "K" 'avy-goto-line-above
-   "f" 'avy-goto-char-in-line
-   "gb" 'pop-tag-mark
-   "/" 'swiper
-   ))
+  )
 
 
 (provide 'init-evil)
