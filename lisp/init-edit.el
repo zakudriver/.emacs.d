@@ -151,6 +151,18 @@
   (after-init . whole-line-or-region-global-mode))
 
 
+(use-package hideshow
+  :hook
+  (prog-mode . hs-minor-mode)
+  :bind
+  (:map hs-minor-mode-map
+        ("C-c @ a" . 'hs-show-all)
+        ("C-c @ h" . 'hs-hide-all)
+        ("C-c @ d" . 'hs-hide-block)
+        ("C-c @ s" . 'hs-show-block)
+        ("C-c @ t" . 'hs-toggle-hiding)))
+
+
 (provide 'init-edit)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-edit.el ends here

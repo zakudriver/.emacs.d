@@ -2,8 +2,6 @@
 
 
 (use-package company
-  :diminish
-  :commands company-cancel
   :bind
   (("M-/" . company-complete)
    ("s-/" . company-yasnippet)
