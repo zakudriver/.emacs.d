@@ -54,6 +54,8 @@
                             (kaolin-themes kaolin-eclipse)
                             (kaolin-themes kaolin-valley-dark)
                             (kaolin-themes kaolin-temple)
+                            (leuven-theme leuven (setq leuven-scale-outline-headlines nil))
+                            (leuven-theme leuven-dark (setq leuven-scale-outline-headlines nil))
                             )
   "Theme list.")
 

@@ -44,13 +44,11 @@
 
 
 ;; Treat undo history as a tree
-;; (use-package undo-tree
-;;   :hook
-;;   (after-init . global-undo-tree-mode)
-;;   (web-mode . undo-tree-mode) ;; web-mode
-;;   :bind
-;;   (:map undo-tree-map
-;;         ("C-/" . nil)))
+(use-package undo-tree
+  :hook
+  (after-init . global-undo-tree-mode)
+  (web-mode . undo-tree-mode) ;; web-mode
+  )
 
 
 ;; Show number of matches in mode-line while searching
@@ -113,12 +111,16 @@
 
 ;; Hungry deletion
 (use-package hungry-delete
-  :bind
-  ("M-<backspace>" . hungry-delete-backward)
-  :custom
-  (hungry-delete-chars-to-skip " \t\f\v")
   :hook
-  (minibuffer-with-setup . (lambda () (hungry-delete-mode 0))))
+  (prog-mode . turn-on-hungry-delete-mode)
+  :bind
+  (:map hungry-delete-mode-map
+        ("M-<backspace>" . hungry-delete-backward))
+  :custom
+  (hungry-delete-except-modes '(help-mode minibuffer-inactive-mode calc-mode ivy-mode minibuffer-mode))
+  (hungry-delete-chars-to-skip " \t\f\v")
+  (hungry-delete-join-reluctantly t)
+  )
 
 
 ;; move to the beginning/end of line or code

@@ -49,8 +49,8 @@
   "Env path file.")
 
 
-(defconst kumo/index-map
-  '("a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z")
+(defconst kumo/expanding-index-map
+  '("a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z 1" "z 2" "z 3" "z 4" "z 5" "z 6" "z 7" "z 8" "z 9")
   "When index > 9.")
 
 

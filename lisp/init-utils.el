@@ -161,7 +161,7 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
 
 (use-package fireplace
   :init
-  (setq zone-timer (run-with-idle-timer 6 t (lambda ()
+  (setq zone-timer (run-with-idle-timer 120 t (lambda ()
                                               (delete-other-windows)
                                               (fireplace))))
   )

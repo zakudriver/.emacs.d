@@ -79,7 +79,7 @@ THEME is '(theme-package-name theme name)."
   (let ((idx 1))
     (dolist (i kumo/theme-list)
       (global-set-key (kbd
-                       (concat "C-c T " (if (> idx 9) (nth (- idx 10) kumo/index-map) (number-to-string idx))))
+                       (concat "C-c T " (if (> idx 9) (nth (- idx 10) kumo/expanding-index-map) (number-to-string idx))))
                       (nth 1 i))
       (incf idx)
       )))

@@ -99,7 +99,7 @@ FONT is a symbol."
   (let ((idx 1))
     (dolist (i kumo/current-font-list)
       (global-set-key (kbd
-                       (concat "C-c F " (if (> idx 9) (nth (- idx 10) kumo/index-map) (number-to-string idx))))
+                       (concat "C-c F " (if (> idx 9) (nth (- idx 10) kumo/expanding-index-map) (number-to-string idx))))
                       i)
       (incf idx)
       )))
