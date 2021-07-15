@@ -487,6 +487,15 @@ EXPORTER: export way."
     (newline)))
 
 
+(defun kumo-region-whole-line ()
+  "Region whole line link vim S-v."
+  (interactive)
+  (progn
+    (end-of-line)
+    (set-mark (line-beginning-position)
+              )))
+
+
 (provide 'init-funcs)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

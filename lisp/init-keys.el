@@ -52,6 +52,8 @@
 (global-set-key (kbd "C-c T 0") 'kumo-current-theme)
 (global-set-key (kbd "C-c F 0") 'kumo-current-font)
 
+(global-set-key (kbd "C-c z") 'kumo-wrap-with-input)
+
 
 ;;    "u" 'undo-tree-visualize
 
