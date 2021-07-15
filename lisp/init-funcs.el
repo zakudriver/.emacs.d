@@ -492,8 +492,7 @@ EXPORTER: export way."
   (interactive)
   (progn
     (end-of-line)
-    (set-mark (line-beginning-position)
-              )))
+    (set-mark (line-beginning-position))))
 
 
 (provide 'init-funcs)

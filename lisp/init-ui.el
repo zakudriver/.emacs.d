@@ -103,6 +103,15 @@
 ;;   (poke-line-pokemon "gengar"))
 
 
+(use-package fireplace
+  :custom
+  (fireplace-smoke-on t)
+  :init
+  (setq zone-timer (run-with-idle-timer 300 t (lambda ()
+                                                (delete-other-windows)
+                                                (fireplace)))))
+
+
 ;; Emoji
 (use-package emojify
   :hook

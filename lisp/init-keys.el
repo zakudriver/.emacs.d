@@ -4,7 +4,7 @@
 ;; global keys
 (global-set-key (kbd "<f2>") 'kumo-open-init-file)
 (global-set-key (kbd "<C-tab>") 'kumo-indent-all)
-(global-set-key (kbd "C-<return>") 'smart-region)
+;; (global-set-key (kbd "C-<return>") 'smart-region)
 
 (global-set-key (kbd "C-x s") 'kumo-save-some-buffers) ;; replace 'save-some-buffer
 
@@ -53,6 +53,7 @@
 (global-set-key (kbd "C-c F 0") 'kumo-current-font)
 
 (global-set-key (kbd "C-c z") 'kumo-wrap-with-input)
+(global-set-key (kbd "C-S-v") 'kumo-region-whole-line)
 
 
 ;;    "u" 'undo-tree-visualize

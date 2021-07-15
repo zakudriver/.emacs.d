@@ -153,6 +153,12 @@
   (after-init . whole-line-or-region-global-mode))
 
 
+(use-package goto-chg
+  :bind
+  ("M-o" . 'goto-last-change)
+  ("M-O" . 'goto-last-change-reverse))
+
+
 (use-package hideshow
   :hook
   (prog-mode . hs-minor-mode)
