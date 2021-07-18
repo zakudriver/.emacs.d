@@ -76,12 +76,12 @@ THEME is '(theme-package-name theme name)."
 
 (defun bind-change-theme-keymap ()
   "Bind change theme keymap on general."
-  (let ((idx 1))
-    (dolist (i kumo/theme-list)
+  (let ((i 1))
+    (dolist (v kumo/theme-list)
       (global-set-key (kbd
-                       (concat "C-c T " (if (> idx 9) (nth (- idx 10) kumo/expanding-index-map) (number-to-string idx))))
-                      (nth 1 i))
-      (incf idx)
+                       (concat "C-c T " (if (> i 9) (nth (- i 10) kumo/expanding-index-map) (number-to-string i))))
+                      (nth 1 v))
+      (incf i)
       )))
 
 

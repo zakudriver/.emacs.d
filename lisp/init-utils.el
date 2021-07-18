@@ -120,7 +120,7 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
   :bind
   (("C-c y y" . youdao-dictionary-search-at-point-posframe)
    ("C-c y Y" . youdao-dictionary-search-at-point)
-   ("C-c y i" . youdao-dictionary-search-from-input)
+   ("C-c y I" . youdao-dictionary-search-from-input)
    :map youdao-dictionary-mode-map
    ("?" . youdao-dictionary-hydra/body))
   :custom
@@ -135,10 +135,7 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
   :hook
   (rg-mode . rg-enable-default-bindings)
   :bind
-  (("C-c R" . rg-menu)
-   :map rg-global-map
-   ("c" . rg-dwim-current-dir)
-   ("f" . rg-dwim-current-file)
+  (("C-c R m" . rg-menu)
    :map rg-mode-map
    ("m" . rg-menu))
   :custom
@@ -157,6 +154,11 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
      :map rg-global-map
      ("R" . counsel-rg)
      ("F" . counsel-fzf))))
+
+
+(use-package deadgrep
+  :bind
+  ("C-c R r" . deadgrep))
 
 
 (provide 'init-utils)

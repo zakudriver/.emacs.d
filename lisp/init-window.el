@@ -1,6 +1,10 @@
 ;;; Code:
 
 
+(eval-when-compile
+  (require 'init-const))
+
+
 ;; Fullscreen
 (if (featurep 'cocoa)
     (progn
@@ -66,7 +70,7 @@
  _s_wap x-direction and y-direction    _f3_: new                        ^ ^ _J_ ^ ^            _-_           _d_  
  Flip _v_erticall                                                   _F_ullscreen       ^^^_b_alance       ^^^_m_ax
  Flop _h_orizontally                                                _M_aximized
- Rotate 180 _d_egrees
+ _R_otate 180 degrees
  Rotate 90  degrees _c_lockwise
  Rotate 90  degrees _a_nti-clockwise
 "
@@ -87,16 +91,27 @@
     ("L" enlarge-window-horizontally)
     ("v" flip-frame)
     ("h" flop-frame)
-    ("d" rotate-frame)
+    ("R" rotate-frame)
     ("c" rotate-frame-clockwise)
     ("a" rotate-frame-anticlockwise)
     ("d" kumo-adjust-opacity-down)
     ("u" kumo-adjust-opacity-up)
     ("m" kumo-adjust-opacity-max)
-    ("q" nil "quit")))
+    ("q" nil "quit"))
+  :config
+  (use-package transpose-frame)
+  )
 
 
-(use-package transpose-frame)
+(use-package zoom
+  :hook
+  (after-init . zoom-mode)
+  :bind
+  ("C-c w z" . zoom)
+  :custom
+  (zoom-size '(0.618 . 0.618))
+  (zoom-ignored-buffer-names '(kumo/flycheck-errors-buffer-name))
+  (zoom-ignored-major-modes '(flycheck-error-list-mode)))
 
 
 (provide 'init-window)

@@ -96,12 +96,12 @@ FONT is a symbol."
 
 (defun bind-change-font-keymap ()
   "Bind change font keymap on general."
-  (let ((idx 1))
-    (dolist (i kumo/current-font-list)
+  (let ((i 1))
+    (dolist (v kumo/current-font-list)
       (global-set-key (kbd
-                       (concat "C-c F " (if (> idx 9) (nth (- idx 10) kumo/expanding-index-map) (number-to-string idx))))
-                      i)
-      (incf idx)
+                       (concat "C-c F " (if (> i 9) (nth (- i 10) kumo/expanding-index-map) (number-to-string i))))
+                      v)
+      (incf i)
       )))
 
 

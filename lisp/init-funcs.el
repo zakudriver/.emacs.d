@@ -429,25 +429,14 @@ EXPORTER: export way."
   (modify-frame-parameters nil `((alpha . 100))))
 
 
-
-(defun kumo-kill-and-save-whole-line ()
-  "Copy region or whole line."
-  (interactive)
-  (if mark-active
-      (kill-ring-save (region-beginning)
-                      (region-end))
-    (kill-ring-save (line-beginning-position)
-                    (line-end-position))))
-
-
 (defun kumo-kill-whole-line ()
   "Kill region or whole line."
   (interactive)
   (if mark-active
-      (kill-region (region-beginning)
-                   (region-end))
-    (kill-region (line-beginning-position)
-                 (line-end-position))))
+      (delete-region (region-beginning)
+                     (region-end))
+    (delete-region (line-beginning-position)
+                   (line-end-position))))
 
 
 (defun kumo-newline-above-current ()
@@ -465,34 +454,50 @@ EXPORTER: export way."
          (newline-and-indent)))
 
 
+(defun kumo-delete-word-at-point (&optional arg)
+  "Delete word at point, like vim diw.
+ARG: when not nil delete symbol( concat by '_') at point"
+  (interactive "P")
+  (let* (
+         (type (if arg 'symbol 'word))
+         (point (bounds-of-thing-at-point type)))
+    (delete-region (car point) (cdr point)))
+  )
+
+(defun kumo-delete-word (arg)
+  "Kill characters forward until encountering the end of a word.
+With argument ARG, do this that many times."
+  (interactive "p")
+  (delete-region (point) (progn (forward-word arg) (point))))
+
+
+(defun kumo-backward-delete-word (arg)
+  "Delete characters backward until encountering the beginning of a word.
+With argument ARG, do this that many times.
+This command does not push text to `kill-ring'."
+  (interactive "p")
+  (kumo-delete-word (- arg)))
+
+
 (defun kumo-kill-line ()
-  "Kill line like vim dd."
+  "Delete text from current position to end of line char.
+This command does not push text to `kill-ring'."
   (interactive)
-  (progn (beginning-of-line)
-         (kill-line)))
+  (delete-region
+   (point)
+   (progn (end-of-line 1) (point)))
+  (delete-char 1))
 
 
-(defun kumo-yank ()
-  "Yank like vim yank."
-  (interactive)
-  (progn (yank)
-         (newline-and-indent)))
-
-
-(defun kumo-backward-kill-word ()
-  "Yank like vim yank."
-  (interactive)
-  (progn
-    (yank)
-    (newline)))
-
-
-(defun kumo-region-whole-line ()
-  "Region whole line link vim S-v."
-  (interactive)
-  (progn
-    (end-of-line)
-    (set-mark (line-beginning-position))))
+(defun kumo-save-word-at-point (&optional arg)
+  "Delete word at point, like vim diw.
+ARG: when not nil delete symbol( concat by '_') at point"
+  (interactive "P")
+  (let* (
+         (type (if arg 'symbol 'word))
+         (point (bounds-of-thing-at-point type)))
+    (kill-ring-save (car point) (cdr point)))
+  )
 
 
 (provide 'init-funcs)

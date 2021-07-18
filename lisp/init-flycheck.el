@@ -29,6 +29,8 @@
     (define-fringe-bitmap 'flycheck-fringe-bitmap-double-arrow
       [16 48 112 240 112 48 16] nil nil 'center))
 
+  ;; (flycheck-add-mode 'javascript-eslint 'web-mode)
+
   (use-package flycheck-popup-tip
     :hook
     (flycheck-mode . flycheck-popup-tip-mode)

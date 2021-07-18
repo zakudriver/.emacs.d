@@ -4,9 +4,6 @@
 ;; global keys
 (global-set-key (kbd "<f2>") 'kumo-open-init-file)
 (global-set-key (kbd "<C-tab>") 'kumo-indent-all)
-;; (global-set-key (kbd "C-<return>") 'smart-region)
-
-(global-set-key (kbd "C-x s") 'kumo-save-some-buffers) ;; replace 'save-some-buffer
 
 (global-set-key (kbd "C-c w w") 'hydra-frame-window/body)
 (global-set-key (kbd "C-c w v") 'split-window-vertically)
@@ -21,20 +18,8 @@
 
 (global-set-key (kbd "C-c n d") 'kumo-number-division)
 
-(global-set-key (kbd "C-o") 'kumo-newline-next-current)
-(global-set-key (kbd "C-S-o") 'kumo-newline-above-current)
-
-;; (global-set-key (kbd "C-k") 'kumo-kill-line) ;; replace 'kill-line
-;; (global-set-key (kbd "C-S-w") 'kumo-kill-and-save-whole-line)
-;; (global-set-key (kbd "C-w") 'kill-ring-save) ;; replace 'kill-region
-;; (global-set-key (kbd "M-w") 'kill-region) ;; replace 'kill-ring-save
-;; (global-set-key (kbd "M-W") 'kumo-kill-whole-line)
-
 (global-set-key (kbd "M-p") 'beginning-of-buffer)
 (global-set-key (kbd "M-n") 'end-of-buffer)
-
-;; (global-set-key (kbd "C-y") 'yank)
-;; (global-set-key (kbd "C-S-y") 'kumo-yank)
 
 (global-set-key (kbd "C-c f n") 'kumo-put-file-name-on-clipboard)
 (global-set-key (kbd "C-c f d") 'kumo-open-current-file-in-finder)
@@ -53,17 +38,21 @@
 (global-set-key (kbd "C-c F 0") 'kumo-current-font)
 
 (global-set-key (kbd "C-c z") 'kumo-wrap-with-input)
-(global-set-key (kbd "C-S-v") 'kumo-region-whole-line)
 
+;; like vim
+(global-set-key (kbd "C-c d i w") 'kumo-delete-word-at-point)
+(global-set-key (kbd "C-c y i w") 'kumo-save-word-at-point)
+(global-set-key (kbd "C-o") 'kumo-newline-next-current)
+(global-set-key (kbd "C-S-o") 'kumo-newline-above-current)
 
-;;    "u" 'undo-tree-visualize
+;; replace key
+(global-set-key (kbd "C-<backspace>") 'kumo-backward-delete-word) ;; replace C-<backspace>
+(global-set-key (kbd "M-d") 'kumo-delete-word) ;; replace M-d
+(global-set-key (kbd "C-k") 'kumo-kill-line) ;; replace C-k
+(global-set-key (kbd "C-S-<backspace>") 'kumo-kill-whole-line) ;; replace C-S-<backspace>
 
-;;    "vo" 'vterm-other-window
-;;    "vv" 'vterm
-;;    "vN" 'kumo-new-vterm
-;;    "vs" 'kumo-vterm-select-window
-;;    "vp" 'kumo-vterm-previous
-;;    "vn" 'kumo-vterm-next
+;; replace func
+(global-set-key (kbd "C-x s") 'kumo-save-some-buffers) ;; replace 'save-some-buffer
 
 
 (provide 'init-keys)
