@@ -2,10 +2,9 @@
 
  /This is kumo's emacs configuration. (only GUI)/
 
- /TODO remove evil/
- 
-*Feature*
+ *Feature*
 
+- only evil local mode(*TODO remove evil*)
 - customized theme/font list
 - theme/font dynamic switching
 - customized modeline
