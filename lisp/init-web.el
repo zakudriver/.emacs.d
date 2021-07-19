@@ -17,13 +17,18 @@
 (use-package web-mode
   :mode
   ((".*[^\\(\\.component\\)]\\.html$" . web-mode)
-   ("\\.jsx$" . web-mode)
-   ("\\.tsx$" . web-mode)
-   ("\\.ejs$" . web-mode))
+   ("\\.jsx$"                         . web-mode)
+   ("\\.tsx$"                         . web-mode)
+   ("\\.ejs$"                         . web-mode))
   :bind
   (:map web-mode-map
         ("M-;" . web-mode-comment-or-uncomment))
   :custom
+  (web-mode-comment-formats '(("java"       . "/*")
+                              ("javascript" . "/*")
+                              ("typescript" . "//")
+                              ("php"        . "/*")
+                              ("css"        . "/*")))
   (web-mode-markup-indent-offset 2)
   (web-mode-css-indent-offset 2)
   (web-mode-code-indent-offset 2)
@@ -44,8 +49,8 @@
   ((web-mode ng2-html-mode) . emmet-mode)
   :bind
   ((:map emmet-mode-keymap
-         ("C-. [" . emmet-prev-edit-point)
-         ("C-. ]" . emmet-next-edit-point)
+         ("C-. ["     . emmet-prev-edit-point)
+         ("C-. ]"     . emmet-next-edit-point)
          ("<backtab>" . emmet-expand-yas)))
   :custom
   (emmet-move-cursor-between-quotes t)

@@ -14,6 +14,15 @@
   (js2-strict-missing-semi-warning nil))
 
 
+;; (use-package js-mode
+;; :mode
+;; (("\\.tsx$" . js-jsx-mode)
+;;  ("\\.jsx$" . js-jsx-mode))
+;; :custom
+;; ((js-jsx-syntax   t)
+;;  (js-indent-level 2)))
+
+
 (use-package typescript-mode
   :custom
   (typescript-indent-level 2))
@@ -21,20 +30,21 @@
 
 (use-package tide
   :hook
-  ((typescript-mode js2-mode) . (lambda ()
-                                  (tide-setup)
-                                  (tide-hl-identifier-mode)
-                                  ))
+  ((typescript-mode js2-mode js-mode) . (lambda ()
+                                          (tide-setup)
+                                          (tide-hl-identifier-mode)
+                                          ))
   (web-mode . (lambda ()
                 (when (member (file-name-extension buffer-file-name) '("tsx" "jsx"))
                   (tide-setup)
                   (tide-hl-identifier-mode)
-                  (flycheck-add-mode 'typescript-tslint 'web-mode)
+                  ;; (flycheck-add-mode 'typescript-tslint 'web-mode)
                   )))
   :bind
   (:map tide-mode-map
         ([remap evil-goto-definition] . tide-jump-to-definition)
-        ([remap pop-tag-mark] . tide-jump-back)))
+        ([remap pop-tag-mark] . tide-jump-back))
+  )
 
 
 (use-package ng2-mode

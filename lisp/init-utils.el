@@ -139,7 +139,7 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
    :map rg-mode-map
    ("m" . rg-menu))
   :custom
-  (rg-keymap-prefix "\C-cR")
+  ;; (rg-keymap-prefix "\C-cR")
   (rg-group-result t)
   (rg-show-columns t)
   :config

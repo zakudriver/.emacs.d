@@ -2,12 +2,14 @@
 
 
 (eval-when-compile
-  (require 'init-const))
+  (require 'init-const)
+  (require 'init-custom))
 
 
 (use-package flycheck
   :hook
   (after-init . global-flycheck-mode)
+  (flycheck-mode . use-eslint-from-nodemodules)
   :init
   (add-to-list 'display-buffer-alist
                `(,(eval `(rx bos ,kumo/flycheck-errors-buffer-name eos))
@@ -16,9 +18,7 @@
                  (reusable-frames . visible)
                  (window-height . 0.2)))
   :custom
-  (flycheck-global-modes
-   '(not text-mode outline-mode fundamental-mode lisp-interaction-mode
-         org-mode diff-mode shell-mode eshell-mode term-mode vterm-mode))
+  (flycheck-global-modes kumo/flycheck-boot-mode)
   (flycheck-emacs-lisp-load-path 'inherit)
   ;; Only check while saving and opening files
   (flycheck-check-syntax-automatically '(save mode-enabled))
@@ -28,7 +28,18 @@
   (when (fboundp 'define-fringe-bitmap)
     (define-fringe-bitmap 'flycheck-fringe-bitmap-double-arrow
       [16 48 112 240 112 48 16] nil nil 'center))
+  (defun use-eslint-from-nodemodules ()
+    (let* ((root (locate-dominating-file
+                  (or (buffer-file-name) default-directory)
+                  "node_modules"))
+           (eslint
+            (and root
+                 (expand-file-name "node_modules/.bin/eslint"
+                                   root))))
+      (when (and eslint (file-executable-p eslint))
+        (setq-local flycheck-javascript-eslint-executable eslint))))
 
+  
   ;; (flycheck-add-mode 'javascript-eslint 'web-mode)
 
   (use-package flycheck-popup-tip

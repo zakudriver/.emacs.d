@@ -305,10 +305,10 @@ BUFFER is the symbol."
     (goto-char point)))
 
 
-(defun kumo-home-path-resolve (path)
+(defun kumo-home-path-resolve (&rest path)
   "Return $HOME + path.
-PATH is a string."
-  (concat (getenv "HOME") path))
+PATH is a string list."
+  (apply 'concat (getenv "HOME") path))
 
 
 (defvar kumo/divisor-cache 14

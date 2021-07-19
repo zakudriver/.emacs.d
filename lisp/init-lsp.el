@@ -12,18 +12,18 @@
   :hook
   (prog-mode . (lambda ()
                  (when (apply 'derived-mode-p kumo/lsp-major-mode)
-                     (lsp-deferred))))
+                   (lsp-deferred))))
   (lsp-mode . (lambda ()
                 (when (apply 'derived-mode-p kumo/lsp-on-save-major-mode)
-                    (add-hook 'before-save-hook #'lsp-format-buffer t t))))
+                  (add-hook 'before-save-hook #'lsp-format-buffer t t))))
   :custom
   (lsp-clients-angular-language-server-command
    `("node"
-     ,(kumo-home-path-resolve "/.config/yarn/global/node_modules/@angular/language-server")
+     ,(kumo-home-path-resolve kumo/global-nodemodules-path "/@angular/language-server")
      "--ngProbeLocations"
-     ,(kumo-home-path-resolve "/.config/yarn/global/node_modules")
+     ,(kumo-home-path-resolve kumo/global-nodemodules-path)
      "--tsProbeLocations"
-     ,(kumo-home-path-resolve "/.config/yarn/global/node_modules")
+     ,(kumo-home-path-resolve kumo/global-nodemodules-path)
      "--stdio"))
   (lsp-auto-guess-root nil)      ; not Detect project root
   (lsp-prefer-flymake nil)       ; Use lsp-ui and flycheck

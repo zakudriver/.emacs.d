@@ -2,6 +2,7 @@
 
  /This is kumo's emacs configuration. (only GUI)/
 
+ /TODO remove evil/
  
 *Feature*
 
