@@ -27,16 +27,6 @@
               major-mode 'text-mode)
 
 
-;; prettify-symbols
-;; (use-package prog-mode
-;;   :hook
-;;   (prog-mode . prettify-symbols-mode)
-;;   :custom
-;;   (prettify-symbols-unprettify-at-point 'right-edge)
-;;   :init
-;;   (setq-default prettify-symbols-alist kumo/prettify-symbols-alist))
-
-
 ;; Automatically reload files was modified by external program
 (use-package autorevert
   :hook
@@ -112,15 +102,13 @@
 ;; Hungry deletion
 (use-package hungry-delete
   :hook
-  (prog-mode . turn-on-hungry-delete-mode)
+  (after-init . global-hungry-delete-mode)
   :bind
   (:map hungry-delete-mode-map
         ("M-<backspace>" . hungry-delete-backward))
   :custom
   (hungry-delete-except-modes '(help-mode minibuffer-inactive-mode calc-mode ivy-mode minibuffer-mode))
-  (hungry-delete-chars-to-skip " \t\f\v")
-  (hungry-delete-join-reluctantly t)
-  )
+  (hungry-delete-chars-to-skip " \t\f\v"))
 
 
 ;; move to the beginning/end of line or code

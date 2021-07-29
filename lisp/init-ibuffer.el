@@ -15,7 +15,7 @@
   :hook
   (ibuffer .
            (lambda ()
-             (persp-ibuffer-set-filter-groups)
+             ;; (persp-ibuffer-set-filter-groups)
              (unless (eq ibuffer-sorting-mode 'alphabetic)
                (ibuffer-do-sort-by-alphabetic))))
   :custom

@@ -54,15 +54,19 @@ If you experience stuttering, increase this.")
   (dolist (dir '("site-lisp" "lisp"))
     (push (expand-file-name dir user-emacs-directory) load-path)))
 
+
 (defun add-subdirs-to-load-path (&rest _)
   "Add subdirectories to `load-path'."
   (let ((default-directory (expand-file-name "site-lisp" user-emacs-directory)))
     (normal-top-level-add-subdirs-to-load-path)))
 
+
 (advice-add #'package-initialize :after #'update-load-path)
 ;; (advice-add #'package-initialize :after #'add-subdirs-to-load-path)
 
+
 (update-load-path)
+
 
 ;; set my own configuration
 (with-temp-message ""
@@ -83,7 +87,7 @@ If you experience stuttering, increase this.")
   (require 'init-evil)
   ;; (require 'init-modeline)
   (require 'init-font)
-  (require 'init-theme)
+  ;; (require 'init-theme)
   (require 'init-ui)
 
   (require 'init-edit)

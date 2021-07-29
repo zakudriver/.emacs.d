@@ -2,7 +2,7 @@
 
 
 (eval-when-compile
-  (require 'cl)
+  (require 'cl-lib)
   (require 'init-const)
   (require 'init-custom))
 
@@ -95,7 +95,7 @@ FONT is a symbol."
 
 
 (defun bind-change-font-keymap ()
-  "Bind change font keymap on general."
+  "Bind change font keymap."
   (let ((i 1))
     (dolist (v kumo/current-font-list)
       (global-set-key (kbd

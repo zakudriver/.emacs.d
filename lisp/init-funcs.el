@@ -23,25 +23,25 @@
   (set-buffer-file-coding-system 'undecided-dos nil))
 
 
-(defun font-installed-p (font-name)
-  "Check if font with FONT-NAME is available."
-  (find-font (font-spec :name font-name)))
-
-
-(defun quit-and-kill-window ()
-  "Quit and kill current window."
-  (interactive)
-  (with-current-buffer (current-buffer)
-    (run-hooks 'quit-window-hook))
-  (quit-restore-window nil 'kill))
-
-
 (defun save-buffer-as-utf8 (coding-system)
   "Revert a buffer with `CODING-SYSTEM' and save as UTF-8."
   (interactive "zCoding system for visited file (default nil):")
   (revert-buffer-with-coding-system coding-system)
   (set-buffer-file-coding-system 'utf-8)
   (save-buffer))
+
+
+(defun font-installed-p (font-name)
+  "Check if font with FONT-NAME is available."
+  (find-font (font-spec :name font-name)))
+
+
+;; (defun quit-and-kill-window ()
+;;   "Quit and kill current window."
+;;   (interactive)
+;;   (with-current-buffer (current-buffer)
+;;     (run-hooks 'quit-window-hook))
+;;   (quit-restore-window nil 'kill))
 
 
 (defun kumo-save-some-buffers ()
@@ -190,7 +190,8 @@ Including indent-buffer, which should not be called automatically on save."
 BEG is begin point.
 END is end point.
 SYMBOL is input string."
-  (interactive "r \nsPlease input symbol: ")
+  (interactive "*r\ncPlease input symbol: ")
+  (setq symbol (char-to-string symbol))
   (let ((map-list '(("''" . "'")
                     ("\"\"" . "\"")
                     ("``" . "`"))))

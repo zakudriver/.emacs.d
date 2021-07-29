@@ -8,7 +8,7 @@
 ;; Manage and navigate projects
 (use-package projectile
   :bind
-  ("C-c p P" . projectile-command-map)
+  ("C-c P" . projectile-command-map)
   :hook
   (after-init . projectile-mode)
   :custom

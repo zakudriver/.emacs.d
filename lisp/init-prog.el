@@ -1,6 +1,15 @@
 ;;; Code:
 
 
+;; (use-package prog-mode
+;;   :hook
+;;   (prog-mode . prettify-symbols-mode)
+;;   :custom
+;;   (prettify-symbols-unprettify-at-point 'right-edge)
+;;   :init
+;;   (setq-default prettify-symbols-alist kumo/prettify-symbols-alist))
+
+
 (use-package vimrc-mode)
 
 

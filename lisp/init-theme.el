@@ -2,7 +2,7 @@
 
 
 (eval-when-compile
-  (require 'cl)
+  (require 'cl-lib)
   (require 'init-const)
   (require 'init-custom))
 
@@ -75,7 +75,7 @@ THEME is '(theme-package-name theme name)."
 
 
 (defun bind-change-theme-keymap ()
-  "Bind change theme keymap on general."
+  "Bind change theme keymap."
   (let ((i 1))
     (dolist (v kumo/theme-list)
       (global-set-key (kbd
@@ -95,7 +95,7 @@ THEME is '(theme-package-name theme name)."
 
 ;; bind change theme keymap
 (bind-change-theme-keymap)
-
+(message "init-theme")
 
 (provide 'init-theme)
 

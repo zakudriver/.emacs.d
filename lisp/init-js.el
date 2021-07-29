@@ -32,18 +32,18 @@
   :hook
   ((typescript-mode js2-mode js-mode) . (lambda ()
                                           (tide-setup)
-                                          (tide-hl-identifier-mode)
-                                          ))
+                                          (tide-hl-identifier-mode)))
   (web-mode . (lambda ()
                 (when (member (file-name-extension buffer-file-name) '("tsx" "jsx"))
                   (tide-setup)
-                  (tide-hl-identifier-mode)
-                  ;; (flycheck-add-mode 'typescript-tslint 'web-mode)
-                  )))
+                  (tide-hl-identifier-mode))))
   :bind
   (:map tide-mode-map
         ([remap evil-goto-definition] . tide-jump-to-definition)
         ([remap pop-tag-mark] . tide-jump-back))
+  :config
+  (flycheck-add-next-checker 'jsx-tide '(warning . javascript-eslint) 'append)
+  (flycheck-add-next-checker 'tsx-tide '(warning . javascript-eslint) 'append)
   )
 
 

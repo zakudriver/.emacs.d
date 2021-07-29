@@ -5,6 +5,15 @@
   (require 'init-const)
   (require 'init-custom))
 
+;; Theme
+(use-package lacquer
+  :ensure nil
+  :load-path "~/.emacs.d/site-lisp/lacquer"
+  :hook
+  (after-init . lacquer-mode)
+  :custom
+  (lacquer/theme-list kumo/theme-list))
+
 
 ;; Title
 (setq frame-title-format nil

@@ -118,7 +118,7 @@
   "Hugo postdir.")
 
 
-(defconst kumo/easy-hugo-url "https://rx-78-kum0.github.io/"
+(defconst kumo/easy-hugo-url "https://dingansichkum0.github.io/"
   "Hugo site url.")
 
 

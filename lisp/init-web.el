@@ -27,6 +27,7 @@
   (web-mode-comment-formats '(("java"       . "/*")
                               ("javascript" . "/*")
                               ("typescript" . "//")
+                              ("jsx"        . "//")
                               ("php"        . "/*")
                               ("css"        . "/*")))
   (web-mode-markup-indent-offset 2)

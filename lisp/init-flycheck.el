@@ -9,7 +9,8 @@
 (use-package flycheck
   :hook
   (after-init . global-flycheck-mode)
-  (flycheck-mode . use-eslint-from-nodemodules)
+  (tide-mode . use-eslint-from-nodemodules)
+  ;; (web-mode . use-eslint-tide)
   :init
   (add-to-list 'display-buffer-alist
                `(,(eval `(rx bos ,kumo/flycheck-errors-buffer-name eos))
@@ -37,10 +38,15 @@
                  (expand-file-name "node_modules/.bin/eslint"
                                    root))))
       (when (and eslint (file-executable-p eslint))
-        (setq-local flycheck-javascript-eslint-executable eslint))))
-
+        (setq-local flycheck-javascript-eslint-executable eslint)
+        ;; (flycheck-select-checker 'javascript-eslint)
+        (flycheck-add-next-checker 'tsx-tide 'javascript-eslint 'append)
+        (flycheck-add-next-checker 'typescript-tide 'javascript-eslint 'append)
+        )))
   
-  ;; (flycheck-add-mode 'javascript-eslint 'web-mode)
+  
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
+  (flycheck-add-mode 'javascript-eslint 'typescript-mode)
 
   (use-package flycheck-popup-tip
     :hook
