@@ -85,9 +85,7 @@ If you experience stuttering, increase this.")
   (require 'init-utils)
   (require 'init-keys)
   (require 'init-evil)
-  ;; (require 'init-modeline)
-  (require 'init-font)
-  ;; (require 'init-theme)
+  ;; ;; (require 'init-modeline)
   (require 'init-ui)
 
   (require 'init-edit)
@@ -102,7 +100,7 @@ If you experience stuttering, increase this.")
   (require 'init-yasnippet)
   (require 'init-projectile)
 
-  ;; polymode
+  ;; ;; polymode
   (require 'init-polymode)
 
   ;; Programming

@@ -7,12 +7,26 @@
 
 ;; Theme
 (use-package lacquer
-  :ensure nil
   :load-path "~/.emacs.d/site-lisp/lacquer"
   :hook
   (after-init . lacquer-mode)
   :custom
-  (lacquer/theme-list kumo/theme-list))
+  (lacquer/theme-list kumo/theme-list)
+  (lacquer/font-list kumo/font-list))
+
+
+;; Font
+(with-no-warnings
+  (when sys/macp
+    (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") nil 'prepend)
+    (setq ns-use-thin-smoothing t
+          ns-pop-up-frames nil)))
+
+;; (set-face-attribute 'default nil :height kumo/current-font-size)
+(set-face-attribute 'default nil :weight kumo/font-weight)
+(setq-default line-spacing 0.3
+              fill-column 80)
+
 
 
 ;; Title

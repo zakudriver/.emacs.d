@@ -34,7 +34,6 @@
 (global-set-key (kbd "C-c c c") 'kumo-flycheck-list-errors-toggle)
 (global-set-key (kbd "C-c c s") 'kumo-flycheck-list-errors-select-window)
 
-;; (global-set-key (kbd "C-c T 0") 'kumo-current-theme)
 (global-set-key (kbd "C-c F 0") 'kumo-current-font)
 
 (global-set-key (kbd "C-c z") 'kumo-wrap-with-input)

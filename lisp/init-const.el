@@ -34,11 +34,6 @@
   "Symbols for wrap.")
 
 
-(defconst kumo/theme-setting-cache
-  "~/.emacs.d/.theme"
-  "Theme setting cache.")
-
-
 (defconst kumo/font-setting-cache
   "~/.emacs.d/.font"
   "Font setting cache.")
