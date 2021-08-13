@@ -161,6 +161,9 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
   ("C-c R r" . deadgrep))
 
 
+(use-package package-lint)
+
+
 (provide 'init-utils)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

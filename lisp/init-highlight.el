@@ -146,6 +146,11 @@ FACE defaults to inheriting from default and highlight."
   (pulse-highlight-face ((t (:inherit region)))))
 
 
+(use-package highlight-numbers
+  :hook
+  (prog-mode . highlight-numbers-mode))
+
+
 (provide 'init-highlight)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

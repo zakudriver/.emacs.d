@@ -64,13 +64,13 @@
   :init
   (defhydra hydra-frame-window (:color pink :hint nil)
     "
- ^Window^                              Frame^                       ^^Window Size^^^      ^Text Zoom^    ^Opacity^              
- _w1_: delete                          _f1_: delete                     ^ ^ _K_ ^ ^            _=_           _u_         
- _w2_: delete others                   _f2_: delete others              _H_ ^+^ _L_            ^+^           ^+^
- _s_wap x-direction and y-direction    _f3_: new                        ^ ^ _J_ ^ ^            _-_           _d_  
- Flip _v_erticall                                                   _F_ullscreen       ^^^_b_alance       ^^^_m_ax
+ ^Window^                              Frame^                       ^^Window Size^^^       ^Opacity^              
+ _w1_: delete                          _f1_: delete                     ^ ^ _K_ ^ ^            _=_          
+ _w2_: delete others                   _f2_: delete others              _H_ ^+^ _L_            ^+^ 
+ _s_wap x-direction and y-direction    _f3_: new                        ^ ^ _J_ ^ ^            _-_  
+ Flip _v_erticall                                                   _F_ullscreen        ^^^_m_ax
  Flop _h_orizontally                                                _M_aximized
- _R_otate 180 degrees
+ _R_otate 180 degrees                                               _b_alance
  Rotate 90  degrees _c_lockwise
  Rotate 90  degrees _a_nti-clockwise
 "
@@ -83,8 +83,6 @@
     ("s" transpose-frame)
     ("F" toggle-frame-fullscreen)
     ("M" toggle-frame-maximized)
-    ("=" kumo-font-size-increase)
-    ("-" kumo-font-size-decrease)
     ("H" shrink-window-horizontally)
     ("K" shrink-window)
     ("J" enlarge-window)
@@ -94,13 +92,12 @@
     ("R" rotate-frame)
     ("c" rotate-frame-clockwise)
     ("a" rotate-frame-anticlockwise)
-    ("d" kumo-adjust-opacity-down)
-    ("u" kumo-adjust-opacity-up)
+    ("-" kumo-adjust-opacity-down)
+    ("=" kumo-adjust-opacity-up)
     ("m" kumo-adjust-opacity-max)
     ("q" nil "quit"))
   :config
-  (use-package transpose-frame)
-  )
+  (use-package transpose-frame))
 
 
 (use-package zoom

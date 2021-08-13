@@ -167,23 +167,6 @@ Including indent-buffer, which should not be called automatically on save."
           (if current-win-2nd (other-window 1))))))
 
 
-;; Font
-(defun kumo-font-size-increase ()
-  "Font size increase."
-  (interactive)
-  (let ((current-size (+ kumo/current-font-size 5)))
-    (set-face-attribute 'default nil :height current-size)
-    (set-font-cache nil current-size)))
-
-
-(defun kumo-font-size-decrease ()
-  "Font size decrease."
-  (interactive)
-  (let ((current-size (- kumo/current-font-size 5)))
-    (set-face-attribute 'default nil :height current-size)
-    (set-font-cache nil current-size)))
-
-
 ;; Wrap selected text by input symbol.
 (defun kumo-wrap-with-input (beg end symbol)
   "Wrap selected text by input symbol.

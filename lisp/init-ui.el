@@ -9,8 +9,12 @@
 (use-package lacquer
   :load-path "~/.emacs.d/site-lisp/lacquer"
   :hook
-  (after-init . lacquer-mode)
+  (after-init . lacquer-auto-mode)
   :custom
+  ;; (lacquer/auto-switch-time '("00:01" "00:02" "10:00" "14:00" "16:00" "18:00" "20:00" "22:00"))
+  ;; (lacquer/auto-switch-time '("00:01" "00:02" "15:34"))
+  (lacquer/auto-switch-mode 'random)
+  (lacquer/auto-switch-time (* 60 30))
   (lacquer/theme-list kumo/theme-list)
   (lacquer/font-list kumo/font-list))
 
@@ -22,11 +26,11 @@
     (setq ns-use-thin-smoothing t
           ns-pop-up-frames nil)))
 
+
 ;; (set-face-attribute 'default nil :height kumo/current-font-size)
 (set-face-attribute 'default nil :weight kumo/font-weight)
 (setq-default line-spacing 0.3
               fill-column 80)
-
 
 
 ;; Title
@@ -34,7 +38,7 @@
       frame-resize-pixelwise t)
 
 
-;; 透明背景
+;; Transparent background
 (modify-frame-parameters nil `((alpha . 85)))
 
 
@@ -113,7 +117,7 @@
   (after-init . nyan-mode)
   :custom
   (nyan-bar-length 24)
-  (nyan-animate-nyancat t)
+  ;; (nyan-animate-nyancat t)
   (nyan-wavy-trail nil)
   (nyan-animation-frame-interval 0.4))
 

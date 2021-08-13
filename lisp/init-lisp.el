@@ -1,9 +1,8 @@
-;;Code:
+;;; Code:
 
 
 ;; Show function arglist or variable docstring
 (use-package eldoc
-  :diminish
   :init
   ;; Enable Eldoc in lisp modes in 24
   ;; `global-eldoc-mode' is enabled by default in 25.
@@ -18,6 +17,11 @@
 (use-package ielm
   :hook
   (ielm-mode . eldoc-mode))
+
+
+(use-package highlight-quoted
+  :hook
+  (emacs-lisp-mode . highlight-quoted-mode))
 
 
 (provide 'init-lisp)
