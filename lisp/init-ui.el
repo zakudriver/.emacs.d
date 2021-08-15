@@ -11,12 +11,12 @@
   :hook
   (after-init . lacquer-auto-mode)
   :custom
-  ;; (lacquer/auto-switch-time '("00:01" "00:02" "10:00" "14:00" "16:00" "18:00" "20:00" "22:00"))
-  ;; (lacquer/auto-switch-time '("00:01" "00:02" "15:34"))
-  (lacquer/auto-switch-mode 'random)
-  (lacquer/auto-switch-time (* 60 30))
-  (lacquer/theme-list kumo/theme-list)
-  (lacquer/font-list kumo/font-list))
+  ;; (lacquer-auto-switch-time '("00:01" "00:02" "10:00" "14:00" "16:00" "18:00" "20:00" "22:00"))
+  ;; (lacquer-auto-switch-time '("00:01" "00:02" "15:34"))
+  (lacquer-auto-switch-mode 'random)
+  (lacquer-auto-switch-time (* 60 30))
+  (lacquer-theme-list kumo/theme-list)
+  (lacquer-font-list kumo/font-list))
 
 
 ;; Font

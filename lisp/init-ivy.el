@@ -7,8 +7,7 @@
   (("C-h f" . counsel-describe-function)
    ("C-h v" . counsel-describe-variable)
    ("C-s" . swiper-isearch)
-   ("C-S-s" . swiper-all)
-   ("C-r" . swiper-isearch-backward)
+   ("C-S" . swiper-isearch-backward)
    :map counsel-mode-map
    ([remap swiper] . counsel-grep-or-swiper)
    ([remap swiper-backward] . counsel-grep-or-swiper-backward)

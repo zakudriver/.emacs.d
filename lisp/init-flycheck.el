@@ -41,8 +41,7 @@
         (setq-local flycheck-javascript-eslint-executable eslint)
         ;; (flycheck-select-checker 'javascript-eslint)
         (flycheck-add-next-checker 'tsx-tide 'javascript-eslint 'append)
-        (flycheck-add-next-checker 'typescript-tide 'javascript-eslint 'append)
-        )))
+        (flycheck-add-next-checker 'typescript-tide 'javascript-eslint 'append))))
   
   
   (flycheck-add-mode 'javascript-eslint 'web-mode)

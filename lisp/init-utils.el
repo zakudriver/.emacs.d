@@ -125,8 +125,8 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
    ("?" . youdao-dictionary-hydra/body))
   :custom
   (url-automatic-caching t)
-  (youdao-dictionary-use-chinese-word-segmentation t) ; 中文分词
-  )
+  ;; 中文分词
+  (youdao-dictionary-use-chinese-word-segmentation t))
 
 
 ;; Fast search tool `ripgrep'

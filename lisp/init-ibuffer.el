@@ -51,16 +51,7 @@
                              :face ibuffer-filter-group-name-face
                              :v-adjust -0.05
                              :height 1.25)
-      " ")))
-
-  ;; (use-package perspective
-  ;;   :custom
-  ;;   (persp-state-default-file (concat user-emacs-directory kumo/perspective-state-file))
-  ;;   :hook
-  ;;   (kill-emacs . persp-state-save)
-  ;;   :init
-  ;;   (persp-mode))
-  )
+      " "))))
 
 
 (provide 'init-ibuffer)

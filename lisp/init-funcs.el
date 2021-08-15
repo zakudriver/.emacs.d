@@ -234,8 +234,7 @@ SYMBOL is input string."
       (let ((name (buffer-name (window-buffer i))))
         (when (string-match-p "vterm" name)
           (select-window (get-buffer-window name))
-          (throw 'break nil))))
-    ))
+          (throw 'break nil))))))
 
 
 (defun kumo-new-vterm ()
@@ -445,8 +444,8 @@ ARG: when not nil delete symbol( concat by '_') at point"
   (let* (
          (type (if arg 'symbol 'word))
          (point (bounds-of-thing-at-point type)))
-    (delete-region (car point) (cdr point)))
-  )
+    (delete-region (car point) (cdr point))))
+
 
 (defun kumo-delete-word (arg)
   "Kill characters forward until encountering the end of a word.
@@ -480,8 +479,7 @@ ARG: when not nil delete symbol( concat by '_') at point"
   (let* (
          (type (if arg 'symbol 'word))
          (point (bounds-of-thing-at-point type)))
-    (kill-ring-save (car point) (cdr point)))
-  )
+    (kill-ring-save (car point) (cdr point))))
 
 
 (provide 'init-funcs)
