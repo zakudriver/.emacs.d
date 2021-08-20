@@ -476,8 +476,7 @@ This command does not push text to `kill-ring'."
   "Delete word at point, like vim diw.
 ARG: when not nil delete symbol( concat by '_') at point"
   (interactive "P")
-  (let* (
-         (type (if arg 'symbol 'word))
+  (let* ((type (if arg 'symbol 'word))
          (point (bounds-of-thing-at-point type)))
     (kill-ring-save (car point) (cdr point))))
 

@@ -164,6 +164,12 @@
   (after-init . selectric-mode))
 
 
+(use-package edit-server
+  :hook
+  (after-init . edit-server-start)
+  (kill-emacs .  edit-server-stop))
+
+
 (provide 'init-edit)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-edit.el ends here
