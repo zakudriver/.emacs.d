@@ -167,7 +167,7 @@
 (use-package edit-server
   :hook
   (after-init . edit-server-start)
-  (kill-emacs .  edit-server-stop))
+  (kill-emacs . edit-server-stop))
 
 
 (provide 'init-edit)
