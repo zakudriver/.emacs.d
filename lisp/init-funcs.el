@@ -499,7 +499,7 @@ ARG: when not nil delete symbol( concat by '_') at point"
 
 (defun kumo-react-expand ()
   "React component expand.
-E.g: <Buttom />"
+E.g: <Button />"
   (interactive)
   (let* ((end (point))
          (start (kumo-find-left-bound))
