@@ -36,14 +36,6 @@
   (find-font (font-spec :name font-name)))
 
 
-;; (defun quit-and-kill-window ()
-;;   "Quit and kill current window."
-;;   (interactive)
-;;   (with-current-buffer (current-buffer)
-;;     (run-hooks 'quit-window-hook))
-;;   (quit-restore-window nil 'kill))
-
-
 (defun kumo-save-some-buffers ()
   "Save some buffers without prompting."
   (interactive)
@@ -479,6 +471,42 @@ ARG: when not nil delete symbol( concat by '_') at point"
   (let* ((type (if arg 'symbol 'word))
          (point (bounds-of-thing-at-point type)))
     (kill-ring-save (car point) (cdr point))))
+
+
+(defun kumo-find-left-bound ()
+  "Find the left bound of an expr."
+  (save-excursion (save-match-data
+                    (let ((char (char-before))
+                          (in-style-attr (looking-back "style=[\"'][^\"']*" nil))
+                          (syn-tab (make-syntax-table)))
+                      (modify-syntax-entry ?\\ "\\")
+                      (while char
+                        (cond ((and in-style-attr (member char '(?\" ?\')))
+                               (setq char nil))
+                              ((member char '(?\} ?\] ?\)))
+                               (with-syntax-table syn-tab
+                                 (backward-sexp) (setq char (char-before))))
+                              ((eq char ?\>)
+                               (if (looking-back "<[^>]+>" (line-beginning-position))
+                                   (setq char nil)
+                                 (progn (backward-char) (setq char (char-before)))))
+                              ((not (string-match-p "[[:space:]\n;]" (string char)))
+                               (backward-char) (setq char (char-before)))
+                              (t
+                               (setq char nil))))
+                      (point)))))
+
+
+(defun kumo-react-expand ()
+  "React component expand.
+E.g: <Buttom />"
+  (interactive)
+  (let* ((end (point))
+         (start (kumo-find-left-bound))
+         (line (buffer-substring-no-properties start end)))
+    (delete-region start end)
+    (insert (format "<%s />" line))
+    (backward-char 3)))
 
 
 (provide 'init-funcs)

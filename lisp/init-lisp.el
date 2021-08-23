@@ -24,6 +24,9 @@
   (emacs-lisp-mode . highlight-quoted-mode))
 
 
+(define-key emacs-lisp-mode-map (kbd "<C-tab>") 'kumo-indent-all)
+
+
 (provide 'init-lisp)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

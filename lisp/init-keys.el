@@ -3,7 +3,6 @@
 
 ;; global keys
 (global-set-key (kbd "<f2>") 'kumo-open-init-file)
-(global-set-key (kbd "<C-tab>") 'kumo-indent-all)
 
 (global-set-key (kbd "C-c w w") 'hydra-frame-window/body)
 (global-set-key (kbd "C-c w v") 'split-window-vertically)
