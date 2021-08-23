@@ -1,6 +1,6 @@
 ;;; Code:
 
-(setq debug-on-error t)
+;; (setq debug-on-error t)
 
 (when (version< emacs-version "26.1")
   (error "This requires Emacs 26.1 and above!"))

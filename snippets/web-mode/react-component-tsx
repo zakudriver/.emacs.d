@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: react-component-tsx
+# key: tsx
+# --
+
+import React from 'react';
+import { I$1Props } from './types'
+
+export const ${1:NAME}: React.FC<I$1Props> = ({ children }) => {
+	return (
+    <div>
+		  ${2:}
+    </div>
+  );
+}
