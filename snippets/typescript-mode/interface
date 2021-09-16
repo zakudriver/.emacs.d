@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: interface
+# key: interface
+# --
+
+export interface I${1:name} {
+  $0
+}

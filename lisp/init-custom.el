@@ -56,6 +56,9 @@
                             (kaolin-themes kaolin-temple)
                             (leuven-theme leuven (setq leuven-scale-outline-headlines nil))
                             (leuven-theme leuven-dark (setq leuven-scale-outline-headlines nil))
+                            (ample-theme ample)
+                            (ample-theme ample-flat)
+                            (ample-theme ample-light)
                             )
   "Theme list.")
 

@@ -30,16 +30,9 @@
 
 (use-package tide
   :hook
-  ((typescript-mode js2-mode js-mode) . (lambda ()
-                                          (tide-setup)
-                                          (tide-hl-identifier-mode)))
-  ;; (web-mode . (lambda ()
-  ;;               (when (member (file-name-extension buffer-file-name) '("tsx" "jsx"))
-  ;;                 (tide-setup)
-  ;;                 (tide-hl-identifier-mode))))
-  (web-mode . (lambda ()
-                (tide-setup)
-                (tide-hl-identifier-mode)))
+  ((typescript-mode web-mode js2-mode js-mode) . (lambda ()
+                                                   (tide-setup)
+                                                   (tide-hl-identifier-mode)))
   :bind
   (:map tide-mode-map
         ([remap evil-goto-definition] . tide-jump-to-definition)

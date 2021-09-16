@@ -38,7 +38,15 @@
   :hook
   (after-init . global-undo-tree-mode)
   (web-mode . undo-tree-mode) ;; web-mode
-  )
+  :init
+  (add-to-list 'display-buffer-alist
+               '("^ \\*undo-tree\\*"
+                 display-buffer-reuse-window display-buffer-in-side-window
+                 (reusable-frames . visible)
+                 (side . right)
+                 (slot . 1)
+                 (window-width . 0.5)
+                 (window-height . 0.15))))
 
 
 ;; Show number of matches in mode-line while searching

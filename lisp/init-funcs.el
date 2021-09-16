@@ -509,6 +509,41 @@ E.g: <Button />"
     (backward-char 3)))
 
 
+(defun kumo-disable-window-dedicated ()
+  "Disable current window is dedicated."
+  (interactive)
+  (set-window-dedicated-p (frame-selected-window) nil))
+
+
+(defun kumo-jsx-comments (&optional beg end)
+  "Line comments for jsx.
+BEG: region of beginning.
+END: region of end."
+  (interactive (if (use-region-p) (list (region-beginning) (region-end))))
+  (if beg
+      (let ((beg-linum (line-number-at-pos beg))
+            (end-linum (line-number-at-pos end)))
+        (goto-char beg)
+        (beginning-of-line)
+        (cl-loop for i from beg-linum to end-linum
+                 do (progn
+                      (unless
+                          (string-match-p "\\`\\s-*$" (thing-at-point 'line))
+                        (skip-syntax-forward " " (line-end-position))
+                        (insert "{/* ")
+                        (end-of-line)
+                        (insert " */}"))
+                      (unless (= i end-linum)
+                        (forward-line)))))
+    (unless
+        (string-match-p "\\`\\s-*$" (thing-at-point 'line))
+      (beginning-of-line)
+      (skip-syntax-forward " " (line-end-position))
+      (insert "{/* ")
+      (end-of-line)
+      (insert " */}"))))
+
+
 (provide 'init-funcs)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

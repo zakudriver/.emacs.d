@@ -278,9 +278,7 @@
   (add-to-list 'all-the-icons-icon-alist
                '("\\.tsx$" all-the-icons-fileicon "typescript" :height 0.9 :face all-the-icons-dblue))
   (add-to-list 'all-the-icons-mode-icon-alist
-               '(typescript-mode all-the-icons-fileicon "typescript" :height 0.9 :face all-the-icons-blue))
-  )
-
+               '(typescript-mode all-the-icons-fileicon "typescript" :height 0.9 :face all-the-icons-blue)))
 
 
 (provide 'init-ui)

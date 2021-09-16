@@ -62,8 +62,7 @@
     (dired-mode . org-download-enable)
     :custom
     (org-download-image-dir "./img")
-    (org-download-backend "curl \"%s\" -o \"%s\""))
-  )
+    (org-download-backend "curl \"%s\" -o \"%s\"")))
 
 
 (use-package ob-go)

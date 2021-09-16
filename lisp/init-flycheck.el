@@ -9,15 +9,15 @@
 (use-package flycheck
   :hook
   (after-init . global-flycheck-mode)
-  (tide-mode . use-eslint-from-nodemodules)
+  (tide-mode  . use-eslint-from-nodemodules)
   ;; (web-mode . use-eslint-tide)
   :init
   (add-to-list 'display-buffer-alist
                `(,(eval `(rx bos ,kumo/flycheck-errors-buffer-name eos))
                  (display-buffer-reuse-window display-buffer-in-side-window)
-                 (side . bottom)
+                 (side            . bottom)
                  (reusable-frames . visible)
-                 (window-height . 0.2)))
+                 (window-height   . 0.15)))
   :custom
   (flycheck-global-modes kumo/flycheck-boot-mode)
   (flycheck-emacs-lisp-load-path 'inherit)

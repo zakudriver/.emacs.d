@@ -22,7 +22,8 @@
    ("\\.ejs$"                         . web-mode))
   :bind
   (:map web-mode-map
-        ("M-;" . web-mode-comment-or-uncomment))
+        ("M-;" . web-mode-comment-or-uncomment)
+        ("C-;" . kumo-jsx-comments))
   :custom
   (web-mode-comment-formats '(("java"       . "/*")
                               ("javascript" . "/*")

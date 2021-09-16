@@ -108,7 +108,11 @@
   :custom
   (zoom-size '(0.618 . 0.618))
   (zoom-ignored-buffer-names '(kumo/flycheck-errors-buffer-name))
-  (zoom-ignored-major-modes '(flycheck-error-list-mode)))
+  (zoom-ignored-major-modes '(flycheck-error-list-mode undo-tree-visualizer-mode achive-visual-mode))
+  :config
+  (advice-add 'balance-windows :around (lambda (func &optional window-or-frame)
+                                         (unless (zoom--window-ignored-p)
+                                           (funcall func window-or-frame)))))
 
 
 (provide 'init-window)

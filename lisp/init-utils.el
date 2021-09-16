@@ -164,6 +164,16 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
 (use-package package-lint)
 
 
+(use-package achive
+  :load-path "~/.emacs.d/site-lisp/achive"
+  :bind
+  ("C-c a a" . achive)
+  ("C-c a g" . achive-update)
+  :custom
+  (achive-language 'zh)
+  (achive-stock-list '("sh600036" "sh601012" "sz000625" "sz002050" "sz002013" "sh600176" "sh603993" "sh601388" "sz002557" "sh600989" "sh600887" "sz002097" "sz000731" "sh600740" "sh601015" "sz002128" "sh601985" "sz000630")))
+
+
 (provide 'init-utils)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
