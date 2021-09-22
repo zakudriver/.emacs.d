@@ -17,7 +17,9 @@
       make-backup-files nil          ; Forbide to make backup files
       set-mark-command-repeat-pop t  ; Repeating C-SPC after popping mark pops it again
       auto-save-default nil
-      completion-ignore-case t)
+      completion-ignore-case t
+      scroll-preserve-screen-position t
+      scroll-conservatively 0)
 
 
 ;; Permanently indent with spaces, never with TABs

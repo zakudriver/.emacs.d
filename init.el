@@ -84,7 +84,7 @@ If you experience stuttering, increase this.")
   (require 'init-funcs)
   (require 'init-utils)
   (require 'init-keys)
-  (require 'init-evil)
+  ;; (require 'init-evil)
   ;; ;; (require 'init-modeline)
   (require 'init-ui)
 

@@ -59,7 +59,12 @@
                             (ample-theme ample)
                             (ample-theme ample-flat)
                             (ample-theme ample-light)
-                            )
+                            (sublime-themes brin)
+                            (sublime-themes granger)
+                            (sublime-themes spolsky)
+                            (sublime-themes fogus)
+                            (sublime-themes junio)
+                            (jazz-theme jazz))
   "Theme list.")
 
 

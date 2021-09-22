@@ -4,6 +4,8 @@
 (use-package polymode
   :mode
   ("\\.ts$" . poly-typescript-mode)
+  :init
+  (setq polymode-prefix-key "\M-\"")
   :config
   ;; == typescript ==
   (define-hostmode poly-typescript-hostmode :mode 'typescript-mode)
