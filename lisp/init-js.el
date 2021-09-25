@@ -28,18 +28,18 @@
   (typescript-indent-level 2))
 
 
-(use-package tide
-  :hook
-  ((typescript-mode web-mode js2-mode js-mode) . (lambda ()
-                                                   (tide-setup)
-                                                   (tide-hl-identifier-mode)))
-  :bind
-  (:map tide-mode-map
-        ([remap evil-goto-definition] . tide-jump-to-definition)
-        ([remap pop-tag-mark] . tide-jump-back))
-  :config
-  (flycheck-add-next-checker 'jsx-tide '(warning . javascript-eslint) 'append)
-  (flycheck-add-next-checker 'tsx-tide '(warning . javascript-eslint) 'append))
+;; (use-package tide
+;;   :hook
+;;   ((typescript-mode web-mode js2-mode js-mode) . (lambda ()
+;;                                                    (tide-setup)
+;;                                                    (tide-hl-identifier-mode)))
+;;   :bind
+;;   (:map tide-mode-map
+;;         ([remap evil-goto-definition] . tide-jump-to-definition)
+;;         ([remap pop-tag-mark] . tide-jump-back))
+;;   :config
+;;   (flycheck-add-next-checker 'jsx-tide '(warning . javascript-eslint) 'append)
+;;   (flycheck-add-next-checker 'tsx-tide '(warning . javascript-eslint) 'append))
 
 
 (use-package ng2-mode
@@ -55,13 +55,12 @@
 
 (use-package prettier-js
   :hook
-  ((web-mode js2-mode ng2-mode typescript-mode scss-mode css-mode json-mode html-mode ng2-html-mode) . prettier-js-mode)
-  ;; (web-mode . (lambda ()
-  ;;               (unless (member (file-name-extension buffer-file-name) '("ejs"))
-  ;;                 (prettier-js-mode))))
-  ;; :custom
-  ;; (prettier-js-args '("--single-quote" "true")) ;; "--print-width" "120"
-  )
+  ((web-mode js2-mode ng2-mode typescript-mode scss-mode css-mode json-mode html-mode ng2-html-mode) . prettier-js-mode))
+;; (web-mode . (lambda ()
+;;               (unless (member (file-name-extension buffer-file-name) '("ejs"))
+;;                 (prettier-js-mode))))
+;; :custom
+;; (prettier-js-args '("--single-quote" "true")) ;; "--print-width" "120")
 
 
 

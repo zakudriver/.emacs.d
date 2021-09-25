@@ -142,7 +142,7 @@
   "Hugo github deploy buffer name.")
 
 
-(defconst kumo/lsp-major-mode '(go-mode ng2-html-mode sh-mode ruby-mode css-mode scss-mode sass-mode)
+(defconst kumo/lsp-major-mode '(go-mode ng2-html-mode sh-mode ruby-mode css-mode scss-mode sass-mode web-mode typescript-mode)
   "Lsp Supported major mode.")
 
 
@@ -169,6 +169,14 @@
 
 (defconst kumo/global-nodemodules-path "/.pnpm-global/5/node_modules"
   "Global node_modules path.")
+
+
+(defcustom kumo/native-compile-async-jobs (or (ignore-errors
+	                                              (string-to-number (shell-command-to-string "nproc")))
+	                                            4)
+  "How many jobs to use."
+  :type 'integer)
+
 
 ;; (defconst kumo/prettify-symbols-alist
 ;;   '(("lambda" . ?λ)

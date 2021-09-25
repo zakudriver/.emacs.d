@@ -24,7 +24,10 @@
       large-file-warning-threshold 100000000  ;; Prefers the newest version of a file
       ring-bell-function 'ignore              ;; disable the annoying bell ring
       mouse-drag-copy-region t
-      create-lockfiles nil)
+      create-lockfiles nil
+      native-comp-async-report-warnings-errors nil
+      comp-deferred-compilation t
+      read-process-output-max (* 1024 1024 2))
 
 
 ;; Environment

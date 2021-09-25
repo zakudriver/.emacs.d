@@ -65,6 +65,19 @@
   (require 'use-package))
 
 
+(use-package comp
+  :ensure nil
+  :config
+  (defun kumo-package-native-compile-async (package &optional all)
+    "Compile PACKAGE natively, or with prefix ALL, all packages."
+    (interactive (list (unless current-prefix-arg
+			                   (completing-read "Package: " (mapcar #'car package-alist)))))
+    (let* ((directory (if package
+			                    (file-name-directory (locate-library package))
+			                  package-user-dir)))
+      (native-compile-async directory kumo/native-compile-async-jobs t))))
+
+
 ;; Required by `use-package'
 (use-package diminish)
 (use-package bind-key)
