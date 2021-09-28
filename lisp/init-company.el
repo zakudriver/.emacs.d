@@ -18,13 +18,14 @@
   :custom
   (company-tooltip-align-annotations t)
   (company-tooltip-limit 12)
-  (company-idle-delay 0)
+  (company-idle-delay 0.0)
   (company-echo-delay nil)
-  (company-minimum-prefix-length 1)
+  (company-minimum-prefix-length 2)
   (company-require-match nil)
   (company-dabbrev-ignore-case nil)
+  (company-dabbrev-code-ignore-case nil)
   (company-dabbrev-downcase nil)
-  (company-global-modes '(not erc-mode message-mode help-mode shell-mode))
+  (company-global-modes '(not erc-mode message-mode help-mode shell-mode gud-mode))
   (company-frontends '(company-pseudo-tooltip-frontend company-echo-metadata-frontend))
   (company-backends '((company-capf :with company-yasnippet)
                       (company-dabbrev-code company-keywords company-files)
@@ -49,8 +50,7 @@
     :custom
     (company-box-backends-colors nil)
     (company-box-show-single-candidate t)
-    (company-box-max-candidates 50)
-    (company-box-doc-delay 0.3)
+    (company-box-doc-delay 0.1)
     :config
     ;; Prettify icons
     (advice-add #'company-box-icons--elisp :override #'(lambda (candidate)

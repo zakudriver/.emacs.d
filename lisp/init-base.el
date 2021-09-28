@@ -25,8 +25,6 @@
       ring-bell-function 'ignore              ;; disable the annoying bell ring
       mouse-drag-copy-region t
       create-lockfiles nil
-      native-comp-async-report-warnings-errors nil
-      comp-deferred-compilation t
       read-process-output-max (* 1024 1024 2))
 
 

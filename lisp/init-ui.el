@@ -117,7 +117,7 @@
   :custom
   (nyan-bar-length 24)
   ;; (nyan-animate-nyancat t)
-  (nyan-wavy-trail nil)
+  (nyan-wavy-trail t)
   (nyan-animation-frame-interval 0.4))
 
 ;; poke line

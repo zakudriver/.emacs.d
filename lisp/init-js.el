@@ -28,18 +28,16 @@
   (typescript-indent-level 2))
 
 
-;; (use-package tide
-;;   :hook
-;;   ((typescript-mode web-mode js2-mode js-mode) . (lambda ()
-;;                                                    (tide-setup)
-;;                                                    (tide-hl-identifier-mode)))
-;;   :bind
-;;   (:map tide-mode-map
-;;         ([remap evil-goto-definition] . tide-jump-to-definition)
-;;         ([remap pop-tag-mark] . tide-jump-back))
-;;   :config
-;;   (flycheck-add-next-checker 'jsx-tide '(warning . javascript-eslint) 'append)
-;;   (flycheck-add-next-checker 'tsx-tide '(warning . javascript-eslint) 'append))
+(use-package tide
+  ;; :hook
+  ;; ((typescript-mode web-mode js2-mode js-mode) . tide-setup)
+  :bind
+  (:map tide-mode-map
+        ([remap evil-goto-definition] . tide-jump-to-definition)
+        ([remap pop-tag-mark] . tide-jump-back)))
+;; :config
+;; (flycheck-add-next-checker 'jsx-tide '(warning . javascript-eslint) 'append)
+;; (flycheck-add-next-checker 'tsx-tide '(warning . javascript-eslint) 'append)
 
 
 (use-package ng2-mode

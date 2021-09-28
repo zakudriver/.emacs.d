@@ -1,6 +1,6 @@
 ;;; Code:
 
-(setq debug-on-error t)
+;; (setq debug-on-error t)
 
 
 (when (version< emacs-version "26.1")
@@ -8,44 +8,29 @@
 
 
 ;; Speed up startup
-(defvar kumo-gc-cons-threshold 400000000
-  "The default value to use for `gc-cons-threshold'.
-If you experience freezing, decrease this.
-If you experience stuttering, increase this.")
+(setq auto-mode-case-fold nil)
 
-(defvar kumo-gc-cons-upper-limit 400000000
-  "The temporary value for `gc-cons-threshold' to defer it.")
+(defvar old-file-name-handler-alist file-name-handler-alist)
+(unless (or (daemonp) noninteractive)
+  ;; (let ((old-file-name-handler-alist file-name-handler-alist))
+  ;; If `file-name-handler-alist' is nil, no 256 colors in TUI
+  ;; @see https://emacs-china.org/t/spacemacs-centaur-emacs/3802/839
+  (setq file-name-handler-alist
+        (unless (display-graphic-p)
+          '(("\\(?:\\.tzst\\|\\.zst\\|\\.dz\\|\\.txz\\|\\.xz\\|\\.lzma\\|\\.lz\\|\\.g?z\\|\\.\\(?:tgz\\|svgz\\|sifz\\)\\|\\.tbz2?\\|\\.bz2\\|\\.Z\\)\\(?:~\\|\\.~[-[:alnum:]:#@^._]+\\(?:~[[:digit:]]+\\)?~\\)?\\'" . jka-compr-handler))))
+  (add-hook 'emacs-startup-hook
+            (lambda ()
+              "Recover file name handlers."
+              (setq file-name-handler-alist
+                    (delete-dups (append file-name-handler-alist
+                                         old-file-name-handler-alist))))))
 
-(defvar kumo-gc-timer (run-with-idle-timer 15 t #'garbage-collect)
-  "Run garbarge collection when idle 10s.")
 
-(defvar default-file-name-handler-alist file-name-handler-alist)
-
-(setq file-name-handler-alist nil
-      gc-cons-threshold kumo-gc-cons-upper-limit)
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            "Restore defalut values after startup."
-            (setq file-name-handler-alist default-file-name-handler-alist)
-            (setq gc-cons-threshold kumo-gc-cons-threshold)
-
-            ;; GC automatically while unfocusing the frame
-            ;; `focus-out-hook' is obsolete since 27.1
-            (if (boundp 'after-focus-change-function)
-                (add-function :after after-focus-change-function
-                              (lambda ()
-                                (unless (frame-focus-state)
-                                  (garbage-collect))))
-              (add-hook 'focus-out-hook 'garbage-collect))
-
-            (defun my-minibuffer-setup-hook ()
-              (setq gc-cons-threshold kumo-gc-cons-upper-limit))
-
-            (defun my-minibuffer-exit-hook ()
-              (setq gc-cons-threshold kumo-gc-cons-threshold))
-
-            (add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
-            (add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)))
+(defvar normal-gc-cons-threshold (* 20 1024 1024))
+(let ((init-gc-cons-threshold (* 128 1024 1024)))
+  (setq gc-cons-threshold init-gc-cons-threshold)
+  (add-hook 'emacs-startup-hook
+            (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
 
 
 ;; Load path
@@ -121,3 +106,25 @@ If you experience stuttering, increase this.")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init.el ends here
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(highlight-parentheses-background-colors '("#F4CCE1") nil nil "Customized with use-package highlight-parentheses")
+ '(highlight-parentheses-colors '("#73317a") nil nil "Customized with use-package highlight-parentheses")
+ '(warning-suppress-types '((comp))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
+ '(org-pomodoro-keep-killed-pomodoro-time t)
+ '(org-pomodoro-mode-line ((t (:inherit warning))))
+ '(org-pomodoro-mode-line-break ((t (:inherit success))))
+ '(org-pomodoro-mode-line-overtime ((t (:inherit error))))
+ '(pulse-highlight-face ((t (:inherit region))))
+ '(pulse-highlight-start-face ((t (:inherit region))))
+ '(symbol-overlay-default-face ((t (:inherit (region bold))))))
+(put 'upcase-region 'disabled nil)

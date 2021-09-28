@@ -1,19 +1,23 @@
 ;;; Code:
 
-;; Defer garbage collection further back in the startup process
-(setq gc-cons-threshold most-positive-fixnum)
+(setenv "LIBRARY_PATH" "/opt/homebrew/lib/gcc/11:/opt/homebrew/lib/gcc/11/gcc/aarch64-apple-darwin20/11.1.0")
 
-;; Package initialize occurs automatically, before `user-init-file' is
-;; loaded, but after `early-init-file'. We handle package
-;; initialization, so we must prevent Emacs from doing it early!
-(setq package-enable-at-startup nil)
+;; (setenv "LIBRARY_PATH" "/usr/local/opt/gcc/lib/gcc/10:/usr/local/opt/gcc/lib/gcc/10/gcc/x86_64-apple-darwin20/10.2.0")
+
+
+(setq
+ gc-cons-threshold most-positive-fixnum
+ gc-cons-percentage 0.5
+ package-enable-at-startup nil
+ frame-inhibit-implied-resize t ;; Inhibit resizing frame
+ byte-compile-warnings '(cl-functions) ;; clear waring: Package cl is deprecated
+ inhibit-startup-message t
+ initial-major-mode 'fundamental-mode
+ load-prefer-newer noninteractive)
+
+
 (advice-add #'package--ensure-init-file :override #'ignore)
 
-;; Inhibit resizing frame
-(setq frame-inhibit-implied-resize t)
-
-;; clear waring: Package cl is deprecated
-(setq byte-compile-warnings '(cl-functions))
 
 ;; Faster to disable these here (before they've been initialized)
 (push '(menu-bar-lines . 0) default-frame-alist)

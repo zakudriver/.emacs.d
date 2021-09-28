@@ -36,19 +36,19 @@
 
 
 ;; Treat undo history as a tree
-(use-package undo-tree
-  :hook
-  (after-init . global-undo-tree-mode)
-  (web-mode . undo-tree-mode) ;; web-mode
-  :init
-  (add-to-list 'display-buffer-alist
-               '("^ \\*undo-tree\\*"
-                 display-buffer-reuse-window display-buffer-in-side-window
-                 (reusable-frames . visible)
-                 (side . right)
-                 (slot . 1)
-                 (window-width . 0.5)
-                 (window-height . 0.15))))
+;; (use-package undo-tree
+;;   :hook
+;;   (after-init . global-undo-tree-mode)
+;;   (web-mode . undo-tree-mode) ;; web-mode
+;;   :init
+;;   (add-to-list 'display-buffer-alist
+;;                '("^ \\*undo-tree\\*"
+;;                  display-buffer-reuse-window display-buffer-in-side-window
+;;                  (reusable-frames . visible)
+;;                  (side . right)
+;;                  (slot . 1)
+;;                  (window-width . 0.5)
+;;                  (window-height . 0.15))))
 
 
 ;; Show number of matches in mode-line while searching
@@ -171,15 +171,15 @@
         ("C-c @ t" . 'hs-toggle-hiding)))
 
 
-(use-package selectric-mode
-  :hook
-  (after-init . selectric-mode))
+;; (use-package selectric-mode
+;;   :hook
+;;   (after-init . selectric-mode))
 
 
-(use-package edit-server
-  :hook
-  (after-init . edit-server-start)
-  (kill-emacs . edit-server-stop))
+;; (use-package edit-server
+;;   :hook
+;;   (after-init . edit-server-start)
+;;   (kill-emacs . edit-server-stop))
 
 
 (provide 'init-edit)

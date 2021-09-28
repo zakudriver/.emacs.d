@@ -26,19 +26,35 @@
      ,(kumo-home-path-resolve kumo/global-nodemodules-path)
      "--stdio"))
   (lsp-auto-guess-root nil)      ; not Detect project root
-  (lsp-prefer-flymake nil)       ; Use lsp-ui and flycheck
   (lsp-log-io nil)
-  (lsp-trace nil)
-  (lsp-print-performance t)
-  (lsp-response-timeout 20)
+  (lsp-print-performance nil)
+  (lsp-response-timeout 10)
   (lsp-idle-delay 0.500)
+  (lsp-enable-on-type-formatting nil)
+  (lsp-enable-folding nil)
+  (lsp-enable-snippet nil)
+  (lsp-enable-links nil)
+  (lsp-enable-symbol-highlighting nil)
+  ;; (lsp-restart 'auto-restart)
+  (lsp-completion-show-detail nil)
+  (lsp-completion-sort-initial-results t)
+  (lsp-completion-use-last-result t)
+  (lsp-signature-auto-activate nil)
+  (lsp-enable-indentation nil)
+  ;; deno
+  (lsp-clients-deno-config "./tsconfig.json")
+  (lsp-clients-deno-import-map "./import_map.json")
+  (lsp-clients-deno-enable-lint nil)
+  (lsp-headerline-breadcrumb-enable nil)
+  (lsp-headerline-breadcrumb-icons-enable nil)
+  (lsp-lens-enable nil)
+  (lsp-disabled-clients '((web-mode . (deno-ls)) (typescript-mode . (deno-ls))))
+  ;; eslint
   (lsp-eslint-run "onSave")
-  ;; (lsp-clients-deno-config "./tsconfig.json")
-  ;; (lsp-clients-deno-import-map "./import_map.json")
-  ;; (lsp-clients-deno-enable-lint nil)
-  ;; header
-  (lsp-headerline-breadcrumb-enable nil))
-
+  (lsp-eslint-format nil)
+  ;; typescript/javascript
+  (lsp-typescript-format-enable nil)
+  (lsp-javascript-format-enable nil))
 
 ;; (use-package company-lsp
 ;;   :after (lsp-mode company)
@@ -73,22 +89,21 @@
   (lsp-ui-doc-use-childframe t)
   (lsp-ui-doc-use-webkit nil)
   (lsp-ui-doc-delay 0.2)
-  ;; lsp-ui-flycheck
-  (lsp-ui-flycheck-enable t)
+  (lsp-ui-doc-show-with-mouse nil)
   ;; lsp-ui-sideline
   (lsp-ui-sideline-enable t)
   (lsp-ui-sideline-ignore-duplicate t)
   (lsp-ui-sideline-show-symbol t)
   (lsp-ui-sideline-show-hover nil)
-  (lsp-ui-sideline-show-diagnostics nil)
-  (lsp-ui-sideline-show-code-actions t)
+  (lsp-ui-sideline-show-diagnostics t)
+  (lsp-ui-sideline-show-code-actions nil)
   (lsp-ui-sideline-code-actions-prefix "💡 ")
   ;; lsp-ui-imenu
   (lsp-ui-imenu-enable t)
   (lsp-ui-imenu-kind-position 'top)
   (lsp-ui-imenu-auto-refresh 'after-save)
   ;; lsp-ui-peek
-  (lsp-ui-peek-enable t)
+  (lsp-ui-peek-enable nil)
   (lsp-ui-peek-peek-height 20)
   (lsp-ui-peek-list-width 50)
   (lsp-ui-peek-fontify 'on-demand))
@@ -120,7 +135,6 @@
                                              (require 'ccls)
                                              (lsp)))
   :custom
-  (lsp-prefer-flymake nil)
   (flycheck-disabled-checkers '(c/c++-clang c/c++-cppcheck c/c++-gcc))
   (ccls-initialization-options kumo/ccls-initialization-options)
   :config
@@ -135,7 +149,6 @@
 (use-package lsp-dart
   :custom
   (lsp-dart-outline nil)
-  (lsp-enable-on-type-formatting t)
   (lsp-dart-sdk-dir (kumo-home-path-resolve "/opt/flutter/bin/cache/dart-sdk"))
   (lsp-dart-flutter-sdk-dir (kumo-home-path-resolve "/opt/flutter")))
 
