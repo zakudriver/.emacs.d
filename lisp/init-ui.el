@@ -21,12 +21,14 @@
 ;; Font
 (with-no-warnings
   (when sys/macp
-    (set-fontset-font t 'symbol (font-spec :family "Apple Color Emoji") nil 'prepend)
+    ;; (set-fontset-font
+    ;;  t 'symbol (font-spec :family "Apple Color Emoji") nil 'prepend)
+    (set-fontset-font
+     "fontset-default" 'unicode "Apple Color Emoji" nil 'prepend)
     (setq ns-use-thin-smoothing t
           ns-pop-up-frames nil)))
 
 
-;; (set-face-attribute 'default nil :height kumo/current-font-size)
 (set-face-attribute 'default nil :weight kumo/font-weight)
 (setq-default line-spacing 0.3
               fill-column 80)
@@ -146,6 +148,7 @@
                     (global-emojify-mode)))))
 
 
+
 ;; Misc
 (fset 'yes-or-no-p 'y-or-n-p)
 (size-indication-mode t)
@@ -176,8 +179,11 @@
 
 ;; icons
 (use-package all-the-icons
-  :init (unless (or sys/win32p (font-installed-p "all-the-icons"))
-          (all-the-icons-install-fonts t))
+  :if
+  (display-graphic-p)
+  :init
+  (unless (or sys/win32p (kumo-font-installed-p "all-the-icons"))
+    (all-the-icons-install-fonts t))
   :config
   (declare-function memoize 'memoize)
   (declare-function memoize-restore 'memoize)

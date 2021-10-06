@@ -41,12 +41,6 @@
   (with-eval-after-load 'counsel
     (bind-key [remap org-set-tags-command] #'counsel-org-tag org-mode-map))
 
-  (use-package org-bullets
-    :hook
-    (org-mode . org-bullets-mode)
-    :custom
-    (org-bullets-bullet-list '("🌞" "🌤" "⛈" "🌈")))
-
   (use-package org-pomodoro
     :custom-face
     (org-pomodoro-mode-line ((t (:inherit warning))))
@@ -62,8 +56,15 @@
     (dired-mode . org-download-enable)
     :custom
     (org-download-image-dir "./img")
-    (org-download-backend "curl \"%s\" -o \"%s\"")))
+    (org-download-backend "curl \"%s\" -o \"%s\""))
 
+  (use-package org-superstar
+    :if
+    (and (display-graphic-p) (kumo-chars-displayable-p kumo/org-headline-bullets-list))
+    :hook
+    (org-mode . org-superstar-mode)
+    :custom
+    (org-superstar-headline-bullets-list kumo/org-headline-bullets-list)))
 
 (use-package ob-go)
 

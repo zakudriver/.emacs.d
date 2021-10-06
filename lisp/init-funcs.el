@@ -1,5 +1,6 @@
 ;;; Code:
 
+(require 'cl-lib)
 
 (eval-when-compile
   (require 'init-custom))
@@ -11,19 +12,19 @@
   (find-file (concat user-emacs-directory "init.el")))
 
 
-(defun dos2unix ()
+(defun kumo-dos2unix ()
   "Convert the current buffer to UNIX file format."
   (interactive)
   (set-buffer-file-coding-system 'undecided-unix nil))
 
 
-(defun unix2dos ()
+(defun kumo-unix2dos ()
   "Convert the current buffer to DOS file format."
   (interactive)
   (set-buffer-file-coding-system 'undecided-dos nil))
 
 
-(defun save-buffer-as-utf8 (coding-system)
+(defun kumo-save-buffer-as-utf8 (coding-system)
   "Revert a buffer with `CODING-SYSTEM' and save as UTF-8."
   (interactive "zCoding system for visited file (default nil):")
   (revert-buffer-with-coding-system coding-system)
@@ -31,9 +32,17 @@
   (save-buffer))
 
 
-(defun font-installed-p (font-name)
+(defun kumo-font-installed-p (font-name)
   "Check if font with FONT-NAME is available."
   (find-font (font-spec :name font-name)))
+
+
+(defun kumo-chars-displayable-p (chars)
+  "Check if list of CHARS is available."
+  (cl-loop for it in chars
+           if (not (char-displayable-p (string-to-char it)))
+           return nil
+           finally return t))
 
 
 (defun kumo-save-some-buffers ()

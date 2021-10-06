@@ -1,7 +1,8 @@
 ;;; Code:
 
 ;; (setq debug-on-error t)
-
+;; (setq server-socket-dir (format "/tmp/emacs%d" (user-uid)))
+;; (server-start)
 
 (when (version< emacs-version "26.1")
   (error "This requires Emacs 26.1 and above!"))

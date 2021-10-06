@@ -113,61 +113,60 @@
   "CCLS initialization options.")
 
 
-(defconst kumo/modeline-height 26
+(defcustom kumo/modeline-height 26
   "Modeline height.")
 
 
-;; Hugo const
-(defconst kumo/easy-hugo-basedir "~/WWW-BUILDER/"
+(defcustom kumo/easy-hugo-basedir "~/WWW-BUILDER/"
   "Hugo basedir.")
 
 
-(defconst kumo/easy-hugo-postdir "notebook-org"
+(defcustom kumo/easy-hugo-postdir "notebook-org"
   "Hugo postdir.")
 
 
-(defconst kumo/easy-hugo-url "https://dingansichkum0.github.io/"
+(defcustom kumo/easy-hugo-url "https://dingansichkum0.github.io/"
   "Hugo site url.")
 
 
-(defconst kumo/easy-hugo-preview-url "http://localhost:1313/"
+(defcustom kumo/easy-hugo-preview-url "http://localhost:1313/"
   "Hugo preview url.")
 
 
-(defconst kumo/easy-hugo-github-deploy-script "publish.sh"
+(defcustom kumo/easy-hugo-github-deploy-script "publish.sh"
   "Hugo github deploy script.")
 
 
-(defconst kumo/easy-hugo-github-deploy-buffer-name "*Hugo Github Deploy*"
+(defcustom kumo/easy-hugo-github-deploy-buffer-name "*Hugo Github Deploy*"
   "Hugo github deploy buffer name.")
 
 
-(defconst kumo/lsp-major-mode '(go-mode ng2-html-mode sh-mode ruby-mode css-mode scss-mode sass-mode web-mode typescript-mode)
+(defcustom kumo/lsp-major-mode '(go-mode ng2-html-mode sh-mode ruby-mode css-mode scss-mode sass-mode web-mode typescript-mode)
   "Lsp Supported major mode.")
 
 
-(defconst kumo/lsp-on-save-major-mode '(ruby-mode)
+(defcustom kumo/lsp-on-save-major-mode '(ruby-mode)
   "Lsp Supported major mode.")
 
 
-(defconst kumo/org-mode-export-html-css "/org/style.css"
+(defcustom kumo/org-mode-export-html-css "/org/style.css"
   "Insert inline css file when org export html.")
 
 
-(defconst kumo/perspective-state-file "/.perspective"
+(defcustom kumo/perspective-state-file "/.perspective"
   "Perspective state cache file.")
 
 
-(defconst kumo/evil-local-mode '(web-mode typescript-mode js-mode js2-mode go-mode ruby-mode css-mode scss-mode)
+(defcustom kumo/evil-local-mode '(web-mode typescript-mode js-mode js2-mode go-mode ruby-mode css-mode scss-mode)
   "Start evil-local-mode list.")
 
 
-(defconst kumo/flycheck-boot-mode '(not text-mode outline-mode fundamental-mode lisp-interaction-mode
-                                        org-mode diff-mode shell-mode eshell-mode term-mode vterm-mode)
+(defcustom kumo/flycheck-boot-mode '(not text-mode outline-mode fundamental-mode lisp-interaction-mode
+                                         org-mode diff-mode shell-mode eshell-mode term-mode vterm-mode)
   "Start flycheck list.")
 
 
-(defconst kumo/global-nodemodules-path "/.pnpm-global/5/node_modules"
+(defcustom kumo/global-nodemodules-path "/.pnpm-global/5/node_modules"
   "Global node_modules path.")
 
 
@@ -176,6 +175,10 @@
 	                                            4)
   "How many jobs to use."
   :type 'integer)
+
+
+(defcustom kumo/org-headline-bullets-list '("🌞" "🌤" "⛈" "🌈")
+  "List of org headline bullets.")
 
 
 ;; (defconst kumo/prettify-symbols-alist

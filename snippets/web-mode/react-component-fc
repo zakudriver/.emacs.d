@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: react-component-tsx
-# key: tsx
+# name: react-component-fc
+# key: fc
 # --
 
 import React from 'react';
