@@ -7,8 +7,8 @@
 
 (use-package org
   :bind
-  (("C-c o o" . org-switch)
-   ("C-c o a" . org-agenda)
+  (("C-, o o" . org-switch)
+   ("C-, o a" . org-agenda)
    :map org-mode-map
    ("C-," . nil)
    ("C-, l" . font-lock-mode)
@@ -49,7 +49,7 @@
     (org-pomodoro-keep-killed-pomodoro-time t)
     :bind
     (:map org-agenda-mode-map
-          ("C-. p" . org-pomodoro)))
+          ("C-, p" . org-pomodoro)))
 
   (use-package org-download
     :hook
@@ -97,11 +97,12 @@
   (easy-hugo-url kumo/easy-hugo-url)
   (easy-hugo-preview-url kumo/easy-hugo-preview-url)
   (easy-hugo-github-deploy-script kumo/easy-hugo-github-deploy-script)
-  (easy-hugo-default-ext ".org")
-  )
+  (easy-hugo-default-ext ".org"))
 
 (use-package ox-hugo
-  :after ox)
+  :after ox
+  :custom
+  (org-hugo-base-dir kumo/easy-hugo-basedir))
 
 
 (provide 'init-org)

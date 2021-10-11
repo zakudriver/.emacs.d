@@ -53,7 +53,6 @@
 
 ;; Show number of matches in mode-line while searching
 (use-package anzu
-  :diminish
   :bind
   (([remap query-replace] . anzu-query-replace)
    ([remap query-replace-regexp] . anzu-query-replace-regexp)
@@ -128,10 +127,10 @@
   :bind
   ("C-a" . 'mwim-beginning-of-code-or-line)
   ("C-e" . 'mwim-end-of-code-or-line)
-  ("C-c m w" . 'avy-goto-char-timer)
-  ("C-c m l" . 'avy-goto-char-in-line)
-  ("C-c m n" . 'avy-goto-line-below)
-  ("C-c m p" . 'avy-goto-line-above))
+  ("C-S-w" . 'avy-goto-char-timer)
+  ("C-S-l" . 'avy-goto-char-in-line)
+  ("C-S-n" . 'avy-goto-line-below)
+  ("C-S-p" . 'avy-goto-line-above))
 
 
 ;; Flexible text folding
@@ -140,12 +139,26 @@
   (prog-mode . origami-mode)
   :bind
   (:map origami-mode-map
-        ("C-. o" . origami-open-node)
-        ("C-. c" . origami-close-node))
+        ("C-. @ o" . origami-open-node)
+        ("C-. @ O" . origami-open-all-nodes)
+        ("C-. @ c" . origami-close-node)
+        ("C-. @ C" . origami-close-all-nodes)
+        ("C-. @ t" . origami-toggle-all-nodes))
   :custom
   (origami-show-fold-header t)
-  :config
   (face-spec-reset-face 'origami-fold-header-face))
+
+
+(use-package hideshow
+  :hook
+  (prog-mode . hs-minor-mode)
+  :bind
+  (:map hs-minor-mode-map
+        ("C-. @ S" . 'hs-show-all)
+        ("C-. @ H" . 'hs-hide-all)
+        ("C-. @ h" . 'hs-hide-block)
+        ("C-. @ s" . 'hs-show-block)
+        ("C-. @ T" . 'hs-toggle-hiding)))
 
 
 (use-package whole-line-or-region
@@ -157,18 +170,6 @@
   :bind
   ("M-o" . 'goto-last-change)
   ("M-O" . 'goto-last-change-reverse))
-
-
-(use-package hideshow
-  :hook
-  (prog-mode . hs-minor-mode)
-  :bind
-  (:map hs-minor-mode-map
-        ("C-c @ a" . 'hs-show-all)
-        ("C-c @ h" . 'hs-hide-all)
-        ("C-c @ d" . 'hs-hide-block)
-        ("C-c @ s" . 'hs-show-block)
-        ("C-c @ t" . 'hs-toggle-hiding)))
 
 
 ;; (use-package selectric-mode

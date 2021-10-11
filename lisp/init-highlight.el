@@ -53,8 +53,7 @@ FACE defaults to inheriting from default and highlight."
                                                                 (setq show-paren--off-screen-overlay
                                                                       (display-line-overlay
                                                                        (window-start) msg ))))))
-                                                   (blink-matching-open)))))
-  )
+                                                   (blink-matching-open))))))
 
 
 ;; Highlight symbols
@@ -64,8 +63,8 @@ FACE defaults to inheriting from default and highlight."
   :custom-face
   (symbol-overlay-default-face ((t (:inherit (region bold)))))
   :bind
-  (("C-c l m" . symbol-overlay-put)
-   ("C-c l M" . symbol-overlay-remove-all)
+  (("C-. l m" . symbol-overlay-put)
+   ("C-. l M" . symbol-overlay-remove-all)
    :map symbol-overlay-map
    ("M-n" . symbol-overlay-jump-next)
    ("M-p" . symbol-overlay-jump-prev)
@@ -102,8 +101,7 @@ FACE defaults to inheriting from default and highlight."
                                            "Turn on symbol highlighting."
                                            (interactive)
                                            (when (derived-mode-p 'prog-mode)
-                                             (symbol-overlay-mode 1))))
-  )
+                                             (symbol-overlay-mode)))))
 
 
 ;; Highlight indentions
@@ -134,10 +132,7 @@ FACE defaults to inheriting from default and highlight."
   (after-init . global-diff-hl-mode)
   (dired-mode . diff-hl-dired-mode)
   :custom
-  (diff-hl-draw-borders nil)
-  :bind
-  (:map diff-hl-command-map
-        ("C-. c" . diff-hl-mark-hunk)))
+  (diff-hl-draw-borders nil))
 
 
 (use-package pulse

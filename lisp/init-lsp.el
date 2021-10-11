@@ -69,8 +69,8 @@
   :after lsp-mode
   :bind
   (:map lsp-mode-map
-        ("C-. w w" . lsp-ivy-workspace-symbol)
-        ("C-. w g" . lsp-ivy-global-workspace-symbol)))
+        ("s-l w w" . lsp-ivy-workspace-symbol)
+        ("s-l w g" . lsp-ivy-global-workspace-symbol)))
 
 
 (use-package lsp-ui
@@ -78,7 +78,7 @@
   :after lsp-mode
   :bind
   (:map lsp-ui-mode-map
-        ("C-. c a" . lsp-ui-sideline-apply-code-actions))
+        ("s-l c a" . lsp-ui-sideline-apply-code-actions))
   :custom
   ;; lsp-ui-doc
   (lsp-ui-doc-enable t)
