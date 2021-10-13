@@ -17,9 +17,6 @@
 
 (global-set-key (kbd "C-c n d") 'kumo-number-division)
 
-(global-set-key (kbd "M-F") 'forward-to-word)
-(global-set-key (kbd "M-B") 'backward-to-word)
-
 (global-set-key (kbd "C-c f n") 'kumo-put-file-name-on-clipboard)
 (global-set-key (kbd "C-c f d") 'kumo-open-current-file-in-finder)
 
@@ -56,6 +53,9 @@
 ;; modify
 (global-set-key (kbd "C-S-a") 'beginning-of-buffer) ;; modify M-<
 (global-set-key (kbd "C-S-e") 'end-of-buffer) ;; modify M->
+
+(global-set-key (kbd "M-F") 'forward-to-word)
+(global-set-key (kbd "M-B") 'backward-to-word)
 
 
 (provide 'init-keys)
