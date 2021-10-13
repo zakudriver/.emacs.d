@@ -17,12 +17,8 @@
 
 (global-set-key (kbd "C-c n d") 'kumo-number-division)
 
-;; (global-set-key (kbd "M-p") 'beginning-of-buffer)
-;; (global-set-key (kbd "M-n") 'end-of-buffer)
-
 (global-set-key (kbd "M-F") 'forward-to-word)
 (global-set-key (kbd "M-B") 'backward-to-word)
-
 
 (global-set-key (kbd "C-c f n") 'kumo-put-file-name-on-clipboard)
 (global-set-key (kbd "C-c f d") 'kumo-open-current-file-in-finder)
@@ -37,8 +33,6 @@
 (global-set-key (kbd "C-c c c") 'kumo-flycheck-list-errors-toggle)
 (global-set-key (kbd "C-c c s") 'kumo-flycheck-list-errors-select-window)
 
-(global-set-key (kbd "C-c F 0") 'kumo-current-font)
-
 (global-set-key (kbd "C-c z") 'kumo-wrap-with-input)
 
 ;; like vim
@@ -51,10 +45,17 @@
 (global-set-key (kbd "C-<backspace>") 'kumo-backward-delete-word) ;; replace C-<backspace>
 (global-set-key (kbd "M-d") 'kumo-delete-word) ;; replace M-d
 (global-set-key (kbd "C-k") 'kumo-kill-line) ;; replace C-k
-(global-set-key (kbd "C-S-<backspace>") 'kumo-kill-whole-line) ;; replace C-S-<backspace>
+
 
 ;; replace func
 (global-set-key (kbd "C-x s") 'kumo-save-some-buffers) ;; replace 'save-some-buffer
+
+;; extension
+(global-set-key (kbd "C-S-k") 'kumo-kill-whole-line)
+
+;; modify
+(global-set-key (kbd "C-S-a") 'beginning-of-buffer) ;; modify M-<
+(global-set-key (kbd "C-S-e") 'end-of-buffer) ;; modify M->
 
 
 (provide 'init-keys)

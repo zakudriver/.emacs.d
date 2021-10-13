@@ -420,7 +420,8 @@ EXPORTER: export way."
       (delete-region (region-beginning)
                      (region-end))
     (delete-region (line-beginning-position)
-                   (line-end-position))))
+                   (line-end-position))
+    (delete-char 1)))
 
 
 (defun kumo-newline-above-current ()
@@ -467,10 +468,13 @@ This command does not push text to `kill-ring'."
   "Delete text from current position to end of line char.
 This command does not push text to `kill-ring'."
   (interactive)
-  (delete-region
-   (point)
-   (progn (end-of-line 1) (point)))
-  (delete-char 1))
+  (let ((orig-point (point)))
+    (move-end-of-line 1)
+    (if (= orig-point (point))
+        (delete-char 1)
+      (delete-region
+       orig-point
+       (point)))))
 
 
 (defun kumo-save-word-at-point (&optional arg)

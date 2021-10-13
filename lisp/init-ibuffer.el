@@ -11,7 +11,7 @@
   (ibuffer-find-file
    ibuffer-current-buffer)
   :bind
-  ("C-c b i" . ibuffer)
+  ("C-x C-b" . ibuffer)
   :hook
   (ibuffer .
            (lambda ()

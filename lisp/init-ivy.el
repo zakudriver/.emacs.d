@@ -7,7 +7,7 @@
   (("C-h f" . counsel-describe-function)
    ("C-h v" . counsel-describe-variable)
    ("C-s" . swiper-isearch)
-   ("C-S" . swiper-isearch-backward)
+   ("C-S-s" . swiper-isearch-backward)
    :map counsel-mode-map
    ([remap swiper] . counsel-grep-or-swiper)
    ([remap swiper-backward] . counsel-grep-or-swiper-backward)
@@ -15,7 +15,6 @@
    ([remap set-variable] . counsel-set-variable)
    ([remap insert-char] . counsel-unicode-char)
    ([remap recentf-open-files] . counsel-recentf)
-
    ("C-c c z" . counsel-fzf)
    ("C-c c p" . counsel-pt)
    ("C-c c m" . counsel-imenu)
@@ -115,6 +114,22 @@ This is for use in `ivy-re-builders-alist'."
                            (or (and ivy-rich-mode 'abbreviate) 'name))))
   :custom
   (ivy-rich-parse-remote-buffer nil))
+
+
+(use-package ivy-posframe
+  :hook
+  (ivy-mode . ivy-posframe-mode)
+  :custom
+  (ivy-posframe-display-functions-alist
+   '((swiper                  . ivy-posframe-display-at-frame-center)
+     (swiper-isearch          . ivy-posframe-display-at-frame-center)
+     (counsel-rg              . ivy-posframe-display-at-frame-center)
+     (counsel-fzf             . ivy-posframe-display-at-frame-center)
+     (counsel-pt              . ivy-posframe-display-at-frame-center)
+     (counsel-imenu           . ivy-posframe-display-at-frame-center)
+     (swiper-isearch-backward . ivy-posframe-display-at-frame-center)
+     (counsel-find-file       . ivy-posframe-display-at-frame-center)
+     (ivy-switch-buffer       . ivy-posframe-display-at-frame-center))))
 
 
 (provide 'init-ivy)

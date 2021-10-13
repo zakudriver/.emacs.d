@@ -2,7 +2,8 @@
 
 
 ;; linum-mode
-(global-linum-mode t)
+;; (global-linum-mode t)
+(global-display-line-numbers-mode t)
 
 
 ;; prettify-symbols-mod
@@ -82,11 +83,11 @@
   (after-init . multiple-cursors-mode)
   :bind
   (("C-S-c C-S-c" . mc/edit-lines)
-   ("C->" . mc/mark-next-like-this)
-   ("C-<" . mc/mark-previous-like-this)
-   ("C-c C-<" . mc/mark-all-like-this)
-   ("C-M->" . mc/skip-to-next-like-this)
-   ("C-M-<" . mc/skip-to-previous-like-this)
+   ("C->"         . mc/mark-next-like-this)
+   ("C-<"         . mc/mark-previous-like-this)
+   ("C-c C-<"     . mc/mark-all-like-this)
+   ("C-M->"       . mc/skip-to-next-like-this)
+   ("C-M-<"       . mc/skip-to-previous-like-this)
    :map mc/keymap
    ("C-|" . mc/vertical-align-with-space)))
 
@@ -125,12 +126,12 @@
 ;; move to the beginning/end of line or code
 (use-package mwim
   :bind
-  ("C-a" . 'mwim-beginning-of-code-or-line)
-  ("C-e" . 'mwim-end-of-code-or-line)
-  ("C-S-w" . 'avy-goto-char-timer)
-  ("C-S-l" . 'avy-goto-char-in-line)
-  ("C-S-n" . 'avy-goto-line-below)
-  ("C-S-p" . 'avy-goto-line-above))
+  ("C-a"   . mwim-beginning-of-code-or-line)
+  ("C-e"   . mwim-end-of-code-or-line)
+  ("C-S-w" . avy-goto-char-timer)
+  ("C-S-l" . avy-goto-char-in-line)
+  ("C-S-n" . avy-goto-line-below)
+  ("C-S-p" . avy-goto-line-above))
 
 
 ;; Flexible text folding

@@ -8,7 +8,7 @@
 
 (use-package flycheck
   :hook
-  (after-init . global-flycheck-mode)
+  (prog-mode . global-flycheck-mode)
   ;; (tide-mode  . use-eslint-from-nodemodules)
   ;; (web-mode . use-eslint-tide)
   :init
