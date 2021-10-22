@@ -256,12 +256,13 @@ BUFFER is the symbol."
   (kumo-bottom-window (window-buffer)))
 
 
-(defun kumo-indent-all ()
+(defun kumo-indent-whole-buffer ()
   "Mark whole buffer."
   (interactive)
   (let ((point (point)))
-    (region-beginning)
-    (region-end)
+    (push-mark)
+    (push-mark (point-max) nil t)
+    (goto-char (minibuffer-prompt-end))
     (indent-for-tab-command)
     (goto-char point)))
 
