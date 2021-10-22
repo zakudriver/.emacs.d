@@ -1,3 +1,8 @@
+;;; init-lsp --- Summary
+
+;;; Commentary:
+;; some configuration of lsp.
+
 ;;; Code:
 
 
@@ -110,6 +115,7 @@
 
 
 (use-package dap-mode
+  :functions dap-hydra/nil
   :hook
   ((lsp-mode . dap-auto-configure-mode)
    (dap-stopped . (lambda (_args) (dap-hydra)))
@@ -155,5 +161,4 @@
 
 (provide 'init-lsp)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-lsp.el ends here

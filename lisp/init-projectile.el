@@ -1,3 +1,8 @@
+;;; init-projectile --- Summary
+
+;;; Commentary:
+;; some configuration of projectile.
+
 ;;; Code:
 
 

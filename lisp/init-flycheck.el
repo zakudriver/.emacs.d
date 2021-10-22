@@ -1,3 +1,8 @@
+;;; init-flycheck --- Summary
+
+;;; Commentary:
+;; some configuration of flycheck.
+
 ;;; Code:
 
 
@@ -11,6 +16,8 @@
   (prog-mode . global-flycheck-mode)
   ;; (tide-mode  . use-eslint-from-nodemodules)
   ;; (web-mode . use-eslint-tide)
+  :bind
+  ("C-c c c" . kumo-flycheck-list-errors-toggle)
   :init
   (add-to-list 'display-buffer-alist
                `(,(eval `(rx bos ,kumo/flycheck-errors-buffer-name eos))
@@ -28,7 +35,15 @@
   :config
   (when (fboundp 'define-fringe-bitmap)
     (define-fringe-bitmap 'flycheck-fringe-bitmap-double-arrow
-      [16 48 112 240 112 48 16] nil nil 'center)))
+      [16 48 112 240 112 48 16] nil nil 'center))
+
+  (defun kumo-flycheck-list-errors-toggle ()
+    "Open or delete flycheck-errors-list window."
+    (interactive)
+    (let ((w (get-buffer-window kumo/flycheck-errors-buffer-name)))
+      (if w
+          (delete-window w)
+        (flycheck-list-errors)))))
 
 
 ;; (use-package flycheck-popup-tip
@@ -57,5 +72,4 @@
 
 (provide 'init-flycheck)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-flycheck.el ends here

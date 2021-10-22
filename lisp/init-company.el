@@ -1,7 +1,13 @@
+;;; init-company --- Summary
+
+;;; Commentary:
+;; some configuration of company.
+
 ;;; Code:
 
 
 (use-package company
+  :functions company-box-icons--elisp
   :bind
   (("M-/" . company-complete)
    ("s-/" . company-yasnippet)
@@ -53,15 +59,15 @@
     (company-box-doc-delay 0.1)
     :config
     ;; Prettify icons
-    (advice-add #'company-box-icons--elisp :override #'(lambda (candidate)
-                                                         (when (derived-mode-p 'emacs-lisp-mode)
-                                                           (let ((sym (intern candidate)))
-                                                             (cond ((fboundp sym) 'Function)
-                                                                   ((featurep sym) 'Module)
-                                                                   ((facep sym) 'Color)
-                                                                   ((boundp sym) 'Variable)
-                                                                   ((symbolp sym) 'Text)
-                                                                   (t . nil))))))
+    (advice-add #'company-box-icons--elisp :override (lambda (candidate)
+                                                       (when (derived-mode-p 'emacs-lisp-mode)
+                                                         (let ((sym (intern candidate)))
+                                                           (cond ((fboundp sym) 'Function)
+                                                                 ((featurep sym) 'Module)
+                                                                 ((facep sym) 'Color)
+                                                                 ((boundp sym) 'Variable)
+                                                                 ((symbolp sym) 'Text)
+                                                                 (t . nil))))))
 
     (declare-function all-the-icons-faicon 'all-the-icons)
     (declare-function all-the-icons-material 'all-the-icons)
@@ -94,12 +100,9 @@
             (Operator . ,(all-the-icons-material "control_point" :height 0.85 :v-adjust -0.2))
             (TypeParameter . ,(all-the-icons-faicon "arrows" :height 0.8 :v-adjust -0.05))
             (Template . ,(all-the-icons-material "format_align_left" :height 0.85 :v-adjust -0.2)))
-          company-box-icons-alist 'company-box-icons-all-the-icons)
-    )
-  )
+          company-box-icons-alist 'company-box-icons-all-the-icons)))
 
 
 (provide 'init-company)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-company.el ends here

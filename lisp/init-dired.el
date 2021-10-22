@@ -1,7 +1,13 @@
+;;; init-dired --- Summary
+
+;;; Commentary:
+;; some configuration of Dired.
+
 ;;; Code:
 
 
-(eval-when-compile (require 'init-const))
+(eval-when-compile
+  (require 'init-const))
 
 
 ;; Directory operations
@@ -83,11 +89,9 @@
 
     (setq dired-omit-files
           (concat dired-omit-files
-                  "\\|^.DS_Store$\\|^.projectile$\\|^.git*\\|^.svn$\\|^.vscode$\\|\\.js\\.meta$\\|\\.meta$\\|\\.elc$\\|^.emacs.*")))
-  )
+                  "\\|^.DS_Store$\\|^.projectile$\\|^.git*\\|^.svn$\\|^.vscode$\\|\\.js\\.meta$\\|\\.meta$\\|\\.elc$\\|^.emacs.*"))))
 
 
 (provide 'init-dired)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-dired.el ends here

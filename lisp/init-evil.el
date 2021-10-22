@@ -1,3 +1,8 @@
+;;; init-evil --- Summary
+
+;;; Commentary:
+;; some configuration of evil.
+
 ;;; Code:
 
 
@@ -150,5 +155,4 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
 
 (provide 'init-evil)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-evil.el ends here

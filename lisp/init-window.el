@@ -1,8 +1,14 @@
+;;; init-window --- Summary
+
+;;; Commentary:
+;; some configuration of window.
+
 ;;; Code:
 
 
 (eval-when-compile
-  (require 'init-const))
+  (require 'init-const)
+  (require 'init-funcs))
 
 
 ;; Fullscreen
@@ -24,8 +30,7 @@
       (when (version< emacs-version "27")
         (run-at-time "2sec" nil
                      (lambda ()
-                       (toggle-frame-fullscreen)
-                       ))))
+                       (toggle-frame-fullscreen)))))
   ;; 非Mac平台直接最大化
   (toggle-frame-maximized))
 
@@ -117,5 +122,4 @@
 
 (provide 'init-window)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-window.el ends here

@@ -1,3 +1,8 @@
+;;; init-ibuffer --- Summary
+
+;;; Commentary:
+;; some configuration of ibuffer.
+
 ;;; Code:
 
 
@@ -22,15 +27,14 @@
   (ibuffer-filter-group-name-face '(:inherit (font-lock-string-face bold)))
   :config
   (with-eval-after-load 'counsel
-    (advice-add #'ibuffer-find-file :override #'(lambda ()
-                                                  (interactive)
-                                                  (let ((default-directory (let ((buf (ibuffer-current-buffer)))
-                                                                             (if (buffer-live-p buf)
-                                                                                 (with-current-buffer buf
-                                                                                   default-directory)
-                                                                               default-directory))))
-                                                    (counsel-find-file default-directory))
-                                                  )))
+    (advice-add #'ibuffer-find-file :override (lambda ()
+                                                (interactive)
+                                                (let ((default-directory (let ((buf (ibuffer-current-buffer)))
+                                                                           (if (buffer-live-p buf)
+                                                                               (with-current-buffer buf
+                                                                                 default-directory)
+                                                                             default-directory))))
+                                                  (counsel-find-file default-directory)))))
 
   (use-package all-the-icons-ibuffer
     :hook
@@ -38,7 +42,7 @@
 
   ;; Group ibuffer's list by project root
   (use-package ibuffer-projectile
-    :functions all-the-icons-octicon ibuffer-do-sort-by-alphabetic
+    :functions ibuffer-do-sort-by-alphabetic
     :hook
     (ibuffer . (lambda ()
                  (ibuffer-projectile-set-filter-groups)
@@ -56,5 +60,4 @@
 
 (provide 'init-ibuffer)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-ibuffer.el ends here

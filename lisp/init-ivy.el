@@ -1,8 +1,13 @@
+;;; init-ivy --- Summary
+
+;;; Commentary:
+;; some configuration of ivy.
+
 ;;; Code:
 
 
 (use-package counsel
-  :diminish ivy-mode counsel-mode
+  :defines magit-completing-read-function
   :bind
   (("C-h f" . counsel-describe-function)
    ("C-h v" . counsel-describe-variable)
@@ -134,5 +139,4 @@ This is for use in `ivy-re-builders-alist'."
 
 (provide 'init-ivy)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-ivy.el ends here

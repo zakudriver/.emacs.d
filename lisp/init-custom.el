@@ -1,3 +1,8 @@
+;;; init-custom --- Summary
+
+;;; Commentary:
+;; somme customizable variables.
+
 ;;; Code:
 
 
@@ -5,18 +10,20 @@
   (require 'init-const))
 
 
-(defcustom kumo/package-archives 'emacs-china
-  "Set package archives from which to fetch."
-  :type '(choice
-          (const :tag "Melpa" melpa)
-          (const :tag "Emacs-China" emacs-china)
-          (const :tag "Tuna" tuna)))
+(defconst kumo/package-archives 'emacs-china
+  "Set package archives from which to fetch.
+(choice
+  (const :tag \"Melpa\" melpa)
+  (const :tag \"Emacs-China\" emacs-china)
+  (const :tag \"Tuna\" tuna))")
 
 
-(defconst kumo/logo (expand-file-name "logo.png" user-emacs-directory))
+(defconst kumo/logo (expand-file-name "logo.png" user-emacs-directory)
+  "Path of logo file.")
 
 
-(defconst kumo/default-theme 'monokai)
+(defconst kumo/default-theme 'monokai
+  "Default theme.")
 
 
 (defconst kumo/theme-list '((monokai-theme monokai)
@@ -64,12 +71,15 @@
                             (sublime-themes spolsky)
                             (sublime-themes fogus)
                             (sublime-themes junio)
-                            (jazz-theme jazz))
+                            (jazz-theme jazz)
+                            (grandshell-theme grandshell)
+                            (tron-legacy-theme tron-legacy))
   "Theme list.")
 
 
 (defconst kumo/font-list
   '(Menlo
+    SF\ Mono 
     Roboto\ Mono
     Anonymous\ Pro
     FantasqueSansMono
@@ -77,8 +87,7 @@
     Fira\ Code
     Operator\ Mono
     Inconsolata
-    Iosevka
-    )
+    Iosevka)
   "Font list.")
 
 
@@ -113,71 +122,70 @@
   "CCLS initialization options.")
 
 
-(defcustom kumo/modeline-height 26
+(defconst kumo/modeline-height 26
   "Modeline height.")
 
 
-(defcustom kumo/easy-hugo-basedir "~/WWW-BUILDER/"
+(defconst kumo/easy-hugo-basedir "~/WWW-BUILDER/"
   "Hugo basedir.")
 
 
-(defcustom kumo/easy-hugo-postdir "notebook-org"
+(defconst kumo/easy-hugo-postdir "notebook-org"
   "Hugo postdir.")
 
 
-(defcustom kumo/easy-hugo-url "https://dingansichkum0.github.io/"
+(defconst kumo/easy-hugo-url "https://dingansichkum0.github.io/"
   "Hugo site url.")
 
 
-(defcustom kumo/easy-hugo-preview-url "http://localhost:1313/"
+(defconst kumo/easy-hugo-preview-url "http://localhost:1313/"
   "Hugo preview url.")
 
 
-(defcustom kumo/easy-hugo-github-deploy-script "publish.sh"
+(defconst kumo/easy-hugo-github-deploy-script "publish.sh"
   "Hugo github deploy script.")
 
 
-(defcustom kumo/easy-hugo-github-deploy-buffer-name "*Hugo Github Deploy*"
+(defconst kumo/easy-hugo-github-deploy-buffer-name "*Hugo Github Deploy*"
   "Hugo github deploy buffer name.")
 
 
-(defcustom kumo/lsp-major-mode '(go-mode ng2-html-mode sh-mode ruby-mode css-mode scss-mode sass-mode web-mode typescript-mode)
+(defconst kumo/lsp-major-mode '(go-mode ng2-html-mode sh-mode ruby-mode css-mode scss-mode sass-mode web-mode typescript-mode)
   "Lsp Supported major mode.")
 
 
-(defcustom kumo/lsp-on-save-major-mode '(ruby-mode)
+(defconst kumo/lsp-on-save-major-mode '(ruby-mode)
   "Lsp Supported major mode.")
 
 
-(defcustom kumo/org-mode-export-html-css "/org/style.css"
+(defconst kumo/org-mode-export-html-css "/org/style.css"
   "Insert inline css file when org export html.")
 
 
-(defcustom kumo/perspective-state-file "/.perspective"
+(defconst kumo/perspective-state-file "/.perspective"
   "Perspective state cache file.")
 
 
-(defcustom kumo/evil-local-mode '(web-mode typescript-mode js-mode js2-mode go-mode ruby-mode css-mode scss-mode)
+(defconst kumo/evil-local-mode '(web-mode typescript-mode js-mode js2-mode go-mode ruby-mode css-mode scss-mode)
   "Start evil-local-mode list.")
 
 
-(defcustom kumo/flycheck-boot-mode '(not text-mode outline-mode fundamental-mode lisp-interaction-mode
-                                         org-mode diff-mode shell-mode eshell-mode term-mode vterm-mode)
+(defconst kumo/flycheck-boot-mode '(not text-mode outline-mode fundamental-mode lisp-interaction-mode
+                                        org-mode diff-mode shell-mode eshell-mode term-mode vterm-mode)
   "Start flycheck list.")
 
 
-(defcustom kumo/global-nodemodules-path "/.pnpm-global/5/node_modules"
+(defconst kumo/global-nodemodules-path "/.pnpm-global/5/node_modules"
   "Global node_modules path.")
 
 
-(defcustom kumo/native-compile-async-jobs (or (ignore-errors
-	                                              (string-to-number (shell-command-to-string "nproc")))
-	                                            4)
-  "How many jobs to use."
-  :type 'integer)
+(defconst kumo/native-compile-async-jobs (or (ignore-errors
+	                                             (string-to-number (shell-command-to-string "nproc")))
+	                                           4)
+  "How many jobs to use.")
 
 
-(defcustom kumo/org-headline-bullets-list '("🌞" "🌤" "⛈" "🌈")
+(defconst kumo/org-headline-bullets-list '("🌞" "🌤" "⛈" "🌈")
   "List of org headline bullets.")
 
 
@@ -200,5 +208,4 @@
 
 (provide 'init-custom)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-custom.el ends here

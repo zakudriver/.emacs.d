@@ -1,8 +1,14 @@
+;;; init-org --- Summary
+
+;;; Commentary:
+;; some configuration of org.
+
 ;;; Code:
 
 
 (eval-when-compile
-  (require 'init-custom))
+  (require 'init-custom)
+  (require 'init-funcs))
 
 
 (use-package org
@@ -66,6 +72,7 @@
     :custom
     (org-superstar-headline-bullets-list kumo/org-headline-bullets-list)))
 
+
 (use-package ob-go)
 
 
@@ -99,6 +106,7 @@
   (easy-hugo-github-deploy-script kumo/easy-hugo-github-deploy-script)
   (easy-hugo-default-ext ".org"))
 
+
 (use-package ox-hugo
   :after ox
   :custom
@@ -107,5 +115,4 @@
 
 (provide 'init-org)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-org.el ends here

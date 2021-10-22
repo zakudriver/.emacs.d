@@ -1,3 +1,8 @@
+;;; init-keys --- Summary
+
+;;; Commentary:
+;; some configuration of keys.
+
 ;;; Code:
 
 
@@ -22,12 +27,12 @@
 
 (global-set-key (kbd "C-c b t") 'kumo-kill-this-buffer)
 (global-set-key (kbd "C-c b o") 'kumo-kill-other-buffers)
-(global-set-key (kbd "C-c b a") 'kumo-kill-all-buffers)
+;; (global-set-key (kbd "C-c b a") 'kumo-kill-all-buffers)
 (global-set-key (kbd "C-c b p") 'kumo-switch-to-previous-buffer)
 (global-set-key (kbd "C-c b R") 'kumo-rename-current-buffer-file)
 (global-set-key (kbd "C-c b D") 'kumo-delete-current-buffer-file)
 
-(global-set-key (kbd "C-c c c") 'kumo-flycheck-list-errors-toggle)
+;; (global-set-key (kbd "C-c c c") 'kumo-flycheck-list-errors-toggle)
 (global-set-key (kbd "C-c c s") 'kumo-flycheck-list-errors-select-window)
 
 (global-set-key (kbd "C-c z") 'kumo-wrap-with-input)
@@ -60,5 +65,4 @@
 
 (provide 'init-keys)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-keys.el ends here

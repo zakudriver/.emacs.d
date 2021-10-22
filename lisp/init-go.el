@@ -1,3 +1,8 @@
+;;; init-funcs --- Summary
+
+;;; Commentary:
+;; some configuration of golang.
+
 ;;; Code:
 
 ;; Golang
@@ -18,6 +23,7 @@
 ;;
 
 (use-package go-mode
+  :functions go-update-tools
   :bind
   (:map go-mode-map
         ([remap xref-find-definitions] . godef-jump)
@@ -29,6 +35,8 @@
   (before-save . gofmt-before-save)
   :init
   (setenv "GO111MODULE" "on")
+  (unless (executable-find "gopls")
+    (go-update-tools))
   :config
   ;; Install or update tools
   (defvar go--tools '("golang.org/x/tools/cmd/goimports"
@@ -75,8 +83,6 @@
                  (message "Installed %s" pkg)
                (message "Failed to install %s: %d" pkg status))))))))
 
-  (unless (executable-find "gopls")
-    (go-update-tools))
 
   ;; Misc
   (use-package go-dlv)
@@ -105,11 +111,9 @@
   (use-package flycheck-golangci-lint
     :after flycheck
     :hook
-    (go-mode . flycheck-golangci-lint-setup))
-  )
+    (go-mode . flycheck-golangci-lint-setup)))
 
 
 (provide 'init-go)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-go.el ends here

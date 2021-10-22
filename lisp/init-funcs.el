@@ -1,3 +1,8 @@
+;;; init-funcs --- Summary
+
+;;; Commentary:
+;; some functions.
+
 ;;; Code:
 
 (require 'cl-lib)
@@ -77,14 +82,6 @@ ARG: If the universal prefix argument is used then will the windows too."
     (message "Buffers deleted!")))
 
 
-(defun kumo-kill-all-buffers ()
-  "Kill all buffers."
-  (interactive "P")
-  (mapc 'kill-buffer (buffer-list))
-  (kumo-open-dashboard)
-  (message "Buffers deleted!"))
-
-
 (defun kumo-switch-to-previous-buffer ()
   "Switch to previously open buffer.
 Repeated invocations toggle between the two most recently open buffers."
@@ -101,7 +98,7 @@ Repeated invocations toggle between the two most recently open buffers."
         (error "Buffer '%s' is not visiting a file!" name)
       (let ((new-name (read-file-name "New name: " filename)))
         (if (get-buffer new-name)
-            (error "A buffer named '%s' already exists!")
+            (error "A buffer named '%s' already exists!" new-name)
           (rename-file filename new-name 1)
           (rename-buffer new-name)
           (set-visited-file-name new-name)
@@ -126,7 +123,8 @@ Repeated invocations toggle between the two most recently open buffers."
 
 (defun kumo-cleanup-buffer-safe ()
   "Perform a bunch of safe operations on the whitespace content of a buffer.
-Does not indent buffer, because it is used for a 'before-save-hook, and that might be bad."
+Does not indent buffer, because it is used for a 'before-save-hook,
+and that might be bad."
   (interactive)
   (untabify (point-min) (point-max))
   (delete-trailing-whitespace)
@@ -212,15 +210,6 @@ SYMBOL is input string."
   (other-window 1))
 
 
-(defun kumo-flycheck-list-errors-toggle ()
-  "Open or delete flycheck-errors-list window."
-  (interactive)
-  (let ((w (get-buffer-window kumo/flycheck-errors-buffer-name)))
-    (if w
-        (delete-window w)
-      (flycheck-list-errors))))
-
-
 (defun kumo-flycheck-list-errors-select-window ()
   "Select window for flycheck-errors-list."
   (interactive)
@@ -267,24 +256,12 @@ BUFFER is the symbol."
   (kumo-bottom-window (window-buffer)))
 
 
-(defun kumo-open-dashboard ()
-  "Open the *dashboard* buffer and jump to the first widget."
-  (interactive)
-  (delete-other-windows)
-  (if (get-buffer dashboard-buffer-name)
-      (kill-buffer dashboard-buffer-name))
-  (dashboard-insert-startupify-lists)
-  (switch-to-buffer dashboard-buffer-name)
-  (run-at-time "0.1sec" nil
-               (lambda ()
-                 (goto-line kumo/dashboard-position))))
-
-
 (defun kumo-indent-all ()
   "Mark whole buffer."
   (interactive)
   (let ((point (point)))
-    (mark-whole-buffer)
+    (region-beginning)
+    (region-end)
     (indent-for-tab-command)
     (goto-char point)))
 
@@ -429,7 +406,7 @@ EXPORTER: export way."
   (interactive)
   (progn (beginning-of-line)
          (newline)
-         (previous-line)))
+         (forward-line -1)))
 
 
 (defun kumo-newline-next-current ()
@@ -559,5 +536,4 @@ END: region of end."
 
 (provide 'init-funcs)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-funcs.el ends here

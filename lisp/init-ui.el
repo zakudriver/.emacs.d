@@ -1,9 +1,15 @@
+;;; init-ui --- Summary
+
+;;; Commentary:
+;; some configuration of ui.
+
 ;;; Code:
 
 
 (eval-when-compile
   (require 'init-const)
-  (require 'init-custom))
+  (require 'init-custom)
+  (require 'zone))
 
 ;; Theme
 (use-package lacquer
@@ -79,11 +85,22 @@
   :custom-face
   (dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
   :hook
-  (emacs-with-setup .
-                    (lambda ()
-                      (goto-line kumo/dashboard-position)))
+  (emacs-with-setup . (lambda ()
+                        (forward-line kumo/dashboard-position)))
   :init
-  (dashboard-setup-startup-hook))
+  (dashboard-setup-startup-hook)
+  :config
+  (defun kumo-open-dashboard ()
+    "Open the *dashboard* buffer and jump to the first widget."
+    (interactive)
+    (delete-other-windows)
+    (if (get-buffer dashboard-buffer-name)
+        (kill-buffer dashboard-buffer-name))
+    (dashboard-insert-startupify-lists)
+    (switch-to-buffer dashboard-buffer-name)
+    (run-at-time "0.1sec" nil
+                 (lambda ()
+                   (forward-line kumo/dashboard-position)))))
 
 
 (use-package doom-modeline
@@ -97,7 +114,7 @@
   (auto-revert-check-vc-info t)
   :hook
   (after-init . (lambda ()
-                  (doom-modeline-mode t)
+                  (doom-modeline-mode)
                   (setup-custom-doom-modeline)))
   :config
   (set-face-attribute 'mode-line nil :height 120)
@@ -108,8 +125,7 @@
     '(misc-info input-method buffer-encoding major-mode process vcs checker))
 
   (defun setup-custom-doom-modeline ()
-    (doom-modeline-set-modeline 'my-simple-line 'default))
-  )
+    (doom-modeline-set-modeline 'my-simple-line 'default)))
 
 
 ;; nyan-mode
@@ -144,8 +160,8 @@
 (use-package emojify
   :hook
   (after-init . (lambda ()
-                  (when sys/linuxp
-                    (global-emojify-mode)))))
+                  (if sys/linuxp
+                      (global-emojify-mode)))))
 
 
 
@@ -168,13 +184,13 @@
 
 
 ;; Don't open a file in a new frame
-(when (boundp 'ns-pop-up-frames)
-  (setq ns-pop-up-frames nil))
+(if (boundp 'ns-pop-up-frames)
+    (setq ns-pop-up-frames nil))
 
 
 ;; Don't use GTK+ tooltip
-(when (boundp 'x-gtk-use-system-tooltips)
-  (setq x-gtk-use-system-tooltips nil))
+(if (boundp 'x-gtk-use-system-tooltips)
+    (setq x-gtk-use-system-tooltips nil))
 
 
 ;; icons
@@ -289,5 +305,4 @@
 
 (provide 'init-ui)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-ui.el ends here

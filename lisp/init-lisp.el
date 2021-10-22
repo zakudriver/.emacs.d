@@ -1,3 +1,8 @@
+;;; init-lisp --- Summary
+
+;;; Commentary:
+;; some configuration of Lisp.
+
 ;;; Code:
 
 
@@ -29,5 +34,4 @@
 
 (provide 'init-lisp)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-lisp.el ends here

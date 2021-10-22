@@ -1,3 +1,8 @@
+;;; init-web --- Summary
+
+;;; Commentary:
+;; some configuration of web.
+
 ;;; Code:
 
 
@@ -5,6 +10,7 @@
 (use-package css-mode
   :custom
   (css-indent-offset 2))
+
 
 ;; SCSS mode
 (use-package scss-mode
@@ -62,5 +68,5 @@
 
 
 (provide 'init-web)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;;; init-web.el ends here

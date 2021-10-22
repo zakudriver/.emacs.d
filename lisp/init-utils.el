@@ -1,21 +1,19 @@
+;;; init-uitls --- Summary
+
+;;; Commentary:
+;; somme configuration of utils.
+
 ;;; Code:
 
 
 (eval-when-compile
+  (require 'cl-lib)
   (require 'init-const)
+  (require 'init-funcs)
   (require 'init-custom))
 
 
-(use-package magit
-  :config
-  (advice-add #'magit-mode-bury-buffer :override #'(lambda ()
-                                                     "Quit and kill magit buffer, then restore window configuration."
-                                                     (interactive)
-                                                     (let ((current (current-buffer)))
-                                                       (dolist (buf (magit-mode-get-buffers))
-                                                         (unless (eq buf current)
-                                                           (kill-buffer buf))))
-                                                     (funcall magit-bury-buffer-function t))))
+(use-package magit)
 
 
 (use-package docker
@@ -24,6 +22,7 @@
 
 
 (use-package vterm
+  :functions (kumo-bottom-window vterm-mode)
   :bind
   (:map vterm-mode-map
         ("M-p" . vterm-send-prior)
@@ -33,51 +32,44 @@
         ("M-p" . vterm-yank)
         ("M-u" . vterm-undo))
   :config
-  (advice-add #'vterm :override #'(lambda ()
-                                    "Toggle vterm or create a new vterm."
-                                    (interactive)
+  (advice-add #'vterm :override (lambda ()
+                                  "Toggle vterm or create a new vterm."
+                                  (interactive)
 
-                                    (let ((buffer  (catch 'break
-                                                     (dolist (i (buffer-list))
-                                                       (when (string-match-p "vterm" (buffer-name i))
-                                                         (throw 'break i)
-                                                         )))))
+                                  (let ((buffer  (catch 'break
+                                                   (dolist (i (buffer-list))
+                                                     (when (string-match-p "vterm" (buffer-name i))
+                                                       (throw 'break i)
+                                                       )))))
 
-                                      (if buffer
-                                          (let ((win (get-buffer-window buffer)))
-                                            (if (window-live-p win)
-                                                (delete-window win)
-                                              (let ((w (catch 'break
-                                                         (dolist (i (window-list))
-                                                           (let ((name (buffer-name (window-buffer i))))
-                                                             (when (string-match-p "vterm" name)
-                                                               ;; (delete-window name)
-                                                               (throw 'break i)
-                                                               ))))))
-                                                (if w
-                                                    (delete-window w)
-                                                  (kumo-bottom-window buffer)))))
-                                        (setq buffer (generate-new-buffer "vterm"))
-                                        (with-current-buffer (buffer-name buffer)
-                                          (vterm-mode))
-                                        (kumo-bottom-window buffer)
-                                        )
-                                      )))
+                                    (if buffer
+                                        (let ((win (get-buffer-window buffer)))
+                                          (if (window-live-p win)
+                                              (delete-window win)
+                                            (let ((w (catch 'break
+                                                       (dolist (i (window-list))
+                                                         (let ((name (buffer-name (window-buffer i))))
+                                                           (when (string-match-p "vterm" name)
+                                                             ;; (delete-window name)
+                                                             (throw 'break i)))))))
+                                              (if w
+                                                  (delete-window w)
+                                                (kumo-bottom-window buffer)))))
+                                      (setq buffer (generate-new-buffer "vterm"))
+                                      (with-current-buffer (buffer-name buffer)
+                                        (vterm-mode))
+                                      (kumo-bottom-window buffer)))))
 
   (defvar kumo/vterm-buffer-list nil
     "Vterm buffer list.")
 
-  (defun vterm-exit-hook()
-    "Vterm exit hook."
-    (when (derived-mode-p 'vterm-mode)
-      (setq kumo/vterm-buffer-list
-	          (delq (current-buffer) kumo/vterm-buffer-list))))
-  (add-hook 'kill-buffer-hook #'vterm-exit-hook)
+  (add-hook 'kill-buffer-hook (lambda ()
+                                (if (derived-mode-p 'vterm-mode)
+                                    (setq kumo/vterm-buffer-list
+	                                        (delq (current-buffer) kumo/vterm-buffer-list)))))
 
-  (defun vterm-mode-hook()
-    "Hook for `vterm-mode-hook'."
-    (add-to-list 'kumo/vterm-buffer-list (current-buffer)))
-  (add-hook 'vterm-mode-hook #'vterm-mode-hook)
+  (add-hook 'vterm-mode-hook (lambda ()
+                               (add-to-list 'kumo/vterm-buffer-list (current-buffer))))
 
   (defun kumo-vterm-switch (direction offset)
     (if kumo/vterm-buffer-list
@@ -101,14 +93,13 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
     "Go to the next term buffer.
 If OFFSET is `non-nil', will goto next term buffer with OFFSET."
     (interactive "P")
-    (kumo-vterm-switch 'next (or offset 1)))
-  )
+    (kumo-vterm-switch 'next (or offset 1))))
 
 
 ;; process view
 (use-package proced
   :bind
-  ("C-c p p" . 'proced)
+  ("C-c p P" . 'proced)
   :custom
   (proced-auto-update-flag t)
   (proced-auto-update-interval 3)
@@ -174,7 +165,17 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
   (achive-stock-list '("sh600036" "sh601012" "sz000625" "sz002050" "sz002013" "sh600176" "sh603993" "sh601388" "sz002557" "sh600989" "sh600887" "sz002097" "sz000731" "sh600740" "sh601015" "sz002128" "sh601985" "sz000630")))
 
 
+(use-package wttrin
+  :load-path "~/.emacs.d/site-lisp/emacs-wttrin"
+  :bind
+  ("C-c w W" . wttrin)
+  :custom
+  (wttrin-cities '("Guanghan"))
+  (wttrin-forecast-days 2)
+  (wttrin-language "zh-cn")
+  (wttrin-units-wind-speed t))
+
+
 (provide 'init-utils)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-utils.el ends here

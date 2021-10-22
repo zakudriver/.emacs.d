@@ -1,3 +1,8 @@
+;;; init-ruby --- Summary
+
+;;; Commentary:
+;; some configuration of ruby.
+
 ;;; Code:
 
 
@@ -30,5 +35,4 @@
 
 (provide 'init-ruby)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-ruby.el ends here

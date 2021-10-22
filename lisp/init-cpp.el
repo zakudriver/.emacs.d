@@ -1,3 +1,8 @@
+;;; init-cpp --- Summary
+
+;;; Commentary:
+;; some configuration of cpp.
+
 ;;; Code:
 
 
@@ -8,8 +13,10 @@
 
 
 (use-package clang-format
+  :defines
+  (c-mode-map c++-mode-map)
   :bind
-  (:map c-mode-map 
+  (:map c-mode-map
         ("C-. f" . clang-format-buffer)
         :map c++-mode-map
         ("C-. f" . clang-format-buffer))
@@ -62,5 +69,4 @@
 
 (provide 'init-cpp)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-cpp.el ends here

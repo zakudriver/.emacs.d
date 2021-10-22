@@ -1,6 +1,12 @@
+;;; init-package --- Summary
+
+;;; Commentary:
+;; some configuration of package.
+
 ;;; Code:
 
-(eval-when-compile (require 'init-custom))
+(eval-when-compile
+  (require 'init-custom))
 
 
 ;; FIXME: DO NOT copy package-selected-packages to init/custom file forcibly.
@@ -89,6 +95,7 @@
 
 ;; Auto update packages
 (use-package auto-package-update
+  :functions auto-package-update-now
   :ensure nil
   :custom
   (auto-package-update-delete-old-versions t)
@@ -99,5 +106,4 @@
 
 (provide 'init-package)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-package.el ends here

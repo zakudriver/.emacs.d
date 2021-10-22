@@ -1,7 +1,12 @@
+;;; init-edit --- Summary
+
+;;; Commentary:
+;; some configuration of edit.
+
 ;;; Code:
 
 
-;; linum-mode
+;; line number
 ;; (global-linum-mode t)
 (global-display-line-numbers-mode t)
 
@@ -155,11 +160,11 @@
   (prog-mode . hs-minor-mode)
   :bind
   (:map hs-minor-mode-map
-        ("C-. @ S" . 'hs-show-all)
-        ("C-. @ H" . 'hs-hide-all)
-        ("C-. @ h" . 'hs-hide-block)
-        ("C-. @ s" . 'hs-show-block)
-        ("C-. @ T" . 'hs-toggle-hiding)))
+        ("C-. @ S" . hs-show-all)
+        ("C-. @ H" . hs-hide-all)
+        ("C-. @ h" . hs-hide-block)
+        ("C-. @ s" . hs-show-block)
+        ("C-. @ T" . hs-toggle-hiding)))
 
 
 (use-package whole-line-or-region
@@ -185,5 +190,5 @@
 
 
 (provide 'init-edit)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;;; init-edit.el ends here

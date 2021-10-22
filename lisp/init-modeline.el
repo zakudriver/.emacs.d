@@ -1,3 +1,8 @@
+;;; init-modeline --- Summary
+
+;;; Commentary:
+;; some configuration of modeline.
+
 ;;; Code:
 
 (require 'cl-lib)
@@ -369,5 +374,4 @@ LINE-POSITION is 'top or 'bottom or 'all."
 
 (provide 'init-modeline)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-modeline.el ends here

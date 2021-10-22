@@ -1,3 +1,8 @@
+;;; init-base --- Summary
+
+;;; Commentary:
+;; some basal configuration.
+
 ;;; Code:
 
 
@@ -89,4 +94,4 @@
 (provide 'init-base)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; init-basic.el ends here
+;;; init-base.el ends here

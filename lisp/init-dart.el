@@ -1,5 +1,10 @@
- ;;;Code:
+;;; init-dart --- Summary
 
+;;; Commentary:
+;; somme configuration of dart.
+
+;;; Code:
+ 
 
 (use-package dart-mode
   :defines
@@ -30,5 +35,4 @@
 
 (provide 'init-dart)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-dart.el ends here

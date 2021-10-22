@@ -1,3 +1,8 @@
+;;; init-prog --- Summary
+
+;;; Commentary:
+;; some configuration of prog.
+
 ;;; Code:
 
 
@@ -37,5 +42,4 @@
 
 (provide 'init-prog)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-prog.el ends here

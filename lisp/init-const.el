@@ -1,3 +1,8 @@
+;;; init-consts --- Summary
+
+;;; Commentary:
+;; some consts.
+
 ;;; Code:
 
 
@@ -59,5 +64,4 @@
 
 (provide 'init-const)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-const.el ends here

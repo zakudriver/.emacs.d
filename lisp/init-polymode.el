@@ -1,3 +1,8 @@
+;;; init-polymode --- Summary
+
+;;; Commentary:
+;; some configuration of polymode.
+
 ;;; Code:
 
 
@@ -33,10 +38,9 @@
     :head-matcher "gr?a?p?h?ql`"
     :tail-matcher "`;"
     :head-mode 'host
-    :tail-mode 'host)
-  )
+    :tail-mode 'host))
 
 
 (provide 'init-polymode)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;;; init-polymode.el ends here

@@ -1,3 +1,8 @@
+;;; init-js --- Summary
+
+;;; Commentary:
+;; some configuration of js.
+
 ;;; Code:
 
 
@@ -61,7 +66,6 @@
 ;; (prettier-js-args '("--single-quote" "true")) ;; "--print-width" "120")
 
 
-
 (provide 'init-js)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;;; init-js.el ends here

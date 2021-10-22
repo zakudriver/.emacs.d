@@ -1,3 +1,8 @@
+;;; init-yasnippet --- Summary
+
+;;; Commentary:
+;; some configuration of yasnippet.
+
 ;;; Code:
 
 
@@ -11,5 +16,4 @@
 
 (provide 'init-yasnippet)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-yasnippet.el ends here

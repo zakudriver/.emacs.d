@@ -1,3 +1,8 @@
+;;; init-highlight --- Summary
+
+;;; Commentary:
+;; some configuration of highlight.
+
 ;;; Code:
 
 
@@ -11,6 +16,7 @@
 
 ;; Highlight matching parens
 (use-package paren
+  :functions show-paren-function
   :hook
   (after-init . show-paren-mode)
   :config
@@ -27,33 +33,33 @@ FACE defaults to inheriting from default and highlight."
       ol))
 
   (defvar-local show-paren--off-screen-overlay nil)
-  (advice-add #'show-paren-function :after #'(lambda (&rest _args)
-                                               "Display matching line for off-screen paren."
-                                               (when (overlayp show-paren--off-screen-overlay)
-                                                 (delete-overlay show-paren--off-screen-overlay))
-                                               ;; check if it's appropriate to show match info,
-                                               (when (and (overlay-buffer show-paren--overlay)
-                                                          (not (or cursor-in-echo-area
-                                                                   executing-kbd-macro
-                                                                   noninteractive
-                                                                   (minibufferp)
-                                                                   this-command))
-                                                          (and (not (bobp))
-                                                               (memq (char-syntax (char-before)) '(?\) ?\$)))
-                                                          (= 1 (logand 1 (- (point)
-                                                                            (save-excursion
-                                                                              (forward-char -1)
-                                                                              (skip-syntax-backward "/\\")
-                                                                              (point))))))
-                                                 ;; rebind `minibuffer-message' called by
-                                                 ;; `blink-matching-open' to handle the overlay display
-                                                 (cl-letf (((symbol-function #'minibuffer-message)
-                                                            (lambda (msg &rest args)
-                                                              (let ((msg (apply #'format-message msg args)))
-                                                                (setq show-paren--off-screen-overlay
-                                                                      (display-line-overlay
-                                                                       (window-start) msg ))))))
-                                                   (blink-matching-open))))))
+  (advice-add #'show-paren-function :after (lambda (&rest _args)
+                                             "Display matching line for off-screen paren."
+                                             (when (overlayp show-paren--off-screen-overlay)
+                                               (delete-overlay show-paren--off-screen-overlay))
+                                             ;; check if it's appropriate to show match info,
+                                             (when (and (overlay-buffer show-paren--overlay)
+                                                        (not (or cursor-in-echo-area
+                                                                 executing-kbd-macro
+                                                                 noninteractive
+                                                                 (minibufferp)
+                                                                 this-command))
+                                                        (and (not (bobp))
+                                                             (memq (char-syntax (char-before)) '(?\) ?\$)))
+                                                        (= 1 (logand 1 (- (point)
+                                                                          (save-excursion
+                                                                            (forward-char -1)
+                                                                            (skip-syntax-backward "/\\")
+                                                                            (point))))))
+                                               ;; rebind `minibuffer-message' called by
+                                               ;; `blink-matching-open' to handle the overlay display
+                                               (cl-letf (((symbol-function #'minibuffer-message)
+                                                          (lambda (msg &rest args)
+                                                            (let ((msg (apply #'format-message msg args)))
+                                                              (setq show-paren--off-screen-overlay
+                                                                    (display-line-overlay
+                                                                     (window-start) msg ))))))
+                                                 (blink-matching-open))))))
 
 
 ;; Highlight symbols
@@ -92,16 +98,16 @@ FACE defaults to inheriting from default and highlight."
             (:inherit (all-the-icons-cyan bold) :inverse-video t))))
   :config
   ;; Disable symbol highlighting while selecting
-  (advice-add #'set-mark :after #'(lambda (&rest _)
-                                    "Turn off symbol highlighting."
-                                    (interactive)
-                                    (symbol-overlay-mode -1)))
+  (advice-add #'set-mark :after (lambda (&rest _)
+                                  "Turn off symbol highlighting."
+                                  (interactive)
+                                  (symbol-overlay-mode -1)))
 
-  (advice-add #'deactivate-mark :after #'(lambda ()
-                                           "Turn on symbol highlighting."
-                                           (interactive)
-                                           (when (derived-mode-p 'prog-mode)
-                                             (symbol-overlay-mode)))))
+  (advice-add #'deactivate-mark :after (lambda ()
+                                         "Turn on symbol highlighting."
+                                         (interactive)
+                                         (when (derived-mode-p 'prog-mode)
+                                           (symbol-overlay-mode)))))
 
 
 ;; Highlight indentions
@@ -148,5 +154,4 @@ FACE defaults to inheriting from default and highlight."
 
 (provide 'init-highlight)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-highlight.el ends here
