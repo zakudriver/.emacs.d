@@ -6,26 +6,28 @@
 ;;; Code:
 
 
-(use-package js2-mode
-  :mode
-  (("\\.js$" . js2-mode))
+;; (use-package js2-mode
+;;   :mode
+;;   (("\\.js$" . js2-mode))
+;;   :custom
+;;   (js-indent-level 2)
+;;   (js2-basic-offset 2)
+;;   (js-chain-indent t)
+;;   (js2-highlight-level 3)
+;;   (js2-mode-show-parse-errors t)
+;;   (js2-mode-show-strict-warnings nil)
+;;   (js2-strict-missing-semi-warning nil))
+
+
+(use-package js-mode
+  :ensure nil
+  ;; :mode
+  ;; ("\\.tsx$" . js-jsx-mode)
+  ;; ("\\.jsx$" . js-jsx-mode)
   :custom
-  (js-indent-level 2)
-  (js2-basic-offset 2)
-  (js-chain-indent t)
-  (js2-highlight-level 3)
-  (js2-mode-show-parse-errors t)
-  (js2-mode-show-strict-warnings nil)
-  (js2-strict-missing-semi-warning nil))
-
-
-;; (use-package js-mode
-;; :mode
-;; (("\\.tsx$" . js-jsx-mode)
-;;  ("\\.jsx$" . js-jsx-mode))
-;; :custom
-;; ((js-jsx-syntax   t)
-;;  (js-indent-level 2)))
+  (js-jsx-syntax       t)
+  (js-indent-level     2)
+  (js-jsx-indent-level 2))
 
 
 (use-package typescript-mode
@@ -58,7 +60,7 @@
 
 (use-package prettier-js
   :hook
-  ((web-mode js2-mode ng2-mode typescript-mode scss-mode css-mode json-mode html-mode ng2-html-mode) . prettier-js-mode))
+  ((web-mode js-mode ng2-mode typescript-mode scss-mode css-mode json-mode html-mode ng2-html-mode) . prettier-js-mode))
 ;; (web-mode . (lambda ()
 ;;               (unless (member (file-name-extension buffer-file-name) '("ejs"))
 ;;                 (prettier-js-mode))))

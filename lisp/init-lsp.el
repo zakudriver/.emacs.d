@@ -123,7 +123,7 @@
    (go-mode . (lambda () (require 'dap-go)))
    ((c-mode c++-mode objc-mode swift-mode) . (lambda () (require 'dap-lldb)))
    (elixir-mode . (lambda () (require 'dap-elixir)))
-   ((js-mode js2-mode) . (lambda () (require 'dap-chrome)))
+   (js-mode . (lambda () (require 'dap-chrome)))
    (ruby-mode . (lambda () (require 'dap-ruby))))
   :bind
   (:map lsp-mode-map

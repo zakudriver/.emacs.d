@@ -87,7 +87,10 @@
     Fira\ Code
     Operator\ Mono
     Inconsolata
-    Iosevka)
+    Iosevka
+    Cochin
+    Optima
+    JetBrains\ Mono)
   "Font list.")
 
 
@@ -150,7 +153,7 @@
   "Hugo github deploy buffer name.")
 
 
-(defconst kumo/lsp-major-mode '(go-mode ng2-html-mode sh-mode ruby-mode css-mode scss-mode sass-mode web-mode typescript-mode)
+(defconst kumo/lsp-major-mode '(go-mode ng2-html-mode sh-mode ruby-mode css-mode scss-mode sass-mode web-mode typescript-mode js-mode)
   "Lsp Supported major mode.")
 
 
@@ -166,7 +169,7 @@
   "Perspective state cache file.")
 
 
-(defconst kumo/evil-local-mode '(web-mode typescript-mode js-mode js2-mode go-mode ruby-mode css-mode scss-mode)
+(defconst kumo/evil-local-mode '(web-mode typescript-mode js-mode js-mode go-mode ruby-mode css-mode scss-mode)
   "Start evil-local-mode list.")
 
 

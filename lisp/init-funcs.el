@@ -488,8 +488,8 @@ ARG: when not nil delete symbol( concat by '_') at point"
                       (point)))))
 
 
-(defun kumo-react-expand ()
-  "React component expand.
+(defun kumo-jsx-expand ()
+  "jsx component expand.
 E.g: <Button />"
   (interactive)
   (let* ((end (point))
@@ -506,33 +506,34 @@ E.g: <Button />"
   (set-window-dedicated-p (frame-selected-window) nil))
 
 
-(defun kumo-jsx-comments (&optional beg end)
-  "Line comments for jsx.
+(defun kumo-jsx-comment-or-uncomment (&optional beg end)
+  "Comment-or-uncomment for jsx.
 BEG: region of beginning.
 END: region of end."
-  (interactive (if (use-region-p) (list (region-beginning) (region-end))))
-  (if beg
-      (let ((beg-linum (line-number-at-pos beg))
-            (end-linum (line-number-at-pos end)))
-        (goto-char beg)
-        (beginning-of-line)
-        (cl-loop for i from beg-linum to end-linum
-                 do (progn
-                      (unless
-                          (string-match-p "\\`\\s-*$" (thing-at-point 'line))
-                        (skip-syntax-forward " " (line-end-position))
-                        (insert "{/* ")
-                        (end-of-line)
-                        (insert " */}"))
-                      (unless (= i end-linum)
-                        (forward-line)))))
-    (unless
-        (string-match-p "\\`\\s-*$" (thing-at-point 'line))
-      (beginning-of-line)
-      (skip-syntax-forward " " (line-end-position))
-      (insert "{/* ")
-      (end-of-line)
-      (insert " */}"))))
+  (interactive (if (use-region-p) (list (region-beginning) (region-end)) (list (line-beginning-position) (line-end-position))))
+  (let ((sel (buffer-substring-no-properties beg end))
+        (sub2 "") 
+        content)
+
+    (print sel)
+    
+
+    (setq content (concat "{/* " sel " */}"))
+    (setq sub2 (substring "123" 0 2))
+
+    
+    ;; (when content
+    ;;   (delete-region beg end)
+    ;;   (deactivate-mark)
+    ;;   (let (beg end)
+    ;;     (setq beg (point-at-bol))
+    ;;     (insert content)
+    ;;     (setq end (point-at-eol))
+    ;;     (indent-region beg end)
+    ;;     )
+    ;;   )
+    
+    ))
 
 
 (provide 'init-funcs)

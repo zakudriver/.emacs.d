@@ -22,19 +22,17 @@
 ;; major-mode for editing multiple web formats
 (use-package web-mode
   :mode
-  ((".*[^\\(\\.component\\)]\\.html$" . web-mode)
-   ("\\.jsx$"                         . web-mode)
-   ("\\.tsx$"                         . web-mode)
-   ("\\.ejs$"                         . web-mode))
+  (".*[^\\(\\.component\\)]\\.html$" . web-mode)
+  ("\\.jsx$"                         . web-mode)
+  ("\\.tsx$"                         . web-mode)
+  ("\\.ejs$"                         . web-mode)
   :bind
   (:map web-mode-map
-        ("M-;" . web-mode-comment-or-uncomment)
-        ("C-;" . kumo-jsx-comments))
+        ("M-;" . web-mode-comment-or-uncomment))
   :custom
   (web-mode-comment-formats '(("java"       . "/*")
-                              ("javascript" . "/*")
+                              ("javascript" . "//")
                               ("typescript" . "//")
-                              ("jsx"        . "//")
                               ("php"        . "/*")
                               ("css"        . "/*")))
   (web-mode-markup-indent-offset 2)
@@ -60,7 +58,7 @@
          ("C-. ["     . emmet-prev-edit-point)
          ("C-. ]"     . emmet-next-edit-point)
          ("<backtab>" . emmet-expand-yas)
-         ("<C-tab>"   . kumo-react-expand)))
+         ("<C-tab>"   . kumo-jsx-expand)))
   :custom
   (emmet-move-cursor-between-quotes t)
   (emmet-indentation 2)
