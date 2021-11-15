@@ -17,7 +17,9 @@
   ;; (tide-mode  . use-eslint-from-nodemodules)
   ;; (web-mode . use-eslint-tide)
   :bind
-  ("C-c c c" . kumo-flycheck-list-errors-toggle)
+  (:map flycheck-mode-map
+        ("C-c c c" . kumo-flycheck-list-errors-toggle)
+        ("C-c c s" . kumo-flycheck-list-errors-select-window))
   :init
   (add-to-list 'display-buffer-alist
                `(,(eval `(rx bos ,kumo/flycheck-errors-buffer-name eos))

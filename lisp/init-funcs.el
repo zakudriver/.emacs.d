@@ -506,36 +506,6 @@ E.g: <Button />"
   (set-window-dedicated-p (frame-selected-window) nil))
 
 
-(defun kumo-jsx-comment-or-uncomment (&optional beg end)
-  "Comment-or-uncomment for jsx.
-BEG: region of beginning.
-END: region of end."
-  (interactive (if (use-region-p) (list (region-beginning) (region-end)) (list (line-beginning-position) (line-end-position))))
-  (let ((sel (buffer-substring-no-properties beg end))
-        (sub2 "") 
-        content)
-
-    (print sel)
-    
-
-    (setq content (concat "{/* " sel " */}"))
-    (setq sub2 (substring "123" 0 2))
-
-    
-    ;; (when content
-    ;;   (delete-region beg end)
-    ;;   (deactivate-mark)
-    ;;   (let (beg end)
-    ;;     (setq beg (point-at-bol))
-    ;;     (insert content)
-    ;;     (setq end (point-at-eol))
-    ;;     (indent-region beg end)
-    ;;     )
-    ;;   )
-    
-    ))
-
-
 (provide 'init-funcs)
 
 ;;; init-funcs.el ends here

@@ -5,8 +5,8 @@
 
 ;;; Code:
 
-
-;; global keys
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; custom interactive function
 (global-set-key (kbd "<f2>") 'kumo-open-init-file)
 
 (global-set-key (kbd "C-c w w") 'hydra-frame-window/body)
@@ -27,13 +27,9 @@
 
 (global-set-key (kbd "C-c b t") 'kumo-kill-this-buffer)
 (global-set-key (kbd "C-c b o") 'kumo-kill-other-buffers)
-;; (global-set-key (kbd "C-c b a") 'kumo-kill-all-buffers)
 (global-set-key (kbd "C-c b p") 'kumo-switch-to-previous-buffer)
 (global-set-key (kbd "C-c b R") 'kumo-rename-current-buffer-file)
 (global-set-key (kbd "C-c b D") 'kumo-delete-current-buffer-file)
-
-;; (global-set-key (kbd "C-c c c") 'kumo-flycheck-list-errors-toggle)
-(global-set-key (kbd "C-c c s") 'kumo-flycheck-list-errors-select-window)
 
 (global-set-key (kbd "C-c z") 'kumo-wrap-with-input)
 
@@ -48,20 +44,22 @@
 (global-set-key (kbd "M-d") 'kumo-delete-word) ;; replace M-d
 (global-set-key (kbd "C-k") 'kumo-kill-line) ;; replace C-k
 
-
 ;; replace func
 (global-set-key (kbd "C-x s") 'kumo-save-some-buffers) ;; replace 'save-some-buffer
 
 ;; extension
 (global-set-key (kbd "C-S-k") 'kumo-kill-whole-line)
 
-;; modify
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; build-in interactive
 (global-set-key (kbd "C-S-a") 'beginning-of-buffer) ;; modify M-<
 (global-set-key (kbd "C-S-e") 'end-of-buffer) ;; modify M->
 
 (global-set-key (kbd "M-F") 'forward-to-word)
 (global-set-key (kbd "M-B") 'backward-to-word)
 
+(global-set-key (kbd "C-?") 'undo-redo)
 
 (provide 'init-keys)
 

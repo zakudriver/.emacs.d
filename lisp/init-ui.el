@@ -27,10 +27,11 @@
 ;; Font
 (with-no-warnings
   (when sys/macp
+
+    ;; emacs28 to COMMENTS
     ;; (set-fontset-font
-    ;;  t 'symbol (font-spec :family "Apple Color Emoji") nil 'prepend)
-    (set-fontset-font
-     "fontset-default" 'unicode "Apple Color Emoji" nil 'prepend)
+    ;;  "fontset-default" 'unicode "Apple Color Emoji" nil 'prepend)
+    
     (setq ns-use-thin-smoothing t
           ns-pop-up-frames nil)))
 
@@ -166,13 +167,14 @@
 
 
 ;; Misc
-(fset 'yes-or-no-p 'y-or-n-p)
+;; (fset 'yes-or-no-p 'y-or-n-p) emacs28 to COMMENTS
 (size-indication-mode t)
 (setq inhibit-startup-screen t
       use-file-dialog nil
       use-dialog-box nil
       inhibit-startup-echo-area-message t
       track-eol t
+      use-short-answers t ;; emacs28
       line-move-visual nil)
 
 
