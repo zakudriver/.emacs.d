@@ -81,6 +81,7 @@
   '(Menlo
     SF\ Mono 
     Roboto\ Mono
+    Ubuntu\ Mono
     Anonymous\ Pro
     FantasqueSansMono
     FiraMono
@@ -90,6 +91,7 @@
     Iosevka
     Cochin
     Optima
+    Victor\ Mono
     JetBrains\ Mono)
   "Font list.")
 
