@@ -24,13 +24,14 @@
 (use-package vterm
   :functions (kumo-bottom-window vterm-mode)
   :bind
-  (:map vterm-mode-map
-        ("M-p" . vterm-send-prior)
-        ("M-n" . vterm-send-next)
-        ("M-k" . vterm-send-up)
-        ("M-j" . vterm-send-down)
-        ("M-p" . vterm-yank)
-        ("M-u" . vterm-undo))
+  (("C-c v v" . vterm)
+   :map vterm-mode-map
+   ("M-p" . vterm-send-prior)
+   ("M-n" . vterm-send-next)
+   ("M-k" . vterm-send-up)
+   ("M-j" . vterm-send-down)
+   ("M-p" . vterm-yank)
+   ("M-u" . vterm-undo))
   :config
   (advice-add #'vterm :override (lambda ()
                                   "Toggle vterm or create a new vterm."
@@ -150,9 +151,6 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
 (use-package deadgrep
   :bind
   ("C-c R r" . deadgrep))
-
-
-(use-package package-lint)
 
 
 (use-package achive

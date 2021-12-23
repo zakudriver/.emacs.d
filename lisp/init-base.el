@@ -12,25 +12,25 @@
 
 
 ;; utf-8 group
-(setq locale-coding-system 'utf-8)
-(prefer-coding-system 'utf-8)
-(set-language-environment 'utf-8)
-(set-default-coding-systems 'utf-8)
+(setq locale-coding-system     'utf-8)
+(prefer-coding-system          'utf-8)
+(set-language-environment      'utf-8)
+(set-default-coding-systems    'utf-8)
 (set-buffer-file-coding-system 'utf-8)
-(set-clipboard-coding-system 'utf-8)
-(set-file-name-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-selection-coding-system 'utf-8)
-(modify-coding-system-alist 'process "*" 'utf-8)
+(set-clipboard-coding-system   'utf-8)
+(set-file-name-coding-system   'utf-8)
+(set-keyboard-coding-system    'utf-8)
+(set-terminal-coding-system    'utf-8)
+(set-selection-coding-system   'utf-8)
+(modify-coding-system-alist    'process "*" 'utf-8)
 
 
-(setq load-prefer-newer t                     ;; Prefers the newest version of a file
+(setq load-prefer-newer            t          ;; Prefers the newest version of a file
       large-file-warning-threshold 100000000  ;; Prefers the newest version of a file
-      ring-bell-function 'ignore              ;; disable the annoying bell ring
-      mouse-drag-copy-region t
-      create-lockfiles nil
-      read-process-output-max (* 1024 1024 2))
+      ring-bell-function           'ignore    ;; disable the annoying bell ring
+      mouse-drag-copy-region       t
+      create-lockfiles             nil
+      read-process-output-max      (* 1024 1024 2))
 
 
 ;; Environment
@@ -64,9 +64,9 @@
   :hook
   (after-init . savehist-mode)
   :custom
-  (enable-recursive-minibuffers t)
-  (history-length 1000)
-  (savehist-autosave-interval 300)
+  (enable-recursive-minibuffers  t)
+  (history-length                1000)
+  (savehist-autosave-interval    300)
   (savehist-additional-variables '(mark-ring
                                    global-mark-ring
                                    search-ring

@@ -1,6 +1,6 @@
 ;;; Code:
 
-;; (setq debug-on-error t)
+;;(setq debug-on-error t)
 ;; (setq server-socket-dir (format "/tmp/emacs%d" (user-uid)))
 ;; (server-start)
 

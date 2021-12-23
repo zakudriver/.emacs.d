@@ -70,3 +70,4 @@ learn/
 site-lisp/
 projects
 /eln-cache
+/cider-history

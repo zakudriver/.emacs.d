@@ -9,7 +9,7 @@
 (eval-when-compile
   (require 'init-const)
   (require 'init-custom)
-  (require 'zone))
+  (require 'init-funcs))
 
 ;; Theme
 (use-package lacquer
@@ -27,10 +27,10 @@
 ;; Font
 (with-no-warnings
   (when sys/macp
-
-    ;; emacs28 to COMMENTS
     ;; (set-fontset-font
-    ;;  "fontset-default" 'unicode "Apple Color Emoji" nil 'prepend)
+    ;;  t 'symbol (font-spec :family "Apple Color Emoji") nil 'prepend)
+    (set-fontset-font "fontset-default" 'unicode "Apple Color Emoji" nil 'prepend)
+    
     
     (setq ns-use-thin-smoothing t
           ns-pop-up-frames nil)))
@@ -152,18 +152,22 @@
   :custom
   (fireplace-smoke-on t)
   :init
-  (setq zone-timer (run-with-idle-timer 300 t (lambda ()
-                                                (delete-other-windows)
-                                                (fireplace)))))
+  (setq zone-timer (run-with-idle-timer 300 t (lambda () (fireplace))))
+  :config
+  (advice-add #'fireplace-off :after (lambda ()
+                                       (kumo-restore-window-configuration)))
+  (advice-add #'fireplace :before (lambda ()
+                                    (kumo-save-window-configuration)
+                                    (delete-other-windows))))
 
 
 ;; Emoji
 (use-package emojify
+  :if sys/linuxp
   :hook
   (after-init . (lambda ()
                   (if sys/linuxp
                       (global-emojify-mode)))))
-
 
 
 ;; Misc

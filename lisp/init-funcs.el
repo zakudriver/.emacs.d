@@ -506,6 +506,22 @@ E.g: <Button />"
   (set-window-dedicated-p (frame-selected-window) nil))
 
 
+(defvar kumo/pre-window-configuration nil
+  "Window configuration to use.")
+
+(defun kumo-save-window-configuration ()
+  "Save window configuration."
+  (interactive)
+  (setq kumo/pre-window-configuration (current-window-configuration)))
+
+
+(defun kumo-restore-window-configuration ()
+  "Restore window configuration."
+  (interactive)
+  (if (window-configuration-p kumo/pre-window-configuration)
+    (set-window-configuration kumo/pre-window-configuration)))
+
+
 (provide 'init-funcs)
 
 ;;; init-funcs.el ends here

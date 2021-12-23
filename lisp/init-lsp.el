@@ -117,14 +117,14 @@
 (use-package dap-mode
   :functions dap-hydra/nil
   :hook
-  ((lsp-mode . dap-auto-configure-mode)
-   (dap-stopped . (lambda (_args) (dap-hydra)))
+  ((lsp-mode       . dap-auto-configure-mode)
+   (dap-stopped    . (lambda (_args) (dap-hydra)))
    (dap-terminated . (lambda (_args) (dap-hydra/nil)))
-   (go-mode . (lambda () (require 'dap-go)))
+   (go-mode        . (lambda () (require 'dap-go)))
    ((c-mode c++-mode objc-mode swift-mode) . (lambda () (require 'dap-lldb)))
-   (elixir-mode . (lambda () (require 'dap-elixir)))
-   (js-mode . (lambda () (require 'dap-chrome)))
-   (ruby-mode . (lambda () (require 'dap-ruby))))
+   (elixir-mode                            . (lambda () (require 'dap-elixir)))
+   (js-mode                                . (lambda () (require 'dap-chrome)))
+   (ruby-mode                              . (lambda () (require 'dap-ruby))))
   :bind
   (:map lsp-mode-map
         ("C-. d d" . dap-debug)

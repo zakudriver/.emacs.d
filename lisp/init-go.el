@@ -27,8 +27,8 @@
   :bind
   (:map go-mode-map
         ([remap xref-find-definitions] . godef-jump)
-        ("C-, a" .  go-improt-add)
-        ("C-, f" . gofmt))
+        ("C-, a"                       . go-improt-add)
+        ("C-, f"                       . gofmt))
   :custom
   (gofmt-command "goimports")
   :hook

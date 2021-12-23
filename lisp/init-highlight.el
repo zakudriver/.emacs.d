@@ -72,30 +72,30 @@ FACE defaults to inheriting from default and highlight."
   (("C-. l m" . symbol-overlay-put)
    ("C-. l M" . symbol-overlay-remove-all)
    :map symbol-overlay-map
-   ("M-n" . symbol-overlay-jump-next)
-   ("M-p" . symbol-overlay-jump-prev)
-   ("M-N" . symbol-overlay-switch-forward)
-   ("M-P" . symbol-overlay-switch-backward)
+   ("M-n"   . symbol-overlay-jump-next)
+   ("M-p"   . symbol-overlay-jump-prev)
+   ("M-N"   . symbol-overlay-switch-forward)
+   ("M-P"   . symbol-overlay-switch-backward)
    ("M-. s" . symbol-overlay-save-symbol)
-   ("h" . nil)
-   ("w" . nil))
+   ("h"     . nil)
+   ("w"     . nil))
   :hook
-  (prog-mode . symbol-overlay-mode)
-  (iedit-mode . turn-off-symbol-overlay)
+  (prog-mode      . symbol-overlay-mode)
+  (iedit-mode     . turn-off-symbol-overlay)
   (iedit-mode-end . turn-on-symbol-overlay)
   :custom
   (symbol-overlay-idle-time 0.1)
   :init
   (with-eval-after-load 'all-the-icons
     (setq symbol-overlay-faces
-          '((:inherit (all-the-icons-blue bold) :inverse-video t)
-            (:inherit (all-the-icons-pink bold) :inverse-video t)
+          '((:inherit (all-the-icons-blue bold)   :inverse-video t)
+            (:inherit (all-the-icons-pink bold)   :inverse-video t)
             (:inherit (all-the-icons-yellow bold) :inverse-video t)
             (:inherit (all-the-icons-maroon bold) :inverse-video t)
-            (:inherit (all-the-icons-red bold) :inverse-video t)
+            (:inherit (all-the-icons-red bold)    :inverse-video t)
             (:inherit (all-the-icons-orange bold) :inverse-video t)
-            (:inherit (all-the-icons-green bold) :inverse-video t)
-            (:inherit (all-the-icons-cyan bold) :inverse-video t))))
+            (:inherit (all-the-icons-green bold)  :inverse-video t)
+            (:inherit (all-the-icons-cyan bold)   :inverse-video t))))
   :config
   ;; Disable symbol highlighting while selecting
   (advice-add #'set-mark :after (lambda (&rest _)

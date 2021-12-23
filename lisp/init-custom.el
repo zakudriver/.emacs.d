@@ -155,11 +155,11 @@
   "Hugo github deploy buffer name.")
 
 
-(defconst kumo/lsp-major-mode '(go-mode ng2-html-mode sh-mode ruby-mode css-mode scss-mode sass-mode web-mode typescript-mode js-mode)
+(defconst kumo/lsp-major-mode '(go-mode ng2-html-mode sh-mode ruby-mode css-mode scss-mode sass-mode web-mode typescript-mode js-mode clojure-mode)
   "Lsp Supported major mode.")
 
 
-(defconst kumo/lsp-on-save-major-mode '(ruby-mode)
+(defconst kumo/lsp-on-save-major-mode '(ruby-mode clojure-mode)
   "Lsp Supported major mode.")
 
 

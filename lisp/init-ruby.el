@@ -22,7 +22,7 @@
 ;; Run a Ruby process in a buffer
 (use-package inf-ruby
   :hook
-  ((ruby-mode . inf-ruby-minor-mode)
+  ((ruby-mode          . inf-ruby-minor-mode)
    (compilation-filter . inf-ruby-auto-enter)))
 
 

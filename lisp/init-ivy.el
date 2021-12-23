@@ -11,19 +11,19 @@
   :bind
   (("C-h f" . counsel-describe-function)
    ("C-h v" . counsel-describe-variable)
-   ("C-s" . swiper-isearch)
+   ("C-s"   . swiper-isearch)
    ("C-S-s" . swiper-isearch-backward)
    :map counsel-mode-map
-   ([remap swiper] . counsel-grep-or-swiper)
+   ([remap swiper]          . counsel-grep-or-swiper)
    ([remap swiper-backward] . counsel-grep-or-swiper-backward)
-   ([remap dired] . counsel-dired)
-   ([remap set-variable] . counsel-set-variable)
-   ([remap insert-char] . counsel-unicode-char)
-   ([remap recentf-open-files] . counsel-recentf)
-   ("C-c c z" . counsel-fzf)
-   ("C-c c p" . counsel-pt)
-   ("C-c c m" . counsel-imenu)
-   ("C-c r" . counsel-rg)
+   ([remap dired]           . counsel-dired)
+   ([remap set-variable]    . counsel-set-variable)
+   ([remap insert-char]     . counsel-unicode-char)
+   ("C-x C-r"               . counsel-recentf)
+   ("C-c c z"               . counsel-fzf)
+   ("C-c c p"               . counsel-pt)
+   ("C-c c m"               . counsel-imenu)
+   ("C-c r"                 . counsel-rg)
    
    :map ivy-minibuffer-map
    ([escape] . minibuffer-keyboard-quit)
@@ -31,20 +31,20 @@
    ([escape] . minibuffer-keyboard-quit))
   :hook
   (after-init . ivy-mode)
-  (ivy-mode . counsel-mode)
+  (ivy-mode   . counsel-mode)
   :custom
   (enable-recursive-minibuffers t) ; Allow commands in minibuffers
-  (ivy-use-selectable-prompt t)
-  (ivy-use-virtual-buffers t)   ; Enable bookmarks and recentf
-  (ivy-height 10)
-  (ivy-fixed-height-minibuffer t)
-  (ivy-count-format "(%d/%d) ")
-  (ivy-on-del-error-function nil)
-  (ivy-initial-inputs-alist nil)
-  (swiper-action-recenter t)
-  (counsel-find-file-at-point t)
-  (counsel-yank-pop-separator "\n────────\n")
-  (counsel-grep-base-command "rg -S --no-heading --line-number --color never %s %s")
+  (ivy-use-selectable-prompt    t)
+  (ivy-use-virtual-buffers      t)   ; Enable bookmarks and recentf
+  (ivy-height                   10)
+  (ivy-fixed-height-minibuffer  t)
+  (ivy-count-format             "(%d/%d) ")
+  (ivy-on-del-error-function    nil)
+  (ivy-initial-inputs-alist     nil)
+  (swiper-action-recenter       t)
+  (counsel-find-file-at-point   t)
+  (counsel-yank-pop-separator   "\n────────\n")
+  (counsel-grep-base-command    "rg -S --no-heading --line-number --color never %s %s")
   :config
   (with-eval-after-load 'projectile
     (setq projectile-completion-system 'ivy))
@@ -78,20 +78,20 @@
     :custom
     (ivy-prescient-retain-classic-highlighting t)
     (ivy-re-builders-alist
-     '((counsel-ag . ivy-prescient-non-fuzzy)
-       (counsel-rg . ivy-prescient-non-fuzzy)
-       (counsel-pt . ivy-prescient-non-fuzzy)
-       (counsel-grep . ivy-prescient-non-fuzzy)
-       (counsel-imenu . ivy-prescient-non-fuzzy)
-       (counsel-yank-pop . ivy-prescient-non-fuzzy)
-       (swiper . ivy-prescient-non-fuzzy)
-       (swiper-isearch . ivy-prescient-non-fuzzy)
-       (swiper-all . ivy-prescient-non-fuzzy)
-       (lsp-ivy-workspace-symbol . ivy-prescient-non-fuzzy)
+     '((counsel-ag                      . ivy-prescient-non-fuzzy)
+       (counsel-rg                      . ivy-prescient-non-fuzzy)
+       (counsel-pt                      . ivy-prescient-non-fuzzy)
+       (counsel-grep                    . ivy-prescient-non-fuzzy)
+       (counsel-imenu                   . ivy-prescient-non-fuzzy)
+       (counsel-yank-pop                . ivy-prescient-non-fuzzy)
+       (swiper                          . ivy-prescient-non-fuzzy)
+       (swiper-isearch                  . ivy-prescient-non-fuzzy)
+       (swiper-all                      . ivy-prescient-non-fuzzy)
+       (lsp-ivy-workspace-symbol        . ivy-prescient-non-fuzzy)
        (lsp-ivy-global-workspace-symbol . ivy-prescient-non-fuzzy)
-       (insert-char . ivy-prescient-non-fuzzy)
-       (counsel-unicode-char . ivy-prescient-non-fuzzy)
-       (t . ivy-prescient-re-builder)))
+       (insert-char                     . ivy-prescient-non-fuzzy)
+       (counsel-unicode-char            . ivy-prescient-non-fuzzy)
+       (t                               . ivy-prescient-re-builder)))
     (ivy-prescient-sort-commands
      '(:not swiper swiper-isearch ivy-switch-buffer
             counsel-grep counsel-git-grep counsel-ag counsel-imenu
@@ -134,6 +134,7 @@ This is for use in `ivy-re-builders-alist'."
      (counsel-imenu           . ivy-posframe-display-at-frame-center)
      (swiper-isearch-backward . ivy-posframe-display-at-frame-center)
      (counsel-find-file       . ivy-posframe-display-at-frame-center)
+     (counsel-recentf         . ivy-posframe-display-at-frame-center)
      (ivy-switch-buffer       . ivy-posframe-display-at-frame-center))))
 
 

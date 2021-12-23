@@ -20,7 +20,7 @@
   :custom
   ;; Always delete and copy recursively
   (dired-recursive-deletes 'always)
-  (dired-recursive-copies 'always)
+  (dired-recursive-copies  'always)
   :config
   (when sys/macp
     ;; Suppress the warning: `ls does not support --dired'.
