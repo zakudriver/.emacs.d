@@ -61,8 +61,8 @@
          ("<C-tab>"   . kumo-jsx-expand)))
   :custom
   (emmet-move-cursor-between-quotes t)
-  (emmet-indentation 2)
-  (emmet-expand-jsx-className? t))
+  (emmet-indentation                2)
+  (emmet-expand-jsx-className?      t))
 
 
 (provide 'init-web)

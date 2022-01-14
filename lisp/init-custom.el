@@ -79,7 +79,8 @@
 
 (defconst kumo/font-list
   '(Menlo
-    SF\ Mono 
+    SF\ Mono
+    Monaco
     Roboto\ Mono
     Ubuntu\ Mono
     Anonymous\ Pro

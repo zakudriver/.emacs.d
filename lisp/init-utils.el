@@ -168,9 +168,9 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
   :bind
   ("C-c w W" . wttrin)
   :custom
-  (wttrin-cities '("Guanghan"))
-  (wttrin-forecast-days 2)
-  (wttrin-language "zh-cn")
+  (wttrin-cities           '("Guanghan"))
+  (wttrin-forecast-days    2)
+  (wttrin-language         "zh-cn")
   (wttrin-units-wind-speed t))
 
 

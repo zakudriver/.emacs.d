@@ -8,7 +8,19 @@
 
 (use-package paredit
   :hook
-  ((emacs-lisp-mode clojure-mode) . paredit-mode))
+  ((emacs-lisp-mode clojure-mode) . paredit-mode)
+  :bind
+  (:map paredit-mode-map
+        ("M-[" . paredit-wrap-angled)
+        ("M-{" . paredit-wrap-curly)
+        ("DEL" . kumo-paredit-backward-delete))
+  :config
+  (defun kumo-paredit-backward-delete (n &optional arg)
+    "Delete the previous N characters;"
+    (interactive "p\nP")
+    (if (use-region-p)
+        (delete-region (region-beginning) (region-end))
+      (paredit-backward-delete arg))))
 
 
 ;; Show function arglist or variable docstring
@@ -96,7 +108,7 @@
   (highlight-defined-face-use-itself t))
 
 
-;;;; clojure-mode
+;;;; clojure
 (use-package clojure-mode)
 
 

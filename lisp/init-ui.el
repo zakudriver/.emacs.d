@@ -20,8 +20,8 @@
   ;; (lacquer-auto-switch-time '("00:01" "00:02" "10:00" "14:00" "16:00" "18:00" "20:00" "22:00"))
   (lacquer-auto-switch-mode 'random)
   (lacquer-auto-switch-time (* 60 30))
-  (lacquer-theme-list kumo/theme-list)
-  (lacquer-font-list kumo/font-list))
+  (lacquer-theme-list       kumo/theme-list)
+  (lacquer-font-list        kumo/font-list))
 
 
 ;; Font
@@ -152,13 +152,17 @@
   :custom
   (fireplace-smoke-on t)
   :init
-  (setq zone-timer (run-with-idle-timer 300 t (lambda () (fireplace))))
+  (setq zone-timer (run-with-idle-timer 500 t (lambda () (fireplace))))
   :config
+  (defvar kumo/fireplacepee nil)
   (advice-add #'fireplace-off :after (lambda ()
+                                       (setq kumo/fireplacepee nil)
                                        (kumo-restore-window-configuration)))
   (advice-add #'fireplace :before (lambda ()
-                                    (kumo-save-window-configuration)
-                                    (delete-other-windows))))
+                                    (unless kumo/fireplacepee
+                                      (setq kumo/fireplacepee t)
+                                      (kumo-save-window-configuration)
+                                      (delete-other-windows)))))
 
 
 ;; Emoji

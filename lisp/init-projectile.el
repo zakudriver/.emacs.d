@@ -18,8 +18,8 @@
   (after-init . projectile-mode)
   :custom
   (projectile-mode-line-prefix "")
-  (projectile-sort-order 'recentf)
-  (projectile-use-git-grep t)
+  (projectile-sort-order       'recentf)
+  (projectile-use-git-grep     t)
   :config
   ;; (projectile-update-mode-line)         ; Update mode-line at the first time
 

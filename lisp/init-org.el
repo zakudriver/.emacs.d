@@ -79,10 +79,10 @@
 
 
 (defvar org-load-language-list '((emacs-lisp . t)
-                                 (shell . t)
-                                 (css . t)
-                                 (sass . t)
-                                 (go . t)
+                                 (shell      . t)
+                                 (css        . t)
+                                 (sass       . t)
+                                 (go         . t)
                                  (typescript . t)))
 
 (org-babel-do-load-languages 'org-babel-load-languages
@@ -97,13 +97,13 @@
    :map easy-hugo-mode-map
    ("G" . kumo-easy-hugo-github-deploy))
   :custom
-  (easy-hugo-org-header t)
-  (easy-hugo-basedir kumo/easy-hugo-basedir)
-  (easy-hugo-postdir kumo/easy-hugo-postdir)
-  (easy-hugo-url kumo/easy-hugo-url)
-  (easy-hugo-preview-url kumo/easy-hugo-preview-url)
+  (easy-hugo-org-header           t)
+  (easy-hugo-basedir              kumo/easy-hugo-basedir)
+  (easy-hugo-postdir              kumo/easy-hugo-postdir)
+  (easy-hugo-url                  kumo/easy-hugo-url)
+  (easy-hugo-preview-url          kumo/easy-hugo-preview-url)
   (easy-hugo-github-deploy-script kumo/easy-hugo-github-deploy-script)
-  (easy-hugo-default-ext ".org"))
+  (easy-hugo-default-ext          ".org"))
 
 
 (use-package ox-hugo

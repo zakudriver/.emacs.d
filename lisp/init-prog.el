@@ -24,8 +24,8 @@
 (use-package bazel-mode
   :ensure nil
   :mode
-  (("\\.bzl$" . bazel-mode)
-   ("\\.bazel" . bazel-mode)
+  (("\\.bzl$"     . bazel-mode)
+   ("\\.bazel"    . bazel-mode)
    ("^WORKSPACE$" . bazel-mode)))
 
 

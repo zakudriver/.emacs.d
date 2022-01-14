@@ -18,11 +18,10 @@
   :bind
   ("C-x C-b" . ibuffer)
   :hook
-  (ibuffer .
-           (lambda ()
-             ;; (persp-ibuffer-set-filter-groups)
-             (unless (eq ibuffer-sorting-mode 'alphabetic)
-               (ibuffer-do-sort-by-alphabetic))))
+  (ibuffer . (lambda ()
+               ;; (persp-ibuffer-set-filter-groups)
+               (unless (eq ibuffer-sorting-mode 'alphabetic)
+                 (ibuffer-do-sort-by-alphabetic))))
   :custom
   (ibuffer-filter-group-name-face '(:inherit (font-lock-string-face bold)))
   :config
