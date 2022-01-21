@@ -19,11 +19,11 @@
    ([remap dired]           . counsel-dired)
    ([remap set-variable]    . counsel-set-variable)
    ([remap insert-char]     . counsel-unicode-char)
+   ("C-r"                   . counsel-rg)
    ("C-x C-r"               . counsel-recentf)
    ("C-c c z"               . counsel-fzf)
    ("C-c c p"               . counsel-pt)
    ("C-c c m"               . counsel-imenu)
-   ("C-c r"                 . counsel-rg)
    
    :map ivy-minibuffer-map
    ([escape] . minibuffer-keyboard-quit)
