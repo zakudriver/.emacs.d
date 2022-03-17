@@ -73,7 +73,8 @@
                             (sublime-themes junio)
                             (jazz-theme jazz)
                             (grandshell-theme grandshell)
-                            (tron-legacy-theme tron-legacy))
+                            (tron-legacy-theme tron-legacy)
+                            (afternoon-theme afternoon))
   "Theme list.")
 
 

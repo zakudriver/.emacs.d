@@ -62,6 +62,14 @@
   "Dashboard init cursor position.")
 
 
+(defconst kumo/left-brackets '("(" "{" "[" "<" "〔" "【" "〖" "〈" "《" "「" "『" "“" "‘" "‹" "«" "\"")
+  "List of left bracket chars.")
+
+
+(defconst kumo/right-brackets '(")" "]" "}" ">" "〕" "】" "〗" "〉" "》" "」" "』" "”" "’" "›" "»" "\"")
+  "list of right bracket chars.")
+
+
 (provide 'init-const)
 
 ;;; init-const.el ends here

@@ -26,7 +26,7 @@
       (setq ns-use-native-fullscreen nil
             ns-use-fullscreen-animation nil)
       ;; 默认先最大化。
-      
+
       (set-frame-parameter (selected-frame) 'fullscreen 'maximized))
   ;; 非Mac平台直接最大化
   (toggle-frame-maximized))
@@ -70,10 +70,10 @@
  _w1_: delete                          _f1_: delete                     ^ ^ _K_ ^ ^            _=_          
  _w2_: delete others                   _f2_: delete others              _H_ ^+^ _L_            ^+^ 
  _s_wap x-direction and y-direction    _f3_: new                        ^ ^ _J_ ^ ^            _-_  
- Flip _v_erticall                                                   _F_ullscreen        ^^^_m_ax
+ Flip _v_erticall                                                   _F_ullscreen        ^^^max_O_pacity
  Flop _h_orizontally                                                _M_aximized
  _R_otate 180 degrees                                               _b_alance
- Rotate 90  degrees _c_lockwise
+ Rotate 90  degrees _c_lockwise                                     
  Rotate 90  degrees _a_nti-clockwise
 "
     ("w1" delete-window)
@@ -96,7 +96,7 @@
     ("a"  rotate-frame-anticlockwise)
     ("-"  kumo-adjust-opacity-down)
     ("="  kumo-adjust-opacity-up)
-    ("m"  kumo-adjust-opacity-max)
+    ("O"  kumo-adjust-opacity-max)
     ("q"  nil "quit"))
   :config
   (use-package transpose-frame))

@@ -49,7 +49,7 @@
 
 ;; extension
 (global-set-key (kbd "C-S-k") 'kumo-kill-whole-line)
-
+(global-set-key (kbd "C-M-m") 'kumo-goto-matching-bracket)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; build-in interactive

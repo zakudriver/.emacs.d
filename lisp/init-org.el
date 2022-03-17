@@ -22,7 +22,7 @@
   :custom
   (org-startup-indented                t)
   (org-startup-with-inline-images      t)
-  (org-log-done                        t)
+  (org-log-done                        'note)
   (org-edit-timestamp-down-means-later t)
   (org-hide-emphasis-markers         t)
   (org-catch-invisible-edits         'show)
@@ -60,7 +60,7 @@
     :hook
     (dired-mode . org-download-enable)
     :custom
-    (org-download-image-dir "./img")
+    (org-download-image-dir "./org-imgs")
     (org-download-backend "curl \"%s\" -o \"%s\""))
 
   (use-package org-superstar

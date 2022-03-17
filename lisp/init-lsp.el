@@ -57,6 +57,8 @@
   ;; eslint
   (lsp-eslint-run "onSave")
   (lsp-eslint-format nil)
+  (lsp-eslint-package-manager "pnpm")
+  (lsp-eslint-code-action-disable-rule-comment nil)
   ;; typescript/javascript
   (lsp-typescript-format-enable nil)
   (lsp-javascript-format-enable nil))
@@ -115,22 +117,21 @@
 
 
 (use-package dap-mode
+  :defines dap-python-executable
   :functions dap-hydra/nil
-  :hook
-  ((lsp-mode       . dap-auto-configure-mode)
-   (dap-stopped    . (lambda (_args) (dap-hydra)))
-   (dap-terminated . (lambda (_args) (dap-hydra/nil)))
-   (go-mode        . (lambda () (require 'dap-go)))
-   ((c-mode c++-mode objc-mode swift-mode) . (lambda () (require 'dap-lldb)))
-   (elixir-mode                            . (lambda () (require 'dap-elixir)))
-   (js-mode                                . (lambda () (require 'dap-chrome)))
-   (ruby-mode                              . (lambda () (require 'dap-ruby))))
+  :diminish
   :bind
   (:map lsp-mode-map
-        ("C-. d d" . dap-debug)
-        ("C-. d h" . dap-hydra))
-  :init
-  (require 'dap-hydra))
+        ("<f5>" . dap-debug)
+        ("M-<f5>" . dap-hydra))
+  :hook
+  ((after-init . dap-auto-configure-mode)
+   (dap-stopped . (lambda (_args) (dap-hydra)))
+   (dap-terminated . (lambda (_args) (dap-hydra/nil)))
+   (ruby-mode . (lambda () (require 'dap-ruby)))
+   (go-mode . (lambda () (require 'dap-go)))
+   ((c-mode c++-mode objc-mode swift-mode) . (lambda () (require 'dap-lldb)))
+   ((js-mode js2-mode) . (lambda () (require 'dap-chrome)))))
 
 
 ;; C/C++/Objective-C support
@@ -157,6 +158,9 @@
   (lsp-dart-outline nil)
   (lsp-dart-sdk-dir (kumo-home-path-resolve "/opt/flutter/bin/cache/dart-sdk"))
   (lsp-dart-flutter-sdk-dir (kumo-home-path-resolve "/opt/flutter")))
+
+
+(use-package lsp-treemacs)
 
 
 (provide 'init-lsp)

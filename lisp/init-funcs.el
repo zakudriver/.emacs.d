@@ -519,7 +519,35 @@ E.g: <Button />"
   "Restore window configuration."
   (interactive)
   (if (window-configuration-p kumo/pre-window-configuration)
-    (set-window-configuration kumo/pre-window-configuration)))
+      (set-window-configuration kumo/pre-window-configuration)))
+
+
+(defun kumo-goto-matching-bracket ()
+  "Move cursor to the matching bracket.
+If cursor is not on a bracket, call `backward-up-list'.
+The list of brackets to jump to is defined by `kumo-left-brackets'
+and `kumo-right-brackets'."
+  (interactive)
+  (if (nth 3 (syntax-ppss))
+      (backward-up-list 1 'ESCAPE-STRINGS 'NO-SYNTAX-CROSSING)
+    (cond
+     ((eq (char-after) ?\") (forward-sexp))
+     ((eq (char-before) ?\") (backward-sexp ))
+     ((looking-at (regexp-opt kumo/left-brackets))
+      (forward-sexp))
+     ((looking-back (regexp-opt kumo/right-brackets) (max (- (point) 1) 1))
+      (backward-sexp))
+     (t (backward-up-list 1 'ESCAPE-STRINGS 'NO-SYNTAX-CROSSING)))))
+
+
+(defun kumo-insert-eslint-disable-line ()
+  "Insert eslint-disable-next-line."
+  (interactive)
+  (progn (beginning-of-line)
+         (newline)
+         (forward-line -1)
+         (insert "// eslint-disable-next-line")
+         (indent-for-tab-command)))
 
 
 (provide 'init-funcs)
