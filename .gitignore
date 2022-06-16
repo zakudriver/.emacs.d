@@ -59,7 +59,8 @@ README.html
 .lsp-*
 .dap-*
 /.extension
-.lacquer.el
+.lacquer
+.achive
 /transient
 /irony
 .PATH

@@ -27,9 +27,9 @@
 
 (global-set-key (kbd "C-c b t") 'kumo-kill-this-buffer)
 (global-set-key (kbd "C-c b o") 'kumo-kill-other-buffers)
-(global-set-key (kbd "C-c b p") 'kumo-switch-to-previous-buffer)
 (global-set-key (kbd "C-c b R") 'kumo-rename-current-buffer-file)
 (global-set-key (kbd "C-c b D") 'kumo-delete-current-buffer-file)
+(global-set-key (kbd "C-c b P") 'kumo-switch-to-previous-buffer)
 
 (global-set-key (kbd "C-c z") 'kumo-wrap-with-input)
 
@@ -58,6 +58,9 @@
 
 (global-set-key (kbd "M-F") 'forward-to-word)
 (global-set-key (kbd "M-B") 'backward-to-word)
+
+(global-set-key (kbd "C-c b p") 'previous-buffer)
+(global-set-key (kbd "C-c b n") 'next-buffer)
 
 (global-set-key (kbd "C-?") 'undo-redo)
 

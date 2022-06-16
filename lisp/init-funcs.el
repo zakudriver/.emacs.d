@@ -550,6 +550,20 @@ and `kumo-right-brackets'."
          (indent-for-tab-command)))
 
 
+(defun kumo-insert-time-string ()
+  "Select the formatted time to insert."
+  (interactive)
+  (let* ((fmt-list '("%Y-%m-%d" "%Y-%m-%d %a" "%Y-%m-%d %H:%M:%S" "%Y-%m-%d %H:%M:%S %a" "%Y/%m/%d" "%Y/%m/%d %a" "%Y/%m/%d %H:%M:%S" "%Y/%m/%d %H:%M:%S %a"))
+         (str-list (mapcar 'format-time-string fmt-list)))
+    
+    (insert (completing-read "Please select the formatted time to insert: "
+                             str-list
+                             nil
+                             t
+                             nil
+                             nil))))
+
+
 (provide 'init-funcs)
 
 ;;; init-funcs.el ends here

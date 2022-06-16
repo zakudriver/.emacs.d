@@ -148,11 +148,24 @@
 ;;   (poke-line-pokemon "gengar"))
 
 
+(defvar kumo/fireplace-timer nil)
 (use-package fireplace
+  :functions kumo-switch-timing-fireplace
   :custom
   (fireplace-smoke-on t)
   :init
-  (setq zone-timer (run-with-idle-timer 500 t (lambda () (fireplace))))
+  (defun kumo-switch-timing-fireplace ()
+    "Switch whether `fireplace be called regularly."
+    (interactive)
+    (if kumo/fireplace-timer
+        (progn
+          (cancel-timer kumo/fireplace-timer)
+          (setq kumo/fireplace-timer nil))
+      (setq kumo/fireplace-timer (run-with-idle-timer 500 t
+						                                          (lambda ()
+                                                        (fireplace)))))
+    (message "The timing fireplace is %s." (if kumo/fireplace-timer "on" "off")))
+  (kumo-switch-timing-fireplace)
   :config
   (defvar kumo/fireplacepee nil)
   (advice-add #'fireplace-off :after (lambda ()
