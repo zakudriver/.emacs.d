@@ -156,8 +156,8 @@
 (use-package lsp-dart
   :custom
   (lsp-dart-outline nil)
-  (lsp-dart-sdk-dir (kumo-home-path-resolve "/opt/flutter/bin/cache/dart-sdk"))
-  (lsp-dart-flutter-sdk-dir (kumo-home-path-resolve "/opt/flutter")))
+  (lsp-dart-sdk-dir (kumo-home-path-resolve "/.flutter/bin/cache/dart-sdk"))
+  (lsp-dart-flutter-sdk-dir (kumo-home-path-resolve "/.flutter")))
 
 
 (use-package lsp-treemacs)

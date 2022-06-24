@@ -10,7 +10,7 @@
   (require 'init-const))
 
 
-(defconst kumo/package-archives 'emacs-china
+(defconst kumo/package-archives 'tuna
   "Set package archives from which to fetch.
 (choice
   (const :tag \"Melpa\" melpa)
@@ -157,11 +157,11 @@
   "Hugo github deploy buffer name.")
 
 
-(defconst kumo/lsp-major-mode '(go-mode ng2-html-mode sh-mode ruby-mode css-mode scss-mode sass-mode web-mode typescript-mode js-mode clojure-mode)
+(defconst kumo/lsp-major-mode '(go-mode ng2-html-mode sh-mode ruby-mode css-mode scss-mode sass-mode web-mode typescript-mode js-mode clojure-mode dart-mode)
   "Lsp Supported major mode.")
 
 
-(defconst kumo/lsp-on-save-major-mode '(ruby-mode clojure-mode)
+(defconst kumo/lsp-on-save-major-mode '(ruby-mode clojure-mode dart-mode)
   "Lsp Supported major mode.")
 
 

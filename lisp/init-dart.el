@@ -4,13 +4,11 @@
 ;; somme configuration of dart.
 
 ;;; Code:
- 
+
 
 (use-package dart-mode
   :defines
   (projectile-project-root-files-bottom-up)
-  :custom
-  (dart-format-on-save t)
   :config
   (with-eval-after-load 'projectile
     (add-to-list 'projectile-project-root-files-bottom-up "pubspec.yaml")
@@ -25,7 +23,7 @@
 ;;         ("C-M-x" . #'hover-run-or-hot-restart)
 ;;         ("C-M-p" . #'hover-take-screenshot'))
 ;;   :custom
-;;   (flutter-sdk-path (concat (getenv "HOME") "/flutter"))
+;;   (flutter-sdk-path (kumo-home-path-resolve "/.flutter"))
 ;;   (hover-command-path (concat (getenv "GOPATH") "/bin/hover"))
 ;;   (hover-hot-reload-on-save t)
 ;;   (hover-screenshot-path (concat (getenv "HOME") "/Pictures"

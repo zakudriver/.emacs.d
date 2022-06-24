@@ -35,6 +35,8 @@
   (before-save . gofmt-before-save)
   :init
   (setenv "GO111MODULE" "on")
+  (setenv "GOPROXY" "https://goproxy.io/")
+  
   (unless (executable-find "gopls")
     (go-update-tools))
   :config

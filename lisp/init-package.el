@@ -95,13 +95,12 @@
 
 ;; Auto update packages
 (use-package auto-package-update
-  :functions auto-package-update-now
-  :ensure nil
   :custom
   (auto-package-update-delete-old-versions t)
+  (auto-package-update-interval 7)
   (auto-package-update-hide-results t)
   :init
-  (defalias 'upgrade-packages #'auto-package-update-now))
+  (auto-package-update-maybe))
 
 
 (provide 'init-package)

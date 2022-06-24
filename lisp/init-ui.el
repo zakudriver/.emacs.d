@@ -95,8 +95,8 @@
     "Open the *dashboard* buffer and jump to the first widget."
     (interactive)
     (delete-other-windows)
-    (if (get-buffer dashboard-buffer-name)
-        (kill-buffer dashboard-buffer-name))
+    ;; (if (get-buffer dashboard-buffer-name)
+    ;;     (kill-buffer dashboard-buffer-name))
     (dashboard-insert-startupify-lists)
     (switch-to-buffer dashboard-buffer-name)
     (run-at-time "0.1sec" nil
