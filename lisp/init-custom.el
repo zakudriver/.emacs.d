@@ -10,7 +10,7 @@
   (require 'init-const))
 
 
-(defconst kumo/package-archives 'tuna
+(defconst kumo/package-archives 'melpa
   "Set package archives from which to fetch.
 (choice
   (const :tag \"Melpa\" melpa)

@@ -99,37 +99,50 @@
     ;;     (kill-buffer dashboard-buffer-name))
     (dashboard-insert-startupify-lists)
     (switch-to-buffer dashboard-buffer-name)
+    (dashboard-refresh-buffer)
     (run-at-time "0.1sec" nil
                  (lambda ()
                    (forward-line kumo/dashboard-position)))))
 
 
-(use-package doom-modeline
-  :custom
-  (doom-modeline-project-detection 'projectile)
-  (doom-modeline-buffer-file-name-style 'auto)
-  (doom-modeline-height 1)
-  (doom-modeline-bar-width 3)
-  ;; (inhibit-compacting-font-caches t)
-  ;; (find-file-visit-truename t)
-  (auto-revert-check-vc-info t)
-  :hook
-  (after-init . (lambda ()
-                  (doom-modeline-mode)
-                  (setup-custom-doom-modeline)))
-  :config
-  (set-face-attribute 'mode-line nil :height 120)
-  (set-face-attribute 'mode-line-inactive nil :height 120)
+;; (use-package doom-modeline
+;;   :custom
+;;   (doom-modeline-hud t)
+;;   (doom-modeline-support-imenu nil)
+;;   (doom-modeline-project-detection 'projectile)
+;;   (doom-modeline-buffer-file-name-style 'auto)
+;;   (doom-modeline-height 25)
+;;   (doom-modeline-bar-width 2)
+;;   (doom-modeline-unicode-fallback t)
+;;   ;; (doom-modeline-icon nil)
+;;   (doom-modeline-major-mode-icon nil)
+;;   (doom-modeline-buffer-state-icon nil)
+;;   (doom-modeline-buffer-modification-icon nil)
+;;   (doom-modeline-checker-simple-format t)
+;;   (doom-modeline-lsp t)
+;;   (doom-modeline-indent-info nil)
+;;   (auto-revert-check-vc-info t)
+;;   (doom-modeline-minor-modes nil)
+;;   (doom-modeline-enable-word-count nil)
+;;   :hook
+;;   (after-init . doom-modeline-mode)
+;;   :config
+;;   (set-face-attribute 'mode-line nil :height 120)
+;;   (set-face-attribute 'mode-line-inactive nil :height 120)
 
-  (doom-modeline-def-modeline 'my-simple-line
-    '(bar matches buffer-info remote-host buffer-position parrot)
-    '(misc-info input-method buffer-encoding major-mode process vcs checker))
+;;   ;; Define your custom doom-modeline
+;;   (doom-modeline-def-modeline 'my-simple-line
+;;     '(bar matches buffer-info remote-host buffer-position parrot)
+;;     '(misc-info input-method buffer-encoding major-mode process vcs checker))
 
-  (defun setup-custom-doom-modeline ()
-    (doom-modeline-set-modeline 'my-simple-line 'default)))
+;;   ;; Add to `doom-modeline-mode-hook` or other hooks
+;;   (defun setup-custom-doom-modeline ()
+;;     (doom-modeline-set-modeline 'my-simple-line 'default))
+
+;;   (add-hook 'doom-modeline-mode-hook 'setup-custom-doom-modeline))
 
 
-;; nyan-mode
+;; modeline nyan-mode
 (use-package nyan-mode
   :hook
   (after-init . nyan-mode)
@@ -139,7 +152,31 @@
   (nyan-wavy-trail t)
   (nyan-animation-frame-interval 0.4))
 
-;; poke line
+
+;; modeline parrot-mode
+(use-package parrot
+  :hook
+  (after-init . parrot-mode)
+  :config
+  (defun kumo-trigger-parrot (&_rest)
+    "Trigger parrot animation."
+    (parrot-start-animation))
+  (if (boundp 'window-buffer-change-functions)
+      (add-hook 'window-buffer-change-functions 'kumo-trigger-parrot)
+    (add-hook 'post-command-hook 'kumo-trigger-parrot)))
+
+
+;; mood-line-mode
+(use-package mood-line
+  :load-path "~/.emacs.d/site-lisp/mood-line"
+  :hook
+  (after-init . mood-line-mode)
+  :custom
+  (mood-line-background "#002FA7")
+  (mood-line-inactive-background "#5bc2e7"))
+
+
+;; modeline poke-line
 ;; (use-package poke-line
 ;;   :hook
 ;;   (after-init . poke-line-global-mode)

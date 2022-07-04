@@ -95,12 +95,17 @@
 
 ;; Auto update packages
 (use-package auto-package-update
+  :ensure nil
   :custom
   (auto-package-update-delete-old-versions t)
   (auto-package-update-interval 7)
   (auto-package-update-hide-results t)
   :init
   (auto-package-update-maybe))
+
+
+(native-compile-async (concat user-emacs-directory "site-lisp") 'recursively)
+;; (native-compile-async (concat user-emacs-directory "lisp") 'recursively)
 
 
 (provide 'init-package)
