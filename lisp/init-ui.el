@@ -171,9 +171,10 @@
   :load-path "~/.emacs.d/site-lisp/mood-line"
   :hook
   (after-init . mood-line-mode)
-  :custom
-  (mood-line-background "#002FA7")
-  (mood-line-inactive-background "#5bc2e7"))
+  ;; :custom
+  ;; (mood-line-background "#002FA7")
+  ;; (mood-line-inactive-background "#5bc2e7")
+  )
 
 
 ;; modeline poke-line
