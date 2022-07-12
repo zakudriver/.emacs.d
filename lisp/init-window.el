@@ -59,6 +59,10 @@
   :custom
   (winum-auto-setup-mode-line nil)
   :config
+  (defmacro kumo-winum-delete-window-macro-factory ()
+    "Winum delete window function macro factory."
+    `(progn ,@(mapcar 'kumo-winum-delete-window-factory '(0 1 2 3 4 5 6 7 8 9))))
+  
   (kumo-winum-delete-window-macro-factory))
 
 

@@ -311,11 +311,6 @@ NUM is the window number."
      (,(intern-soft (concat "winum-select-window-" (number-to-string num))) t)))
 
 
-(defmacro kumo-winum-delete-window-macro-factory ()
-  "Winum delete window function macro factory."
-  `(progn ,@(mapcar 'kumo-winum-delete-window-factory '(0 1 2 3 4 5 6 7 8 9))))
-
-
 (defun kumo-easy-hugo-github-deploy ()
   "Easy-Hugo deploy github page."
   (interactive)
@@ -361,7 +356,7 @@ EXPORTER: export way."
                                        "/*]]>*/-->\n"
                                        "</style>\n")))))))
 
-
+;; === background opaciyt ===
 (defun kumo-adjust-opacity (frame incr)
   "Adjust the background opacity of FRAME by increment INCR."
   (unless (display-graphic-p frame)
@@ -389,6 +384,7 @@ EXPORTER: export way."
   "Adjust the background opacity to max."
   (interactive)
   (modify-frame-parameters nil `((alpha . 100))))
+;; === background opaciyt ===
 
 
 (defun kumo-kill-whole-line ()

@@ -9,11 +9,11 @@
 (eval-when-compile
   (require 'init-custom))
 
+;; Use plists for deserialization.
+(setenv "LSP_USE_PLISTS" "true")
 
 ;; Emacs client for the Language Server Protocol
 (use-package lsp-mode
-  :commands
-  (lsp-deferred)
   :hook
   (prog-mode . (lambda ()
                  (if (apply 'derived-mode-p kumo/lsp-major-mode)
@@ -55,22 +55,14 @@
   (lsp-lens-enable nil)
   (lsp-disabled-clients '((web-mode . (deno-ls)) (typescript-mode . (deno-ls))))
   ;; eslint
-  (lsp-eslint-run "onSave")
+  ;;(lsp-eslint-run "onSave")
   (lsp-eslint-format nil)
-  (lsp-eslint-package-manager "pnpm")
+  (lsp-eslint-package-manager "npm")
   (lsp-eslint-code-action-disable-rule-comment nil)
   ;; typescript/javascript
   (lsp-typescript-format-enable nil)
   (lsp-javascript-format-enable nil))
 
-;; (use-package company-lsp
-;;   :after (lsp-mode company)
-;;   :custom
-;;   (company-lsp-cache-candidates t)
-;;   (company-lsp-filter-candidates t)
-;;   (company-lsp-async t)
-;;   :config
-;;   (push 'company-lsp company-backends))
 
 (use-package lsp-ivy
   :after lsp-mode

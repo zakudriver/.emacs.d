@@ -99,9 +99,7 @@
   :custom
   (auto-package-update-delete-old-versions t)
   (auto-package-update-interval 7)
-  (auto-package-update-hide-results t)
-  :init
-  (auto-package-update-maybe))
+  (auto-package-update-hide-results t))
 
 
 (native-compile-async (concat user-emacs-directory "site-lisp") 'recursively)
