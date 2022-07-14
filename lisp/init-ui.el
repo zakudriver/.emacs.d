@@ -72,15 +72,15 @@
    ("C-, g" . dashboard-refresh-buffer))
   :custom
   ;; (dashboard-banner-logo-title "Help poor children in Uganda!")
-  (dashboard-banner-logo-title (concat "Happy hacking, " user-login-name " - Emacs ♥ you!"))
-  (dashboard-set-file-icons t)
-  (dashboard-set-heading-icons t)
-  (dashboard-startup-banner (or kumo/logo 'official))
+  (dashboard-banner-logo-title      (concat "Happy hacking, " user-login-name " - Emacs ♥ you!"))
+  (dashboard-set-file-icons         t)
+  (dashboard-set-heading-icons      t)
+  (dashboard-startup-banner         (or kumo/logo 'official))
   (dashboard-image-banner-max-width 200)
-  (dashboard-center-content t)
-  (dashboard-show-shortcuts nil)
-  (dashboard-items '((recents  . 10)
-                     (projects . 10)))
+  (dashboard-center-content         t)
+  (dashboard-show-shortcuts         nil)
+  (dashboard-items                  '((recents  . 10)
+                                      (projects . 10)))
   ;; (dashboard-init-info (concat "Happy hacking, " user-login-name " - Emacs ♥ you!"))
   (dashboard-set-footer nil)
   :custom-face
@@ -147,9 +147,9 @@
   :hook
   (after-init . nyan-mode)
   :custom
-  (nyan-bar-length 24)
-  ;; (nyan-animate-nyancat t)
-  (nyan-wavy-trail t)
+  (nyan-bar-length               24)
+  ;; (nyan-animate-nyancat          t)
+  (nyan-wavy-trail               t)
   (nyan-animation-frame-interval 0.4))
 
 
@@ -228,13 +228,13 @@
 ;; Misc
 ;; (fset 'yes-or-no-p 'y-or-n-p) emacs28 to COMMENTS
 (size-indication-mode t)
-(setq inhibit-startup-screen t
-      use-file-dialog nil
-      use-dialog-box nil
+(setq inhibit-startup-screen            t
+      use-file-dialog                   nil
+      use-dialog-box                    nil
       inhibit-startup-echo-area-message t
-      track-eol t
-      use-short-answers t ;; emacs28
-      line-move-visual nil)
+      track-eol                         t
+      use-short-answers                 t ;; emacs28
+      line-move-visual                  nil)
 
 
 ;; Display dividers between windows

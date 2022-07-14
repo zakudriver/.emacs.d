@@ -102,9 +102,9 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
   :bind
   ("C-c p P" . 'proced)
   :custom
-  (proced-auto-update-flag t)
+  (proced-auto-update-flag     t)
   (proced-auto-update-interval 3)
-  (proced-format 'verbose))
+  (proced-format               'verbose))
 
 
 ;; Youdao Dictionary
@@ -159,7 +159,7 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
   ("C-c a a" . achive)
   ("C-c a g" . achive-update)
   :custom
-  (achive-language 'zh)
+  (achive-language   'zh)
   (achive-stock-list '("sh600036" "sh601012" "sz000625" "sz002050" "sz002013" "sh600176" "sh603993" "sh601388" "sz002557" "sh600989" "sh600887" "sz002097" "sz000731" "sh601015" "sh601985" "sz000630" "sh600875" "sz002312" "sz000876" "sz000422" "sz00097")))
 
 
@@ -172,6 +172,12 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
   (wttrin-forecast-days    2)
   (wttrin-language         "zh-cn")
   (wttrin-units-wind-speed t))
+
+
+;; (use-package screenshot
+;;   :load-path "~/.emacs.d/site-lisp/screenshot"
+;;   :bind
+;;   ("C-c s" . screenshot))
 
 
 (provide 'init-utils)

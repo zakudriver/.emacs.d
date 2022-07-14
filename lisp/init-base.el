@@ -25,12 +25,13 @@
 (modify-coding-system-alist    'process "*" 'utf-8)
 
 
-(setq load-prefer-newer            t          ;; Prefers the newest version of a file
-      large-file-warning-threshold 100000000  ;; Prefers the newest version of a file
-      ring-bell-function           'ignore    ;; disable the annoying bell ring
-      mouse-drag-copy-region       t
-      create-lockfiles             nil
-      read-process-output-max      (* 1024 1024 2))
+(setq load-prefer-newer                        t          ;; Prefers the newest version of a file
+      large-file-warning-threshold             100000000  ;; Prefers the newest version of a file
+      ring-bell-function                       'ignore    ;; disable the annoying bell ring
+      mouse-drag-copy-region                   t
+      create-lockfiles                         nil
+      read-process-output-max                  (* 1024 1024 2)
+      native-comp-async-report-warnings-errors nil)
 
 
 ;; Environment

@@ -19,6 +19,9 @@
 (advice-add #'package--ensure-init-file :override #'ignore)
 
 
+(add-to-list 'default-frame-alist '(undecorated . t))
+
+
 ;; Faster to disable these here (before they've been initialized)
 (push '(menu-bar-lines . 0) default-frame-alist)
 (push '(tool-bar-lines . 0) default-frame-alist)

@@ -102,7 +102,7 @@
   (auto-package-update-hide-results t))
 
 
-(native-compile-async (concat user-emacs-directory "site-lisp") 'recursively)
+;; (native-compile-async (concat user-emacs-directory "site-lisp") 'recursively)
 ;; (native-compile-async (concat user-emacs-directory "lisp") 'recursively)
 
 

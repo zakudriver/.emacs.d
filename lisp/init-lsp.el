@@ -30,34 +30,34 @@
      "--tsProbeLocations"
      ,(kumo-home-path-resolve kumo/global-nodemodules-path)
      "--stdio"))
-  (lsp-auto-guess-root nil)      ; not Detect project root
-  (lsp-log-io nil)
-  (lsp-print-performance nil)
-  (lsp-response-timeout 10)
-  (lsp-idle-delay 0.500)
-  (lsp-enable-on-type-formatting nil)
-  (lsp-enable-folding nil)
-  (lsp-enable-snippet nil)
-  (lsp-enable-links nil)
+  (lsp-auto-guess-root            nil)      ; not Detect project root
+  (lsp-log-io                     nil)
+  (lsp-print-performance          nil)
+  (lsp-response-timeout           10)
+  (lsp-idle-delay                 0.500)
+  (lsp-enable-on-type-formatting  nil)
+  (lsp-enable-folding             nil)
+  (lsp-enable-snippet             nil)
+  (lsp-enable-links               nil)
   (lsp-enable-symbol-highlighting nil)
   ;; (lsp-restart 'auto-restart)
-  (lsp-completion-show-detail nil)
+  (lsp-completion-show-detail          nil)
   (lsp-completion-sort-initial-results t)
-  (lsp-completion-use-last-result t)
-  (lsp-signature-auto-activate nil)
-  (lsp-enable-indentation nil)
+  (lsp-completion-use-last-result      t)
+  (lsp-signature-auto-activate         nil)
+  (lsp-enable-indentation              nil)
   ;; deno
-  (lsp-clients-deno-config "./tsconfig.json")
-  (lsp-clients-deno-import-map "./import_map.json")
-  (lsp-clients-deno-enable-lint nil)
-  (lsp-headerline-breadcrumb-enable nil)
+  (lsp-clients-deno-config                "./tsconfig.json")
+  (lsp-clients-deno-import-map            "./import_map.json")
+  (lsp-clients-deno-enable-lint           nil)
+  (lsp-headerline-breadcrumb-enable       nil)
   (lsp-headerline-breadcrumb-icons-enable nil)
-  (lsp-lens-enable nil)
+  (lsp-lens-enable                        nil)
   (lsp-disabled-clients '((web-mode . (deno-ls)) (typescript-mode . (deno-ls))))
   ;; eslint
-  ;;(lsp-eslint-run "onSave")
-  (lsp-eslint-format nil)
-  (lsp-eslint-package-manager "npm")
+  (lsp-eslint-run                           "onSave")
+  (lsp-eslint-format                        nil)
+  (lsp-eslint-package-manager               "npm")
   (lsp-eslint-code-action-disable-rule-comment nil)
   ;; typescript/javascript
   (lsp-typescript-format-enable nil)
@@ -80,32 +80,32 @@
         ("s-l c a" . lsp-ui-sideline-apply-code-actions))
   :custom
   ;; lsp-ui-doc
-  (lsp-ui-doc-enable t)
-  (lsp-ui-doc-header nil)
-  (lsp-ui-doc-position 'bottom) ;; top, bottom, or at-point
-  (lsp-ui-doc-max-width 120)
-  (lsp-ui-doc-max-height 30)
-  (lsp-ui-doc-use-childframe t)
-  (lsp-ui-doc-use-webkit nil)
-  (lsp-ui-doc-delay 0.2)
+  (lsp-ui-doc-enable          t)
+  (lsp-ui-doc-header          nil)
+  (lsp-ui-doc-position        'bottom) ;; top, bottom, or at-point
+  (lsp-ui-doc-max-width       120)
+  (lsp-ui-doc-max-height      30)
+  (lsp-ui-doc-use-childframe  t)
+  (lsp-ui-doc-use-webkit      nil)
+  (lsp-ui-doc-delay           0.2)
   (lsp-ui-doc-show-with-mouse nil)
   ;; lsp-ui-sideline
-  (lsp-ui-sideline-enable t)
-  (lsp-ui-sideline-ignore-duplicate t)
-  (lsp-ui-sideline-show-symbol t)
-  (lsp-ui-sideline-show-hover nil)
-  (lsp-ui-sideline-show-diagnostics t)
-  (lsp-ui-sideline-show-code-actions nil)
+  (lsp-ui-sideline-enable              t)
+  (lsp-ui-sideline-ignore-duplicate    t)
+  (lsp-ui-sideline-show-symbol         t)
+  (lsp-ui-sideline-show-hover          nil)
+  (lsp-ui-sideline-show-diagnostics    t)
+  (lsp-ui-sideline-show-code-actions   nil)
   (lsp-ui-sideline-code-actions-prefix "💡 ")
   ;; lsp-ui-imenu
-  (lsp-ui-imenu-enable t)
+  (lsp-ui-imenu-enable        t)
   (lsp-ui-imenu-kind-position 'top)
-  (lsp-ui-imenu-auto-refresh 'after-save)
+  (lsp-ui-imenu-auto-refresh  'after-save)
   ;; lsp-ui-peek
-  (lsp-ui-peek-enable nil)
+  (lsp-ui-peek-enable      nil)
   (lsp-ui-peek-peek-height 20)
-  (lsp-ui-peek-list-width 50)
-  (lsp-ui-peek-fontify 'on-demand))
+  (lsp-ui-peek-list-width  50)
+  (lsp-ui-peek-fontify     'on-demand))
 
 
 (use-package dap-mode
@@ -114,16 +114,16 @@
   :diminish
   :bind
   (:map lsp-mode-map
-        ("<f5>" . dap-debug)
+        ("<f5>"   . dap-debug)
         ("M-<f5>" . dap-hydra))
   :hook
-  ((after-init . dap-auto-configure-mode)
-   (dap-stopped . (lambda (_args) (dap-hydra)))
-   (dap-terminated . (lambda (_args) (dap-hydra/nil)))
-   (ruby-mode . (lambda () (require 'dap-ruby)))
-   (go-mode . (lambda () (require 'dap-go)))
+  ((after-init         . dap-auto-configure-mode)
+   (dap-stopped        . (lambda (_args) (dap-hydra)))
+   (dap-terminated     . (lambda (_args) (dap-hydra/nil)))
+   (ruby-mode          . (lambda () (require 'dap-ruby)))
+   (go-mode            . (lambda () (require 'dap-go)))
    ((c-mode c++-mode objc-mode swift-mode) . (lambda () (require 'dap-lldb)))
-   ((js-mode js2-mode) . (lambda () (require 'dap-chrome)))))
+   ((js-mode js2-mode)                     . (lambda () (require 'dap-chrome)))))
 
 
 ;; C/C++/Objective-C support
@@ -134,7 +134,7 @@
                                              (require 'ccls)
                                              (lsp)))
   :custom
-  (flycheck-disabled-checkers '(c/c++-clang c/c++-cppcheck c/c++-gcc))
+  (flycheck-disabled-checkers  '(c/c++-clang c/c++-cppcheck c/c++-gcc))
   (ccls-initialization-options kumo/ccls-initialization-options)
   :config
   (with-eval-after-load 'projectile
@@ -147,8 +147,8 @@
 ;; dart
 (use-package lsp-dart
   :custom
-  (lsp-dart-outline nil)
-  (lsp-dart-sdk-dir (kumo-home-path-resolve "/.flutter/bin/cache/dart-sdk"))
+  (lsp-dart-outline         nil)
+  (lsp-dart-sdk-dir         (kumo-home-path-resolve "/.flutter/bin/cache/dart-sdk"))
   (lsp-dart-flutter-sdk-dir (kumo-home-path-resolve "/.flutter")))
 
 
