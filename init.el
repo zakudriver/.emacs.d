@@ -1,7 +1,7 @@
 ;;; Code:
 
 ;; (setq debug-on-error t)
-(setq edebug-on-error nil)
+
 ;; (setq server-socket-dir (format "/tmp/emacs%d" (user-uid)))
 ;; (server-start)
 
@@ -70,11 +70,11 @@
   ;; Preferences
   (require 'init-base)
   (require 'init-funcs)
+  (require 'init-ui)
   (require 'init-utils)
   (require 'init-keys)
   ;; (require 'init-evil)
-  ;; ;; (require 'init-modeline)
-  (require 'init-ui)
+  
 
   (require 'init-edit)
   (require 'init-highlight)
@@ -89,7 +89,7 @@
   (require 'init-projectile)
 
   ;; ;; polymode
-  (require 'init-polymode)
+  ;; ;; (require 'init-polymode)
 
   ;; Programming
   (require 'init-lsp)
@@ -103,7 +103,9 @@
 
   ;; Web
   (require 'init-js)
-  (require 'init-web))
+  (require 'init-web)
+
+  (require 'init-sol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init.el ends here

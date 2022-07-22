@@ -25,13 +25,38 @@
 (modify-coding-system-alist    'process "*" 'utf-8)
 
 
-(setq load-prefer-newer                        t          ;; Prefers the newest version of a file
-      large-file-warning-threshold             100000000  ;; Prefers the newest version of a file
-      ring-bell-function                       'ignore    ;; disable the annoying bell ring
-      mouse-drag-copy-region                   t
-      create-lockfiles                         nil
-      read-process-output-max                  (* 1024 1024 2)
-      native-comp-async-report-warnings-errors nil)
+;; UTF-8 as the default coding system
+(when (fboundp 'set-charset-priority)
+  (set-charset-priority 'unicode))
+
+
+(setq system-time-locale              "C"
+      delete-by-moving-to-trash       t    ; Deleting files go to OS's trash folder
+      inhibit-compacting-font-caches  t
+      make-backup-files               nil  ; Forbide to make backup files
+      auto-save-default               nil
+      uniquify-buffer-name-style      'post-forward-angle-brackets  ; Show path if names are same
+      sentence-end                    "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*"
+      sentence-end-double-space       nil
+      word-wrap-by-category           t
+
+      ring-bell-function              'ignore  ;; disable the annoying bell ring
+      mouse-drag-copy-region          t
+      create-lockfiles                nil
+      ;; Increase how much is read from processes in a single chunk (default is 4kb)
+      read-process-output-max         #x10000  ;; 64kb
+      
+      adaptive-fill-regexp            "[ t]+|[ t]*([0-9]+.|*+)[ t]*"
+      adaptive-fill-first-line-regexp "^* *$")
+
+
+;; Garbage Collector Magic Hack
+(use-package gcmh
+  :hook (emacs-startup . gcmh-mode)
+  :init
+  (setq gcmh-idle-delay 'auto
+        gcmh-auto-idle-delay-factor 10
+        gcmh-high-cons-threshold #x1000000)) ; 16MB
 
 
 ;; Environment

@@ -16,23 +16,16 @@
 
 
 ;; Miscs
-(setq uniquify-buffer-name-style 'post-forward-angle-brackets  ; Show path if names are same
-      adaptive-fill-regexp "[ t]+|[ t]*([0-9]+.|*+)[ t]*"
-      adaptive-fill-first-line-regexp "^* *$"
-      delete-by-moving-to-trash t    ; Deleting files go to OS's trash folder
-      make-backup-files nil          ; Forbide to make backup files
-      set-mark-command-repeat-pop t  ; Repeating C-SPC after popping mark pops it again
-      auto-save-default nil
+(setq set-mark-command-repeat-pop t  ; Repeating C-SPC after popping mark pops it again
       completion-ignore-case t
       scroll-preserve-screen-position t
       scroll-conservatively 0)
 
 
 ;; Permanently indent with spaces, never with TABs
-(setq-default tab-width 2
-              c-basic-offset 2
+(setq-default tab-width        2
               indent-tabs-mode nil
-              major-mode 'text-mode)
+              major-mode       'text-mode)
 
 
 ;; Automatically reload files was modified by external program

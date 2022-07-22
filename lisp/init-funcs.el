@@ -11,6 +11,62 @@
   (require 'init-custom))
 
 
+;; Pakcage repository (ELPA)
+(defun kumo-set-package-archives (archives &optional refresh async)
+  "Set the package archives (ELPA).
+
+REFRESH is non-nil, will refresh archive contents.
+ASYNC specifies whether to perform the downloads in the background."
+  (interactive
+   (list
+    (intern
+     (ivy-read "Select package archives: "
+               (mapcar #'car kumo/package-archives-alist)
+               :preselect (symbol-name kumo/package-archives)))))
+  
+  ;; Refresh if need
+  (and refresh (package-refresh-contents async))
+
+  (message "Set package archives to `%s'" archives))
+
+
+(defun kumo-test-package-archives (&optional no-chart)
+  "Test connection speed of all package archives and display on chart.
+
+Not displaying the chart if NO-CHART is non-nil.
+Return the fastest package archive."
+  (interactive)
+
+  (let* ((durations (mapcar
+                     (lambda (pair)
+                       (let ((url (concat (cdr (nth 2 (cdr pair)))
+                                          "archive-contents"))
+                             (start (current-time)))
+                         (message "Fetching %s..." url)
+                         (ignore-errors
+                           (url-copy-file url null-device t))
+                         (float-time (time-subtract (current-time) start))))
+                     kumo/package-archives-alist))
+         (fastest (car (nth (cl-position (apply #'min durations) durations)
+                            kumo/package-archives-alist))))
+
+    ;; Display on chart
+    (when (and (not no-chart)
+               (require 'chart nil t)
+               (require 'url nil t))
+      (chart-bar-quickie
+       'horizontal
+       "Speed test for the ELPA mirrors"
+       (mapcar (lambda (p) (symbol-name (car p))) kumo/package-archives-alist)
+       "ELPA"
+       (mapcar (lambda (d) (* 1e3 d)) durations) "ms"))
+
+    (message "`%s' is the fastest package archive" fastest)
+
+    ;; Return the fastest
+    fastest))
+
+
 (defun kumo-open-init-file()
   "Open init.el file."
   (interactive)
@@ -558,6 +614,7 @@ and `kumo-right-brackets'."
                              t
                              nil
                              nil))))
+
 
 
 (provide 'init-funcs)

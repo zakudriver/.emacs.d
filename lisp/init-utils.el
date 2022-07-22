@@ -108,17 +108,17 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
 
 
 ;; Youdao Dictionary
-(use-package youdao-dictionary
+(use-package yd
+  :load-path "~/.emacs.d/site-lisp/yd.el"
   :bind
-  (("C-c y y" . youdao-dictionary-search-at-point-posframe)
-   ("C-c y Y" . youdao-dictionary-search-at-point)
-   ("C-c y I" . youdao-dictionary-search-from-input)
-   :map youdao-dictionary-mode-map
-   ("?" . youdao-dictionary-hydra/body))
+  (("C-c y y" . yd-search-at-point-posframe)
+   ("C-c y Y" . yd-search-at-point)
+   ("C-c y I" . yd-search-from-input)
+   :map yd-mode-map
+   ("?" . yd-hydra/body))
   :custom
-  (url-automatic-caching t)
   ;; 中文分词
-  (youdao-dictionary-use-chinese-word-segmentation t))
+  (yd-use-chinese-word-segmentation t))
 
 
 ;; Fast search tool `ripgrep'
@@ -174,10 +174,10 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
   (wttrin-units-wind-speed t))
 
 
-;; (use-package screenshot
-;;   :load-path "~/.emacs.d/site-lisp/screenshot"
-;;   :bind
-;;   ("C-c s" . screenshot))
+(use-package screenshot
+  :load-path "~/.emacs.d/site-lisp/screenshot"
+  :bind
+  ("C-c s" . screenshot))
 
 
 (provide 'init-utils)
