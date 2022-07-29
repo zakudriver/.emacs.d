@@ -157,12 +157,14 @@
 (use-package parrot
   :hook
   (after-init . parrot-mode)
+  :custom
+  (parrot-num-rotations 1)
   :config
   (defun kumo-trigger-parrot (&_rest)
     "Trigger parrot animation."
     (parrot-start-animation))
-  (if (boundp 'window-buffer-change-functions)
-      (add-hook 'window-buffer-change-functions 'kumo-trigger-parrot)
+  (if (boundp 'window-selection-change-functions)
+      (add-hook 'window-selection-change-functions 'kumo-trigger-parrot)
     (add-hook 'post-command-hook 'kumo-trigger-parrot)))
 
 
