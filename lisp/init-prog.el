@@ -40,6 +40,9 @@
 (use-package graphql-mode)
 
 
+(use-package json-mode)
+
+
 (provide 'init-prog)
 
 ;;; init-prog.el ends here

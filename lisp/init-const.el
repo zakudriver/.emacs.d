@@ -67,7 +67,7 @@
 
 
 (defconst kumo/right-brackets '(")" "]" "}" ">" "〕" "】" "〗" "〉" "》" "」" "』" "”" "’" "›" "»" "\"")
-  "list of right bracket chars.")
+  "List of right bracket chars.")
 
 
 (provide 'init-const)

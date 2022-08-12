@@ -109,7 +109,7 @@
                             (kaolin-themes kaolin-eclipse)
                             (kaolin-themes kaolin-valley-dark)
                             (kaolin-themes kaolin-temple)
-                            (leuven-theme leuven (setq leuven-scale-outline-headlines nil))
+                            (leuven-theme leuven light (setq leuven-scale-outline-headlines nil))
                             (leuven-theme leuven-dark (setq leuven-scale-outline-headlines nil))
                             (ample-theme ample)
                             (ample-theme ample-flat)
@@ -177,10 +177,6 @@
   "CCLS initialization options.")
 
 
-(defconst kumo/modeline-height 26
-  "Modeline height.")
-
-
 (defconst kumo/easy-hugo-basedir "~/WWW-BUILDER/"
   "Hugo basedir.")
 
@@ -189,7 +185,7 @@
   "Hugo postdir.")
 
 
-(defconst kumo/easy-hugo-url "https://dingansichkum0.github.io/"
+(defconst kumo/easy-hugo-url "https://zakudriver.github.io/"
   "Hugo site url.")
 
 

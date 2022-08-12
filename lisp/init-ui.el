@@ -164,8 +164,8 @@
     "Trigger parrot animation."
     (parrot-start-animation))
   (if (boundp 'window-selection-change-functions)
-      (add-hook 'window-selection-change-functions 'kumo-trigger-parrot)
-    (add-hook 'post-command-hook 'kumo-trigger-parrot)))
+      (add-hook 'window-selection-change-functions #'kumo-trigger-parrot)
+    (add-hook 'post-command-hook #'kumo-trigger-parrot)))
 
 
 ;; mood-line-mode
