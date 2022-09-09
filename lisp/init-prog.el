@@ -43,6 +43,9 @@
 (use-package json-mode)
 
 
+(use-package glsl-mode)
+
+
 (provide 'init-prog)
 
 ;;; init-prog.el ends here

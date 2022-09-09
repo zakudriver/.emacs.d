@@ -144,13 +144,15 @@
 
 ;; modeline nyan-mode
 (use-package nyan-mode
+  :load-path "~/.emacs.d/site-lisp/nyan-mode"
   :hook
   (after-init . nyan-mode)
   :custom
-  (nyan-bar-length               24)
-  ;; (nyan-animate-nyancat          t)
+  (nyan-cat-flavor               'jazz)
+  (nyan-bar-length               40)
+  (nyan-animate-nyancat          nil)
   (nyan-wavy-trail               t)
-  (nyan-animation-frame-interval 0.4))
+  (nyan-animation-frames         10))
 
 
 ;; modeline parrot-mode

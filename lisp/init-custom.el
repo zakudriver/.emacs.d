@@ -156,16 +156,6 @@
   "Font weight.")
 
 
-(defconst kumo/env-path
-  (if (file-exists-p kumo/env-path-file)
-      (split-string (with-temp-buffer
-                      (insert-file-contents kumo/env-path-file)
-                      (buffer-string)) ":" t)
-    (write-region "" nil kumo/env-path-file)
-    nil)
-  "ENV_PATH list.")
-
-
 (defconst kumo/ccls-initialization-options
   (if sys/macp
       '(:clang
@@ -201,7 +191,7 @@
   "Hugo github deploy buffer name.")
 
 
-(defconst kumo/lsp-major-mode '(go-mode ng2-html-mode sh-mode ruby-mode css-mode scss-mode sass-mode web-mode typescript-mode js-mode clojure-mode dart-mode)
+(defconst kumo/lsp-major-mode '(go-mode ng2-html-mode sh-mode ruby-mode css-mode scss-mode sass-mode web-mode typescript-mode js-mode clojure-mode dart-mode rust-mode)
   "Lsp Supported major mode.")
 
 
@@ -211,10 +201,6 @@
 
 (defconst kumo/org-mode-export-html-css "/org/style.css"
   "Insert inline css file when org export html.")
-
-
-(defconst kumo/perspective-state-file "/.perspective"
-  "Perspective state cache file.")
 
 
 (defconst kumo/evil-local-mode '(web-mode typescript-mode js-mode js-mode go-mode ruby-mode css-mode scss-mode)

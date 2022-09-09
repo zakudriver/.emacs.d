@@ -117,6 +117,8 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
    :map yd-mode-map
    ("?" . yd-hydra/body))
   :custom
+  (yd-app-key "78762df07eff3cf2")
+  (yd-secret-key "buZDTTRkFgVRPCegCzLpX255Y1Ql17F3")
   ;; 中文分词
   (yd-use-chinese-word-segmentation t))
 

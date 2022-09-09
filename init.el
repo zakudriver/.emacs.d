@@ -1,6 +1,6 @@
 ;;; Code:
 
-;; (setq debug-on-error t)
+;; x(setq debug-on-error t)
 
 ;; (setq server-socket-dir (format "/tmp/emacs%d" (user-uid)))
 ;; (server-start)
@@ -99,6 +99,7 @@
   (require 'init-dart)
   (require 'init-cpp)
   (require 'init-ruby)
+  (require 'init-rust)
   (require 'init-lisp)
 
   ;; Web
