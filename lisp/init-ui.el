@@ -192,7 +192,6 @@
 
 (defvar kumo/fireplace-timer nil)
 (use-package fireplace
-  :functions kumo-switch-timing-fireplace
   :custom
   (fireplace-smoke-on t)
   :init
@@ -207,7 +206,6 @@
 						                                          (lambda ()
                                                         (fireplace)))))
     (message "The timing fireplace is %s." (if kumo/fireplace-timer "on" "off")))
-  (kumo-switch-timing-fireplace)
   :config
   (defvar kumo/fireplacepee nil)
   (advice-add #'fireplace-off :after (lambda ()

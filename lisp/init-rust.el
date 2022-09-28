@@ -6,12 +6,9 @@
 ;;; Code:
 
 
-(use-package rust-mode
+(use-package rustic
   :custom
-  (rust-format-on-save t))
-
-
-;; (use-package rustic)
+  (rustic-format-trigger 'on-save))
 
 
 (provide 'init-rust)

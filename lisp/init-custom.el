@@ -39,7 +39,7 @@
                                    :value-type (string :tag "URL or directory name"))))
 
 
-(defcustom kumo/package-archives 'emacs-cn
+(defcustom kumo/package-archives 'melpa
   "Set package archives from which to fetch."
   :group 'centaur
   :set (lambda (symbol value)
@@ -122,7 +122,8 @@
                             (jazz-theme jazz)
                             (grandshell-theme grandshell)
                             (tron-legacy-theme tron-legacy)
-                            (afternoon-theme afternoon))
+                            (afternoon-theme afternoon)
+                            (night-owl-theme night-owl))
   "Theme list.")
 
 

@@ -3,10 +3,10 @@
 # key: fc
 # --
 
-import React from 'react';
+import { FC } from 'react';
 import { I$1Props } from './types'
 
-export const ${1:NAME}: React.FC<I$1Props> = ({ children }) => {
+export const ${1:NAME}: FC<I$1Props> = ({ children }) => {
 	return (
     <div>
 		  ${2:}

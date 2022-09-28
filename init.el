@@ -93,6 +93,7 @@
 
   ;; Programming
   (require 'init-lsp)
+  
   (require 'init-prog)
   (require 'init-org)
   (require 'init-go)
