@@ -46,15 +46,15 @@
   (with-eval-after-load 'counsel
     (bind-key [remap org-set-tags-command] #'counsel-org-tag org-mode-map))
 
-  (use-package org-pomodoro
-    :custom-face
-    (org-pomodoro-mode-line ((t (:inherit warning))))
-    (org-pomodoro-mode-line-overtime ((t (:inherit error))))
-    (org-pomodoro-mode-line-break ((t (:inherit success))))
-    (org-pomodoro-keep-killed-pomodoro-time t)
-    :bind
-    (:map org-agenda-mode-map
-          ("C-, p" . org-pomodoro)))
+  ;; (use-package org-pomodoro
+  ;;   :custom-face
+  ;;   (org-pomodoro-mode-line ((t (:inherit warning))))
+  ;;   (org-pomodoro-mode-line-overtime ((t (:inherit error))))
+  ;;   (org-pomodoro-mode-line-break ((t (:inherit success))))
+  ;;   (org-pomodoro-keep-killed-pomodoro-time t)
+  ;;   :bind
+  ;;   (:map org-agenda-mode-map
+  ;;         ("C-, p" . org-pomodoro)))
 
   (use-package org-download
     :hook

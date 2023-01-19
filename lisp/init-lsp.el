@@ -5,7 +5,6 @@
 
 ;;; Code:
 
-
 (eval-when-compile
   (require 'init-custom))
 
@@ -23,13 +22,8 @@
                     (add-hook 'before-save-hook #'lsp-format-buffer t t))))
   :custom
   (lsp-clients-angular-language-server-command
-   `("node"
-     ,(kumo-home-path-resolve kumo/global-nodemodules-path "/@angular/language-server")
-     "--ngProbeLocations"
-     ,(kumo-home-path-resolve kumo/global-nodemodules-path)
-     "--tsProbeLocations"
-     ,(kumo-home-path-resolve kumo/global-nodemodules-path)
-     "--stdio"))
+   '("node"
+     "/opt/homebrew/lib/node_modules/@angular/language-server" "--ngProbeLocations" "/opt/homebrew/lib/node_modules" "--tsProbeLocations" "/opt/homebrew/lib/node_modules" "--stdio"))
   (lsp-auto-guess-root            nil)      ; not Detect project root
   (lsp-log-io                     nil)
   (lsp-print-performance          nil)
@@ -45,7 +39,10 @@
   (lsp-completion-sort-initial-results t)
   (lsp-completion-use-last-result      t)
   (lsp-signature-auto-activate         nil)
-  (lsp-enable-indentation              nil)
+  (lsp-signature-doc-lines             30)
+  (lsp-enable-indentation              t)
+  (lsp-eldoc-render-all                nil)
+  (lsp-eldoc-enable-hover              nil)
   ;; deno
   (lsp-clients-deno-config                "./tsconfig.json")
   (lsp-clients-deno-import-map            "./import_map.json")
@@ -80,23 +77,27 @@
         ("s-l c a" . lsp-ui-sideline-apply-code-actions))
   :custom
   ;; lsp-ui-doc
-  (lsp-ui-doc-enable          t)
-  (lsp-ui-doc-header          nil)
-  (lsp-ui-doc-position        'bottom) ;; top, bottom, or at-point
-  (lsp-ui-doc-max-width       120)
-  (lsp-ui-doc-max-height      30)
-  (lsp-ui-doc-use-childframe  t)
-  (lsp-ui-doc-use-webkit      nil)
-  (lsp-ui-doc-delay           0.2)
-  (lsp-ui-doc-show-with-mouse nil)
+  (lsp-ui-doc-enable            t)
+  (lsp-ui-doc-show-with-cursor  t)
+  (lsp-ui-doc-header            nil)
+  (lsp-ui-doc-position          'bottom) ;; top, bottom, or at-point
+  (lsp-ui-doc-border            "#443355")
+  (lsp-ui-doc-max-width         120)
+  (lsp-ui-doc-max-height        30)
+  (lsp-ui-doc-use-childframe    t)
+  (lsp-ui-doc-use-webkit        nil)
+  (lsp-ui-doc-delay             0.2)
+  (lsp-ui-doc-show-with-mouse   nil)
+  (lsp-ui-doc-include-signature t)
   ;; lsp-ui-sideline
-  (lsp-ui-sideline-enable              t)
-  (lsp-ui-sideline-ignore-duplicate    t)
-  (lsp-ui-sideline-show-symbol         t)
-  (lsp-ui-sideline-show-hover          nil)
-  (lsp-ui-sideline-show-diagnostics    t)
-  (lsp-ui-sideline-show-code-actions   nil)
-  (lsp-ui-sideline-code-actions-prefix "💡 ")
+  (lsp-ui-sideline-enable               t)
+  (lsp-ui-sideline-show-hover           nil)
+  (lsp-ui-sideline-ignore-duplicate     t)
+  (lsp-ui-sideline-show-symbol          nil)
+  (lsp-ui-sideline-show-diagnostics     t)
+  (lsp-ui-sideline-show-code-actions    nil)
+  (lsp-ui-sideline-code-actions-prefix  "💡 ")
+  (lsp-ui-sideline-wait-for-all-symbols nil)
   ;; lsp-ui-imenu
   (lsp-ui-imenu-enable        t)
   (lsp-ui-imenu-kind-position 'top)

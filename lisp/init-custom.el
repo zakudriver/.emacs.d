@@ -123,7 +123,22 @@
                             (grandshell-theme grandshell)
                             (tron-legacy-theme tron-legacy)
                             (afternoon-theme afternoon)
-                            (night-owl-theme night-owl))
+                            (night-owl-theme night-owl)
+                            (ef-themes ef-winter)
+                            (ef-themes ef-summer)
+                            (ef-themes ef-duo-light)
+                            (ef-themes ef-day)
+                            (ef-themes ef-frost)
+                            (ef-themes ef-spring)
+                            (ef-themes ef-trio-light)
+                            (ef-themes ef-tritanopia-light)
+                            (ef-themes ef-dark)
+                            (ef-themes ef-duo-dark)
+                            (ef-themes ef-bio)
+                            (ef-themes ef-night)
+                            (ef-themes ef-cherie)
+                            (ef-themes ef-trio-dark)
+                            (ef-themes ef-deuteranopia-dark))
   "Theme list.")
 
 
@@ -192,7 +207,7 @@
   "Hugo github deploy buffer name.")
 
 
-(defconst kumo/lsp-major-mode '(go-mode ng2-html-mode sh-mode ruby-mode css-mode scss-mode sass-mode web-mode typescript-mode js-mode clojure-mode dart-mode rust-mode)
+(defconst kumo/lsp-major-mode '(go-mode ng2-mode ng2-html-mode sh-mode ruby-mode css-mode scss-mode sass-mode web-mode typescript-mode js-mode clojure-mode dart-mode rust-mode)
   "Lsp Supported major mode.")
 
 
@@ -213,17 +228,13 @@
   "Start flycheck list.")
 
 
-(defconst kumo/global-nodemodules-path "/.pnpm-global/5/node_modules"
-  "Global node_modules path.")
-
-
 (defconst kumo/native-compile-async-jobs (or (ignore-errors
 	                                             (string-to-number (shell-command-to-string "nproc")))
 	                                           4)
   "How many jobs to use.")
 
 
-(defconst kumo/org-headline-bullets-list '("🌞" "🌤" "⛈" "🌈")
+(defconst kumo/org-headline-bullets-list '("🌞" "🌤" "🌦️" "🌧️" "🌈")
   "List of org headline bullets.")
 
 

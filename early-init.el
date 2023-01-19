@@ -17,6 +17,7 @@
 
 
 ;; (add-to-list 'default-frame-alist '(undecorated . t))
+(add-to-list 'default-frame-alist '(undecorated-round . t))
 
 
 ;; Faster to disable these here (before they've been initialized)
