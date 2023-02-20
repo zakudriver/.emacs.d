@@ -66,6 +66,7 @@
 
 ;; Dashboard
 (use-package dashboard
+  :commands dashboard-insert-startupify-lists
   :bind
   (("C-c h" . kumo-open-dashboard)
    :map dashboard-mode-map
@@ -157,6 +158,8 @@
 
 ;; modeline parrot-mode
 (use-package parrot
+  :functions kumo-trigger-parrot
+  :commands parrot-start-animation
   :hook
   (after-init . parrot-mode)
   :custom
@@ -192,6 +195,8 @@
 
 (defvar kumo/fireplace-timer nil)
 (use-package fireplace
+  :commands
+  (fireplace-off kumo-restore-window-configuration kumo-save-window-configuration)
   :custom
   (fireplace-smoke-on t)
   :init
@@ -258,6 +263,7 @@
 
 ;; icons
 (use-package all-the-icons
+  :commands kumo-font-installed-p
   :if
   (display-graphic-p)
   :init

@@ -8,6 +8,7 @@
 
 (use-package company
   :functions company-box-icons--elisp
+  :commands company-abort
   :bind
   (("M-/" . company-complete)
    ("s-/" . company-yasnippet)
@@ -51,6 +52,7 @@
   ;; Icons and quickhelp
   (use-package company-box
     :diminish
+    :commands company-box-icons--elisp
     :hook
     (company-mode . company-box-mode)
     :custom

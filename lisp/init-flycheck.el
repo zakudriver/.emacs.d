@@ -12,6 +12,7 @@
 
 
 (use-package flycheck
+  :commands flycheck-list-errors
   :hook
   (prog-mode . global-flycheck-mode)
   ;; (tide-mode  . use-eslint-from-nodemodules)

@@ -13,7 +13,7 @@
 
 ;; Pakcage repository (ELPA)
 (defun kumo-set-package-archives (archives &optional refresh async)
-  "Set the package archives (ELPA).
+  "Set the package ARCHIVES (ELPA).
 
 REFRESH is non-nil, will refresh archive contents.
 ASYNC specifies whether to perform the downloads in the background."
@@ -54,12 +54,13 @@ Return the fastest package archive."
     (when (and (not no-chart)
                (require 'chart nil t)
                (require 'url nil t))
-      (chart-bar-quickie
-       'horizontal
-       "Speed test for the ELPA mirrors"
-       (mapcar (lambda (p) (symbol-name (car p))) kumo/package-archives-alist)
-       "ELPA"
-       (mapcar (lambda (d) (* 1e3 d)) durations) "ms"))
+      (if (functionp 'chart-bar-quickie)
+          (chart-bar-quickie
+           'horizontal
+           "Speed test for the ELPA mirrors"
+           (mapcar (lambda (p) (symbol-name (car p))) kumo/package-archives-alist)
+           "ELPA"
+           (mapcar (lambda (d) (* 1e3 d)) durations) "ms")))
 
     (message "`%s' is the fastest package archive" fastest)
 
@@ -179,7 +180,7 @@ Repeated invocations toggle between the two most recently open buffers."
 
 (defun kumo-cleanup-buffer-safe ()
   "Perform a bunch of safe operations on the whitespace content of a buffer.
-Does not indent buffer, because it is used for a 'before-save-hook,
+Does not indent buffer, because it is used for a `before-save-hook',
 and that might be bad."
   (interactive)
   (untabify (point-min) (point-max))
@@ -541,7 +542,7 @@ ARG: when not nil delete symbol( concat by '_') at point"
 
 
 (defun kumo-jsx-expand ()
-  "jsx component expand.
+  "JSX component expand.
 E.g: <Button />"
   (interactive)
   (let* ((end (point))

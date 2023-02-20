@@ -13,6 +13,7 @@
 
 ;; Emacs client for the Language Server Protocol
 (use-package lsp-mode
+  :commands lsp-format-buffer
   :hook
   (prog-mode . (lambda ()
                  (if (apply 'derived-mode-p kumo/lsp-major-mode)
@@ -125,32 +126,6 @@
    (go-mode            . (lambda () (require 'dap-go)))
    ((c-mode c++-mode objc-mode swift-mode) . (lambda () (require 'dap-lldb)))
    ((js-mode js2-mode)                     . (lambda () (require 'dap-chrome)))))
-
-
-;; C/C++/Objective-C support
-(use-package ccls
-  :defines projectile-project-root-files-top-down-recurring
-  :hook
-  ((c-mode c++-mode objc-mode cuda-mode) . (lambda ()
-                                             (require 'ccls)
-                                             (lsp)))
-  :custom
-  (flycheck-disabled-checkers  '(c/c++-clang c/c++-cppcheck c/c++-gcc))
-  (ccls-initialization-options kumo/ccls-initialization-options)
-  :config
-  (with-eval-after-load 'projectile
-    (setq projectile-project-root-files-top-down-recurring
-          (append '("compile_commands.json"
-                    ".ccls")
-                  projectile-project-root-files-top-down-recurring))))
-
-
-;; dart
-(use-package lsp-dart
-  :custom
-  (lsp-dart-outline         nil)
-  (lsp-dart-sdk-dir         (kumo-home-path-resolve "/.flutter/bin/cache/dart-sdk"))
-  (lsp-dart-flutter-sdk-dir (kumo-home-path-resolve "/.flutter")))
 
 
 (use-package lsp-treemacs)

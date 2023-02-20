@@ -5,6 +5,17 @@
 
 ;;; Code:
 
+(eval-when-compile
+  (require 'init-funcs))
+
+
+;; dart lsp
+(use-package lsp-dart
+  :custom
+  (lsp-dart-outline         nil)
+  (lsp-dart-sdk-dir         (kumo-home-path-resolve "/.flutter/bin/cache/dart-sdk"))
+  (lsp-dart-flutter-sdk-dir (kumo-home-path-resolve "/.flutter")))
+
 
 (use-package dart-mode
   :defines

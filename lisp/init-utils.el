@@ -22,7 +22,8 @@
 
 
 (use-package vterm
-  :functions (kumo-bottom-window vterm-mode)
+  :functions
+  (kumo-bottom-window vterm-mode)
   :bind
   (("C-c v v" . vterm)
    :map vterm-mode-map

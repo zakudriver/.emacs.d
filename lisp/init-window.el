@@ -34,6 +34,7 @@
 
 ;; Quickly switch windows
 (use-package winum
+  :commands kumo-winum-delete-window-macro-factory
   :hook
   (after-init . winum-mode)
   :bind (("M-0"     . winum-select-window-0)
@@ -67,17 +68,19 @@
 
 
 (use-package hydra
+  :commands
+  (kumo-adjust-opacity-down kumo-adjust-opacity-up kumo-adjust-opacity-max)
   :init
   (defhydra hydra-frame-window (:color pink :hint nil)
     "
- ^Window^                              Frame^                       ^^Window Size^^^       ^Opacity^              
- _w1_: delete                          _f1_: delete                     ^ ^ _K_ ^ ^            _=_          
- _w2_: delete others                   _f2_: delete others              _H_ ^+^ _L_            ^+^ 
- _s_wap x-direction and y-direction    _f3_: new                        ^ ^ _J_ ^ ^            _-_  
+ ^Window^                              Frame^                       ^^Window Size^^^       ^Opacity^
+ _w1_: delete                          _f1_: delete                     ^ ^ _K_ ^ ^            _=
+ _w2_: delete others                   _f2_: delete others              _H_ ^+^ _L_            ^+^
+ _s_wap x-direction and y-direction    _f3_: new                        ^ ^ _J_ ^ ^            _-
  Flip _v_erticall                                                   _F_ullscreen        ^^^max_O_pacity
  Flop _h_orizontally                                                _M_aximized
  _R_otate 180 degrees                                               _b_alance
- Rotate 90  degrees _c_lockwise                                     
+ Rotate 90  degrees _c_lockwise
  Rotate 90  degrees _a_nti-clockwise
 "
     ("w1" delete-window)
@@ -107,6 +110,7 @@
 
 
 (use-package zoom
+  :commands zoom--window-ignored-p
   :hook
   (after-init . zoom-mode)
   :bind

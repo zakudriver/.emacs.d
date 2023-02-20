@@ -14,9 +14,12 @@
 (global-hl-line-mode t)
 
 
+(defvar-local show-paren--off-screen-overlay nil)
+
 ;; Highlight matching parens
 (use-package paren
-  :functions show-paren-function
+  :functions
+  (show-paren-function display-line-overlay)
   :hook
   (after-init . show-paren-mode)
   :config
@@ -32,7 +35,6 @@ FACE defaults to inheriting from default and highlight."
                    (or face '(:inherit highlight)))
       ol))
 
-  (defvar-local show-paren--off-screen-overlay nil)
   (advice-add #'show-paren-function :after (lambda (&rest _args)
                                              "Display matching line for off-screen paren."
                                              (when (overlayp show-paren--off-screen-overlay)

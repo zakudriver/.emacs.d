@@ -158,7 +158,9 @@
     Cochin
     Optima
     Victor\ Mono
-    JetBrains\ Mono)
+    JetBrains\ Mono
+    Pes\ Mono
+    Fairfax\ Hax\ HD)
   "Font list.")
 
 
@@ -207,7 +209,7 @@
   "Hugo github deploy buffer name.")
 
 
-(defconst kumo/lsp-major-mode '(go-mode ng2-mode ng2-html-mode sh-mode ruby-mode css-mode scss-mode sass-mode web-mode typescript-mode js-mode clojure-mode dart-mode rust-mode)
+(defconst kumo/lsp-major-mode '(go-mode ng2-mode ng2-html-mode sh-mode ruby-mode css-mode scss-mode sass-mode web-mode typescript-mode js-mode clojure-mode dart-mode rust-mode swift-mode)
   "Lsp Supported major mode.")
 
 

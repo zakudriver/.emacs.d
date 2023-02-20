@@ -7,6 +7,7 @@
 
 
 (use-package paredit
+  :commands paredit-backward-delete
   :hook
   ((emacs-lisp-mode clojure-mode) . paredit-mode)
   :bind

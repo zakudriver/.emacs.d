@@ -6,8 +6,10 @@
 ;;; Code:
 
 
-(setq ruby-indent-level 2
-      ruby-indent-tabs-mode nil)
+(use-package ruby-mode
+  :custom
+  (ruby-indent-level 2)
+  (ruby-indent-tabs-mode nil))
 
 
 ;; Integrate rbenv

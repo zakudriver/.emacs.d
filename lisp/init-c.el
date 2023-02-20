@@ -1,9 +1,26 @@
-;;; init-cpp --- Summary
+;;; init-c --- Summary
 
 ;;; Commentary:
-;; some configuration of cpp.
+;; some configuration of c.
 
 ;;; Code:
+
+;; C/C++/Objective-C lsp
+(use-package ccls
+  :defines projectile-project-root-files-top-down-recurring
+  :hook
+  ((c-mode c++-mode objc-mode cuda-mode) . (lambda ()
+                                             (require 'ccls)
+                                             (lsp)))
+  :custom
+  (flycheck-disabled-checkers  '(c/c++-clang c/c++-cppcheck c/c++-gcc))
+  (ccls-initialization-options kumo/ccls-initialization-options)
+  :config
+  (with-eval-after-load 'projectile
+    (setq projectile-project-root-files-top-down-recurring
+          (append '("compile_commands.json"
+                    ".ccls")
+                  projectile-project-root-files-top-down-recurring))))
 
 
 ;; cpp keyword highlight
@@ -67,6 +84,6 @@
   ((c-mode c++-mode) . (lambda () (add-to-list 'company-backends 'company-irony-c-headers))))
 
 
-(provide 'init-cpp)
+(provide 'init-c)
 
-;;; init-cpp.el ends here
+;;; init-c.el ends here
