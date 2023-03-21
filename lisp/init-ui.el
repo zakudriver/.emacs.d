@@ -17,15 +17,16 @@
   :pretty-hydra
   ((:title (pretty-hydra-title "Lacquer Management" 'faicon "th" :height 1 :v-adjust -0.1)
            :foreign-keys warn :quit-key ("q" "C-g"))
-   ("Actions"
+   ("Theme"
     (("t" lacquer-current-theme "current theme")
-     ("f" lacquer-current-font "current font")
      ("T" lacquer-theme-selector "theme selector")
-     ("F" lacquer-font-selector "font selector")
      ("C" lacquer-theme-carousel "theme carousel")
      ("M" lacquer-mode-selector "mode selector")
      ("a" lacquer-start-auto-switch "start auto switch")
-     ("A" lacquer-stop-auto-switch "stop auto switch"))))
+     ("A" lacquer-stop-auto-switch "stop auto switch"))
+    "Font"
+    (("f" lacquer-current-font "current font")
+     ("F" lacquer-font-selector "font selector"))))
   :hook
   (after-init . lacquer-auto-mode)
   :bind
@@ -182,6 +183,7 @@
 (use-package fireplace
   :commands
   (fireplace-off my-restore-window-configuration my-save-window-configuration)
+  :functions my-switch-timing-fireplace
   :custom
   (fireplace-smoke-on t)
   :init
@@ -196,6 +198,7 @@
 						                                        (lambda ()
                                                       (fireplace)))))
     (message "The timing fireplace is %s." (if my/fireplace-timer "on" "off")))
+  (my-switch-timing-fireplace)
   :config
   (defvar my/fireplacepee nil)
   (advice-add #'fireplace-off :after (lambda ()
