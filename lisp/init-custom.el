@@ -10,7 +10,7 @@
   (require 'init-const))
 
 
-(defcustom kumo/package-archives-alist
+(defcustom my/package-archives-alist
   '((melpa    . (("gnu"    . "http://elpa.gnu.org/packages/")
                  ("nongnu" . "http://elpa.nongnu.org/nongnu/")
                  ("melpa"  . "http://melpa.org/packages/")))
@@ -39,13 +39,13 @@
                                    :value-type (string :tag "URL or directory name"))))
 
 
-(defcustom kumo/package-archives 'melpa
+(defcustom my/package-archives 'melpa
   "Set package archives from which to fetch."
   :group 'centaur
   :set (lambda (symbol value)
          (set symbol value)
          (setq package-archives
-               (or (alist-get value kumo/package-archives-alist)
+               (or (alist-get value my/package-archives-alist)
                    (error "Unknown package archives: `%s'" value))))
   :type `(choice ,@(mapcar
                     (lambda (item)
@@ -53,10 +53,10 @@
                         (list 'const
                               :tag (capitalize (symbol-name name))
                               name)))
-                    kumo/package-archives-alist)))
+                    my/package-archives-alist)))
 
 
-;; (defconst kumo/package-archives 'tuna
+;; (defconst my/package-archives 'tuna
 ;;   "Set package archives from which to fetch.
 ;; (choice
 ;;   (const :tag \"Melpa\" melpa)
@@ -66,15 +66,15 @@
 ;;   (const :tag \"Melpa-Mirror\" melpa-mirror))")
 
 
-(defconst kumo/logo (expand-file-name "logo.png" user-emacs-directory)
+(defconst my/logo (expand-file-name "logo.png" user-emacs-directory)
   "Path of logo file.")
 
 
-(defconst kumo/default-theme 'monokai
+(defconst my/default-theme 'monokai
   "Default theme.")
 
 
-(defconst kumo/theme-list '((monokai-theme monokai)
+(defconst my/theme-list '((monokai-theme monokai)
                             (monokai-pro-theme monokai-pro)
                             (dracula-theme dracula)
                             (doom-themes doom-one-light)
@@ -142,7 +142,7 @@
   "Theme list.")
 
 
-(defconst kumo/font-list
+(defconst my/font-list
   '(Menlo
     SF\ Mono
     Monaco
@@ -160,21 +160,22 @@
     Victor\ Mono
     JetBrains\ Mono
     Pes\ Mono
-    Fairfax\ Hax\ HD)
+    Fairfax\ Hax\ HD
+    Unifont)
   "Font list.")
 
 
-(defconst kumo/default-font-size
+(defconst my/default-font-size
   (if sys/macp 135 100)
   "Font size.")
 
 
-(defconst kumo/font-weight
+(defconst my/font-weight
   'normal
   "Font weight.")
 
 
-(defconst kumo/ccls-initialization-options
+(defconst my/ccls-initialization-options
   (if sys/macp
       '(:clang
         (:extraArgs ["-isystem/Library/Developer/CommandLineTools/usr/include/c++/v1"
@@ -185,62 +186,62 @@
   "CCLS initialization options.")
 
 
-(defconst kumo/easy-hugo-basedir "~/WWW-BUILDER/"
+(defconst my/easy-hugo-basedir "~/WWW-BUILDER/"
   "Hugo basedir.")
 
 
-(defconst kumo/easy-hugo-postdir "notebook-org"
+(defconst my/easy-hugo-postdir "notebook-org"
   "Hugo postdir.")
 
 
-(defconst kumo/easy-hugo-url "https://zakudriver.github.io/"
+(defconst my/easy-hugo-url "https://zakudriver.github.io/"
   "Hugo site url.")
 
 
-(defconst kumo/easy-hugo-preview-url "http://localhost:1313/"
+(defconst my/easy-hugo-preview-url "http://localhost:1313/"
   "Hugo preview url.")
 
 
-(defconst kumo/easy-hugo-github-deploy-script "publish.sh"
+(defconst my/easy-hugo-github-deploy-script "publish.sh"
   "Hugo github deploy script.")
 
 
-(defconst kumo/easy-hugo-github-deploy-buffer-name "*Hugo Github Deploy*"
+(defconst my/easy-hugo-github-deploy-buffer-name "*Hugo Github Deploy*"
   "Hugo github deploy buffer name.")
 
 
-(defconst kumo/lsp-major-mode '(go-mode ng2-mode ng2-html-mode sh-mode ruby-mode css-mode scss-mode sass-mode web-mode typescript-mode js-mode clojure-mode dart-mode rust-mode swift-mode)
+(defconst my/lsp-major-mode '(go-mode ng2-mode ng2-html-mode sh-mode ruby-mode css-mode scss-mode sass-mode web-mode typescript-mode js-mode clojure-mode dart-mode rust-mode swift-mode)
   "Lsp Supported major mode.")
 
 
-(defconst kumo/lsp-on-save-major-mode '(ruby-mode clojure-mode dart-mode)
+(defconst my/lsp-on-save-major-mode '(ruby-mode clojure-mode dart-mode)
   "Lsp Supported major mode.")
 
 
-(defconst kumo/org-mode-export-html-css "/org/style.css"
+(defconst my/org-mode-export-html-css "/org/style.css"
   "Insert inline css file when org export html.")
 
 
-(defconst kumo/evil-local-mode '(web-mode typescript-mode js-mode js-mode go-mode ruby-mode css-mode scss-mode)
+(defconst my/evil-local-mode '(web-mode typescript-mode js-mode js-mode go-mode ruby-mode css-mode scss-mode)
   "Start evil-local-mode list.")
 
 
-(defconst kumo/flycheck-boot-mode '(not text-mode outline-mode fundamental-mode lisp-interaction-mode
+(defconst my/flycheck-boot-mode '(not text-mode outline-mode fundamental-mode lisp-interaction-mode
                                         org-mode diff-mode shell-mode eshell-mode term-mode vterm-mode)
   "Start flycheck list.")
 
 
-(defconst kumo/native-compile-async-jobs (or (ignore-errors
+(defconst my/native-compile-async-jobs (or (ignore-errors
 	                                             (string-to-number (shell-command-to-string "nproc")))
 	                                           4)
   "How many jobs to use.")
 
 
-(defconst kumo/org-headline-bullets-list '("🌞" "🌤" "🌦️" "🌧️" "🌈")
+(defconst my/org-headline-bullets-list '("🌞" "🌤" "🌦️" "🌧️" "🌈")
   "List of org headline bullets.")
 
 
-;; (defconst kumo/prettify-symbols-alist
+;; (defconst my/prettify-symbols-alist
 ;;   '(("lambda" . ?λ)
 ;;     ("<-" . ?←)
 ;;     ("->" . ?→)

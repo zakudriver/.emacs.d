@@ -16,7 +16,7 @@
   :commands evil-local-mode
   :hook
   (prog-mode . (lambda ()
-                 (when (apply 'derived-mode-p kumo/evil-local-mode)
+                 (when (apply 'derived-mode-p my/evil-local-mode)
                    (evil-local-mode t))))
   :custom
   (evil-want-C-u-scroll t)
@@ -42,7 +42,7 @@
                    (kbd "<C-backspace>") 'backward-delete-char-untabify)
   
   (evil-define-key nil evil-visual-state-map
-                   "z" 'kumo-wrap-with-input
+                   "z" 'my-wrap-with-input
                    "d" 'evil-delete)
 
   ;; evil x key

@@ -19,17 +19,17 @@
   ;; (web-mode . use-eslint-tide)
   :bind
   (:map flycheck-mode-map
-        ("C-c c c" . kumo-flycheck-list-errors-toggle)
-        ("C-c c s" . kumo-flycheck-list-errors-select-window))
+        ("C-c c c" . my-flycheck-list-errors-toggle)
+        ("C-c c s" . my-flycheck-list-errors-select-window))
   :init
   (add-to-list 'display-buffer-alist
-               `(,(eval `(rx bos ,kumo/flycheck-errors-buffer-name eos))
+               `(,(eval `(rx bos ,my/flycheck-errors-buffer-name eos))
                  (display-buffer-reuse-window display-buffer-in-side-window)
                  (side            . bottom)
                  (reusable-frames . visible)
                  (window-height   . 0.15)))
   :custom
-  (flycheck-global-modes kumo/flycheck-boot-mode)
+  (flycheck-global-modes my/flycheck-boot-mode)
   (flycheck-emacs-lisp-load-path 'inherit)
   ;; Only check while saving and opening files
   (flycheck-check-syntax-automatically '(save mode-enabled))
@@ -40,10 +40,10 @@
     (define-fringe-bitmap 'flycheck-fringe-bitmap-double-arrow
       [16 48 112 240 112 48 16] nil nil 'center))
 
-  (defun kumo-flycheck-list-errors-toggle ()
+  (defun my-flycheck-list-errors-toggle ()
     "Open or delete flycheck-errors-list window."
     (interactive)
-    (let ((w (get-buffer-window kumo/flycheck-errors-buffer-name)))
+    (let ((w (get-buffer-window my/flycheck-errors-buffer-name)))
       (if w
           (delete-window w)
         (flycheck-list-errors)))))

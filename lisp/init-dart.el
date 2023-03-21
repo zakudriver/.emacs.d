@@ -13,8 +13,8 @@
 (use-package lsp-dart
   :custom
   (lsp-dart-outline         nil)
-  (lsp-dart-sdk-dir         (kumo-home-path-resolve "/.flutter/bin/cache/dart-sdk"))
-  (lsp-dart-flutter-sdk-dir (kumo-home-path-resolve "/.flutter")))
+  (lsp-dart-sdk-dir         (my-home-path-resolve "/.flutter/bin/cache/dart-sdk"))
+  (lsp-dart-flutter-sdk-dir (my-home-path-resolve "/.flutter")))
 
 
 (use-package dart-mode
@@ -34,7 +34,7 @@
 ;;         ("C-M-x" . #'hover-run-or-hot-restart)
 ;;         ("C-M-p" . #'hover-take-screenshot'))
 ;;   :custom
-;;   (flutter-sdk-path (kumo-home-path-resolve "/.flutter"))
+;;   (flutter-sdk-path (my-home-path-resolve "/.flutter"))
 ;;   (hover-command-path (concat (getenv "GOPATH") "/bin/hover"))
 ;;   (hover-hot-reload-on-save t)
 ;;   (hover-screenshot-path (concat (getenv "HOME") "/Pictures"

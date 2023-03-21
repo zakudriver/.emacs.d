@@ -58,7 +58,7 @@
          ("C-. ["     . emmet-prev-edit-point)
          ("C-. ]"     . emmet-next-edit-point)
          ("<backtab>" . emmet-expand-yas)
-         ("<C-tab>"   . kumo-jsx-expand)))
+         ("<C-tab>"   . my-jsx-expand)))
   :custom
   (emmet-move-cursor-between-quotes t)
   (emmet-indentation                2)

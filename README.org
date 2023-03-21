@@ -1,6 +1,6 @@
 * emacs.d
 
- /This is kumo's emacs configuration. (only GUI)/
+ Emacs configuration. (only GUI)/
 
  *Feature*
 

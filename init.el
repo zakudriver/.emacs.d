@@ -2,6 +2,9 @@
 
 ;; (setq debug-on-error t)
 
+;; (setq url-proxy-services '(("http" . "127.0.0.1:58591") ("https" . "127.0.0.1:58591")))
+
+
 ;; (setq server-socket-dir (format "/tmp/emacs%d" (user-uid)))
 ;; (server-start)
 
@@ -82,16 +85,18 @@
 
   (require 'init-window)
   (require 'init-ivy)
+
   (require 'init-company)
+  (require 'init-yasnippet)
+  
   (require 'init-dired)
   (require 'init-flycheck)
-  (require 'init-yasnippet)
   (require 'init-projectile)
 
-  ;; ;; polymode
-  ;; ;; (require 'init-polymode)
+  ;; polymode
+  ;; (require 'init-polymode)
 
-  ;; Programming
+  ;; ;; Programming
   (require 'init-lsp)
   
   (require 'init-prog)
@@ -104,7 +109,7 @@
   (require 'init-rust)
   (require 'init-lisp)
 
-  ;; Web
+  ;; ;; Web
   (require 'init-js)
   (require 'init-web)
 

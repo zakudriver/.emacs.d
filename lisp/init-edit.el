@@ -64,6 +64,8 @@
 
 ;; Increase selected region by semantic units
 (use-package expand-region
+  :custom
+  (expand-region-fast-keys-enabled nil)
   :bind
   ("C-=" . er/expand-region)
   ("C--" . er/contract-region))
@@ -88,14 +90,6 @@
    ("C-M-<"       . mc/skip-to-previous-like-this)
    :map mc/keymap
    ("C-|" . mc/vertical-align-with-space)))
-
-
-;; Never lose your cursor again
-(use-package beacon
-  :hook
-  (after-init . beacon-mode)
-  :custom
-  (beacon-blink-when-window-changes nil))
 
 
 ;; Automatic parenthesis pairing

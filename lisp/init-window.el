@@ -10,6 +10,9 @@
   (require 'init-const)
   (require 'init-funcs))
 
+(if sys/macp
+    (pixel-scroll-precision-mode))
+
 
 ;; Fullscreen
 (if (featurep 'cocoa)
@@ -34,10 +37,36 @@
 
 ;; Quickly switch windows
 (use-package winum
-  :commands kumo-winum-delete-window-macro-factory
+  :commands my-winum-delete-window-macro-factory
+  :pretty-hydra
+  ((:title (pretty-hydra-title "Window Management" 'faicon "th" :height 1 :v-adjust -0.1)
+           :foreign-keys warn :quit-key ("q" "C-g"))
+   ("Actions"
+    (("TAB" other-window "switch")
+     ("x" delete-window "delete" :exit t)
+     ("m" toggle-frame-maximized "maximize")
+     ("f" toggle-frame-fullscreen "fullscreen" :exit t))
+    "Resize"
+    (("h" shrink-window-horizontally "←")
+     ("j" enlarge-window "↓")
+     ("k" shrink-window "↑")
+     ("l" enlarge-window-horizontally "→")
+     ("n" balance-windows "balance" :exit t))
+    "Split"
+    (("r" split-window-right "horizontally")
+     ("R" split-window-horizontally-instead "horizontally instead")
+     ("v" split-window-below "vertically")
+     ("V" split-window-vertically-instead "vertically instead")
+     ("t" toggle-window-split "toggle"))
+    "Zoom"
+    (("+" text-scale-increase "in")
+     ("=" text-scale-increase "in")
+     ("-" text-scale-decrease "out")
+     ("0" (text-scale-increase 0) "reset"))))
   :hook
   (after-init . winum-mode)
-  :bind (("M-0"     . winum-select-window-0)
+  :bind (("C-c w w" . winum-hydra/body)
+         ("M-0"     . winum-select-window-0)
          ("M-1"     . winum-select-window-1)
          ("M-2"     . winum-select-window-2)
          ("M-3"     . winum-select-window-3)
@@ -60,53 +89,11 @@
   :custom
   (winum-auto-setup-mode-line nil)
   :config
-  (defmacro kumo-winum-delete-window-macro-factory ()
+  (defmacro my-winum-delete-window-macro-factory ()
     "Winum delete window function macro factory."
-    `(progn ,@(mapcar 'kumo-winum-delete-window-factory '(0 1 2 3 4 5 6 7 8 9))))
+    `(progn ,@(mapcar 'my-winum-delete-window-factory (number-sequence 0 9))))
   
-  (kumo-winum-delete-window-macro-factory))
-
-
-(use-package hydra
-  :commands
-  (kumo-adjust-opacity-down kumo-adjust-opacity-up kumo-adjust-opacity-max)
-  :init
-  (defhydra hydra-frame-window (:color pink :hint nil)
-    "
- ^Window^                              Frame^                       ^^Window Size^^^       ^Opacity^
- _w1_: delete                          _f1_: delete                     ^ ^ _K_ ^ ^            _=
- _w2_: delete others                   _f2_: delete others              _H_ ^+^ _L_            ^+^
- _s_wap x-direction and y-direction    _f3_: new                        ^ ^ _J_ ^ ^            _-
- Flip _v_erticall                                                   _F_ullscreen        ^^^max_O_pacity
- Flop _h_orizontally                                                _M_aximized
- _R_otate 180 degrees                                               _b_alance
- Rotate 90  degrees _c_lockwise
- Rotate 90  degrees _a_nti-clockwise
-"
-    ("w1" delete-window)
-    ("w2" delete-other-windows)
-    ("f1" delete-frame :exit t)
-    ("f2" delete-other-frames :exit t)
-    ("f3" make-frame  :exit t)
-    ("b"  balance-windows)
-    ("s"  transpose-frame)
-    ("F"  toggle-frame-fullscreen)
-    ("M"  toggle-frame-maximized)
-    ("H"  shrink-window-horizontally)
-    ("K"  shrink-window)
-    ("J"  enlarge-window)
-    ("L"  enlarge-window-horizontally)
-    ("v"  flip-frame)
-    ("h"  flop-frame)
-    ("R"  rotate-frame)
-    ("c"  rotate-frame-clockwise)
-    ("a"  rotate-frame-anticlockwise)
-    ("-"  kumo-adjust-opacity-down)
-    ("="  kumo-adjust-opacity-up)
-    ("O"  kumo-adjust-opacity-max)
-    ("q"  nil "quit"))
-  :config
-  (use-package transpose-frame))
+  (my-winum-delete-window-macro-factory))
 
 
 (use-package zoom
@@ -117,12 +104,98 @@
   ("C-c w z" . zoom)
   :custom
   (zoom-size                 '(0.618 . 0.618))
-  (zoom-ignored-buffer-names '(kumo/flycheck-errors-buffer-name))
+  (zoom-ignored-buffer-names '(my/flycheck-errors-buffer-name))
   (zoom-ignored-major-modes  '(flycheck-error-list-mode undo-tree-visualizer-mode achive-visual-mode treemacs-mode vterm-mode))
   :config
   (advice-add 'balance-windows :around (lambda (func &optional window-or-frame)
                                          (unless (zoom--window-ignored-p)
                                            (funcall func window-or-frame)))))
+
+
+(use-package windmove
+  :ensure nil
+  :init
+  (windmove-default-keybindings 'super))
+
+
+(use-package popper
+  :functions popper-close-window-hack
+  :autoload popper-group-by-projectile
+  :hook
+  (emacs-startup . popper-mode)
+  :bind
+  (("C-`"   . popper-toggle-latest)
+   ("M-`"   . popper-cycle)
+   ("C-M-`" . popper-toggle-type))
+  :custom
+  (popper-reference-buffers
+   '("\\*Messages\\*"
+     "Output\\*$"
+     "\\*Compile-Log\\*"
+     "\\*Completions\\*"
+     "\\*Warnings\\*"
+     "\\*Async Shell Command\\*"
+     "\\*Calendar\\*"
+     "\\*Finder\\*"
+     "\\*Kill Ring\\*"
+     "\\*Go-Translate\\*"
+     bookmark-bmenu-mode
+     comint-mode
+     compilation-mode
+     help-mode helpful-mode
+     tabulated-list-mode
+     Buffer-menu-mode
+
+     flymake-diagnostics-buffer-mode
+     flycheck-error-list-mode flycheck-verify-mode
+
+     grep-mode occur-mode rg-mode deadgrep-mode ag-mode pt-mode
+     ivy-occur-mode ivy-occur-grep-mode
+     youdao-dictionary-mode
+
+     "^\\*Process List\\*" process-menu-mode
+     list-environment-mode cargo-process-mode
+
+     "^\\*eshell.*\\*.*$"       eshell-mode
+     "^\\*shell.*\\*.*$"        shell-mode
+     "^\\*terminal.*\\*.*$"     term-mode
+     "^\\*vterm[inal]*.*\\*.*$" vterm-mode
+
+     "\\*DAP Templates\\*$" dap-server-log-mode
+     "\\*ELP Profiling Restuls\\*" profiler-report-mode
+     "\\*Paradox Report\\*$" "\\*package update results\\*$" "\\*Package-Lint\\*$"
+
+     "\\*ert\\*$" overseer-buffer-mode
+     "\\*gud-debug\\*$"
+     "\\*lsp-help\\*$" "\\*lsp session\\*$" "*Java Dependency List*" "*LSP Symbols List*" "*LSP Error List*"
+     "\\*quickrun\\*$"
+     "\\*tldr\\*$"
+     "\\*vc-.*\\*$"
+     "^\\*elfeed-entry\\*$"
+     "^\\*macro expansion\\**"
+
+     "\\*Agenda Commands\\*" "\\*Org Select\\*" "\\*Capture\\*" "^CAPTURE-.*\\.org*"
+     "\\*Gofmt Errors\\*$" "\\*Go Test\\*$" godoc-mode
+     "\\*docker-.+\\*"
+     "\\*prolog\\*" inferior-python-mode inf-ruby-mode swift-repl-mode
+     "\\*rustfmt\\*$" rustic-compilation-mode rustic-cargo-clippy-mode
+     rustic-cargo-outdated-mode rustic-cargo-run-mode rustic-cargo-test-mode))
+  :config
+  (popper-echo-mode 1)
+  
+  (with-eval-after-load 'projectile
+    (setq popper-group-function #'popper-group-by-projectile))
+
+  (defun popper-close-window-hack (&rest _)
+    "Close popper window via `C-g'."
+    ;; `C-g' can deactivate region
+    (when (and (called-interactively-p 'interactive)
+               (not (region-active-p))
+               popper-open-popup-alist)
+      (let ((window (caar popper-open-popup-alist)))
+        (when (window-live-p window)
+          (delete-window window)))))
+  (advice-add #'keyboard-quit :before #'popper-close-window-hack))
 
 
 (provide 'init-window)

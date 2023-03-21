@@ -14,9 +14,9 @@
   (:map paredit-mode-map
         ("M-[" . paredit-wrap-angled)
         ("M-{" . paredit-wrap-curly)
-        ("DEL" . kumo-paredit-backward-delete))
+        ("DEL" . my-paredit-backward-delete))
   :config
-  (defun kumo-paredit-backward-delete (n &optional arg)
+  (defun my-paredit-backward-delete (n &optional arg)
     "Delete the previous N characters;"
     (interactive "p\nP")
     (if (use-region-p)
@@ -24,18 +24,16 @@
       (paredit-backward-delete arg))))
 
 
-
-(use-package eldoc
-  :ensure nil
-  :diminish)
+;; (use-package eldoc
+;;   :ensure nil)
 
 
-;;;; emacs-lisp-mode
+;; emacs-lisp-mode
 (use-package elisp-mode
   :ensure nil
   :bind
   (:map emacs-lisp-mode-map
-        ("C-<tab>" . kumo-indent-whole-buffer)))
+        ("C-<tab>" . my-indent-whole-buffer)))
 
 
 (use-package highlight-quoted

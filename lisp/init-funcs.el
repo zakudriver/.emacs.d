@@ -12,7 +12,7 @@
 
 
 ;; Pakcage repository (ELPA)
-(defun kumo-set-package-archives (archives &optional refresh async)
+(defun my-set-package-archives (archives &optional refresh async)
   "Set the package ARCHIVES (ELPA).
 
 REFRESH is non-nil, will refresh archive contents.
@@ -21,8 +21,8 @@ ASYNC specifies whether to perform the downloads in the background."
    (list
     (intern
      (ivy-read "Select package archives: "
-               (mapcar #'car kumo/package-archives-alist)
-               :preselect (symbol-name kumo/package-archives)))))
+               (mapcar #'car my/package-archives-alist)
+               :preselect (symbol-name my/package-archives)))))
   
   ;; Refresh if need
   (and refresh (package-refresh-contents async))
@@ -30,7 +30,7 @@ ASYNC specifies whether to perform the downloads in the background."
   (message "Set package archives to `%s'" archives))
 
 
-(defun kumo-test-package-archives (&optional no-chart)
+(defun my-test-package-archives (&optional no-chart)
   "Test connection speed of all package archives and display on chart.
 
 Not displaying the chart if NO-CHART is non-nil.
@@ -46,9 +46,9 @@ Return the fastest package archive."
                          (ignore-errors
                            (url-copy-file url null-device t))
                          (float-time (time-subtract (current-time) start))))
-                     kumo/package-archives-alist))
+                     my/package-archives-alist))
          (fastest (car (nth (cl-position (apply #'min durations) durations)
-                            kumo/package-archives-alist))))
+                            my/package-archives-alist))))
 
     ;; Display on chart
     (when (and (not no-chart)
@@ -58,7 +58,7 @@ Return the fastest package archive."
           (chart-bar-quickie
            'horizontal
            "Speed test for the ELPA mirrors"
-           (mapcar (lambda (p) (symbol-name (car p))) kumo/package-archives-alist)
+           (mapcar (lambda (p) (symbol-name (car p))) my/package-archives-alist)
            "ELPA"
            (mapcar (lambda (d) (* 1e3 d)) durations) "ms")))
 
@@ -68,25 +68,25 @@ Return the fastest package archive."
     fastest))
 
 
-(defun kumo-open-init-file()
+(defun my-open-init-file()
   "Open init.el file."
   (interactive)
   (find-file (concat user-emacs-directory "init.el")))
 
 
-(defun kumo-dos2unix ()
+(defun my-dos2unix ()
   "Convert the current buffer to UNIX file format."
   (interactive)
   (set-buffer-file-coding-system 'undecided-unix nil))
 
 
-(defun kumo-unix2dos ()
+(defun my-unix2dos ()
   "Convert the current buffer to DOS file format."
   (interactive)
   (set-buffer-file-coding-system 'undecided-dos nil))
 
 
-(defun kumo-save-buffer-as-utf8 (coding-system)
+(defun my-save-buffer-as-utf8 (coding-system)
   "Revert a buffer with `CODING-SYSTEM' and save as UTF-8."
   (interactive "zCoding system for visited file (default nil):")
   (revert-buffer-with-coding-system coding-system)
@@ -94,12 +94,12 @@ Return the fastest package archive."
   (save-buffer))
 
 
-(defun kumo-font-installed-p (font-name)
+(defun my-font-installed-p (font-name)
   "Check if font with FONT-NAME is available."
   (find-font (font-spec :name font-name)))
 
 
-(defun kumo-chars-displayable-p (chars)
+(defun my-chars-displayable-p (chars)
   "Check if list of CHARS is available."
   (cl-loop for it in chars
            if (not (char-displayable-p (string-to-char it)))
@@ -107,7 +107,7 @@ Return the fastest package archive."
            finally return t))
 
 
-(defun kumo-save-some-buffers ()
+(defun my-save-some-buffers ()
   "Save some buffers without prompting."
   (interactive)
   (if (y-or-n-p (format "Really save buffers? "))
@@ -115,7 +115,7 @@ Return the fastest package archive."
     (message "Canceled save.")))
 
 
-(defun kumo-kill-this-buffer (&optional arg)
+(defun my-kill-this-buffer (&optional arg)
   "Kill the current buffer.
 ARG: If the universal prefix argument is used then kill also the window."
   (interactive "P")
@@ -127,7 +127,7 @@ ARG: If the universal prefix argument is used then kill also the window."
   (message "Buffers deleted!"))
 
 
-(defun kumo-kill-other-buffers (&optional arg)
+(defun my-kill-other-buffers (&optional arg)
   "Kill other buffers.
 ARG: If the universal prefix argument is used then will the windows too."
   (interactive "P")
@@ -139,14 +139,14 @@ ARG: If the universal prefix argument is used then will the windows too."
     (message "Buffers deleted!")))
 
 
-(defun kumo-switch-to-previous-buffer ()
+(defun my-switch-to-previous-buffer ()
   "Switch to previously open buffer.
 Repeated invocations toggle between the two most recently open buffers."
   (interactive)
   (switch-to-buffer (other-buffer (current-buffer) 1)))
 
 
-(defun kumo-rename-current-buffer-file ()
+(defun my-rename-current-buffer-file ()
   "Rename current buffer and file it is visiting."
   (interactive)
   (let ((name (buffer-name))
@@ -164,7 +164,7 @@ Repeated invocations toggle between the two most recently open buffers."
                    name (file-name-nondirectory new-name)))))))
 
 
-(defun kumo-delete-current-buffer-file ()
+(defun my-delete-current-buffer-file ()
   "Delete file connected to current buffer and kill buffer."
   (interactive)
   (let ((filename (buffer-file-name))
@@ -178,7 +178,7 @@ Repeated invocations toggle between the two most recently open buffers."
         (message "File '%s' successfully removed" filename)))))
 
 
-(defun kumo-cleanup-buffer-safe ()
+(defun my-cleanup-buffer-safe ()
   "Perform a bunch of safe operations on the whitespace content of a buffer.
 Does not indent buffer, because it is used for a `before-save-hook',
 and that might be bad."
@@ -188,15 +188,15 @@ and that might be bad."
   (set-buffer-file-coding-system 'utf-8))
 
 
-(defun kumo-cleanup-buffer ()
+(defun my-cleanup-buffer ()
   "Perform a bunch of operations on the whitespace content of a buffer.
 Including indent-buffer, which should not be called automatically on save."
   (interactive)
-  (kumo-cleanup-buffer-safe)
+  (my-cleanup-buffer-safe)
   (indent-region (point-min) (point-max)))
 
 
-(defun kumo-toggle-window-split ()
+(defun my-toggle-window-split ()
   "Toggle windows."
   (interactive)
   (if (= (count-windows) 2)
@@ -224,7 +224,7 @@ Including indent-buffer, which should not be called automatically on save."
 
 
 ;; Wrap selected text by input symbol.
-(defun kumo-wrap-with-input (beg end symbol)
+(defun my-wrap-with-input (beg end symbol)
   "Wrap selected text by input symbol.
 BEG is begin point.
 END is end point.
@@ -240,7 +240,7 @@ SYMBOL is input string."
 
   (let ((beg-symbol symbol)
         (end-symbol symbol))
-    (cl-loop for (i . j) in kumo/symbol-list
+    (cl-loop for (i . j) in my/symbol-list
              do (cond
                  ((string= symbol j)
                   (setq beg-symbol i))
@@ -253,27 +253,27 @@ SYMBOL is input string."
     (insert end-symbol)))
 
 
-(defun kumo-window-vertically-selected ()
+(defun my-window-vertically-selected ()
   "Split window vertically and selected."
   (interactive)
   (split-window-vertically)
   (other-window 1))
 
 
-(defun kumo-window-horizontally-selected ()
+(defun my-window-horizontally-selected ()
   "Split window horizontally and selected."
   (interactive)
   (split-window-horizontally)
   (other-window 1))
 
 
-(defun kumo-flycheck-list-errors-select-window ()
+(defun my-flycheck-list-errors-select-window ()
   "Select window for flycheck-errors-list."
   (interactive)
-  (select-window (get-buffer-window kumo/flycheck-errors-buffer-name)))
+  (select-window (get-buffer-window my/flycheck-errors-buffer-name)))
 
 
-(defun kumo-vterm-select-window ()
+(defun my-vterm-select-window ()
   "Select window for vterm."
   (interactive)
   (catch 'break
@@ -284,18 +284,18 @@ SYMBOL is input string."
           (throw 'break nil))))))
 
 
-(defun kumo-new-vterm ()
+(defun my-new-vterm ()
   "New a vterm."
   (interactive)
   (if (fboundp 'vterm-mode)
       (let ((buffer (generate-new-buffer "vterm")))
         (with-current-buffer (buffer-name buffer)
           (vterm-mode))
-        (kumo-bottom-window buffer))
+        (my-bottom-window buffer))
     (vterm)))
 
 
-(defun kumo-bottom-window (buffer)
+(defun my-bottom-window (buffer)
   "Open a bottom window.
 BUFFER is the symbol."
   (display-buffer-in-side-window
@@ -306,14 +306,14 @@ BUFFER is the symbol."
      (window-height . 0.3))))
 
 
-(defun kumo-current-buffer-bottom-window ()
+(defun my-current-buffer-bottom-window ()
   "Current buffer display on then bottom window."
   (interactive)
   (delete-window)
-  (kumo-bottom-window (window-buffer)))
+  (my-bottom-window (window-buffer)))
 
 
-(defun kumo-indent-whole-buffer ()
+(defun my-indent-whole-buffer ()
   "Mark whole buffer."
   (interactive)
   (let ((point (point)))
@@ -324,43 +324,43 @@ BUFFER is the symbol."
     (goto-char point)))
 
 
-(defun kumo-home-path-resolve (&rest path)
+(defun my-home-path-resolve (&rest path)
   "Return $HOME + path.
 PATH is a string list."
   (apply 'concat (getenv "HOME") path))
 
 
-(defvar kumo/divisor-cache 14
+(defvar my/divisor-cache 14
   "Divisor cache.")
-(defun kumo-number-division (beg end &optional num)
+(defun my-number-division (beg end &optional num)
   "Selected number division.
 BEG is begin point.
 END is end point.
 NUM is a number."
   (interactive "r\nsPlease input number: ")
   (setq num (string-to-number num))
-  (setq kumo/divisor-cache (if (= num 0) kumo/divisor-cache num))
+  (setq my/divisor-cache (if (= num 0) my/divisor-cache num))
   (if (use-region-p)
       (let ((regionp (string-to-number (buffer-substring beg end))))
         (delete-region beg end)
         (insert
-         (number-to-string (/ (float regionp) (float kumo/divisor-cache)))))))
+         (number-to-string (/ (float regionp) (float my/divisor-cache)))))))
 
 
-(defun kumo-timestamp ()
+(defun my-timestamp ()
   "Timestamp.
 eg: 2020-02-22T22:22:22."
   (interactive)
   (insert (format-time-string "%Y-%m-%dT%H:%M:%S")))
 
 
-(defun kumo-select-minibuffer-window ()
+(defun my-select-minibuffer-window ()
   "Select minibuffer window."
   (interactive)
   (select-window (active-minibuffer-window)))
 
 
-(defun kumo-winum-delete-window-factory (num)
+(defun my-winum-delete-window-factory (num)
   "Winum delete window function macro factory.
 NUM is the window number."
   `(defun ,(intern (concat "winum-delete-window-" (number-to-string num))) ()
@@ -368,15 +368,15 @@ NUM is the window number."
      (,(intern-soft (concat "winum-select-window-" (number-to-string num))) t)))
 
 
-(defun kumo-easy-hugo-github-deploy ()
+(defun my-easy-hugo-github-deploy ()
   "Easy-Hugo deploy github page."
   (interactive)
-  (let* ((output-buffer (get-buffer-create kumo/easy-hugo-github-deploy-buffer-name))
-         (command-window (async-shell-command (expand-file-name (concat kumo/easy-hugo-basedir kumo/easy-hugo-github-deploy-script)) output-buffer nil)))
+  (let* ((output-buffer (get-buffer-create my/easy-hugo-github-deploy-buffer-name))
+         (command-window (async-shell-command (expand-file-name (concat my/easy-hugo-basedir my/easy-hugo-github-deploy-script)) output-buffer nil)))
     (select-window command-window)))
 
 
-(defun kumo-put-file-name-on-clipboard (&optional arg)
+(defun my-put-file-name-on-clipboard (&optional arg)
   "Put the current file name on the clipboard.
 ARG: If the universal prefix argument is used then put file full name."
   (interactive "P")
@@ -389,18 +389,18 @@ ARG: If the universal prefix argument is used then put file full name."
       (message filename))))
 
 
-(defun kumo-open-current-file-in-finder ()
+(defun my-open-current-file-in-finder ()
   "Open current file in mac finder."
   (interactive)
   (when sys/macp
     (shell-command (concat "open -R " buffer-file-name))))
 
 
-(defun kumo-org-inline-css-hook (exporter)
+(defun my-org-inline-css-hook (exporter)
   "Insert custom inline css when org export html.
 EXPORTER: export way."
   (when (eq exporter 'html)
-    (let ((path (concat user-emacs-directory kumo/org-mode-export-html-css)))
+    (let ((path (concat user-emacs-directory my/org-mode-export-html-css)))
       (if (file-exists-p path)
           (progn
             (setq-local org-html-head-include-default-style nil)
@@ -414,7 +414,7 @@ EXPORTER: export way."
                                        "</style>\n")))))))
 
 ;; === background opaciyt ===
-(defun kumo-adjust-opacity (frame incr)
+(defun my-adjust-opacity (frame incr)
   "Adjust the background opacity of FRAME by increment INCR."
   (unless (display-graphic-p frame)
     (error "Cannot adjust opacity of this frame"))
@@ -425,26 +425,26 @@ EXPORTER: export way."
       (modify-frame-parameters frame (list (cons 'alpha newalpha))))))
 
 
-(defun kumo-adjust-opacity-down ()
+(defun my-adjust-opacity-down ()
   "Adjust the background opacity to down."
   (interactive)
-  (kumo-adjust-opacity nil -2))
+  (my-adjust-opacity nil -2))
 
 
-(defun kumo-adjust-opacity-up ()
+(defun my-adjust-opacity-up ()
   "Adjust the background opacity to up."
   (interactive)
-  (kumo-adjust-opacity nil 2))
+  (my-adjust-opacity nil 2))
 
 
-(defun kumo-adjust-opacity-max ()
+(defun my-adjust-opacity-max ()
   "Adjust the background opacity to max."
   (interactive)
   (modify-frame-parameters nil `((alpha . 100))))
 ;; === background opaciyt ===
 
 
-(defun kumo-kill-whole-line ()
+(defun my-kill-whole-line ()
   "Kill region or whole line."
   (interactive)
   (if mark-active
@@ -455,7 +455,7 @@ EXPORTER: export way."
     (delete-char 1)))
 
 
-(defun kumo-newline-above-current ()
+(defun my-newline-above-current ()
   "Add a line above current line like vim O."
   (interactive)
   (progn (beginning-of-line)
@@ -463,14 +463,14 @@ EXPORTER: export way."
          (forward-line -1)))
 
 
-(defun kumo-newline-next-current ()
+(defun my-newline-next-current ()
   "Add a line next current line like vim o."
   (interactive)
   (progn (end-of-line)
          (newline-and-indent)))
 
 
-(defun kumo-delete-word-at-point (&optional arg)
+(defun my-delete-word-at-point (&optional arg)
   "Delete word at point, like vim diw.
 ARG: when not nil delete symbol( concat by '_') at point"
   (interactive "P")
@@ -480,22 +480,22 @@ ARG: when not nil delete symbol( concat by '_') at point"
     (delete-region (car point) (cdr point))))
 
 
-(defun kumo-delete-word (arg)
+(defun my-delete-word (arg)
   "Kill characters forward until encountering the end of a word.
 With argument ARG, do this that many times."
   (interactive "p")
   (delete-region (point) (progn (forward-word arg) (point))))
 
 
-(defun kumo-backward-delete-word (arg)
+(defun my-backward-delete-word (arg)
   "Delete characters backward until encountering the beginning of a word.
 With argument ARG, do this that many times.
 This command does not push text to `kill-ring'."
   (interactive "p")
-  (kumo-delete-word (- arg)))
+  (my-delete-word (- arg)))
 
 
-(defun kumo-kill-line ()
+(defun my-kill-line ()
   "Delete text from current position to end of line char.
 This command does not push text to `kill-ring'."
   (interactive)
@@ -508,7 +508,7 @@ This command does not push text to `kill-ring'."
        (point)))))
 
 
-(defun kumo-save-word-at-point (&optional arg)
+(defun my-save-word-at-point (&optional arg)
   "Delete word at point, like vim diw.
 ARG: when not nil delete symbol( concat by '_') at point"
   (interactive "P")
@@ -517,7 +517,7 @@ ARG: when not nil delete symbol( concat by '_') at point"
     (kill-ring-save (car point) (cdr point))))
 
 
-(defun kumo-find-left-bound ()
+(defun my-find-left-bound ()
   "Find the left bound of an expr."
   (save-excursion (save-match-data
                     (let ((char (char-before))
@@ -541,59 +541,59 @@ ARG: when not nil delete symbol( concat by '_') at point"
                       (point)))))
 
 
-(defun kumo-jsx-expand ()
+(defun my-jsx-expand ()
   "JSX component expand.
 E.g: <Button />"
   (interactive)
   (let* ((end (point))
-         (start (kumo-find-left-bound))
+         (start (my-find-left-bound))
          (line (buffer-substring-no-properties start end)))
     (delete-region start end)
     (insert (format "<%s />" line))
     (backward-char 3)))
 
 
-(defun kumo-disable-window-dedicated ()
+(defun my-disable-window-dedicated ()
   "Disable current window is dedicated."
   (interactive)
   (set-window-dedicated-p (frame-selected-window) nil))
 
 
-(defvar kumo/pre-window-configuration nil
+(defvar my/pre-window-configuration nil
   "Window configuration to use.")
 
-(defun kumo-save-window-configuration ()
+(defun my-save-window-configuration ()
   "Save window configuration."
   (interactive)
-  (setq kumo/pre-window-configuration (current-window-configuration)))
+  (setq my/pre-window-configuration (current-window-configuration)))
 
 
-(defun kumo-restore-window-configuration ()
+(defun my-restore-window-configuration ()
   "Restore window configuration."
   (interactive)
-  (if (window-configuration-p kumo/pre-window-configuration)
-      (set-window-configuration kumo/pre-window-configuration)))
+  (if (window-configuration-p my/pre-window-configuration)
+      (set-window-configuration my/pre-window-configuration)))
 
 
-(defun kumo-goto-matching-bracket ()
+(defun my-goto-matching-bracket ()
   "Move cursor to the matching bracket.
 If cursor is not on a bracket, call `backward-up-list'.
-The list of brackets to jump to is defined by `kumo-left-brackets'
-and `kumo-right-brackets'."
+The list of brackets to jump to is defined by `my-left-brackets'
+and `my-right-brackets'."
   (interactive)
   (if (nth 3 (syntax-ppss))
       (backward-up-list 1 'ESCAPE-STRINGS 'NO-SYNTAX-CROSSING)
     (cond
      ((eq (char-after) ?\") (forward-sexp))
      ((eq (char-before) ?\") (backward-sexp ))
-     ((looking-at (regexp-opt kumo/left-brackets))
+     ((looking-at (regexp-opt my/left-brackets))
       (forward-sexp))
-     ((looking-back (regexp-opt kumo/right-brackets) (max (- (point) 1) 1))
+     ((looking-back (regexp-opt my/right-brackets) (max (- (point) 1) 1))
       (backward-sexp))
      (t (backward-up-list 1 'ESCAPE-STRINGS 'NO-SYNTAX-CROSSING)))))
 
 
-(defun kumo-insert-eslint-disable-line ()
+(defun my-insert-eslint-disable-line ()
   "Insert eslint-disable-next-line."
   (interactive)
   (progn (beginning-of-line)
@@ -603,7 +603,7 @@ and `kumo-right-brackets'."
          (indent-for-tab-command)))
 
 
-(defun kumo-insert-time-string ()
+(defun my-insert-time-string ()
   "Select the formatted time to insert."
   (interactive)
   (let* ((fmt-list '("%Y-%m-%d" "%Y-%m-%d %a" "%Y-%m-%d %H:%M:%S" "%Y-%m-%d %H:%M:%S %a" "%Y/%m/%d" "%Y/%m/%d %a" "%Y/%m/%d %H:%M:%S" "%Y/%m/%d %H:%M:%S %a"))

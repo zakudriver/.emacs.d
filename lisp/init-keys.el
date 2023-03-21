@@ -7,49 +7,48 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; custom interactive function
-(global-set-key (kbd "<f2>") 'kumo-open-init-file)
+(global-set-key (kbd "<f2>") 'my-open-init-file)
 
-(global-set-key (kbd "C-c w w") 'hydra-frame-window/body)
 (global-set-key (kbd "C-c w v") 'split-window-vertically)
-(global-set-key (kbd "C-c w V") 'kumo-window-vertically-selected)
+(global-set-key (kbd "C-c w V") 'my-window-vertically-selected)
 (global-set-key (kbd "C-c w h") 'split-window-horizontally)
-(global-set-key (kbd "C-c w H") 'kumo-window-horizontally-selected)
+(global-set-key (kbd "C-c w H") 'my-window-horizontally-selected)
 (global-set-key (kbd "C-c w t") 'delete-window)
 (global-set-key (kbd "C-c w q") 'quit-window)
 (global-set-key (kbd "C-c w o") 'delete-other-windows)
-(global-set-key (kbd "C-c w b") 'kumo-current-buffer-bottom-window)
-(global-set-key (kbd "C-c w m") 'kumo-select-minibuffer-window)
+(global-set-key (kbd "C-c w b") 'my-current-buffer-bottom-window)
+(global-set-key (kbd "C-c w m") 'my-select-minibuffer-window)
 
-(global-set-key (kbd "C-c n d") 'kumo-number-division)
+(global-set-key (kbd "C-c n d") 'my-number-division)
 
-(global-set-key (kbd "C-c f n") 'kumo-put-file-name-on-clipboard)
-(global-set-key (kbd "C-c f d") 'kumo-open-current-file-in-finder)
+(global-set-key (kbd "C-c f n") 'my-put-file-name-on-clipboard)
+(global-set-key (kbd "C-c f d") 'my-open-current-file-in-finder)
 
-(global-set-key (kbd "C-c b t") 'kumo-kill-this-buffer)
-(global-set-key (kbd "C-c b o") 'kumo-kill-other-buffers)
-(global-set-key (kbd "C-c b R") 'kumo-rename-current-buffer-file)
-(global-set-key (kbd "C-c b D") 'kumo-delete-current-buffer-file)
-(global-set-key (kbd "C-c b P") 'kumo-switch-to-previous-buffer)
+(global-set-key (kbd "C-c b t") 'my-kill-this-buffer)
+(global-set-key (kbd "C-c b o") 'my-kill-other-buffers)
+(global-set-key (kbd "C-c b R") 'my-rename-current-buffer-file)
+(global-set-key (kbd "C-c b D") 'my-delete-current-buffer-file)
+(global-set-key (kbd "C-c b P") 'my-switch-to-previous-buffer)
 
-(global-set-key (kbd "C-c z") 'kumo-wrap-with-input)
+(global-set-key (kbd "C-c z") 'my-wrap-with-input)
 
 ;; like vim
-(global-set-key (kbd "C-c d i w") 'kumo-delete-word-at-point)
-(global-set-key (kbd "C-c y i w") 'kumo-save-word-at-point)
-(global-set-key (kbd "C-o") 'kumo-newline-next-current)
-(global-set-key (kbd "C-S-o") 'kumo-newline-above-current)
+(global-set-key (kbd "C-c d i w") 'my-delete-word-at-point)
+(global-set-key (kbd "C-c y i w") 'my-save-word-at-point)
+(global-set-key (kbd "C-o") 'my-newline-next-current)
+(global-set-key (kbd "C-S-o") 'my-newline-above-current)
 
 ;; replace key
-(global-set-key (kbd "C-<backspace>") 'kumo-backward-delete-word) ;; replace C-<backspace>
-(global-set-key (kbd "M-d") 'kumo-delete-word) ;; replace M-d
-(global-set-key (kbd "C-k") 'kumo-kill-line) ;; replace C-k
+(global-set-key (kbd "C-<backspace>") 'my-backward-delete-word) ;; replace C-<backspace>
+(global-set-key (kbd "M-d") 'my-delete-word) ;; replace M-d
+(global-set-key (kbd "C-k") 'my-kill-line) ;; replace C-k
 
 ;; replace func
-(global-set-key (kbd "C-x s") 'kumo-save-some-buffers) ;; replace 'save-some-buffer
+(global-set-key (kbd "C-x s") 'my-save-some-buffers) ;; replace 'save-some-buffer
 
 ;; extension
-(global-set-key (kbd "C-S-k") 'kumo-kill-whole-line)
-(global-set-key (kbd "C-M-m") 'kumo-goto-matching-bracket)
+(global-set-key (kbd "C-S-k") 'my-kill-whole-line)
+(global-set-key (kbd "C-M-m") 'my-goto-matching-bracket)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; build-in interactive

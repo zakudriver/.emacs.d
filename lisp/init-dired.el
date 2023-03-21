@@ -18,7 +18,7 @@
         ("k" . dired-previous-line)
         ("j" . dired-next-line))
   :custom
-  ;; Always delete and copy recursively
+  (dired-dwim-target       t)
   (dired-recursive-deletes 'always)
   (dired-recursive-copies  'always)
   :config
@@ -61,10 +61,34 @@
     :hook
     (dired-mode . diredfl-global-mode))
 
+
+  ;; Shows icons
+  (use-package all-the-icons-dired
+    :diminish
+    :hook
+    (dired-mode . all-the-icons-dired-mode)
+    :custom
+    (all-the-icons-dired-monochrome nil)
+    :config
+    (with-no-warnings
+      (defun my-all-the-icons-dired--icon (file)
+        "Return the icon for FILE."
+        (if (file-directory-p file)
+            (all-the-icons-icon-for-dir file
+                                        :height 0.9
+                                        :face 'all-the-icons-dired-dir-face
+                                        :v-adjust all-the-icons-dired-v-adjust)
+          (apply 'all-the-icons-icon-for-file file
+                 (append
+                  '(:height 0.9)
+                  `(:v-adjust ,all-the-icons-dired-v-adjust)
+                  (when all-the-icons-dired-monochrome
+                    `(:face ,(face-at-point)))))))
+      (advice-add #'all-the-icons-dired--icon :override #'my-all-the-icons-dired--icon)))
+
   ;; Extra Dired functionality
   (use-package dired-aux
     :ensure nil)
-
   (use-package dired-x
     :ensure nil
     :demand
@@ -72,7 +96,6 @@
     (let ((cmd (cond
                 (sys/macp "open")
                 (sys/linuxp "xdg-open")
-                (sys/win32p "start")
                 (t ""))))
       (setq dired-guess-shell-alist-user
             `(("\\.pdf\\'" ,cmd)
@@ -90,6 +113,9 @@
     (setq dired-omit-files
           (concat dired-omit-files
                   "\\|^.DS_Store$\\|^.projectile$\\|^.git*\\|^.svn$\\|^.vscode$\\|\\.js\\.meta$\\|\\.meta$\\|\\.elc$\\|^.emacs.*"))))
+
+
+(use-package fd-dired)
 
 
 (provide 'init-dired)

@@ -12,6 +12,7 @@
 
 
 (use-package org
+  :ensure nil
   :bind
   (("C-, o o" . org-switch)
    ("C-, o a" . org-agenda)
@@ -42,7 +43,7 @@
                                        (?C . success)))
   :config
   ;; Embed inline CSS read from a file.
-  (add-hook 'org-export-before-processing-hook 'kumo-org-inline-css-hook)
+  (add-hook 'org-export-before-processing-functions 'my-org-inline-css-hook)
 
   (with-eval-after-load 'counsel
     (bind-key [remap org-set-tags-command] #'counsel-org-tag org-mode-map))
@@ -55,13 +56,13 @@
     (org-download-backend "curl \"%s\" -o \"%s\""))
 
   (use-package org-superstar
-    :commands kumo-chars-displayable-p
+    :commands my-chars-displayable-p
     :if
-    (and (display-graphic-p) (kumo-chars-displayable-p kumo/org-headline-bullets-list))
+    (and (display-graphic-p) (my-chars-displayable-p my/org-headline-bullets-list))
     :hook
     (org-mode . org-superstar-mode)
     :custom
-    (org-superstar-headline-bullets-list kumo/org-headline-bullets-list)))
+    (org-superstar-headline-bullets-list my/org-headline-bullets-list)))
 
 
 (use-package ob-go)
@@ -70,15 +71,13 @@
 (use-package ob-typescript)
 
 
-(defvar org-load-language-list '((emacs-lisp . t)
-                                 (shell      . t)
-                                 (css        . t)
-                                 (sass       . t)
-                                 (go         . t)
-                                 (typescript . t)))
-
 (org-babel-do-load-languages 'org-babel-load-languages
-                             org-load-language-list)
+                             '((emacs-lisp . t)
+                               (shell      . t)
+                               (css        . t)
+                               (sass       . t)
+                               (go         . t)
+                               (typescript . t)))
 
 
 ;; hugo
@@ -87,48 +86,21 @@
   :bind
   (("C-c H" . easy-hugo)
    :map easy-hugo-mode-map
-   ("G" . kumo-easy-hugo-github-deploy))
+   ("G" . my-easy-hugo-github-deploy))
   :custom
   (easy-hugo-org-header           t)
-  (easy-hugo-basedir              kumo/easy-hugo-basedir)
-  (easy-hugo-postdir              kumo/easy-hugo-postdir)
-  (easy-hugo-url                  kumo/easy-hugo-url)
-  (easy-hugo-preview-url          kumo/easy-hugo-preview-url)
-  (easy-hugo-github-deploy-script kumo/easy-hugo-github-deploy-script)
+  (easy-hugo-basedir              my/easy-hugo-basedir)
+  (easy-hugo-postdir              my/easy-hugo-postdir)
+  (easy-hugo-url                  my/easy-hugo-url)
+  (easy-hugo-preview-url          my/easy-hugo-preview-url)
+  (easy-hugo-github-deploy-script my/easy-hugo-github-deploy-script)
   (easy-hugo-default-ext          ".org"))
 
 
 (use-package ox-hugo
   :after ox
   :custom
-  (org-hugo-base-dir kumo/easy-hugo-basedir))
-
-
-;; (use-package org-roam
-;;   :custom
-;;   (org-roam-directory (file-truename "~/ORG-ROAM/"))
-;;   :bind
-;;   (("C-c n l" . org-roam-buffer-toggle)
-;;    ("C-c n f" . org-roam-node-find)
-;;    ("C-c n g" . org-roam-graph)
-;;    ("C-c n i" . org-roam-node-insert)
-;;    ("C-c n c" . org-roam-capture)
-;;    ("C-c n j" . org-roam-dailies-capture-today))
-;;   :config
-;;   ;; If you're using a vertical completion framework, you might want a more informative completion interface
-;;   (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
-;;   (org-roam-db-autosync-mode)
-;;   ;; If using org-roam-protocol
-;;   (require 'org-roam-protocol))
-
-
-;; (use-package org-roam-ui
-;;   :after org-roam
-;;   :custom
-;;   (org-roam-ui-sync-theme t)
-;;   (org-roam-ui-follow t)
-;;   (org-roam-ui-update-on-save t)
-;;   (org-roam-ui-open-on-start t))
+  (org-hugo-base-dir my/easy-hugo-basedir))
 
 
 (provide 'init-org)

@@ -14,7 +14,7 @@
                                              (lsp)))
   :custom
   (flycheck-disabled-checkers  '(c/c++-clang c/c++-cppcheck c/c++-gcc))
-  (ccls-initialization-options kumo/ccls-initialization-options)
+  (ccls-initialization-options my/ccls-initialization-options)
   :config
   (with-eval-after-load 'projectile
     (setq projectile-project-root-files-top-down-recurring

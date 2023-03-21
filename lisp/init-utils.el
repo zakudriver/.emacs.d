@@ -23,7 +23,7 @@
 
 (use-package vterm
   :functions
-  (kumo-bottom-window vterm-mode)
+  (my-bottom-window vterm-mode)
   :bind
   (("C-c v v" . vterm)
    :map vterm-mode-map
@@ -56,46 +56,46 @@
                                                              (throw 'break i)))))))
                                               (if w
                                                   (delete-window w)
-                                                (kumo-bottom-window buffer)))))
+                                                (my-bottom-window buffer)))))
                                       (setq buffer (generate-new-buffer "vterm"))
                                       (with-current-buffer (buffer-name buffer)
                                         (vterm-mode))
-                                      (kumo-bottom-window buffer)))))
+                                      (my-bottom-window buffer)))))
 
-  (defvar kumo/vterm-buffer-list nil
+  (defvar my/vterm-buffer-list nil
     "Vterm buffer list.")
 
   (add-hook 'kill-buffer-hook (lambda ()
                                 (if (derived-mode-p 'vterm-mode)
-                                    (setq kumo/vterm-buffer-list
-	                                        (delq (current-buffer) kumo/vterm-buffer-list)))))
+                                    (setq my/vterm-buffer-list
+	                                        (delq (current-buffer) my/vterm-buffer-list)))))
 
   (add-hook 'vterm-mode-hook (lambda ()
-                               (add-to-list 'kumo/vterm-buffer-list (current-buffer))))
+                               (add-to-list 'my/vterm-buffer-list (current-buffer))))
 
-  (defun kumo-vterm-switch (direction offset)
-    (if kumo/vterm-buffer-list
-        (let ((len (length kumo/vterm-buffer-list))
-	            (index (cl-position (current-buffer) kumo/vterm-buffer-list)))
+  (defun my-vterm-switch (direction offset)
+    (if my/vterm-buffer-list
+        (let ((len (length my/vterm-buffer-list))
+	            (index (cl-position (current-buffer) my/vterm-buffer-list)))
 	        (if index
 	            (let ((target-index (if (eq direction 'previous)
 				                              (mod (+ index offset) len)
 				                            (mod (- index offset) len))))
-	              (switch-to-buffer (nth target-index kumo/vterm-buffer-list) nil t))
-	          (switch-to-buffer (car kumo/vterm-buffer-list) nil t)))
+	              (switch-to-buffer (nth target-index my/vterm-buffer-list) nil t))
+	          (switch-to-buffer (car my/vterm-buffer-list) nil t)))
       nil))
 
-  (defun kumo-vterm-previous (&optional offset)
+  (defun my-vterm-previous (&optional offset)
     "Go to the previous term buffer.
 If OFFSET is `non-nil', will goto next term buffer with OFFSET."
     (interactive "P")
-    (kumo-vterm-switch 'previous (or offset 1)))
+    (my-vterm-switch 'previous (or offset 1)))
 
-  (defun kumo-vterm-next (&optional offset)
+  (defun my-vterm-next (&optional offset)
     "Go to the next term buffer.
 If OFFSET is `non-nil', will goto next term buffer with OFFSET."
     (interactive "P")
-    (kumo-vterm-switch 'next (or offset 1))))
+    (my-vterm-switch 'next (or offset 1))))
 
 
 ;; process view
@@ -110,6 +110,7 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
 
 ;; Youdao Dictionary
 (use-package yd
+  :ensure nil
   :load-path "~/.emacs.d/site-lisp/yd.el"
   :bind
   (("C-c y y" . yd-search-at-point-posframe)

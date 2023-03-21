@@ -13,17 +13,17 @@
 ;;     (progn
 ;;       ;; Get and select the fastest package archives automatically
 ;;       (message "Testing connection... Please wait a moment.")
-;;       (kumo-set-package-archives
-;;        (kumo-test-package-archives 'no-chart)))
+;;       (my-set-package-archives
+;;        (my-test-package-archives 'no-chart)))
 ;;   ;; Select package archives manually
 ;;   ;; Use `ido-completing-read' for better experience since
 ;;   ;; `ivy-mode' is not available at this moment.
-;;   (kumo-set-package-archives
+;;   (my-set-package-archives
 ;;    (intern
 ;;     (ido-completing-read
 ;;      "Select package archives: "
 ;;      (mapcar #'symbol-name
-;;              (mapcar #'car kumo/package-archives-alist))))))
+;;              (mapcar #'car my/package-archives-alist))))))
 
 
 (defun my-package--save-selected-packages (&optional value)
@@ -36,7 +36,7 @@
 
 
 ;; Set ELPA packages
-(kumo-set-package-archives kumo/package-archives nil nil)
+(my-set-package-archives my/package-archives nil nil)
 
 
 ;; Initialize packages
@@ -68,19 +68,36 @@
 ;; (use-package comp
 ;;   :ensure nil
 ;;   :config
-;;   (defun kumo-package-native-compile-async (package &optional all)
+;;   (defun my-package-native-compile-async (package &optional all)
 ;;     "Compile PACKAGE natively, or with prefix ALL, all packages."
 ;;     (interactive (list (unless current-prefix-arg
 ;; 			                   (completing-read "Package: " (mapcar #'car package-alist)))))
 ;;     (let* ((directory (if package
 ;; 			                    (file-name-directory (locate-library package))
 ;; 			                  package-user-dir)))
-;;       (native-compile-async directory kumo/native-compile-async-jobs t))))
+;;       (native-compile-async directory my/native-compile-async-jobs t))))
 
 
 ;; Required by `use-package'
 (use-package diminish)
 (use-package bind-key)
+(use-package pretty-hydra
+  :demand t
+  :config
+  (cl-defun pretty-hydra-title (title &optional icon-type icon-name
+                                      &key face height v-adjust)
+    "Add an icon in the hydra title."
+    (let ((face (or face `(:foreground ,(face-background 'highlight))))
+          (height (or height 1.0))
+          (v-adjust (or v-adjust 0.0)))
+      (concat
+       (when (and icon-type icon-name)
+         (let ((f (intern (format "all-the-icons-%s" icon-type))))
+           (when (fboundp f)
+             (concat
+              (apply f (list icon-name :face face :height height :v-adjust v-adjust))
+              " "))))
+       (propertize title 'face face)))))
 
 
 ;; Update GPG keyring for GNU ELPA

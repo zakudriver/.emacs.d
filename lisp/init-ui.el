@@ -14,14 +14,36 @@
 ;; Theme
 (use-package lacquer
   :load-path "~/.emacs.d/site-lisp/lacquer"
+  :pretty-hydra
+  ((:title (pretty-hydra-title "Lacquer Management" 'faicon "th" :height 1 :v-adjust -0.1)
+           :foreign-keys warn :quit-key ("q" "C-g"))
+   ("Actions"
+    (("t" lacquer-current-theme "current theme")
+     ("f" lacquer-current-font "current font")
+     ("T" lacquer-theme-selector "theme selector")
+     ("F" lacquer-font-selector "font selector")
+     ("C" lacquer-theme-carousel "theme carousel")
+     ("M" lacquer-mode-selector "mode selector")
+     ("a" lacquer-start-auto-switch "start auto switch")
+     ("A" lacquer-stop-auto-switch "stop auto switch"))))
   :hook
   (after-init . lacquer-auto-mode)
+  :bind
+  ("C-c l" . lacquer-hydra/body)
   :custom
   ;; (lacquer-auto-switch-time '("00:01" "00:02" "10:00" "14:00" "16:00" "18:00" "20:00" "22:00"))
   (lacquer-auto-switch-mode 'random)
   (lacquer-auto-switch-time (* 60 30))
-  (lacquer-theme-list       kumo/theme-list)
-  (lacquer-font-list        kumo/font-list))
+  (lacquer-theme-list       my/theme-list)
+  (lacquer-font-list        my/font-list))
+
+
+;; Never lose your cursor again
+;; (use-package beacon
+;;   :hook
+;;   (after-init . beacon-mode)
+;;   :custom
+;;   (beacon-blink-when-window-changes nil))
 
 
 ;; Font
@@ -36,7 +58,7 @@
           ns-pop-up-frames nil)))
 
 
-(set-face-attribute 'default nil :weight kumo/font-weight)
+(set-face-attribute 'default nil :weight my/font-weight)
 (setq-default line-spacing 0.3
               fill-column 80)
 
@@ -68,7 +90,7 @@
 (use-package dashboard
   :commands dashboard-insert-startupify-lists
   :bind
-  (("C-c h" . kumo-open-dashboard)
+  (("C-c h" . my-open-dashboard)
    :map dashboard-mode-map
    ("C-, g" . dashboard-refresh-buffer))
   :custom
@@ -76,7 +98,7 @@
   (dashboard-banner-logo-title      (concat "Happy hacking, " user-login-name " - Emacs ♥ you!"))
   (dashboard-set-file-icons         t)
   (dashboard-set-heading-icons      t)
-  (dashboard-startup-banner         (or kumo/logo 'official))
+  (dashboard-startup-banner         (or my/logo 'official))
   (dashboard-image-banner-max-width 200)
   (dashboard-center-content         t)
   (dashboard-show-shortcuts         nil)
@@ -88,11 +110,11 @@
   (dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
   :hook
   (emacs-with-setup . (lambda ()
-                        (forward-line kumo/dashboard-position)))
+                        (forward-line my/dashboard-position)))
   :init
   (dashboard-setup-startup-hook)
   :config
-  (defun kumo-open-dashboard ()
+  (defun my-open-dashboard ()
     "Open the *dashboard* buffer and jump to the first widget."
     (interactive)
     (delete-other-windows)
@@ -103,44 +125,7 @@
     (dashboard-refresh-buffer)
     (run-at-time "0.1sec" nil
                  (lambda ()
-                   (forward-line kumo/dashboard-position)))))
-
-
-;; (use-package doom-modeline
-;;   :custom
-;;   (doom-modeline-hud t)
-;;   (doom-modeline-support-imenu nil)
-;;   (doom-modeline-project-detection 'projectile)
-;;   (doom-modeline-buffer-file-name-style 'auto)
-;;   (doom-modeline-height 25)
-;;   (doom-modeline-bar-width 2)
-;;   (doom-modeline-unicode-fallback t)
-;;   ;; (doom-modeline-icon nil)
-;;   (doom-modeline-major-mode-icon nil)
-;;   (doom-modeline-buffer-state-icon nil)
-;;   (doom-modeline-buffer-modification-icon nil)
-;;   (doom-modeline-checker-simple-format t)
-;;   (doom-modeline-lsp t)
-;;   (doom-modeline-indent-info nil)
-;;   (auto-revert-check-vc-info t)
-;;   (doom-modeline-minor-modes nil)
-;;   (doom-modeline-enable-word-count nil)
-;;   :hook
-;;   (after-init . doom-modeline-mode)
-;;   :config
-;;   (set-face-attribute 'mode-line nil :height 120)
-;;   (set-face-attribute 'mode-line-inactive nil :height 120)
-
-;;   ;; Define your custom doom-modeline
-;;   (doom-modeline-def-modeline 'my-simple-line
-;;     '(bar matches buffer-info remote-host buffer-position parrot)
-;;     '(misc-info input-method buffer-encoding major-mode process vcs checker))
-
-;;   ;; Add to `doom-modeline-mode-hook` or other hooks
-;;   (defun setup-custom-doom-modeline ()
-;;     (doom-modeline-set-modeline 'my-simple-line 'default))
-
-;;   (add-hook 'doom-modeline-mode-hook 'setup-custom-doom-modeline))
+                   (forward-line my/dashboard-position)))))
 
 
 ;; modeline nyan-mode
@@ -149,28 +134,28 @@
   :hook
   (after-init . nyan-mode)
   :custom
-  (nyan-cat-flavor               'jazz)
-  (nyan-bar-length               40)
-  (nyan-animate-nyancat          nil)
-  (nyan-wavy-trail               t)
-  (nyan-animation-frames         10))
+  (nyan-cat-flavor       'jazz)
+  (nyan-bar-length       40)
+  (nyan-animate-nyancat  nil)
+  (nyan-wavy-trail       t)
+  (nyan-animation-frames 10))
 
 
 ;; modeline parrot-mode
 (use-package parrot
-  :functions kumo-trigger-parrot
+  :functions my-trigger-parrot
   :commands parrot-start-animation
   :hook
   (after-init . parrot-mode)
   :custom
   (parrot-num-rotations 1)
   :config
-  (defun kumo-trigger-parrot (&_rest)
+  (defun my-trigger-parrot (&_rest)
     "Trigger parrot animation."
     (parrot-start-animation))
   (if (boundp 'window-selection-change-functions)
-      (add-hook 'window-selection-change-functions #'kumo-trigger-parrot)
-    (add-hook 'post-command-hook #'kumo-trigger-parrot)))
+      (add-hook 'window-selection-change-functions #'my-trigger-parrot)
+    (add-hook 'post-command-hook #'my-trigger-parrot)))
 
 
 ;; mood-line-mode
@@ -193,33 +178,33 @@
 ;;   (poke-line-pokemon "gengar"))
 
 
-(defvar kumo/fireplace-timer nil)
+(defvar my/fireplace-timer nil)
 (use-package fireplace
   :commands
-  (fireplace-off kumo-restore-window-configuration kumo-save-window-configuration)
+  (fireplace-off my-restore-window-configuration my-save-window-configuration)
   :custom
   (fireplace-smoke-on t)
   :init
-  (defun kumo-switch-timing-fireplace ()
+  (defun my-switch-timing-fireplace ()
     "Switch whether `fireplace be called regularly."
     (interactive)
-    (if kumo/fireplace-timer
+    (if my/fireplace-timer
         (progn
-          (cancel-timer kumo/fireplace-timer)
-          (setq kumo/fireplace-timer nil))
-      (setq kumo/fireplace-timer (run-with-idle-timer 500 t
-						                                          (lambda ()
-                                                        (fireplace)))))
-    (message "The timing fireplace is %s." (if kumo/fireplace-timer "on" "off")))
+          (cancel-timer my/fireplace-timer)
+          (setq my/fireplace-timer nil))
+      (setq my/fireplace-timer (run-with-idle-timer 500 t
+						                                        (lambda ()
+                                                      (fireplace)))))
+    (message "The timing fireplace is %s." (if my/fireplace-timer "on" "off")))
   :config
-  (defvar kumo/fireplacepee nil)
+  (defvar my/fireplacepee nil)
   (advice-add #'fireplace-off :after (lambda ()
-                                       (setq kumo/fireplacepee nil)
-                                       (kumo-restore-window-configuration)))
+                                       (setq my/fireplacepee nil)
+                                       (my-restore-window-configuration)))
   (advice-add #'fireplace :before (lambda ()
-                                    (unless kumo/fireplacepee
-                                      (setq kumo/fireplacepee t)
-                                      (kumo-save-window-configuration)
+                                    (unless my/fireplacepee
+                                      (setq my/fireplacepee t)
+                                      (my-save-window-configuration)
                                       (delete-other-windows)))))
 
 
@@ -263,11 +248,11 @@
 
 ;; icons
 (use-package all-the-icons
-  :commands kumo-font-installed-p
+  :commands my-font-installed-p
   :if
   (display-graphic-p)
   :init
-  (unless (or sys/win32p (kumo-font-installed-p "all-the-icons"))
+  (unless (my-font-installed-p "all-the-icons")
     (all-the-icons-install-fonts t))
   :config
   (declare-function memoize 'memoize)

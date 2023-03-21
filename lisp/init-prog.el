@@ -12,7 +12,7 @@
 ;;   :custom
 ;;   (prettify-symbols-unprettify-at-point 'right-edge)
 ;;   :init
-;;   (setq-default prettify-symbols-alist kumo/prettify-symbols-alist))
+;;   (setq-default prettify-symbols-alist my/prettify-symbols-alist))
 
 
 (use-package vimrc-mode)

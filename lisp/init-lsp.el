@@ -16,10 +16,10 @@
   :commands lsp-format-buffer
   :hook
   (prog-mode . (lambda ()
-                 (if (apply 'derived-mode-p kumo/lsp-major-mode)
+                 (if (apply 'derived-mode-p my/lsp-major-mode)
                      (lsp-deferred))))
   (lsp-mode . (lambda ()
-                (if (apply 'derived-mode-p kumo/lsp-on-save-major-mode)
+                (if (apply 'derived-mode-p my/lsp-on-save-major-mode)
                     (add-hook 'before-save-hook #'lsp-format-buffer t t))))
   :custom
   (lsp-clients-angular-language-server-command
@@ -110,22 +110,22 @@
   (lsp-ui-peek-fontify     'on-demand))
 
 
-(use-package dap-mode
-  :defines dap-python-executable
-  :functions dap-hydra/nil
-  :diminish
-  :bind
-  (:map lsp-mode-map
-        ("<f5>"   . dap-debug)
-        ("M-<f5>" . dap-hydra))
-  :hook
-  ((after-init         . dap-auto-configure-mode)
-   (dap-stopped        . (lambda (_args) (dap-hydra)))
-   (dap-terminated     . (lambda (_args) (dap-hydra/nil)))
-   (ruby-mode          . (lambda () (require 'dap-ruby)))
-   (go-mode            . (lambda () (require 'dap-go)))
-   ((c-mode c++-mode objc-mode swift-mode) . (lambda () (require 'dap-lldb)))
-   ((js-mode js2-mode)                     . (lambda () (require 'dap-chrome)))))
+;; (use-package dap-mode
+;;   :defines dap-python-executable
+;;   :functions dap-hydra/nil
+;;   :diminish
+;;   :bind
+;;   (:map lsp-mode-map
+;;         ("<f5>"   . dap-debug)
+;;         ("M-<f5>" . dap-hydra))
+;;   :hook
+;;   ((after-init         . dap-auto-configure-mode)
+;;    (dap-stopped        . (lambda (_args) (dap-hydra)))
+;;    (dap-terminated     . (lambda (_args) (dap-hydra/nil)))
+;;    (ruby-mode          . (lambda () (require 'dap-ruby)))
+;;    (go-mode            . (lambda () (require 'dap-go)))
+;;    ((c-mode c++-mode objc-mode swift-mode) . (lambda () (require 'dap-lldb)))
+;;    ((js-mode js2-mode)                     . (lambda () (require 'dap-chrome)))))
 
 
 (use-package lsp-treemacs)
