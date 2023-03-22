@@ -14,11 +14,15 @@
   ("\\.epub\\'" . nov-mode)
   :hook
   (nov-mode . my-nov-setup)
+  :bind
+  (:map nov-mode-map
+        ("j" . next-line)
+        ("k" . previous-line))
   :config
   (defun my-nov-setup ()
     "Setup `nov-mode' for better reading experience."
     (visual-line-mode 1)
-    (olivetti-mode 1)
+    ;; (olivetti-mode 1)
     (face-remap-add-relative 'variable-pitch :family "Times New Roman" :height 1.5))
   
   (with-no-warnings
