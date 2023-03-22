@@ -560,7 +560,8 @@ E.g: <Button />"
 
 
 (defvar my/pre-window-configuration nil
-  "Window configuration to use.")
+  "Window configuration variable.")
+
 
 (defun my-save-window-configuration ()
   "Save window configuration."

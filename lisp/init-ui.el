@@ -89,11 +89,14 @@
 
 ;; Dashboard
 (use-package dashboard
-  :commands dashboard-insert-startupify-lists
+  :defines dashboard-recover-layout-p
   :bind
   (("C-c h" . my-open-dashboard)
    :map dashboard-mode-map
-   ("C-, g" . dashboard-refresh-buffer))
+   ("C-, g" . dashboard-refresh-buffer)
+   ("q"     . my-quit-dashboard))
+  :custom-face
+  (dashboard-heading ((t (:inherit (font-lock-string-face bold)))))
   :custom
   ;; (dashboard-banner-logo-title "Help poor children in Uganda!")
   (dashboard-banner-logo-title      (concat "Happy hacking, " user-login-name " - Emacs ♥ you!"))
@@ -115,18 +118,33 @@
   :init
   (dashboard-setup-startup-hook)
   :config
+  (defvar dashboard-recover-layout-p nil
+    "Wether recovers the layout.")
+
   (defun my-open-dashboard ()
     "Open the *dashboard* buffer and jump to the first widget."
     (interactive)
+    ;; Check if need to recover layout
+    (when (length> (window-list-1) 1)
+      (setq dashboard-recover-layout-p t)
+      (my-save-window-configuration))
+    ;; Display dashboard in maximized window
     (delete-other-windows)
-    ;; (if (get-buffer dashboard-buffer-name)
-    ;;     (kill-buffer dashboard-buffer-name))
-    (dashboard-insert-startupify-lists)
-    (switch-to-buffer dashboard-buffer-name)
+    ;; Refresh dashboard buffer
     (dashboard-refresh-buffer)
-    (run-at-time "0.1sec" nil
-                 (lambda ()
-                   (forward-line my/dashboard-position)))))
+    ;; Jump to the first section
+    (let ((fn (local-key-binding "r")))
+      (and fn (funcall fn))))
+
+  (defun my-quit-dashboard ()
+    "Quit dashboard window."
+    (interactive)
+    (quit-window t)
+    (when dashboard-recover-layout-p
+      (setq dashboard-recover-layout-p nil)
+      (my-restore-window-configuration)))
+
+  )
 
 
 ;; modeline nyan-mode
@@ -179,14 +197,19 @@
 ;;   (poke-line-pokemon "gengar"))
 
 
-(defvar my/fireplace-timer nil)
 (use-package fireplace
   :commands
   (fireplace-off my-restore-window-configuration my-save-window-configuration)
-  :functions my-switch-timing-fireplace
   :custom
   (fireplace-smoke-on t)
-  :init
+  :hook
+  (after-init . my-switch-timing-fireplace)
+  :config
+  (defvar my/fireplace-timer nil
+    "Fireplace timer.")
+  (defvar my/fireplace-p nil
+    "Wether recovers the layout.")
+  
   (defun my-switch-timing-fireplace ()
     "Switch whether `fireplace be called regularly."
     (interactive)
@@ -198,15 +221,13 @@
 						                                        (lambda ()
                                                       (fireplace)))))
     (message "The timing fireplace is %s." (if my/fireplace-timer "on" "off")))
-  (my-switch-timing-fireplace)
-  :config
-  (defvar my/fireplacepee nil)
+  
   (advice-add #'fireplace-off :after (lambda ()
-                                       (setq my/fireplacepee nil)
+                                       (setq my/fireplace-p nil)
                                        (my-restore-window-configuration)))
   (advice-add #'fireplace :before (lambda ()
-                                    (unless my/fireplacepee
-                                      (setq my/fireplacepee t)
+                                    (unless my/fireplace-p
+                                      (setq my/fireplace-p t)
                                       (my-save-window-configuration)
                                       (delete-other-windows)))))
 

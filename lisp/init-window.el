@@ -105,7 +105,7 @@
   :custom
   (zoom-size                 '(0.618 . 0.618))
   (zoom-ignored-buffer-names '(my/flycheck-errors-buffer-name))
-  (zoom-ignored-major-modes  '(flycheck-error-list-mode undo-tree-visualizer-mode achive-visual-mode treemacs-mode vterm-mode))
+  (zoom-ignored-major-modes  '(flycheck-error-list-mode undo-tree-visualizer-mode achive-visual-mode treemacs-mode vterm-mode nov-mode))
   :config
   (advice-add 'balance-windows :around (lambda (func &optional window-or-frame)
                                          (unless (zoom--window-ignored-p)
@@ -151,7 +151,7 @@
 
      grep-mode occur-mode rg-mode deadgrep-mode ag-mode pt-mode
      ivy-occur-mode ivy-occur-grep-mode
-     youdao-dictionary-mode
+     yd-mode
 
      "^\\*Process List\\*" process-menu-mode
      list-environment-mode cargo-process-mode

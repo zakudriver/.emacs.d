@@ -78,10 +78,10 @@
   (require 'init-keys)
   ;; (require 'init-evil)
   
-
   (require 'init-edit)
   (require 'init-highlight)
   (require 'init-ibuffer)
+  (require 'init-reader)
 
   (require 'init-window)
   (require 'init-ivy)
