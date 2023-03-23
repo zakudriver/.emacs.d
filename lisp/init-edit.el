@@ -28,8 +28,23 @@
               major-mode       'text-mode)
 
 
+(use-package indent
+  :ensure nil
+  :custom
+  (standard-indent 2))
+
+
+;; so-long emacs/>=27p
+(use-package so-long
+  :hook
+  (after-init . global-so-long-mode)
+  :custom
+  (so-long-threshold 400))
+
+
 ;; Automatically reload files was modified by external program
 (use-package autorevert
+  :ensure nil
   :hook
   (after-init . global-auto-revert-mode))
 
@@ -94,6 +109,7 @@
 
 ;; Automatic parenthesis pairing
 (use-package elec-pair
+  :ensure nil
   :hook
   (after-init . electric-pair-mode)
   :custom
@@ -119,19 +135,24 @@
   (:map hungry-delete-mode-map
         ("M-<backspace>" . hungry-delete-backward))
   :custom
-  (hungry-delete-except-modes  '(help-mode minibuffer-inactive-mode calc-mode ivy-mode minibuffer-mode))
+  (hungry-delete-except-modes  '(help-mode minibuffer-inactive-mode calc-mode minibuffer-mode))
   (hungry-delete-chars-to-skip " \t\f\v"))
 
 
 ;; move to the beginning/end of line or code
 (use-package mwim
   :bind
-  ("C-a" . mwim-beginning-of-code-or-line)
-  ("C-e" . mwim-end-of-code-or-line))
+  ([remap move-beginning-of-line] . mwim-beginning-of-code-or-line)
+  ([remap move-end-of-line] . mwim-end-of-code-or-line))
 
 
 ;; moving the cursor quickly
 (use-package avy
+  :custom
+  (avy-all-windows     nil)
+  (avy-all-windows-alt t)
+  (avy-background      t)
+  (avy-style           'pre)
   :bind
   ("C-S-w" . avy-goto-char-timer)
   ("C-S-l" . avy-goto-char-in-line)
@@ -145,17 +166,86 @@
   ("M-O" . 'goto-last-change-reverse))
 
 
-;; flexible text folding
+;; Flexible text folding
 (use-package hideshow
-  :hook
-  (prog-mode . hs-minor-mode)
+  :ensure nil
+  :pretty-hydra
+  (("Fold"
+    (("t" hs-toggle-all "toggle all")
+     ("a" hs-show-all "show all")
+     ("i" hs-hide-all "hide all")
+     ("g" hs-toggle-hiding "toggle hiding")
+     ("c" hs-cycle "cycle block")
+     ("s" hs-show-block "show block")
+     ("h" hs-hide-block "hide block")
+     ("l" hs-hide-level "hide level"))
+    "Move"
+    (("C-a" mwim-beginning-of-code-or-line "⭰")
+     ("C-e" mwim-end-of-code-or-line "⭲")
+     ("C-b" backward-char "←")
+     ("C-n" next-line "↓")
+     ("C-p" previous-line "↑")
+     ("C-f" forward-char "→")
+     ("C-v" pager-page-down "↘")
+     ("M-v" pager-page-up "↖")
+     ("M-<" beginning-of-buffer "⭶")
+     ("M->" end-of-buffer "⭸"))))
   :bind
   (:map hs-minor-mode-map
-        ("C-. @ S" . hs-show-all)
-        ("C-. @ H" . hs-hide-all)
-        ("C-. @ h" . hs-hide-block)
-        ("C-. @ s" . hs-show-block)
-        ("C-. @ t" . hs-toggle-hiding)))
+        ("C-~" . hideshow-hydra/body))
+  :hook
+  (prog-mode . hs-minor-mode)
+  :config
+  ;; More functions
+  ;; @see https://karthinks.com/software/simple-folding-with-hideshow/
+  (defun hs-cycle (&optional level)
+    (interactive "p")
+    (let (message-log-max
+          (inhibit-message t))
+      (if (= level 1)
+          (pcase last-command
+            ('hs-cycle
+             (hs-hide-level 1)
+             
+             ('hs-cycle-children
+              (save-excursion (hs-show-block))
+              (setq this-command 'hs-cycle-subtree))
+             ('hs-cycle-subtree
+              (hs-hide-block))
+             (_
+              (if (not (hs-already-hidden-p))
+                  (hs-hide-block)
+                (hs-hide-level 1)
+                (setq this-command 'hs-cycle-children))))
+            (hs-hide-level level)
+            (setq this-command 'hs-hide-level))))
+
+    (defun hs-toggle-all ()
+      "Toggle hide/show all."
+      (interactive)
+      (pcase last-command
+        
+        (save-excursion (hs-show-all))
+        (setq this-command 'hs-global-show))
+      (_ (hs-hide-all))))
+
+  ;; Display line counts
+  (defun hs-display-code-line-counts (ov)
+    "Display line counts when hiding codes."
+    (when (eq 'code (overlay-get ov 'hs))
+      (overlay-put ov 'display
+                   (concat
+                    " "
+                    (propertize
+                     (if (char-displayable-p ?⏷) "⏷" "...")
+                     'face 'shadow)
+                    (propertize
+                     (format " (%d lines)"
+                             (count-lines (overlay-start ov)
+                                          (overlay-end ov)))
+                     'face '(:inherit shadow :height 0.8))
+                    " "))))
+  (setq hs-set-up-overlay #'hs-display-code-line-counts))
 
 
 (use-package whole-line-or-region
@@ -172,6 +262,44 @@
 ;;   :hook
 ;;   (after-init . edit-server-start)
 ;;   (kill-emacs . edit-server-stop))
+
+
+(use-package delsel
+  :ensure nil
+  :hook
+  (after-init . delete-selection-mode))
+
+
+(use-package flyspell
+  :ensure nil
+  :if
+  (executable-find "aspell")
+  :custom
+  (flyspell-issue-message-flag nil)
+  (ispell-program-name         "aspell")
+  (ispell-extra-args           '("--sug-mode=ultra" "--lang=en_US" "--run-together"))
+  :hook
+  ((text-mode outline-mode) . flyspell-mode)
+  (flyspell-mode . (lambda ()
+                     (dolist (key '("C-;" "C-," "C-."))
+                       (unbind-key key flyspell-mode-map))))
+  :config
+  ;; Correcting words with flyspell via Ivy
+  (use-package flyspell-correct-ivy
+    :after ivy
+    :custom
+    (flyspell-correct-interface #'flyspell-correct-ivy)
+    :bind
+    (:map flyspell-mode-map
+          ([remap flyspell-correct-word-before-point] . flyspell-correct-wrapper))))
+
+
+;; Handling capitalized subwords in a nomenclature
+(use-package subword
+  :ensure nil
+  :hook
+  (prog-mode . subword-mode)
+  (minibuffer-setup . subword-mode))
 
 
 (provide 'init-edit)

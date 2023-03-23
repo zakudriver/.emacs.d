@@ -13,6 +13,7 @@
 
 (use-package flycheck
   :commands flycheck-list-errors
+  :autoload flycheck-redefine-standard-error-levels
   :hook
   (prog-mode . global-flycheck-mode)
   ;; (tide-mode  . use-eslint-from-nodemodules)
@@ -40,37 +41,20 @@
     (define-fringe-bitmap 'flycheck-fringe-bitmap-double-arrow
       [16 48 112 240 112 48 16] nil nil 'center))
 
+  (flycheck-redefine-standard-error-levels "⏴" 'flycheck-fringe-bitmap-arrow)
+  
   (defun my-flycheck-list-errors-toggle ()
     "Open or delete flycheck-errors-list window."
     (interactive)
     (let ((w (get-buffer-window my/flycheck-errors-buffer-name)))
       (if w
           (delete-window w)
-        (flycheck-list-errors)))))
+        (flycheck-list-errors))))
 
-
-;; (use-package flycheck-popup-tip
-;;   :hook
-;;   (flycheck-mode . flycheck-popup-tip-mode)
-;;   :custom
-;;   (flycheck-popup-tip-error-prefix " \u2717 "))
-
-;; (defun use-eslint-from-nodemodules ()
-;;   (let* ((root (locate-dominating-file
-;;                 (or (buffer-file-name) default-directory)
-;;                 "node_modules"))
-;;          (eslint
-;;           (and root
-;;                (expand-file-name "node_modules/.bin/eslint"
-;;                                  root))))
-;;     (when (and eslint (file-executable-p eslint))
-;;       (setq-local flycheck-javascript-eslint-executable eslint)
-;;       ;; (flycheck-select-checker 'javascript-eslint)
-;;       (flycheck-add-next-checker 'tsx-tide 'javascript-eslint 'append)
-;;       (flycheck-add-next-checker 'typescript-tide 'javascript-eslint 'append))))
-
-;; (flycheck-add-mode 'javascript-eslint 'web-mode)
-;; (flycheck-add-mode 'javascript-eslint 'typescript-mode)
+  
+  (use-package flycheck-popup-tip
+    :hook
+    (flycheck-mode . flycheck-popup-tip-mode)))
 
 
 (provide 'init-flycheck)

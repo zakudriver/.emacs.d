@@ -15,9 +15,7 @@
 (use-package lacquer
   :load-path "~/.emacs.d/site-lisp/lacquer"
   :pretty-hydra
-  ((:title (pretty-hydra-title "Lacquer Management" 'faicon "th" :height 1 :v-adjust -0.1)
-           :foreign-keys warn :quit-key ("q" "C-g"))
-   ("Theme"
+  (("Theme"
     (("t" lacquer-current-theme "current theme")
      ("T" lacquer-theme-selector "theme selector")
      ("C" lacquer-theme-carousel "theme carousel")
@@ -202,8 +200,8 @@
   (fireplace-off my-restore-window-configuration my-save-window-configuration)
   :custom
   (fireplace-smoke-on t)
-  :hook
-  (after-init . my-switch-timing-fireplace)
+  ;; :hook
+  ;; (after-init . my-switch-timing-fireplace)
   :config
   (defvar my/fireplace-timer nil
     "Fireplace timer.")

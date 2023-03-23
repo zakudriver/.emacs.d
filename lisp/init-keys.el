@@ -63,6 +63,9 @@
 
 (global-set-key (kbd "C-?") 'undo-redo)
 
+(global-set-key (kbd "s-.") 'xref-find-definitions-other-window)
+
+
 (provide 'init-keys)
 
 ;;; init-keys.el ends here

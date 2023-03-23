@@ -10,6 +10,7 @@
   (require 'init-const)
   (require 'init-funcs))
 
+
 (if sys/macp
     (pixel-scroll-precision-mode))
 
@@ -39,9 +40,7 @@
 (use-package winum
   :commands my-winum-delete-window-macro-factory
   :pretty-hydra
-  ((:title (pretty-hydra-title "Window Management" 'faicon "th" :height 1 :v-adjust -0.1)
-           :foreign-keys warn :quit-key ("q" "C-g"))
-   ("Actions"
+  (("Actions"
     (("TAB" other-window "switch")
      ("x" delete-window "delete" :exit t)
      ("m" toggle-frame-maximized "maximize")
@@ -65,7 +64,7 @@
      ("0" (text-scale-increase 0) "reset"))))
   :hook
   (after-init . winum-mode)
-  :bind (("C-c w w" . winum-hydra/body)
+  :bind (("C-c W"   . winum-hydra/body)
          ("M-0"     . winum-select-window-0)
          ("M-1"     . winum-select-window-1)
          ("M-2"     . winum-select-window-2)
@@ -128,6 +127,11 @@
    ("M-`"   . popper-cycle)
    ("C-M-`" . popper-toggle-type))
   :custom
+  (popper-window-height (lambda (win)
+                          (fit-window-to-buffer
+                           win
+                           (floor (frame-height) 4)
+                           (floor (frame-height) 8))))
   (popper-reference-buffers
    '("\\*Messages\\*"
      "Output\\*$"
@@ -167,7 +171,7 @@
 
      "\\*ert\\*$" overseer-buffer-mode
      "\\*gud-debug\\*$"
-     "\\*lsp-help\\*$" "\\*lsp session\\*$" "*Java Dependency List*" "*LSP Symbols List*" "*LSP Error List*"
+     "\\*lsp-help\\*$" "\\*lsp session\\*$" "*Java Dependency List*" "*LSP Symbols List*" "*LSP Error List*" xref--xref-buffer-mode
      "\\*quickrun\\*$"
      "\\*tldr\\*$"
      "\\*vc-.*\\*$"

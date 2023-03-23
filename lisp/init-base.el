@@ -117,14 +117,6 @@ that used by the user's shell."
   (which-key-sort-order 'which-key-prefix-then-key-order))
 
 
-;; so-long emacs/>=27p
-(use-package so-long
-  :hook
-  (after-init . global-so-long-mode)
-  :custom
-  (so-long-threshold 400))
-
-
 (provide 'init-base)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

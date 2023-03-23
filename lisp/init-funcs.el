@@ -618,6 +618,12 @@ and `my-right-brackets'."
                              nil))))
 
 
+(defun my-too-long-file-p ()
+  "Check whether the file is too long."
+  (if (fboundp 'buffer-line-statistics)
+      (> (car (buffer-line-statistics)) 3000)
+    (> (buffer-size) 100000)))
+
 
 (provide 'init-funcs)
 
