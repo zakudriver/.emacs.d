@@ -31,10 +31,9 @@
       (setq insert-directory-program "gls")))
 
   (when (or (and sys/macp (executable-find "gls"))
-            (and (not sys/macp) (executable-find "ls")))
+            (and sys/linuxp (executable-find "ls")))
     ;; Using `insert-directory-program'
     (setq ls-lisp-use-insert-directory-program t)
-
     ;; Show directory first
     (setq dired-listing-switches "-alh --group-directories-first")
 
@@ -94,8 +93,8 @@
     :demand
     :config
     (let ((cmd (cond
-                (sys/macp "open")
-                (sys/linuxp "xdg-open")
+                (sys/mac-x-p "open")
+                (sys/linux-x-p "xdg-open")
                 (t ""))))
       (setq dired-guess-shell-alist-user
             `(("\\.pdf\\'" ,cmd)

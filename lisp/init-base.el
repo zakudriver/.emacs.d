@@ -47,7 +47,14 @@
       read-process-output-max         #x10000  ;; 64kb
       
       adaptive-fill-regexp            "[ t]+|[ t]*([0-9]+.|*+)[ t]*"
-      adaptive-fill-first-line-regexp "^* *$")
+      adaptive-fill-first-line-regexp "^* *$"
+      ffap-machine-p-known            'reject)
+
+
+(unless sys/macp
+  (setq command-line-ns-option-alist nil))
+(unless sys/linuxp
+  (setq command-line-x-option-alist nil))
 
 
 ;; Garbage Collector Magic Hack
@@ -65,9 +72,9 @@
 that used by the user's shell."
   (interactive)
   (let ((path-from-shell (replace-regexp-in-string
-			  "[ \t\n]*$" "" (shell-command-to-string
-					  "$SHELL --login -c 'echo $PATH'"
-						    ))))
+			                    "[ \t\n]*$" "" (shell-command-to-string
+					                                "$SHELL --login -c 'echo $PATH'"
+						                              ))))
     (setenv "PATH" path-from-shell)
     (setq exec-path (split-string path-from-shell path-separator))))
 

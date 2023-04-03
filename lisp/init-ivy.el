@@ -54,11 +54,12 @@
   (counsel-yank-pop-separator   "\n────────\n")
   (counsel-grep-base-command    "rg -S --no-heading --line-number --color never %s %s")
   (counsel-fzf-cmd              "fd --type f --hidden --follow --exclude .git --color never '%s'")
-
-  (counsel-find-file-occur-use-find nil)
-  (counsel-find-file-occur-cmd      "gls -a | grep -i -E '%s' | tr '\\n' '\\0' | xargs -0 gls -d --group-directories-first")
   :init
   (add-hook 'counsel-grep-post-action-hook #'recenter)
+  ;; Be compatible with `gls'
+  (if (and sys/macp (executable-find "gls"))
+      (setq counsel-find-file-occur-use-find nil
+            counsel-find-file-occur-cmd      "gls -a | grep -i -E '%s' | tr '\\n' '\\0' | xargs -0 gls -d --group-directories-first"))
   :config
   (with-eval-after-load 'savehist
     (add-to-list 'savehist-additional-variables 'ivy-views))
@@ -438,9 +439,15 @@
 
 
 (use-package counsel-osx-app
+  :if sys/macp
   :bind
   (:map counsel-mode-map
         ("C-c a p" . counsel-osx-app)))
+
+
+(if sys/linux-x-p
+    (bind-key "C-c a p" #'counsel-linux-app counsel-mode-map))
+
 
 (provide 'init-ivy)
 

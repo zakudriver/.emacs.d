@@ -37,6 +37,16 @@
   (lacquer-font-list        my/font-list))
 
 
+(when (and sys/mac-ns-p sys/mac-x-p)
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+  (add-to-list 'default-frame-alist '(ns-appearance . dark))
+  (add-hook 'after-load-theme-hook
+            (lambda ()
+              (let ((bg (frame-parameter nil 'background-mode)))
+                (set-frame-parameter nil 'ns-appearance bg)
+                (setcdr (assq 'ns-appearance default-frame-alist) bg)))))
+
+
 ;; Never lose your cursor again
 ;; (use-package beacon
 ;;   :hook
@@ -46,15 +56,13 @@
 
 
 ;; Font
-(with-no-warnings
-  (when sys/macp
-    ;; (set-fontset-font
-    ;;  t 'symbol (font-spec :family "Apple Color Emoji") nil 'prepend)
-    (set-fontset-font "fontset-default" 'unicode "Apple Color Emoji" nil 'prepend)
-    
-    
-    (setq ns-use-thin-smoothing t
-          ns-pop-up-frames nil)))
+(when sys/macp
+  ;; (set-fontset-font
+  ;;  t 'symbol (font-spec :family "Apple Color Emoji") nil 'prepend)
+  (set-fontset-font "fontset-default" 'unicode "Apple Color Emoji" nil 'prepend)
+  
+  (setq ns-use-thin-smoothing t
+        ns-pop-up-frames      nil))
 
 
 (set-face-attribute 'default nil :weight my/font-weight)

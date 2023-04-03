@@ -74,3 +74,4 @@ projects
 /cider-history
 nov-places
 *.sqlite
+/rust-playground

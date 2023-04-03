@@ -11,8 +11,14 @@
   (require 'init-funcs))
 
 
-(if sys/macp
-    (pixel-scroll-precision-mode))
+(if (fboundp 'pixel-scroll-precision-mode)
+    (pixel-scroll-precision-mode t)
+  (use-package good-scroll
+    :if (not sys/macp)
+    :diminish
+    :hook (after-init . good-scroll-mode)
+    :bind (([remap next] . good-scroll-up-full-screen)
+           ([remap prior] . good-scroll-down-full-screen))))
 
 
 ;; Fullscreen
@@ -182,7 +188,7 @@
      "\\*Gofmt Errors\\*$" "\\*Go Test\\*$" godoc-mode
      "\\*docker-.+\\*"
      "\\*prolog\\*" inferior-python-mode inf-ruby-mode swift-repl-mode
-     "\\*rustfmt\\*$" rustic-compilation-mode rustic-cargo-clippy-mode
+     "\\*rustfmt\\*$" rustic-compilation-mode rustic-cargo-clippy-mode rustic-cargo-plain-run-mode
      rustic-cargo-outdated-mode rustic-cargo-run-mode rustic-cargo-test-mode))
   :config
   (popper-echo-mode 1)

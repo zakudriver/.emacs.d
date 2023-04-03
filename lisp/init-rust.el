@@ -8,7 +8,12 @@
 
 (use-package rustic
   :custom
-  (rustic-format-trigger 'on-save))
+  (rust-indent-offset          2)
+  (rustic-rustfmt-config-alist '((tab_spaces . 2)))
+  (rustic-format-trigger       'on-save))
+
+
+(use-package rust-playground)
 
 
 (provide 'init-rust)
