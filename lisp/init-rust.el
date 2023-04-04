@@ -15,6 +15,7 @@
   (defun rustic-cargo-test-run-with-args (args)
     "Start compilation process for  \"cargo test\" with ARGS."
     (interactive "sPlease enter test arguments: ")
+    (setq rustic-test-arguments args)
     (rustic-cargo-test-run args)))
 
 
