@@ -9,8 +9,13 @@
 (use-package rustic
   :custom
   (rust-indent-offset          2)
-  (rustic-rustfmt-config-alist '((tab_spaces . 2)))
-  (rustic-format-trigger       'on-save))
+  (rustic-rustfmt-config-alist '((tab_spaces . 2) (edition . "2021")))
+  (rustic-format-trigger       'on-save)
+  :config
+  (defun rustic-cargo-test-run-with-args (args)
+    "Start compilation process for  \"cargo test\" with ARGS."
+    (interactive "sPlease enter test arguments: ")
+    (rustic-cargo-test-run args)))
 
 
 (use-package rust-playground)

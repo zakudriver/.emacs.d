@@ -189,7 +189,7 @@
      "\\*docker-.+\\*"
      "\\*prolog\\*" inferior-python-mode inf-ruby-mode swift-repl-mode
      "\\*rustfmt\\*$" rustic-compilation-mode rustic-cargo-clippy-mode rustic-cargo-plain-run-mode
-     rustic-cargo-outdated-mode rustic-cargo-run-mode rustic-cargo-test-mode))
+     rustic-cargo-outdated-mode rustic-cargo-run-mode rustic-cargo-test-mode rustic-popup-mode))
   :config
   (popper-echo-mode 1)
   
