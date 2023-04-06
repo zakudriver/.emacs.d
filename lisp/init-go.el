@@ -34,11 +34,9 @@
   :hook
   (before-save . gofmt-before-save)
   :init
-  (setenv "GO111MODULE" "on")
-  (setenv "GOPROXY" "https://goproxy.io/")
-  
-  (unless (executable-find "gopls")
-    (go-update-tools))
+  (when (executable-find "go")
+    (setenv "GO111MODULE" "on")
+    (setenv "GOPROXY" "https://goproxy.io/"))
   :config
   ;; Install or update tools
   (defvar go--tools '("golang.org/x/tools/cmd/goimports"
