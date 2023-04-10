@@ -196,8 +196,6 @@
   :hook
   (prog-mode . hs-minor-mode)
   :config
-  ;; More functions
-  ;; @see https://karthinks.com/software/simple-folding-with-hideshow/
   (defun hs-cycle (&optional level)
     (interactive "p")
     (let (message-log-max
@@ -206,27 +204,27 @@
           (pcase last-command
             ('hs-cycle
              (hs-hide-level 1)
-             
-             ('hs-cycle-children
-              (save-excursion (hs-show-block))
-              (setq this-command 'hs-cycle-subtree))
-             ('hs-cycle-subtree
-              (hs-hide-block))
-             (_
-              (if (not (hs-already-hidden-p))
-                  (hs-hide-block)
-                (hs-hide-level 1)
-                (setq this-command 'hs-cycle-children))))
-            (hs-hide-level level)
-            (setq this-command 'hs-hide-level))))
+             (setq this-command 'hs-cycle-children))
+            ('hs-cycle-children
+             (save-excursion (hs-show-block))
+             (setq this-command 'hs-cycle-subtree))
+            ('hs-cycle-subtree
+             (hs-hide-block))
+            (_
+             (if (not (hs-already-hidden-p))
+                 (hs-hide-block)
+               (hs-hide-level 1)
+               (setq this-command 'hs-cycle-children))))
+        (hs-hide-level level)
+        (setq this-command 'hs-hide-level))))
 
-    (defun hs-toggle-all ()
-      "Toggle hide/show all."
-      (interactive)
-      (pcase last-command
-        
-        (save-excursion (hs-show-all))
-        (setq this-command 'hs-global-show))
+  (defun hs-toggle-all ()
+    "Toggle hide/show all."
+    (interactive)
+    (pcase last-command
+      ('hs-toggle-all
+       (save-excursion (hs-show-all))
+       (setq this-command 'hs-global-show))
       (_ (hs-hide-all))))
 
   ;; Display line counts
