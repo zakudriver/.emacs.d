@@ -30,7 +30,13 @@
   (js-jsx-indent-level 2))
 
 
+(define-derived-mode typescriptreact-mode web-mode "TypescriptReact"
+  "A major mode for tsx.")
+
+
 (use-package typescript-mode
+  :mode
+  ("\\.tsx\\'" . typescriptreact-mode)
   :custom
   (typescript-indent-level 2))
 
@@ -50,22 +56,13 @@
 (use-package ng2-mode
   :mode
   (".+\\.component\\.html$" . ng2-mode)
-  ("\\.component.ts\\'"     . typescript-mode)
-  ("\\.service.ts\\'"       . typescript-mode)
-  ("\\.pipe.ts\\'"          . typescript-mode)
-  ("\\.directive.ts\\'"     . typescript-mode)
-  ("\\.guard.ts\\'"         . typescript-mode)
-  ("\\.module.ts\\'"        . typescript-mode))
-
-
-(use-package prettier-js
-  :hook
-  ((web-mode js-mode ng2-mode typescript-mode scss-mode css-mode json-mode html-mode ng2-html-mode) . prettier-js-mode))
-;; (web-mode . (lambda ()
-;;               (unless (member (file-name-extension buffer-file-name) '("ejs"))
-;;                 (prettier-js-mode))))
-;; :custom
-;; (prettier-js-args '("--single-quote" "true")) ;; "--print-width" "120")
+  ("\\.component.ts\\'"     . ng2-mode)
+  ;; ("\\.service.ts\\'"       . ng2-mode)
+  ;; ("\\.pipe.ts\\'"          . ng2-mode)
+  ;; ("\\.directive.ts\\'"     . ng2-mode)
+  ;; ("\\.guard.ts\\'"         . ng2-mode)
+  ;; ("\\.module.ts\\'"        . ng2-mode)
+  )
 
 
 (provide 'init-js)

@@ -29,22 +29,6 @@
   (c++-mode . modern-c++-font-lock-mode))
 
 
-(use-package clang-format
-  :defines
-  (c-mode-map c++-mode-map)
-  :bind
-  (:map c-mode-map
-        ("C-. f" . clang-format-buffer)
-        :map c++-mode-map
-        ("C-. f" . clang-format-buffer))
-  :custom
-  (clang-format-style-option "llvm")
-  :hook
-  ((c-mode c++-mode) . (lambda ()
-                         (add-hook (make-local-variable 'before-save-hook)
-                                   'clang-format-buffer))))
-
-
 (use-package irony
   :hook
   ((c-mode c++-mode) . irony-mode)

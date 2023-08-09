@@ -8,17 +8,27 @@
 
 (eval-when-compile
   (require 'init-const)
-  (require 'init-funcs))
+  (require 'init-funcs)
+  (require 'pixel-scroll))
 
 
-(if (fboundp 'pixel-scroll-precision-mode)
-    (pixel-scroll-precision-mode t)
-  (use-package good-scroll
-    :if (not sys/macp)
-    :diminish
-    :hook (after-init . good-scroll-mode)
-    :bind (([remap next] . good-scroll-up-full-screen)
-           ([remap prior] . good-scroll-down-full-screen))))
+(when (fboundp 'pixel-scroll-precision-mode)
+  (setq pixel-scroll-precision-interpolate-page t)
+
+  (defun my-pixel-scroll-interpolate-down (&optional lines)
+    (interactive)
+    (if lines
+        (pixel-scroll-precision-interpolate (* -1 lines (pixel-line-height)))
+      (pixel-scroll-interpolate-down)))
+
+  (defun my-pixel-scroll-interpolate-up (&optional lines)
+    (interactive)
+    (if lines
+        (pixel-scroll-precision-interpolate (* lines (pixel-line-height))))
+    (pixel-scroll-interpolate-up))
+
+  (defalias 'scroll-up-command 'my-pixel-scroll-interpolate-down)
+  (defalias 'scroll-down-command 'my-pixel-scroll-interpolate-up))
 
 
 ;; Fullscreen

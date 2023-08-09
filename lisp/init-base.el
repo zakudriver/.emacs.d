@@ -5,6 +5,20 @@
 
 ;;; Code:
 
+;; Environment
+(defun set-exec-path-from-shell-PATH ()
+  "Set up Emacs's variable `exec-path' and PATH environment variable to match.
+that used by the user's shell."
+  (interactive)
+  (let ((path-from-shell (replace-regexp-in-string
+			                    "[ \t\n]*$" "" (shell-command-to-string
+					                                "$SHELL --login -c 'echo $PATH'"
+						                              ))))
+    (setenv "PATH" path-from-shell)
+    (setq exec-path (split-string path-from-shell path-separator))))
+
+(set-exec-path-from-shell-PATH)
+
 
 (eval-when-compile
   (require 'init-const)
@@ -64,21 +78,6 @@
   (setq gcmh-idle-delay 'auto
         gcmh-auto-idle-delay-factor 10
         gcmh-high-cons-threshold #x1000000)) ; 16MB
-
-
-;; Environment
-(defun set-exec-path-from-shell-PATH ()
-  "Set up Emacs's variable `exec-path' and PATH environment variable to match.
-that used by the user's shell."
-  (interactive)
-  (let ((path-from-shell (replace-regexp-in-string
-			                    "[ \t\n]*$" "" (shell-command-to-string
-					                                "$SHELL --login -c 'echo $PATH'"
-						                              ))))
-    (setenv "PATH" path-from-shell)
-    (setq exec-path (split-string path-from-shell path-separator))))
-
-(set-exec-path-from-shell-PATH)
 
 
 ;; History

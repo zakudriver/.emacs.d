@@ -16,15 +16,14 @@
   :commands lsp-format-buffer
   :hook
   (prog-mode . (lambda ()
-                 (if (apply 'derived-mode-p my/lsp-major-mode)
-                     (lsp-deferred))))
+                 (when (cl-position major-mode my/lsp-major-mode :test 'eq)
+                   (lsp-deferred))))
   (lsp-mode . (lambda ()
-                (if (apply 'derived-mode-p my/lsp-on-save-major-mode)
-                    (add-hook 'before-save-hook #'lsp-format-buffer t t))))
+                (when (cl-position major-mode my/lsp-on-save-major-mode :test 'eq)
+                  (add-hook 'before-save-hook #'lsp-format-buffer t t))))
   :custom
   (lsp-clients-angular-language-server-command
-   '("node"
-     "/opt/homebrew/lib/node_modules/@angular/language-server" "--ngProbeLocations" "/opt/homebrew/lib/node_modules" "--tsProbeLocations" "/opt/homebrew/lib/node_modules" "--stdio"))
+   '("node" "/opt/homebrew/lib/node_modules/@angular/language-server" "--ngProbeLocations" "/opt/homebrew/lib/node_modules" "--tsProbeLocations" "/opt/homebrew/lib/node_modules" "--stdio"))
   (lsp-auto-guess-root            nil)      ; not Detect project root
   (lsp-log-io                     nil)
   (lsp-print-performance          nil)
@@ -53,11 +52,12 @@
   (lsp-lens-enable                        nil)
   (lsp-disabled-clients '((web-mode . (deno-ls)) (typescript-mode . (deno-ls))))
   ;; eslint
-  (lsp-eslint-run                           "onSave")
-  (lsp-eslint-format                        nil)
-  (lsp-eslint-package-manager               "npm")
+  (lsp-eslint-run                              "onSave")
+  (lsp-eslint-format                           nil)
+  (lsp-eslint-package-manager                  "npm")
   (lsp-eslint-code-action-disable-rule-comment nil)
   ;; typescript/javascript
+  (lsp-clients-typescript-prefer-use-project-ts-server t)
   (lsp-typescript-format-enable nil)
   (lsp-javascript-format-enable nil))
 
@@ -129,6 +129,21 @@
 
 
 (use-package lsp-treemacs)
+
+
+;; (use-package eglot
+;;   :defer 3
+;;   :hook
+;;   (prog-mode . (lambda ()
+;;                  (if (apply 'derived-mode-p my/eglot-major-mode)
+;;                      (eglot-ensure))))
+;;   :custom
+;;   (eglot-events-buffer-size 0)
+;;   (eglot-autoshutdown       t)
+;;   :config
+;;   (cl-pushnew '((js-mode typescript-mode typescriptreact-mode) . ("typescript-language-server" "--stdio"))
+;;               eglot-server-programs
+;;               :test #'equal))
 
 
 (provide 'init-lsp)

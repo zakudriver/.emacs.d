@@ -10,6 +10,7 @@
 
 
 (use-package solidity-flycheck
+  :after flycheck
   :hook
   (solidity-mode . solidity-flycheck))
 

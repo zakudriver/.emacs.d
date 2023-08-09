@@ -32,7 +32,7 @@
   :custom
   ;; (lacquer-auto-switch-time '("00:01" "00:02" "10:00" "14:00" "16:00" "18:00" "20:00" "22:00"))
   (lacquer-auto-switch-mode 'random)
-  (lacquer-auto-switch-time (* 60 30))
+  (lacquer-auto-switch-time (* 60 60))
   (lacquer-theme-list       my/theme-list)
   (lacquer-font-list        my/font-list))
 
@@ -148,9 +148,7 @@
     (quit-window t)
     (when dashboard-recover-layout-p
       (setq dashboard-recover-layout-p nil)
-      (my-restore-window-configuration)))
-
-  )
+      (my-restore-window-configuration))))
 
 
 ;; modeline nyan-mode
@@ -167,20 +165,20 @@
 
 
 ;; modeline parrot-mode
-(use-package parrot
-  :functions my-trigger-parrot
-  :commands parrot-start-animation
-  :hook
-  (after-init . parrot-mode)
-  :custom
-  (parrot-num-rotations 1)
-  :config
-  (defun my-trigger-parrot (&_rest)
-    "Trigger parrot animation."
-    (parrot-start-animation))
-  (if (boundp 'window-selection-change-functions)
-      (add-hook 'window-selection-change-functions #'my-trigger-parrot)
-    (add-hook 'post-command-hook #'my-trigger-parrot)))
+;; (use-package parrot
+;;   :functions my-trigger-parrot
+;;   :commands parrot-start-animation
+;;   :hook
+;;   (after-init . parrot-mode)
+;;   :custom
+;;   (parrot-num-rotations 1)
+;;   :config
+;;   (defun my-trigger-parrot (&_rest)
+;;     "Trigger parrot animation."
+;;     (parrot-start-animation))
+;;   (if (boundp 'window-selection-change-functions)
+;;       (add-hook 'window-selection-change-functions #'my-trigger-parrot)
+;;     (add-hook 'post-command-hook #'my-trigger-parrot)))
 
 
 ;; mood-line-mode

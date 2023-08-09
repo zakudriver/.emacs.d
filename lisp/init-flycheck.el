@@ -49,12 +49,13 @@
     (let ((w (get-buffer-window my/flycheck-errors-buffer-name)))
       (if w
           (delete-window w)
-        (flycheck-list-errors))))
+        (flycheck-list-errors)))))
 
-  
-  (use-package flycheck-popup-tip
-    :hook
-    (flycheck-mode . flycheck-popup-tip-mode)))
+
+;; (use-package flycheck-popup-tip
+;;   :hook
+;;   (flycheck-mode . flycheck-popup-tip-mode))
+
 
 
 (provide 'init-flycheck)

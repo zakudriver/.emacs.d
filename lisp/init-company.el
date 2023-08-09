@@ -19,9 +19,9 @@
   (("M-/" . company-complete)
    ("s-/" . company-yasnippet)
    :map company-active-map
-   ("C-p"       . company-select-previous)
-   ("C-n"       . company-select-next)
-   ("<tab>"     . company-complete-common-or-cycle)
+   ("C-p"   . company-select-previous)
+   ("C-n"   . company-select-next)
+   ("<tab>" . company-complete-common-or-cycle)
    :map company-search-map
    ("C-p" . company-select-previous)
    ("C-n" . company-select-next))
@@ -32,7 +32,7 @@
   (company-tooltip-limit             12)
   (company-idle-delay                0)
   (company-echo-delay                nil)
-  (company-minimum-prefix-length     1)
+  (company-minimum-prefix-length     2)
   (company-icon-margin               3)
   (company-require-match             nil)
   (company-dabbrev-ignore-case       nil)
@@ -111,7 +111,6 @@
         (setq company-backends (mapcar #'company-backend-with-yas company-backends)))
 
       (defun my-lsp-fix-company-capf ()
-        "Remove redundant `comapny-capf'."
         (setq company-backends
               (remove 'company-backends (remq 'company-capf company-backends))))
       (advice-add #'lsp-completion--enable :after #'my-lsp-fix-company-capf)

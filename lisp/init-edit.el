@@ -268,28 +268,28 @@
   (after-init . delete-selection-mode))
 
 
-(use-package flyspell
-  :ensure nil
-  :if
-  (executable-find "aspell")
-  :custom
-  (flyspell-issue-message-flag nil)
-  (ispell-program-name         "aspell")
-  (ispell-extra-args           '("--sug-mode=ultra" "--lang=en_US" "--run-together"))
-  :hook
-  ((text-mode outline-mode) . flyspell-mode)
-  (flyspell-mode . (lambda ()
-                     (dolist (key '("C-;" "C-," "C-."))
-                       (unbind-key key flyspell-mode-map))))
-  :config
-  ;; Correcting words with flyspell via Ivy
-  (use-package flyspell-correct-ivy
-    :after ivy
-    :custom
-    (flyspell-correct-interface #'flyspell-correct-ivy)
-    :bind
-    (:map flyspell-mode-map
-          ([remap flyspell-correct-word-before-point] . flyspell-correct-wrapper))))
+;; (use-package flyspell
+;;   :ensure nil
+;;   :if
+;;   (executable-find "aspell")
+;;   :custom
+;;   (flyspell-issue-message-flag nil)
+;;   (ispell-program-name         "aspell")
+;;   (ispell-extra-args           '("--sug-mode=ultra" "--lang=en_US" "--run-together"))
+;;   :hook
+;;   ((text-mode outline-mode) . flyspell-mode)
+;;   (flyspell-mode . (lambda ()
+;;                      (dolist (key '("C-;" "C-," "C-."))
+;;                        (unbind-key key flyspell-mode-map))))
+;;   :config
+;;   ;; Correcting words with flyspell via Ivy
+;;   (use-package flyspell-correct-ivy
+;;     :after ivy
+;;     :custom
+;;     (flyspell-correct-interface #'flyspell-correct-ivy)
+;;     :bind
+;;     (:map flyspell-mode-map
+;;           ([remap flyspell-correct-word-before-point] . flyspell-correct-wrapper))))
 
 
 ;; Handling capitalized subwords in a nomenclature

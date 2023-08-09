@@ -38,9 +38,9 @@
     (advice-add #'nov-content-unique-identifier :override #'my-nov-content-unique-identifier)))
 
 
-(use-package mixed-pitch
-  :hook
-  ((text-mode nov-mode) . mixed-pitch-mode))
+;; (use-package mixed-pitch
+;;   :hook
+;;   ((text-mode nov-mode) . mixed-pitch-mode))
 
 
 (use-package olivetti
