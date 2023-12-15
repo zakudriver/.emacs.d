@@ -1,3 +1,9 @@
+;;; init.el --- Emacs Configuration.	-*- lexical-binding: t no-byte-compile: t -*-
+
+;;; Commentary:
+
+;; Emacs Configuration
+
 ;;; Code:
 
 ;; (setq debug-on-error t)
