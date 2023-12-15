@@ -1,5 +1,4 @@
-;;; init-window --- Summary
-
+;;; init-reader.el --- Initialize reader configurations.	-*- lexical-binding: t -*-
 
 ;;; Commentary:
 ;;
@@ -24,7 +23,7 @@
     (visual-line-mode 1)
     ;; (olivetti-mode 1)
     (face-remap-add-relative 'variable-pitch :family "Times New Roman" :height 1.5))
-  
+
   (with-no-warnings
     ;; WORKAROUND: errors while opening `nov' files with Unicode characters
     ;; @see https://github.com/wasamasa/nov.el/issues/63

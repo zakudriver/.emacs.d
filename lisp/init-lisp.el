@@ -1,4 +1,4 @@
-;;; init-lisp --- Summary
+;; init-elisp.el --- Initialize lisp configurations.	-*- lexical-binding: t -*-
 
 ;;; Commentary:
 ;; some configuration of Lisp languages.

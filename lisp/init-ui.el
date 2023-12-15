@@ -1,4 +1,4 @@
-;;; init-ui --- Summary
+;; init-ui.el --- Better lookings and appearances.	-*- lexical-binding: t -*-
 
 ;;; Commentary:
 ;; some configuration of ui.
@@ -10,6 +10,23 @@
   (require 'init-const)
   (require 'init-custom)
   (require 'init-funcs))
+
+
+(use-package display-line-numbers
+  :ensure nil
+  :hook
+  ((prog-mode yaml-mode conf-mode) . global-display-line-numbers-mode)
+  :custom
+  (display-line-numbers-width-start t))
+
+
+(setq idle-update-delay             1.0
+      highlight-nonselected-windows nil
+      fast-but-imprecise-scrolling  t
+      redisplay-skip-fontification-on-input t
+      frame-title-format nil
+      frame-resize-pixelwise t)
+
 
 ;; Theme
 (use-package lacquer
@@ -47,20 +64,12 @@
                 (setcdr (assq 'ns-appearance default-frame-alist) bg)))))
 
 
-;; Never lose your cursor again
-;; (use-package beacon
-;;   :hook
-;;   (after-init . beacon-mode)
-;;   :custom
-;;   (beacon-blink-when-window-changes nil))
-
-
 ;; Font
 (when sys/macp
   ;; (set-fontset-font
   ;;  t 'symbol (font-spec :family "Apple Color Emoji") nil 'prepend)
   (set-fontset-font "fontset-default" 'unicode "Apple Color Emoji" nil 'prepend)
-  
+
   (setq ns-use-thin-smoothing t
         ns-pop-up-frames      nil))
 
@@ -68,11 +77,6 @@
 (set-face-attribute 'default nil :weight my/font-weight)
 (setq-default line-spacing 0.3
               fill-column 80)
-
-
-;; Title
-(setq frame-title-format nil
-      frame-resize-pixelwise t)
 
 
 ;; Transparent background
@@ -97,7 +101,7 @@
 (use-package dashboard
   :defines dashboard-recover-layout-p
   :bind
-  (("C-c h" . my-open-dashboard)
+  (("C-c d" . my-open-dashboard)
    :map dashboard-mode-map
    ("C-, g" . dashboard-refresh-buffer)
    ("q"     . my-quit-dashboard))
@@ -213,7 +217,7 @@
     "Fireplace timer.")
   (defvar my/fireplace-p nil
     "Wether recovers the layout.")
-  
+
   (defun my-switch-timing-fireplace ()
     "Switch whether `fireplace be called regularly."
     (interactive)
@@ -225,7 +229,7 @@
 						                                        (lambda ()
                                                       (fireplace)))))
     (message "The timing fireplace is %s." (if my/fireplace-timer "on" "off")))
-  
+
   (advice-add #'fireplace-off :after (lambda ()
                                        (setq my/fireplace-p nil)
                                        (my-restore-window-configuration)))
@@ -237,12 +241,12 @@
 
 
 ;; Emoji
-(use-package emojify
-  :if sys/linuxp
-  :hook
-  (after-init . (lambda ()
-                  (if sys/linuxp
-                      (global-emojify-mode)))))
+;; (use-package emojify
+;;   :if sys/linuxp
+;;   :hook
+;;   (after-init . (lambda ()
+;;                   (if sys/linuxp
+;;                       (global-emojify-mode)))))
 
 
 ;; Misc
@@ -251,10 +255,9 @@
 (setq inhibit-startup-screen            t
       use-file-dialog                   nil
       use-dialog-box                    nil
+      inhibit-default-init              t
       inhibit-startup-echo-area-message t
-      track-eol                         t
-      use-short-answers                 t ;; emacs28
-      line-move-visual                  nil)
+      initial-scratch-message           nil)
 
 
 ;; Display dividers between windows
@@ -274,115 +277,84 @@
     (setq x-gtk-use-system-tooltips nil))
 
 
-;; icons
-(use-package all-the-icons
-  :commands my-font-installed-p
-  :if
-  (display-graphic-p)
+(use-package posframe
+  :hook
+  (after-load-theme . posframe-delete-all)
   :init
-  (unless (my-font-installed-p "all-the-icons")
-    (all-the-icons-install-fonts t))
+  (defface posframe-border
+    `((t (:inherit region)))
+    "Face used by the `posframe' border."
+    :group 'posframe)
+  (defvar posframe-border-width 2
+    "Default posframe border width.")
   :config
-  (declare-function memoize 'memoize)
-  (declare-function memoize-restore 'memoize)
-  (defun all-the-icons-reset ()
-    "Reset (unmemoize/memoize) the icons."
-    (interactive)
-    (ignore-errors
-      (dolist (f '(all-the-icons-icon-for-file
-                   all-the-icons-icon-for-mode
-                   all-the-icons-icon-for-url
-                   all-the-icons-icon-family-for-file
-                   all-the-icons-icon-family-for-mode
-                   all-the-icons-icon-family))
-        (memoize-restore f)
-        (memoize f)))
-    (message "Reset all-the-icons"))
+  (with-no-warnings
+    (defun my-posframe--prettify-frame (&rest _)
+      (set-face-background 'fringe nil posframe--frame))
+    (advice-add #'posframe--create-posframe :after #'my-posframe--prettify-frame)
 
-  (add-to-list 'all-the-icons-icon-alist
-               '("^Rakefile$" all-the-icons-alltheicon "ruby-alt" :face all-the-icons-red))
-  (add-to-list 'all-the-icons-icon-alist
-               '("\\go.mod$" all-the-icons-fileicon "go" :face all-the-icons-dblue))
-  (add-to-list 'all-the-icons-icon-alist
-               '("\\go.sum$" all-the-icons-fileicon "go" :face all-the-icons-dpurple))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(xwidget-webkit-mode all-the-icons-faicon "chrome" :v-adjust -0.1 :face all-the-icons-blue))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(bongo-playlist-mode all-the-icons-material "queue_music" :height 1.2 :face 'all-the-icons-green))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(bongo-library-mode all-the-icons-material "library_music" :height 1.1 :face 'all-the-icons-green))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(gnus-group-mode all-the-icons-fileicon "gnu" :face 'all-the-icons-silver))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(gnus-summary-mode all-the-icons-octicon "inbox" :height 1.0 :v-adjust 0.0 :face 'all-the-icons-orange))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(gnus-article-mode all-the-icons-octicon "mail" :height 1.1 :v-adjust 0.0 :face 'all-the-icons-lblue))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(message-mode all-the-icons-octicon "mail" :height 1.1 :v-adjust 0.0 :face 'all-the-icons-lblue))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(diff-mode all-the-icons-octicon "git-compare" :v-adjust 0.0 :face all-the-icons-lred))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(flycheck-error-list-mode all-the-icons-octicon "checklist" :height 1.1 :v-adjust 0.0 :face all-the-icons-lred))
-  (add-to-list 'all-the-icons-icon-alist
-               '("\\.rss$" all-the-icons-octicon "rss" :height 1.1 :v-adjust 0.0 :face all-the-icons-lorange))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(elfeed-search-mode all-the-icons-faicon "rss-square" :v-adjust -0.1 :face all-the-icons-orange))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(elfeed-show-mode all-the-icons-octicon "rss" :height 1.1 :v-adjust 0.0 :face all-the-icons-lorange))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(newsticker-mode all-the-icons-faicon "rss-square" :v-adjust -0.1 :face all-the-icons-orange))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(newsticker-treeview-mode all-the-icons-faicon "rss-square" :v-adjust -0.1 :face all-the-icons-orange))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(newsticker-treeview-list-mode all-the-icons-octicon "rss" :height 1.1 :v-adjust 0.0 :face all-the-icons-orange))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(newsticker-treeview-item-mode all-the-icons-octicon "rss" :height 1.1 :v-adjust 0.0 :face all-the-icons-lorange))
-  (add-to-list 'all-the-icons-icon-alist
-               '("\\.[bB][iI][nN]$" all-the-icons-octicon "file-binary" :v-adjust 0.0 :face all-the-icons-yellow))
-  (add-to-list 'all-the-icons-icon-alist
-               '("\\.c?make$" all-the-icons-fileicon "gnu" :face all-the-icons-dorange))
-  (add-to-list 'all-the-icons-icon-alist
-               '("\\.conf$" all-the-icons-octicon "settings" :v-adjust 0.0 :face all-the-icons-yellow))
-  (add-to-list 'all-the-icons-icon-alist
-               '("\\.toml$" all-the-icons-octicon "settings" :v-adjust 0.0 :face all-the-icons-yellow))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(conf-mode all-the-icons-octicon "settings" :v-adjust 0.0 :face all-the-icons-yellow))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(conf-space-mode all-the-icons-octicon "settings" :v-adjust 0.0 :face all-the-icons-yellow))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(forge-topic-mode all-the-icons-alltheicon "git" :face all-the-icons-blue))
-  (add-to-list 'all-the-icons-icon-alist
-               '("\\.xpm$" all-the-icons-octicon "file-media" :v-adjust 0.0 :face all-the-icons-dgreen))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(help-mode all-the-icons-faicon "info-circle" :height 1.1 :v-adjust -0.1 :face all-the-icons-purple))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(helpful-mode all-the-icons-faicon "info-circle" :height 1.1 :v-adjust -0.1 :face all-the-icons-purple))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(Info-mode all-the-icons-faicon "info-circle" :height 1.1 :v-adjust -0.1))
-  (add-to-list 'all-the-icons-icon-alist
-               '("NEWS$" all-the-icons-faicon "newspaper-o" :height 0.9 :v-adjust -0.2))
-  (add-to-list 'all-the-icons-icon-alist
-               '("Cask\\'" all-the-icons-fileicon "elisp" :height 1.0 :v-adjust -0.2 :face all-the-icons-blue))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(cask-mode all-the-icons-fileicon "elisp" :height 1.0 :v-adjust -0.2 :face all-the-icons-blue))
-  (add-to-list 'all-the-icons-icon-alist
-               '(".*\\.ipynb\\'" all-the-icons-fileicon "jupyter" :height 1.2 :face all-the-icons-orange))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(ein:notebooklist-mode all-the-icons-faicon "book" :face all-the-icons-lorange))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(ein:notebook-mode all-the-icons-fileicon "jupyter" :height 1.2 :face all-the-icons-orange))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(ein:notebook-multilang-mode all-the-icons-fileicon "jupyter" :height 1.2 :face all-the-icons-dorange))
-  (add-to-list 'all-the-icons-icon-alist
-               '("\\.epub\\'" all-the-icons-faicon "book" :height 1.0 :v-adjust -0.1 :face all-the-icons-green))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(nov-mode all-the-icons-faicon "book" :height 1.0 :v-adjust -0.1 :face all-the-icons-green))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(gfm-mode all-the-icons-octicon "markdown" :face all-the-icons-lblue))
-  (add-to-list 'all-the-icons-icon-alist
-               '("\\.tsx$" all-the-icons-fileicon "typescript" :height 0.9 :face all-the-icons-dblue))
-  (add-to-list 'all-the-icons-mode-icon-alist
-               '(typescript-mode all-the-icons-fileicon "typescript" :height 0.9 :face all-the-icons-blue)))
+    (defun posframe-poshandler-frame-center-near-bottom (info)
+      (cons (/ (- (plist-get info :parent-frame-width)
+                  (plist-get info :posframe-width))
+               2)
+            (/ (+ (plist-get info :parent-frame-height)
+                  (* 2 (plist-get info :font-height)))
+               2)))))
+
+
+;; icons
+(use-package nerd-icons
+  :config
+  (when (and (display-graphic-p)
+             (not (my-font-installed-p nerd-icons-font-family)))
+    (nerd-icons-install-fonts t)))
+
+
+(use-package composite
+  :ensure nil
+  :init
+  (defvar composition-ligature-table (make-char-table nil))
+  :hook
+  (((prog-mode
+     conf-mode nxml-mode markdown-mode help-mode
+     shell-mode eshell-mode term-mode vterm-mode)
+    . (lambda () (setq-local composition-function-table composition-ligature-table))))
+  :config
+  ;; support ligatures, some toned down to prevent hang
+  (let ((alist
+         '((33  . ".\\(?:\\(==\\|[!=]\\)[!=]?\\)")
+           (35  . ".\\(?:\\(###?\\|_(\\|[(:=?[_{]\\)[#(:=?[_{]?\\)")
+           (36  . ".\\(?:\\(>\\)>?\\)")
+           (37  . ".\\(?:\\(%\\)%?\\)")
+           (38  . ".\\(?:\\(&\\)&?\\)")
+           (42  . ".\\(?:\\(\\*\\*\\|[*>]\\)[*>]?\\)")
+           ;; (42 . ".\\(?:\\(\\*\\*\\|[*/>]\\).?\\)")
+           (43  . ".\\(?:\\([>]\\)>?\\)")
+           ;; (43 . ".\\(?:\\(\\+\\+\\|[+>]\\).?\\)")
+           (45  . ".\\(?:\\(-[->]\\|<<\\|>>\\|[-<>|~]\\)[-<>|~]?\\)")
+           ;; (46 . ".\\(?:\\(\\.[.<]\\|[-.=]\\)[-.<=]?\\)")
+
+           (47  . ".\\(?:\\(//\\|==\\|[=>]\\)[/=>]?\\)")
+           ;; (47 . ".\\(?:\\(//\\|==\\|[*/=>]\\).?\\)")
+           (48  . ".\\(?:x[a-zA-Z]\\)")
+           (58  . ".\\(?:\\(::\\|[:<=>]\\)[:<=>]?\\)")
+           (59  . ".\\(?:\\(;\\);?\\)")
+           (60  . ".\\(?:\\(!--\\|\\$>\\|\\*>\\|\\+>\\|-[-<>|]\\|/>\\|<[-<=]\\|=[<>|]\\|==>?\\||>\\||||?\\|~[>~]\\|[$*+/:<=>|~-]\\)[$*+/:<=>|~-]?\\)")
+           (61  . ".\\(?:\\(!=\\|/=\\|:=\\|<<\\|=[=>]\\|>>\\|[=>]\\)[=<>]?\\)")
+           (62  . ".\\(?:\\(->\\|=>\\|>[-=>]\\|[-:=>]\\)[-:=>]?\\)")
+           (63  . ".\\(?:\\([.:=?]\\)[.:=?]?\\)")
+           (91  . ".\\(?:\\(|\\)[]|]?\\)")
+           ;; (92 . ".\\(?:\\([\\n]\\)[\\]?\\)")
+           (94  . ".\\(?:\\(=\\)=?\\)")
+           (95  . ".\\(?:\\(|_\\|[_]\\)_?\\)")
+           (119 . ".\\(?:\\(ww\\)w?\\)")
+           (123 . ".\\(?:\\(|\\)[|}]?\\)")
+           (124 . ".\\(?:\\(->\\|=>\\||[-=>]\\||||*>\\|[]=>|}-]\\).?\\)")
+           (126 . ".\\(?:\\(~>\\|[-=>@~]\\)[-=>@~]?\\)"))))
+    (dolist (char-regexp alist)
+      (set-char-table-range composition-ligature-table (car char-regexp)
+                            `([,(cdr char-regexp) 0 font-shape-gstring]))))
+  (set-char-table-parent composition-ligature-table composition-function-table))
 
 
 (provide 'init-ui)

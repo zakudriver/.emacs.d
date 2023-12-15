@@ -1,4 +1,5 @@
-;;; init-lsp --- Summary
+;; init-lsp.el --- Initialize LSP configurations.	-*- lexical-binding: t -*-
+
 
 ;;; Commentary:
 ;; some configuration of lsp.
@@ -11,6 +12,8 @@
 ;; Use plists for deserialization.
 (setenv "LSP_USE_PLISTS" "true")
 
+(setq read-process-output-max (* 1024 1024)) ;; 1MB
+
 ;; Emacs client for the Language Server Protocol
 (use-package lsp-mode
   :commands lsp-format-buffer
@@ -21,10 +24,31 @@
   (lsp-mode . (lambda ()
                 (when (cl-position major-mode my/lsp-on-save-major-mode :test 'eq)
                   (add-hook 'before-save-hook #'lsp-format-buffer t t))))
+  (lsp-completion-mode . (lambda ()
+                           (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
+                                 '(orderless))))
+  :init
+  ;; Optionally configure the first word as flex filtered.
+  (add-hook 'orderless-style-dispatchers #'(lambda (_pattern index _total)
+                                             (and (eq index 0) 'orderless-flex)) nil 'local)
+
+  (setq-local completion-at-point-functions (list (cape-capf-buster #'lsp-completion-at-point)))
+  ;; :bind
+  ;; (:map lsp-mode-map
+  ;;       ([remap xref-find-definitions] . lsp-find-definition)
+  ;;       ([remap xref-find-references] . lsp-find-references))
   :custom
+  (lsp-completion-provider        :none)
+  (lsp-diagnostics-provider       :flymake)
   (lsp-clients-angular-language-server-command
    '("node" "/opt/homebrew/lib/node_modules/@angular/language-server" "--ngProbeLocations" "/opt/homebrew/lib/node_modules" "--tsProbeLocations" "/opt/homebrew/lib/node_modules" "--stdio"))
   (lsp-auto-guess-root            nil)      ; not Detect project root
+  (lsp-keep-workspace-alive       nil)
+  (lsp-signature-auto-activate    nil)
+  (lsp-modeline-code-actions-enable nil)
+  (lsp-modeline-diagnostics-enable  nil)
+  (lsp-enable-file-watchers       nil)
+  (lsp-modeline-workspace-status-enable nil)
   (lsp-log-io                     nil)
   (lsp-print-performance          nil)
   (lsp-response-timeout           10)
@@ -34,19 +58,22 @@
   (lsp-enable-snippet             nil)
   (lsp-enable-links               nil)
   (lsp-enable-symbol-highlighting nil)
+  (lsp-enable-text-document-color nil)
+
   ;; (lsp-restart 'auto-restart)
+  (lsp-completion-enable               t)
   (lsp-completion-show-detail          nil)
-  (lsp-completion-sort-initial-results t)
-  (lsp-completion-use-last-result      t)
+  ;; (lsp-completion-sort-initial-results t)
+  ;; (lsp-completion-use-last-result      t)
   (lsp-signature-auto-activate         nil)
   (lsp-signature-doc-lines             30)
   (lsp-enable-indentation              t)
   (lsp-eldoc-render-all                nil)
   (lsp-eldoc-enable-hover              nil)
   ;; deno
-  (lsp-clients-deno-config                "./tsconfig.json")
-  (lsp-clients-deno-import-map            "./import_map.json")
-  (lsp-clients-deno-enable-lint           nil)
+  ;; (lsp-clients-deno-config                "./tsconfig.json")
+  ;; (lsp-clients-deno-import-map            "./import_map.json")
+  ;; (lsp-clients-deno-enable-lint           nil)
   (lsp-headerline-breadcrumb-enable       nil)
   (lsp-headerline-breadcrumb-icons-enable nil)
   (lsp-lens-enable                        nil)
@@ -56,18 +83,17 @@
   (lsp-eslint-format                           nil)
   (lsp-eslint-package-manager                  "npm")
   (lsp-eslint-code-action-disable-rule-comment nil)
+
   ;; typescript/javascript
   (lsp-clients-typescript-prefer-use-project-ts-server t)
   (lsp-typescript-format-enable nil)
   (lsp-javascript-format-enable nil))
 
 
-(use-package lsp-ivy
-  :after lsp-mode
+(use-package consult-lsp
   :bind
   (:map lsp-mode-map
-        ("s-l w w" . lsp-ivy-workspace-symbol)
-        ("s-l w g" . lsp-ivy-global-workspace-symbol)))
+        ("C-M-." . consult-lsp-symbols)))
 
 
 (use-package lsp-ui
@@ -87,15 +113,15 @@
   (lsp-ui-doc-max-height        30)
   (lsp-ui-doc-use-childframe    t)
   (lsp-ui-doc-use-webkit        nil)
-  (lsp-ui-doc-delay             0.2)
+  (lsp-ui-doc-delay             0.1)
   (lsp-ui-doc-show-with-mouse   nil)
   (lsp-ui-doc-include-signature t)
   ;; lsp-ui-sideline
-  (lsp-ui-sideline-enable               t)
+  (lsp-ui-sideline-enable               nil)
   (lsp-ui-sideline-show-hover           nil)
   (lsp-ui-sideline-ignore-duplicate     t)
   (lsp-ui-sideline-show-symbol          nil)
-  (lsp-ui-sideline-show-diagnostics     t)
+  (lsp-ui-sideline-show-diagnostics     nil)
   (lsp-ui-sideline-show-code-actions    nil)
   (lsp-ui-sideline-code-actions-prefix  "💡 ")
   (lsp-ui-sideline-wait-for-all-symbols nil)
@@ -104,7 +130,7 @@
   (lsp-ui-imenu-kind-position 'top)
   (lsp-ui-imenu-auto-refresh  'after-save)
   ;; lsp-ui-peek
-  (lsp-ui-peek-enable      nil)
+  (lsp-ui-peek-enable      t)
   (lsp-ui-peek-peek-height 20)
   (lsp-ui-peek-list-width  50)
   (lsp-ui-peek-fontify     'on-demand))
@@ -143,7 +169,27 @@
 ;;   :config
 ;;   (cl-pushnew '((js-mode typescript-mode typescriptreact-mode) . ("typescript-language-server" "--stdio"))
 ;;               eglot-server-programs
-;;               :test #'equal))
+;;               :test #'equal)
+
+;;   (use-package consult-eglot
+;;     :bind
+;;     (:map eglot-mode-map
+;;           ("C-M-." . consult-eglot-symbols))))
+
+
+;; (use-package eglot
+;;   :hook
+;;   ((prog-mode . (lambda ()
+;;                   (if (apply 'derived-mode-p my/eglot-major-mode)
+;;                       (eglot-ensure))))
+;;    ((markdown-mode yaml-mode yaml-ts-mode) . eglot-ensure))
+;;   :init
+;;   (setq eglot-send-changes-idle-time 0)
+;;   :config
+;;   (use-package consult-eglot
+;;     :bind
+;;     (:map eglot-mode-map
+;;           ("C-M-." . consult-eglot-symbols))))
 
 
 (provide 'init-lsp)

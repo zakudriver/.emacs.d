@@ -1,4 +1,4 @@
-;;; init-rust --- Summary
+;; init-rust.el --- Initialize rust configurations.	-*- lexical-binding: t -*-
 
 ;;; Commentary:
 ;; some configuration of rust.

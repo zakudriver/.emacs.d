@@ -1,4 +1,4 @@
-;;; init-swift --- Summary
+;;; init-swift.el --- Initialize swift configurations.	-*- lexical-binding: t -*-
 
 ;;; Commentary:
 ;; some configuration of swift.
@@ -15,10 +15,10 @@
   (lsp-sourcekit-executable (string-trim (shell-command-to-string "xcrun --find sourcekit-lsp"))))
 
 
-(use-package flycheck-swift
-  :after flycheck
-  :hook
-  (swift-mode . flycheck-swift-setup))
+;; (use-package flycheck-swift
+;;   :after flycheck
+;;   :hook
+;;   (swift-mode . flycheck-swift-setup))
 
 
 (provide 'init-swift)

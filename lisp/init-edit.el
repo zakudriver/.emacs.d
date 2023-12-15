@@ -1,14 +1,10 @@
-;;; init-edit --- Summary
+;; init-edit.el --- Initialize editing configurations.	-*- lexical-binding: t -*-
+
 
 ;;; Commentary:
 ;; some configuration of edit.
 
 ;;; Code:
-
-
-;; line number
-;; (global-linum-mode t)
-(global-display-line-numbers-mode t)
 
 
 ;; prettify-symbols-mod
@@ -18,8 +14,11 @@
 ;; Miscs
 (setq set-mark-command-repeat-pop     t  ; Repeating C-SPC after popping mark pops it again
       completion-ignore-case          t
+      scroll-step                     1
+      scroll-margin                   0
       scroll-preserve-screen-position t
-      scroll-conservatively           0)
+      auto-window-vscroll             nil
+      scroll-conservatively           100000)
 
 
 ;; Permanently indent with spaces, never with TABs
@@ -34,7 +33,6 @@
   (standard-indent 2))
 
 
-;; so-long emacs/>=27p
 (use-package so-long
   :hook
   (after-init . global-so-long-mode)
@@ -158,6 +156,11 @@
   ("C-S-l" . avy-goto-char-in-line)
   ("C-S-n" . avy-goto-line-below)
   ("C-S-p" . avy-goto-line-above))
+
+
+(use-package avy-zap
+  :bind (("M-z" . avy-zap-to-char-dwim)
+         ("M-Z" . avy-zap-up-to-char-dwim)))
 
 
 (use-package goto-chg
@@ -298,6 +301,9 @@
   :hook
   (prog-mode . subword-mode)
   (minibuffer-setup . subword-mode))
+
+
+(use-package sudo-edit)
 
 
 (provide 'init-edit)

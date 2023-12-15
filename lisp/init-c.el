@@ -1,4 +1,4 @@
-;;; init-c --- Summary
+;; init-c.el --- Initialize c configurations.	-*- lexical-binding: t -*-
 
 ;;; Commentary:
 ;; some configuration of c.
@@ -13,7 +13,6 @@
                                              (require 'ccls)
                                              (lsp)))
   :custom
-  (flycheck-disabled-checkers  '(c/c++-clang c/c++-cppcheck c/c++-gcc))
   (ccls-initialization-options my/ccls-initialization-options)
   :config
   (with-eval-after-load 'projectile
@@ -40,14 +39,14 @@
   (irony-cdb-autosetup-compile-options))
 
 
-(use-package flycheck-irony
-  :after flycheck
-  :hook
-  (c-mode . flycheck-irony-setup)
-  (c++-mode . (lambda ()
-                (flycheck-irony-setup)
-                (setq flycheck-clang-language-standard "c++11")
-                (setq irony-additional-clang-options '("-std=c++11")))))
+;; (use-package flycheck-irony
+;;   :after flycheck
+;;   :hook
+;;   (c-mode . flycheck-irony-setup)
+;;   (c++-mode . (lambda ()
+;;                 (flycheck-irony-setup)
+;;                 (setq flycheck-clang-language-standard "c++11")
+;;                 (setq irony-additional-clang-options '("-std=c++11")))))
 
 
 ;; C/C++ headers completion

@@ -1,4 +1,4 @@
-;;; init-package --- Summary
+;;; init-package.el --- Initialize package configurations.	-*- lexical-binding: t -*-
 
 ;;; Commentary:
 ;; some configuration of package.
@@ -42,7 +42,7 @@
 ;; Initialize packages
 (unless (bound-and-true-p package--initialized) ; To avoid warnings in 27
   (setq package-enable-at-startup nil)          ; To prevent initializing twice
-  
+
   (package-initialize))
 
 
@@ -79,7 +79,8 @@
 
 
 ;; Required by `use-package'
-(use-package diminish)
+(use-package diminish
+  :ensure t)
 (use-package bind-key)
 (use-package pretty-hydra
   :demand t)
@@ -94,8 +95,8 @@
   ;; :ensure nil
   :custom
   (auto-package-update-delete-old-versions t)
-  (auto-package-update-interval 7)
-  (auto-package-update-hide-results t))
+  (auto-package-update-interval            7)
+  (auto-package-update-hide-results        t))
 
 ;; (native-compile-async (concat user-emacs-directory "site-lisp") 'recursively)
 ;; (native-compile-async (concat user-emacs-directory "lisp") 'recursively)

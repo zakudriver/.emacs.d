@@ -1,4 +1,5 @@
-;;; init-web --- Summary
+;; init-web.el --- Initialize web configurations.	-*- lexical-binding: t -*-
+
 
 ;;; Commentary:
 ;; some configuration of web.
@@ -23,7 +24,7 @@
 (use-package web-mode
   :mode
   (".*[^\\(\\.component\\)]\\.html$" . web-mode)
-  ("\\.jsx$"                         . web-mode)
+  ;; ("\\.jsx$"                         . web-mode)
   ;; ("\\.tsx$"                         . web-mode)
   ("\\.ejs$"                         . web-mode)
   :bind

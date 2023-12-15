@@ -1,4 +1,4 @@
-;;; init-js --- Summary
+;; init-js.el --- Initialize javascript configurations.	-*- lexical-binding: t -*-
 
 ;;; Commentary:
 ;; some configuration of js.
@@ -30,6 +30,16 @@
   (js-jsx-indent-level 2))
 
 
+;; (use-package coverlay)
+;; (use-package origami)
+;; (use-package css-in-js
+;;   :load-path "~/.emacs.d/site-lisp/tree-sitter-css-in-js")
+;; (use-package tsx-mode
+;;   :load-path "~/.emacs.d/site-lisp/tsx-mode.el"
+;;   :mode
+;;   ("\\.[jt]sx$" . tsx-mode))
+
+
 (define-derived-mode typescriptreact-mode web-mode "TypescriptReact"
   "A major mode for tsx.")
 
@@ -39,18 +49,6 @@
   ("\\.tsx\\'" . typescriptreact-mode)
   :custom
   (typescript-indent-level 2))
-
-
-;; (use-package tide
-;;   ;; :hook
-;;   ;; ((typescript-mode web-mode js2-mode js-mode) . tide-setup)
-;;   :bind
-;;   (:map tide-mode-map
-;;         ([remap evil-goto-definition] . tide-jump-to-definition)
-;;         ([remap pop-tag-mark]         . tide-jump-back)))
-;; :config
-;; (flycheck-add-next-checker 'jsx-tide '(warning . javascript-eslint) 'append)
-;; (flycheck-add-next-checker 'tsx-tide '(warning . javascript-eslint) 'append)
 
 
 (use-package ng2-mode

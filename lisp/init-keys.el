@@ -1,4 +1,4 @@
-;;; init-keys --- Summary
+;; init-keys.el --- Initialize keys configurations.	-*- lexical-binding: t -*-
 
 ;;; Commentary:
 ;; some configuration of keys.
@@ -33,8 +33,8 @@
 (global-set-key (kbd "C-c z") 'my-wrap-with-input)
 
 ;; like vim
-(global-set-key (kbd "C-c d i w") 'my-delete-word-at-point)
-(global-set-key (kbd "C-c y i w") 'my-save-word-at-point)
+;; (global-set-key (kbd "C-c d i w") 'my-delete-word-at-point)
+;; (global-set-key (kbd "C-c y i w") 'my-save-word-at-point)
 (global-set-key (kbd "C-o") 'my-newline-next-current)
 (global-set-key (kbd "C-S-o") 'my-newline-above-current)
 

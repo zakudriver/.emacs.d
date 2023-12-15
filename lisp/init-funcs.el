@@ -1,4 +1,4 @@
-;;; init-funcs --- Summary
+;; init-funcs.el --- Define functions.	-*- lexical-binding: t -*-
 
 ;;; Commentary:
 ;; some functions.
@@ -20,10 +20,14 @@ ASYNC specifies whether to perform the downloads in the background."
   (interactive
    (list
     (intern
-     (ivy-read "Select package archives: "
-               (mapcar #'car my/package-archives-alist)
-               :preselect (symbol-name my/package-archives)))))
-  
+     (completing-read "Select package archives: "
+                      (mapcar #'car my/package-archives-alist)
+                      nil
+                      t
+                      nil
+                      nil
+                      (symbol-name my/package-archives)))))
+
   ;; Refresh if need
   (and refresh (package-refresh-contents async))
 
@@ -265,12 +269,6 @@ SYMBOL is input string."
   (interactive)
   (split-window-horizontally)
   (other-window 1))
-
-
-(defun my-flycheck-list-errors-select-window ()
-  "Select window for flycheck-errors-list."
-  (interactive)
-  (select-window (get-buffer-window my/flycheck-errors-buffer-name)))
 
 
 (defun my-vterm-select-window ()
@@ -609,7 +607,7 @@ and `my-right-brackets'."
   (interactive)
   (let* ((fmt-list '("%Y-%m-%d" "%Y-%m-%d %a" "%Y-%m-%d %H:%M:%S" "%Y-%m-%d %H:%M:%S %a" "%Y/%m/%d" "%Y/%m/%d %a" "%Y/%m/%d %H:%M:%S" "%Y/%m/%d %H:%M:%S %a"))
          (str-list (mapcar 'format-time-string fmt-list)))
-    
+
     (insert (completing-read "Please select the formatted time to insert: "
                              str-list
                              nil

@@ -1,4 +1,4 @@
-;;; init-dart --- Summary
+;; init-dart.el --- Initialize dart configurations.	-*- lexical-binding: t -*-
 
 ;;; Commentary:
 ;; somme configuration of dart.

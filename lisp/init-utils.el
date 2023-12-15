@@ -1,4 +1,4 @@
-;;; init-uitls --- Summary
+;; init-utils.el --- Initialize ultilities.	-*- lexical-binding: t -*-
 
 ;;; Commentary:
 ;; somme configuration of utils.
@@ -11,57 +11,6 @@
   (require 'init-const)
   (require 'init-funcs)
   (require 'init-custom))
-
-
-(use-package magit
-  :custom
-  (magit-diff-refine-hunk t)
-  :config
-  (with-no-warnings
-    (defun my-magit-kill-buffers (&rest _)
-      "Restore window configuration and kill all Magit buffers."
-      (interactive)
-      (magit-restore-window-configuration)
-      (let ((buffers (magit-mode-get-buffers)))
-        (when (eq major-mode 'magit-status-mode)
-          (mapc (lambda (buf)
-                  (with-current-buffer buf
-                    (if (and magit-this-process
-                             (eq (process-status magit-this-process) 'run))
-                        (bury-buffer buf)
-                      (kill-buffer buf))))
-                buffers))))
-    (setq magit-bury-buffer-function #'my-magit-kill-buffers)))
-
-
-;; Access Git forges from Magit
-(use-package forge
-  :demand t
-  :defines
-  (forge-database-connector forge-topic-list-columns)
-  :custom-face
-  (forge-topic-label ((t (:inherit variable-pitch :height 0.9 :width condensed :weight regular :underline nil))))
-  :custom
-  (forge-database-connector (if (and (require 'emacsql-sqlite-builtin nil t)
-                                     (functionp 'emacsql-sqlite-builtin)
-                                     (functionp 'sqlite-open))
-                                'sqlite-builtin
-                              'sqlite))
-  (forge-topic-list-columns '(("#" 5 forge-topic-list-sort-by-number (:right-align t) number nil)
-                              ("Title" 60 t nil title  nil)
-                              ("State" 6 t nil state nil)
-                              ("Updated" 10 t nil updated nil))))
-
-
-(use-package ediff
-  :ensure nil
-  :custom
-  (ediff-window-setup-function       'ediff-setup-windows-plain)
-  (ediff-split-window-function       'split-window-horizontally)
-  (ediff-merge-split-window-function 'split-window-horizontally)
-  :hook
-  ((ediff-prepare-buffer . outline-show-all) ;; show org ediffs unfolded
-   (ediff-quit . winner-undo)))               ;; restore window layout when done
 
 
 (use-package docker
@@ -148,7 +97,7 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
 
 ;; process view
 (use-package proced
-  :ensure nil  
+  :ensure nil
   :bind
   ("C-c p P" . 'proced)
   :custom
@@ -240,7 +189,7 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
 
 
 (use-package grep
-  :ensure nil  
+  :ensure nil
   :autoload grep-apply-setting
   :config
   (cond
@@ -262,6 +211,9 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
      'grep-find-command '("rg --color=auto --null -nH --no-heading -e ''" . 38))
     (grep-apply-setting
      'grep-find-template "rg --color=auto --null -nH --no-heading -e <R> <D>"))))
+
+
+
 
 
 (provide 'init-utils)

@@ -1,4 +1,4 @@
-;;; init-ruby --- Summary
+;; init-ruby.el --- Initialize ruby configurations.	-*- lexical-binding: t -*-
 
 ;;; Commentary:
 ;; some configuration of ruby.

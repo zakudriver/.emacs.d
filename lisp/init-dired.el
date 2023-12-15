@@ -1,4 +1,5 @@
-;;; init-dired --- Summary
+;; init-dired.el --- Initialize dired configurations.	-*- lexical-binding: t -*-
+
 
 ;;; Commentary:
 ;; some configuration of Dired.
@@ -62,32 +63,17 @@
 
 
   ;; Shows icons
-  (use-package all-the-icons-dired
-    :diminish
+  (use-package nerd-icons-dired
+    :custom-face
+    (nerd-icons-dired-dir-face ((t (:inherit nerd-icons-dsilver :foreground unspecified))))
     :hook
-    (dired-mode . all-the-icons-dired-mode)
-    :custom
-    (all-the-icons-dired-monochrome nil)
-    :config
-    (with-no-warnings
-      (defun my-all-the-icons-dired--icon (file)
-        "Return the icon for FILE."
-        (if (file-directory-p file)
-            (all-the-icons-icon-for-dir file
-                                        :height 0.9
-                                        :face 'all-the-icons-dired-dir-face
-                                        :v-adjust all-the-icons-dired-v-adjust)
-          (apply 'all-the-icons-icon-for-file file
-                 (append
-                  '(:height 0.9)
-                  `(:v-adjust ,all-the-icons-dired-v-adjust)
-                  (when all-the-icons-dired-monochrome
-                    `(:face ,(face-at-point)))))))
-      (advice-add #'all-the-icons-dired--icon :override #'my-all-the-icons-dired--icon)))
+    (dired-mode . nerd-icons-dired-mode))
+
 
   ;; Extra Dired functionality
   (use-package dired-aux
     :ensure nil)
+
   (use-package dired-x
     :ensure nil
     :demand

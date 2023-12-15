@@ -1,4 +1,5 @@
-;;; init-window --- Summary
+;; init-window.el --- Initialize window configurations.	-*- lexical-binding: t -*-
+
 
 ;;; Commentary:
 ;; some configuration of window.
@@ -50,6 +51,26 @@
       (set-frame-parameter (selected-frame) 'fullscreen 'maximized))
   ;; 非Mac平台直接最大化
   (toggle-frame-maximized))
+
+
+;; Restore old window configurations
+(use-package winner
+  :ensure nil
+  :commands
+  (winner-undo winner-redo)
+  :hook
+  (after-init . winner-mode)
+  :custom
+  ( winner-boring-buffers '("*Completions*"
+                            "*Compile-Log*"
+                            "*inferior-lisp*"
+                            "*Fuzzy Completions*"
+                            "*Apropos*"
+                            "*Help*"
+                            "*cvs*"
+                            "*Buffer List*"
+                            "*Ibuffer*"
+                            "*esh command on file*")))
 
 
 ;; Quickly switch windows
@@ -107,7 +128,7 @@
   (defmacro my-winum-delete-window-macro-factory ()
     "Winum delete window function macro factory."
     `(progn ,@(mapcar 'my-winum-delete-window-factory (number-sequence 0 9))))
-  
+
   (my-winum-delete-window-macro-factory))
 
 
@@ -119,8 +140,7 @@
   ("C-c w z" . zoom)
   :custom
   (zoom-size                 '(0.618 . 0.618))
-  (zoom-ignored-buffer-names '(my/flycheck-errors-buffer-name))
-  (zoom-ignored-major-modes  '(flycheck-error-list-mode undo-tree-visualizer-mode achive-visual-mode treemacs-mode vterm-mode nov-mode))
+  (zoom-ignored-major-modes  '(flymake-diagnostics-buffer-mode undo-tree-visualizer-mode achive-visual-mode treemacs-mode vterm-mode nov-mode))
   :config
   (advice-add 'balance-windows :around (lambda (func &optional window-or-frame)
                                          (unless (zoom--window-ignored-p)
@@ -152,7 +172,7 @@
    '("\\*Messages\\*"
      "Output\\*$"
      "\\*Compile-Log\\*"
-     "\\*Completions\\*"
+     ;; "\\*Completions\\*"
      "\\*Warnings\\*"
      "\\*Async Shell Command\\*"
      "\\*Calendar\\*"
@@ -170,7 +190,6 @@
      flycheck-error-list-mode flycheck-verify-mode
 
      grep-mode occur-mode rg-mode deadgrep-mode ag-mode pt-mode
-     ivy-occur-mode ivy-occur-grep-mode
      yd-mode
 
      "^\\*Process List\\*" process-menu-mode
@@ -202,7 +221,7 @@
      rustic-cargo-outdated-mode rustic-cargo-run-mode rustic-cargo-test-mode rustic-popup-mode))
   :config
   (popper-echo-mode 1)
-  
+
   (with-eval-after-load 'projectile
     (setq popper-group-function #'popper-group-by-projectile))
 

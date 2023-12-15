@@ -1,4 +1,4 @@
-;;; init-ibuffer --- Summary
+;; init-ibuffer.el --- Initialize ibuffer configurations.	-*- lexical-binding: t -*-
 
 ;;; Commentary:
 ;; some configuration of ibuffer.

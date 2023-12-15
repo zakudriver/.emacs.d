@@ -1,4 +1,5 @@
-;;; init-funcs --- Summary
+;; init-go.el --- Initialize Golang configurations.	-*- lexical-binding: t -*-
+
 
 ;;; Commentary:
 ;; some configuration of golang.
@@ -108,10 +109,11 @@
   ;; Local Golang playground for short snippets
   (use-package go-playground)
 
-  (use-package flycheck-golangci-lint
-    :after flycheck
-    :hook
-    (go-mode . flycheck-golangci-lint-setup)))
+  ;; (use-package flycheck-golangci-lint
+  ;;   :after flycheck
+  ;;   :hook
+  ;;   (go-mode . flycheck-golangci-lint-setup))
+  )
 
 
 (provide 'init-go)

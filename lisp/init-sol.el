@@ -1,21 +1,18 @@
-;;; init-sol --- Summary
+;; init-sol.el --- Initialize solidity configurations.	-*- lexical-binding: t -*-
+
 
 ;;; Commentary:
 ;; some configuration of solidity.
 
 ;;; Code:
 
-
 (use-package solidity-mode)
 
 
-(use-package solidity-flycheck
-  :after flycheck
-  :hook
-  (solidity-mode . solidity-flycheck))
-
-
-(use-package company-solidity)
+;; (use-package solidity-flycheck
+;;   :after flycheck
+;;   :hook
+;;   (solidity-mode . solidity-flycheck))
 
 
 (provide 'init-sol)

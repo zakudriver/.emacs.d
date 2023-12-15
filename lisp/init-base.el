@@ -1,4 +1,4 @@
-;;; init-base --- Summary
+;; init-base.el --- Better default configurations.	-*- lexical-binding: t -*-
 
 ;;; Commentary:
 ;; some basal configuration.
@@ -44,7 +44,29 @@ that used by the user's shell."
   (set-charset-priority 'unicode))
 
 
-(setq system-time-locale              "C"
+(use-package simple
+  :ensure nil
+  :hook ((after-init . size-indication-mode)
+         (text-mode . visual-line-mode)
+         ((prog-mode markdown-mode conf-mode) . enable-trailing-whitespace))
+  :init
+  (setq column-number-mode t
+        line-number-mode t
+        ;; kill-whole-line t               ; Kill line including '\n'
+        line-move-visual nil
+        track-eol t                     ; Keep cursor at end of lines. Require line-move-visual is nil.
+        set-mark-command-repeat-pop t)  ; Repeating C-SPC after popping mark pops it again
+
+  ;; Visualize TAB, (HARD) SPACE, NEWLINE
+  (setq-default show-trailing-whitespace nil) ; Don't show trailing whitespace by default
+  (defun enable-trailing-whitespace ()
+    "Show trailing spaces and delete on saving."
+    (setq show-trailing-whitespace t)
+    (add-hook 'before-save-hook #'delete-trailing-whitespace nil t)))
+
+
+(setq visible-bell                    t
+      system-time-locale              "C"
       delete-by-moving-to-trash       t    ; Deleting files go to OS's trash folder
       inhibit-compacting-font-caches  t
       make-backup-files               nil  ; Forbide to make backup files
@@ -59,10 +81,11 @@ that used by the user's shell."
       create-lockfiles                nil
       ;; Increase how much is read from processes in a single chunk (default is 4kb)
       read-process-output-max         #x10000  ;; 64kb
-      
+
       adaptive-fill-regexp            "[ t]+|[ t]*([0-9]+.|*+)[ t]*"
       adaptive-fill-first-line-regexp "^* *$"
-      ffap-machine-p-known            'reject)
+      ffap-machine-p-known            'reject
+      use-short-answers               t)
 
 
 (unless sys/macp

@@ -75,24 +75,25 @@
   (require 'init-funcs)
   (require 'init-ui)
   (require 'init-utils)
+  (require 'init-vcs)
   (require 'init-keys)
-  ;; (require 'init-evil)
-  
+
   (require 'init-edit)
   (require 'init-highlight)
-  (require 'init-ibuffer)
+  ;; (require 'init-ibuffer)
   (require 'init-reader)
 
   (require 'init-window)
-  (require 'init-ivy)
+  ;; (require 'init-ivy)
 
-  (require 'init-company)
+  ;; (require 'init-company)
+  (require 'init-completion)
   (require 'init-yasnippet)
-  
+
   (require 'init-dired)
-  (require 'init-flycheck)
-  ;; (require 'init-flymake)
-  
+  ;; (require 'init-flycheck)
+  (require 'init-flymake)
+
   (require 'init-projectile)
 
   ;; polymode
@@ -101,7 +102,7 @@
   ;; ;; Programming
   (require 'init-lsp)
   (require 'init-prettier)
-  
+
   (require 'init-prog)
   (require 'init-org)
   (require 'init-go)
@@ -116,25 +117,7 @@
   (require 'init-js)
   (require 'init-web)
 
-  (require 'init-sol)
-	)
+  (require 'init-sol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init.el ends here
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(sanityinc-tomorrow-night))
- '(custom-safe-themes
-   '("06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default))
- '(highlight-parentheses-background-colors '("#F4CCE1") nil nil "Customized with use-package highlight-parentheses")
- '(highlight-parentheses-colors '("#73317a") nil nil "Customized with use-package highlight-parentheses")
- '(org-fold-catch-invisible-edits 'show nil nil "Customized with use-package org"))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

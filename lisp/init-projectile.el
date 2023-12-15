@@ -1,4 +1,4 @@
-;;; init-projectile --- Summary
+;; init-projectile.el --- Initialize projectile configurations.	-*- lexical-binding: t -*-
 
 ;;; Commentary:
 ;; some configuration of projectile.

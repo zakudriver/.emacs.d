@@ -6,7 +6,7 @@
 
 ;; (setenv "LIBRARY_PATH" "/opt/homebrew/opt/gcc/lib/gcc/12:/opt/homebrew/opt/libgccjit/lib/gcc/12:/opt/homebrew/opt/gcc/lib/gcc/12/gcc/aarch64-apple-darwin22/12")
 
-(setenv "PATH" "/opt/homebrew/bin:/opt/homebrew/sbin:/Users/zakudriver/.cargo/bin:/Users/zakudriver/.rbenv/bin:/usr/local/opt/openssl@1.1/bin:~/Library/pnpm:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Users/zakudriver/.cargo/bin:/usr/bin:/usr/local/bin:/Users/zakudriver/.zsh/bin:/Users/zakudriver/.bin:/usr/local/go/bin:/Users/zakudriver/code/go/bin:/Users/zakudriver/.flutter/bin")
+;; (setenv "PATH" "/opt/homebrew/bin:/opt/homebrew/sbin:/Users/zakudriver/.cargo/bin:/Users/zakudriver/.rbenv/bin:/usr/local/opt/openssl@1.1/bin:~/Library/pnpm:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Users/zakudriver/.cargo/bin:/usr/bin:/usr/local/bin:/Users/zakudriver/.zsh/bin:/Users/zakudriver/.bin:/usr/local/go/bin:/Users/zakudriver/code/go/bin:/Users/zakudriver/.flutter/bin")
 
 
 (setq gc-cons-threshold most-positive-fixnum

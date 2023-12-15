@@ -1,4 +1,4 @@
-;;; init-custom --- Summary
+;; init-custom.el --- Define custom.	-*- lexical-binding: t -*-
 
 ;;; Commentary:
 ;; somme customizable variables.
@@ -39,7 +39,7 @@
                                    :value-type (string :tag "URL or directory name"))))
 
 
-(defcustom my/package-archives 'emacs-cn
+(defcustom my/package-archives 'melpa
   "Set package archives from which to fetch."
   :group 'centaur
   :set (lambda (symbol value)
@@ -143,7 +143,23 @@
                           (color-theme-sanityinc-tomorrow color-theme-sanityinc-tomorrow-night)
                           (color-theme-sanityinc-tomorrow color-theme-sanityinc-tomorrow-blue)
                           (color-theme-sanityinc-tomorrow color-theme-sanityinc-tomorrow-bright)
-                          (color-theme-sanityinc-tomorrow color-theme-sanityinc-tomorrow-eighties))
+                          (color-theme-sanityinc-tomorrow color-theme-sanityinc-tomorrow-eighties)
+                          (modus-themes modus-operandi)
+                          (modus-themes modus-operandi-tinted)
+                          (modus-themes modus-operandi-deuteranopia)
+                          (modus-themes modus-operandi-tritanopia)
+                          (modus-themes modus-vivendi)
+                          (modus-themes modus-vivendi-tinted)
+                          (modus-themes modus-vivendi-deuteranopia)
+                          (modus-themes modus-vivendi-tritanopia)
+                          (darktooth-theme darktooth)
+                          (darktooth-theme darktooth-dark)
+                          (darktooth-theme darktooth-darker)
+                          (kanagawa-theme kanagawa)
+                          (almost-mono-themes almost-mono-white)
+                          (almost-mono-themes almost-mono-black)
+                          (almost-mono-themes almost-mono-gray)
+                          (almost-mono-themes almost-mono-cream))
   "Theme list.")
 
 
@@ -215,7 +231,7 @@
   "Hugo github deploy buffer name.")
 
 
-(defconst my/lsp-major-mode '(go-mode web-mode ng2-mode ng2-html-mode ng2-ts-mode sh-mode ruby-mode css-mode scss-mode sass-mode clojure-mode dart-mode rust-mode swift-mode js-mode typescript-mode typescriptreact-mode graphql-mode)
+(defconst my/lsp-major-mode '(go-mode web-mode ng2-mode ng2-html-mode ng2-ts-mode sh-mode ruby-mode css-mode scss-mode sass-mode clojure-mode dart-mode rust-mode swift-mode js-mode graphql-mode html-mode typescript-mode typescriptreact-mode)
   "Lsp Supported major mode.")
 
 
@@ -231,13 +247,8 @@
   "Insert inline css file when org export html.")
 
 
-(defconst my/evil-local-mode '(web-mode typescript-mode js-mode js-mode go-mode ruby-mode css-mode scss-mode)
-  "Start evil-local-mode list.")
-
-
-(defconst my/flycheck-boot-mode '(not text-mode outline-mode fundamental-mode lisp-interaction-mode
-                                      org-mode diff-mode shell-mode eshell-mode term-mode vterm-mode)
-  "Start flycheck list.")
+;; (defconst my/evil-local-mode '(web-mode typescript-mode js-mode js-mode go-mode ruby-mode css-mode scss-mode)
+;;   "Start evil-local-mode list.")
 
 
 (defconst my/native-compile-async-jobs (or (ignore-errors
