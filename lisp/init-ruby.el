@@ -13,12 +13,12 @@
 
 
 ;; Integrate rbenv
-(use-package rbenv
-  :hook
-  (after-init . global-rbenv-mode)
-  :custom
-  (rbenv-show-active-ruby-in-modeline nil)
-  (rbenv-executable "rbenv"))
+;; (use-package rbenv
+;;   :hook
+;;   (after-init . global-rbenv-mode)
+;;   :custom
+;;   (rbenv-show-active-ruby-in-modeline nil)
+;;   (rbenv-executable "rbenv"))
 
 
 ;; Run a Ruby process in a buffer

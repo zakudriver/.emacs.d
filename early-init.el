@@ -23,9 +23,6 @@
       package-enable-at-startup nil
       use-package-enable-imenu-support t
       frame-inhibit-implied-resize t ;; Inhibit resizing frame
-      byte-compile-warnings '(cl-functions) ;; clear waring: Package cl is deprecated
-      inhibit-startup-message t
-      initial-major-mode 'fundamental-mode
       load-prefer-newer noninteractive)
 
 

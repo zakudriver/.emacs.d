@@ -132,6 +132,13 @@
   (my-winum-delete-window-macro-factory))
 
 
+(use-package window-divider-mode
+  :ensure nil
+  :custom
+  (window-divider-default-bottom-width 0)
+  (window-divider-default-places 'right-only))
+
+
 (use-package zoom
   :commands zoom--window-ignored-p
   :hook

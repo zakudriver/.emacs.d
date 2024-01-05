@@ -100,7 +100,8 @@
   ;; (require 'init-flycheck)
   (require 'init-flymake)
 
-  (require 'init-projectile)
+  ;; (require 'init-projectile)
+  (require 'init-workspace)
 
   ;; polymode
   ;; (require 'init-polymode)
@@ -115,7 +116,7 @@
   (require 'init-dart)
   (require 'init-c)
   (require 'init-swift)
-  (require 'init-ruby)
+  ;; (require 'init-ruby)
   (require 'init-rust)
   (require 'init-lisp)
 

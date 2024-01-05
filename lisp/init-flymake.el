@@ -14,8 +14,9 @@
   :bind
   ("C-c c c" . flymake-show-buffer-diagnostics)
   :custom
-  (flymake-no-changes-timeout nil)
+  (flymake-no-changes-timeout        nil)
   (flymake-fringe-indicator-position 'right-fringe)
+  (flymake-suppress-zero-counters    :note)
   :config
   (setq elisp-flymake-byte-compile-load-path
         (append elisp-flymake-byte-compile-load-path load-path)))
@@ -28,6 +29,12 @@
   :custom
   (sideline-flymake-display-mode 'point)
   (sideline-backends-right '(sideline-flymake)))
+
+
+;; (use-package flymake-eslint
+;;   :custom
+;;   (flymake-eslint-executable-name         "npx")
+;;   (flymake-eslint-prefer-json-diagnostics t))
 
 
 ;; (use-package flymake-eslint

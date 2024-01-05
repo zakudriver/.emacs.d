@@ -40,6 +40,7 @@
   :custom
   (lsp-completion-provider        :none)
   (lsp-diagnostics-provider       :flymake)
+  (lsp-diagnostics-flycheck-default-level 'info)
   (lsp-clients-angular-language-server-command
    '("node" "/opt/homebrew/lib/node_modules/@angular/language-server" "--ngProbeLocations" "/opt/homebrew/lib/node_modules" "--tsProbeLocations" "/opt/homebrew/lib/node_modules" "--stdio"))
   (lsp-auto-guess-root            nil)      ; not Detect project root
@@ -69,7 +70,7 @@
   (lsp-signature-doc-lines             30)
   (lsp-enable-indentation              t)
   (lsp-eldoc-render-all                nil)
-  (lsp-eldoc-enable-hover              nil)
+  (lsp-eldoc-enable-hover              t)
   ;; deno
   ;; (lsp-clients-deno-config                "./tsconfig.json")
   ;; (lsp-clients-deno-import-map            "./import_map.json")
@@ -155,6 +156,19 @@
 
 
 (use-package lsp-treemacs)
+
+;; (use-package eglot
+;;   :hook
+;;   ((prog-mode . (lambda ()
+;;                   (unless (derived-mode-p 'emacs-lisp-mode 'lisp-mode 'makefile-mode 'snippet-mode)
+;;                     (eglot-ensure))))
+;;    ((markdown-mode yaml-mode yaml-ts-mode) . eglot-ensure))
+;;   :custom
+;;   (eglot-send-changes-idle-time 0)
+;;   :config
+;;   (use-package consult-eglot
+;;     :bind (:map eglot-mode-map
+;;                 ("C-M-." . consult-eglot-symbols))))
 
 
 ;; (use-package eglot
