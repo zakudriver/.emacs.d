@@ -17,8 +17,8 @@
   (tabspaces-remove-to-default t)
   (tabspaces-include-buffers '("*scratch*"))
   (tabspaces-initialize-project-with-todo nil)
-  (tabspaces-session t)
-  (tabspaces-session-auto-restore t)
+  ;; (tabspaces-session t)
+  ;; (tabspaces-session-auto-restore t)
   :init
   ;; Filter Buffers for Consult-Buffer
   (with-eval-after-load 'consult

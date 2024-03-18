@@ -42,6 +42,8 @@
 
 (define-derived-mode typescriptreact-mode web-mode "TypescriptReact"
   "A major mode for tsx.")
+;; (define-derived-mode typescriptreact-mode typescript-ts-mode "TypescriptReact"
+;;   "A major mode for tsx.")
 
 
 (use-package typescript-mode

@@ -44,6 +44,14 @@
   ("\\.prisma$" . prisma-mode))
 
 
+;; (use-package treesit-auto
+;;   :hook
+;;   (after-init . global-treesit-auto-mode)
+;;   :custom
+;;   (treesit-auto-install 'prompt)
+;;   (treesit-auto-langs '(typescript)))
+
+
 (provide 'init-prog)
 
 ;;; init-prog.el ends here

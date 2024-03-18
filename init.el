@@ -100,8 +100,8 @@
   ;; (require 'init-flycheck)
   (require 'init-flymake)
 
-  ;; (require 'init-projectile)
-  (require 'init-workspace)
+  (require 'init-projectile)
+  ;; (require 'init-workspace)
 
   ;; polymode
   ;; (require 'init-polymode)
