@@ -233,7 +233,7 @@
   "Hugo github deploy buffer name.")
 
 
-(defconst my/lsp-major-mode '(go-mode web-mode ng2-mode ng2-html-mode ng2-ts-mode sh-mode ruby-mode css-mode scss-mode sass-mode clojure-mode dart-mode rust-mode swift-mode js-mode graphql-mode html-mode typescript-mode typescriptreact-mode)
+(defconst my/lsp-major-mode '(go-mode web-mode ng2-mode ng2-html-mode ng2-ts-mode sh-mode ruby-mode css-mode scss-mode sass-mode clojure-mode dart-mode rust-mode swift-mode js-mode graphql-mode html-mode typescript-mode typescriptreact-mode jtsx-tsx-mode jtsx-typescript-mode)
   "Lsp Supported major mode.")
 
 

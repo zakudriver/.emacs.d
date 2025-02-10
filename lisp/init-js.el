@@ -21,9 +21,6 @@
 
 (use-package js-mode
   :ensure nil
-  ;; :mode
-  ;; ("\\.tsx$" . js-jsx-mode)
-  ;; ("\\.jsx$" . js-jsx-mode)
   :custom
   (js-jsx-syntax       t)
   (js-indent-level     2)
@@ -40,17 +37,17 @@
 ;;   ("\\.[jt]sx$" . tsx-mode))
 
 
-(define-derived-mode typescriptreact-mode web-mode "TypescriptReact"
-  "A major mode for tsx.")
+;; (define-derived-mode typescriptreact-mode web-mode "TypescriptReact"
+;;   "A major mode for tsx.")
 ;; (define-derived-mode typescriptreact-mode typescript-ts-mode "TypescriptReact"
 ;;   "A major mode for tsx.")
 
 
-(use-package typescript-mode
-  :mode
-  ("\\.tsx\\'" . typescriptreact-mode)
-  :custom
-  (typescript-indent-level 2))
+;; (use-package typescript-mode
+;; :mode
+;; ("\\.tsx\\'" . typescriptreact-mode)
+;;   :custom
+;;   (typescript-indent-level 2))
 
 
 (use-package ng2-mode

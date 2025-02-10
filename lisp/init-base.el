@@ -17,7 +17,14 @@ that used by the user's shell."
     (setenv "PATH" path-from-shell)
     (setq exec-path (split-string path-from-shell path-separator))))
 
-(set-exec-path-from-shell-PATH)
+;; (set-exec-path-from-shell-PATH)
+
+
+(let*
+    ((fish-path (shell-command-to-string "/opt/homebrew/bin/fish -i -c \"echo -n \\$PATH[1]; for val in \\$PATH[2..-1];echo -n \\\":\\$val\\\";end\""))
+     (full-path (append exec-path (split-string fish-path ":"))))
+  (setenv "PATH" fish-path)
+  (setq exec-path full-path))
 
 
 (eval-when-compile

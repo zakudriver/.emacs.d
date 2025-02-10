@@ -101,7 +101,7 @@
   ;; (require 'init-flycheck)
   (require 'init-flymake)
 
-  (require 'init-projectile)
+  ;; (require 'init-projectile)
   ;; (require 'init-workspace)
 
   ;; polymode
@@ -120,6 +120,7 @@
   ;; (require 'init-ruby)
   (require 'init-rust)
   (require 'init-lisp)
+  ;; (require 'init-codeql)
 
   ;; ;; Web
   (require 'init-js)
