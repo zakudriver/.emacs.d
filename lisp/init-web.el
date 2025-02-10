@@ -89,7 +89,8 @@
     (define-key mode-map (kbd "C-c j d") 'jtsx-delete-jsx-node)
     (define-key mode-map (kbd "C-c j t") 'jtsx-toggle-jsx-attributes-orientation)
     (define-key mode-map (kbd "C-c j h") 'jtsx-rearrange-jsx-attributes-horizontally)
-    (define-key mode-map (kbd "C-c j v") 'jtsx-rearrange-jsx-attributes-vertically))
+    (define-key mode-map (kbd "C-c j v") 'jtsx-rearrange-jsx-attributes-vertically)
+    (define-key mode-map (kbd "M-.") 'embark-dwim))
 
   (defun jtsx-bind-keys-to-jtsx-jsx-mode-map ()
     (jtsx-bind-keys-to-mode-map jtsx-jsx-mode-map))

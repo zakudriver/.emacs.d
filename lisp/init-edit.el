@@ -111,6 +111,10 @@
   :hook
   (after-init . electric-pair-mode)
   :custom
+  (electric-pair-preserve-balance t)
+  (electric-pair-delete-adjacent-pairs t)
+  (electric-pair-skip-self 'electric-pair-default-skip-self)
+  (electric-pair-open-newline-between-pairs t)
   (electric-pair-pairs
    '((?\" . ?\")
      (?\' . ?\')

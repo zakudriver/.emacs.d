@@ -52,8 +52,6 @@
   (package-install 'use-package))
 
 
-
-
 (eval-and-compile
   (setq use-package-always-ensure t
         use-package-always-defer t
