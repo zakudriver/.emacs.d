@@ -28,6 +28,7 @@
 
 
 (use-package eglot-booster
+  :load-path "~/.emacs.d/site-lisp/eglot-booster"
 	:after eglot
 	:config	(eglot-booster-mode))
 
