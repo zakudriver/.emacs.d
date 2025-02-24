@@ -145,7 +145,7 @@
 (use-package mwim
   :bind
   ([remap move-beginning-of-line] . mwim-beginning-of-code-or-line)
-  ([remap move-end-of-line] . mwim-end-of-code-or-line))
+  ([remap move-end-of-line] .       mwim-end-of-code-or-line))
 
 
 ;; moving the cursor quickly

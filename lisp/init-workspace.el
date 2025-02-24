@@ -41,15 +41,6 @@
     (add-to-list 'consult-buffer-sources 'consult--source-workspace)))
 
 
-(use-package find-file-in-project
-  :bind
-  ("C-c p f" . find-file-in-project-by-selected)
-  ("C-c p F" . find-file-with-similar-name)
-  ("C-c p d" . find-directory-in-project-by-selected)
-  :custom
-  (ffip-use-rust-fd t))
-
-
 (provide 'init-workspace)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

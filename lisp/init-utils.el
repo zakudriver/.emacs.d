@@ -213,13 +213,13 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
      'grep-find-template "rg --color=auto --null -nH --no-heading -e <R> <D>"))))
 
 
-(use-package find-file-in-project
-  :bind
-  ("C-c p f" . find-file-in-project-by-selected)
-  ("C-c p F" . find-file-with-similar-name)
-  ("C-c p d" . find-directory-in-project-by-selected)
-  :custom
-  (ffip-use-rust-fd t))
+;; (use-package find-file-in-project
+;;   :bind
+;;   ("C-c p f" . find-file-in-project-by-selected)
+;;   ("C-c p F" . find-file-with-similar-name)
+;;   ("C-c p d" . find-directory-in-project-by-selected)
+;;   :custom
+;;   (ffip-use-rust-fd t))
 
 
 (use-package project
