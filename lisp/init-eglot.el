@@ -7,7 +7,8 @@
 ;;; Code:
 
 
-(provide 'init-eglot)
+(eval-when-compile
+  (require 'init-custom))
 
 
 (use-package eglot
@@ -21,6 +22,10 @@
   (eglot-autoshutdown       t)
   (eglot-menu-string        "⌨")
   :config
+  ;; (add-to-list 'eglot-server-programs '((tsx-ts-mode :language-id "typescriptreact") . ("tailwindcss-language-server")))
+  ;; (add-to-list 'eglot-server-programs
+  ;;              '((typescript-ts-mode  :language-id "html") . ("tailwindcss-language-server" "--stdio")))
+
   (use-package consult-eglot
     :bind
     (:map eglot-mode-map
@@ -52,5 +57,7 @@
   (eldoc-box-max-pixel-width  800)
   (eldoc-box-clear-with-C-g   t))
 
+
+(provide 'init-eglot)
 
 ;;; init-eglot.el ends here

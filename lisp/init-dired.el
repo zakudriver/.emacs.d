@@ -103,6 +103,15 @@
 (use-package fd-dired)
 
 
+(use-package dired-subtree
+  :after dired
+  :custom
+  (dired-subtree-line-prefix "    ")
+  :bind
+  (:map dired-mode-map
+        ("i" . dired-subtree-toggle)))
+
+
 (provide 'init-dired)
 
 ;;; init-dired.el ends here

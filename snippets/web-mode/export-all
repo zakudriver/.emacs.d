@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: export-all
-# key: export-all
-# --
-
-export * from "${1:package}";

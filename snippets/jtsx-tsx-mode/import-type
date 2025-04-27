@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: import-type
+# key: import-type
+# --
+
+import type { ${2:name} } from "${1:package}";

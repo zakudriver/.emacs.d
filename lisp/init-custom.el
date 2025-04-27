@@ -166,6 +166,7 @@
 (defconst my/font-list
   '(Menlo
     SF\ Mono
+    SFMono\ Nerd\ Font
     Monaco
     Roboto\ Mono
     Ubuntu\ Mono
@@ -241,6 +242,10 @@
 
 (defconst my/eglot-major-mode '(js-mode typescript-mode jtsx-tsx-mode jtsx-typescript-mode jtsx-jsx-mode rust-mode markdown-mode yaml-mode)
   "Eglot Supported major mode.")
+
+
+(defconst my/eslint-enable-mode '(js-mode typescript-mode jtsx-tsx-mode jtsx-typescript-mode jtsx-jsx-mode markdown-mode yaml-mode)
+  "Eslint check to be enabled.")
 
 
 (defconst my/lsp-on-save-major-mode '(ruby-mode clojure-mode dart-mode)

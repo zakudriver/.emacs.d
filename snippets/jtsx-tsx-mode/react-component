@@ -1,9 +1,12 @@
 # -*- mode: snippet -*-
-# name: react-component
-# key: rc
+# name: react-component-fc
+# key: fc
 # --
 
-const ${1:NAME} = () => {
+import type { FC } from "react";
+import type { I$1Props } from "./types";
+
+export const ${1:NAME}: FC<I$1Props> = ({ }) => {
 	return (
     <div>
 		  ${2:}

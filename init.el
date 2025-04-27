@@ -93,6 +93,7 @@
 
   ;; ;; Programming
   ;; (require 'init-lsp)
+
   (require 'init-eglot)
   (require 'init-prettier)
 

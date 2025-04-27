@@ -3,8 +3,8 @@
 # key: fch
 # --
 
-import { FC, PropsWithChildren } from "react";
-import { I$1Props } from "./types";
+import type { FC, PropsWithChildren } from "react";
+import type { I$1Props } from "./types";
 
 export const ${1:NAME}: FC<PropsWithChildren<I$1Props>> = ({ children }) => {
 	return (
