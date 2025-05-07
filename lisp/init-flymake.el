@@ -41,10 +41,7 @@
     (interactive)
     (when (cl-position major-mode my/eslint-enable-mode :test 'eq)
       (when-let* ((root (or (locate-dominating-file (buffer-file-name) "pnpm-lock.yaml") (locate-dominating-file (buffer-file-name) "package-lock.json"))) (nm-bin (file-name-concat root "node_modules" ".bin")))
-        (make-local-variable 'exec-path)
-        (push nm-bin exec-path)
-        (if (executable-find (file-name-concat nm-bin flymake-eslint-executable-name))
-            (flymake-eslint-enable))))))
+        (flymake-eslint-enable)))))
 
 
 (provide 'init-flymake)

@@ -58,6 +58,15 @@
   (eldoc-box-clear-with-C-g   t))
 
 
+
+(use-package add-node-modules-path
+  :hook
+  (prog-mode . (lambda ()
+                 (when (cl-position major-mode my/eslint-enable-mode :test 'eq)
+                   (add-node-modules-path))))
+  :custom
+  (add-node-modules-path-command '("pnpm bin" "pnpm bin -w")))
+
 (provide 'init-eglot)
 
 ;;; init-eglot.el ends here
