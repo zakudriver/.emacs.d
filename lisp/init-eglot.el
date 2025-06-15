@@ -15,8 +15,8 @@
   :defer 3
   :hook
   (prog-mode . (lambda ()
-                 (if (apply 'derived-mode-p my/eglot-major-mode)
-                     (eglot-ensure))))
+                 (when (apply 'derived-mode-p my/eglot-major-mode)
+                   (eglot-ensure))))
   :custom
   (eglot-events-buffer-size 0)
   (eglot-autoshutdown       t)
@@ -25,6 +25,12 @@
   ;; (add-to-list 'eglot-server-programs '((tsx-ts-mode :language-id "typescriptreact") . ("tailwindcss-language-server")))
   ;; (add-to-list 'eglot-server-programs
   ;;              '((typescript-ts-mode  :language-id "html") . ("tailwindcss-language-server" "--stdio")))
+  (defun my/setup-eglot-server-programs ()
+    "Dynamically add some lsp servers before `eglot-ensure`."
+    (dolist (mode my/oxlint-enable-mode)
+      (add-to-list 'eglot-server-programs
+                   `(,mode . ("oxc_language_server")))))
+  ;; (my/setup-eglot-server-programs)
 
   (use-package consult-eglot
     :bind
@@ -58,14 +64,25 @@
   (eldoc-box-clear-with-C-g   t))
 
 
+;; (defvar my/after-node-modules-path-hook nil
+;;   "Hook to run after add-node-modules-path.")
 
-(use-package add-node-modules-path
-  :hook
-  (prog-mode . (lambda ()
-                 (when (cl-position major-mode my/eslint-enable-mode :test 'eq)
-                   (add-node-modules-path))))
-  :custom
-  (add-node-modules-path-command '("pnpm bin" "pnpm bin -w")))
+
+;; (add-hook 'eglot-managed-mode-hook
+;;           (lambda ()
+;;             (when (executable-find "oxc_language_server")
+;;               (dolist (mode my/oxlint-enable-mode)
+;;                 (add-to-list 'eglot-server-programs
+;;                              `(,mode . ("oxc_language_server")))))))
+
+
+;; (add-hook 'my/after-node-modules-path-hook
+;;           (lambda ()
+;;             (when (executable-find "oxc_language_server")
+;;               (dolist (mode my/oxlint-enable-mode)
+;;                 (add-to-list 'eglot-server-programs
+;;                              `(,mode . ("oxc_language_server")))))))
+
 
 (provide 'init-eglot)
 

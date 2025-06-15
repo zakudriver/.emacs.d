@@ -248,6 +248,10 @@
   "Eslint check to be enabled.")
 
 
+(defconst my/oxlint-enable-mode '(typescript-ts-mode tsx-mode)
+  "Oxlint check to be enabled.")
+
+
 (defconst my/lsp-on-save-major-mode '(ruby-mode clojure-mode dart-mode)
   "Lsp Supported major mode.")
 

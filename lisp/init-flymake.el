@@ -7,6 +7,9 @@
 ;;; Code:
 
 
+(require 'seq)
+
+
 (use-package flymake
   :diminish
   :bind
@@ -32,16 +35,43 @@
 (use-package flymake-eslint
   :after eglot
   :hook
-  (eglot-managed-mode . my/flymake-eslint-enable)
+  (eglot-managed-mode . flymake-eslint-enable)
   :custom
-  (flymake-eslint-prefer-json-diagnostics t)
+  (flymake-eslint-prefer-json-diagnostics t))
+
+
+(use-package flymake-oxlint
+  :load-path "~/.emacs.d/site-lisp/flymake-oxlint"
+  :after eglot
+  :hook
+  (eglot-managed-mode . flymake-oxlint-enable)
+  :custom
+  (flymake-oxlint-prefer-json-diagnostics t))
+
+
+(use-package add-node-modules-path
+  :hook (prog-mode . my/add-node-modules-path-based-on-lock)
+  :custom
+  (add-node-modules-path-command "pnpm bin")
   :config
-  (defun my/flymake-eslint-enable ()
-    "Enable `flymake-eslint' based on the project configuration."
-    (interactive)
-    (when (cl-position major-mode my/eslint-enable-mode :test 'eq)
-      (when-let* ((root (or (locate-dominating-file (buffer-file-name) "pnpm-lock.yaml") (locate-dominating-file (buffer-file-name) "package-lock.json"))) (nm-bin (file-name-concat root "node_modules" ".bin")))
-        (flymake-eslint-enable)))))
+  (defun my/add-node-modules-path-based-on-lock ()
+    (let* ((root (locate-dominating-file default-directory
+                                         (lambda (dir)
+                                           (or (file-exists-p (expand-file-name "bun.lockb" dir))
+                                               (file-exists-p (expand-file-name "bun.lock" dir))
+                                               (file-exists-p (expand-file-name "pnpm-lock.yaml" dir))
+                                               (file-exists-p (expand-file-name "package-lock.json" dir))))))
+           (cmd (cond
+                 ((or (file-exists-p (expand-file-name "bun.lockb" root))
+                      (file-exists-p (expand-file-name "bun.lock" root)))
+                  "bun pm bin")
+                 ((file-exists-p (expand-file-name "pnpm-lock.yaml" root))
+                  "pnpm bin")
+                 ((file-exists-p (expand-file-name "package-lock.json" root))
+                  "npm bin")
+                 (t "pnpm bin"))))
+      (setq-local add-node-modules-path-command cmd))
+    (add-node-modules-path)))
 
 
 (provide 'init-flymake)
