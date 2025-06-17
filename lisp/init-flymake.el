@@ -29,30 +29,17 @@
   (flymake-mode . sideline-mode)
   :custom
   (sideline-flymake-display-mode 'point)
-  (sideline-backends-right '(sideline-flymake)))
-
-
-(use-package flymake-eslint
-  :after eglot
-  :hook
-  (eglot-managed-mode . flymake-eslint-enable)
-  :custom
-  (flymake-eslint-prefer-json-diagnostics t))
-
-
-(use-package flymake-oxlint
-  :load-path "~/.emacs.d/site-lisp/flymake-oxlint"
-  :after eglot
-  :hook
-  (eglot-managed-mode . flymake-oxlint-enable)
-  :custom
-  (flymake-oxlint-prefer-json-diagnostics t))
+  (sideline-backends-right       '(sideline-flymake)))
 
 
 (use-package add-node-modules-path
-  :hook (prog-mode . my/add-node-modules-path-based-on-lock)
+  :hook
+  (prog-mode . (lambda ()
+                 (when (apply 'derived-mode-p my/eslint-enable-mode)
+                   (add-node-modules-path))))
   :custom
-  (add-node-modules-path-command "pnpm bin")
+  (add-node-modules-path-command '("bun pm bin"))
+  (add-node-modules-path-debug   t)
   :config
   (defun my/add-node-modules-path-based-on-lock ()
     (let* ((root (locate-dominating-file default-directory
@@ -70,8 +57,28 @@
                  ((file-exists-p (expand-file-name "package-lock.json" root))
                   "npm bin")
                  (t "pnpm bin"))))
-      (setq-local add-node-modules-path-command cmd))
+      (setq-local add-node-modules-path-command (list cmd)))
     (add-node-modules-path)))
+
+
+(use-package flymake-eslint
+  :hook
+  (eglot-managed-mode . (lambda ()
+                          (when (apply 'derived-mode-p my/eslint-enable-mode)
+                            (flymake-eslint-enable))))
+  :custom
+  (flymake-eslint-prefer-json-diagnostics t))
+
+
+(use-package flymake-oxlint
+  :load-path "~/.emacs.d/site-lisp/flymake-oxlint"
+  :demand t
+  :hook
+  (eglot-managed-mode . (lambda ()
+                          (when (apply 'derived-mode-p my/eslint-enable-mode)
+                            (flymake-oxlint-enable))))
+  :custom
+  (flymake-oxlint-prefer-json-diagnostics t))
 
 
 (provide 'init-flymake)

@@ -11,7 +11,7 @@
   (rust-format-on-save         t)
   (rust-mode-treesitter-derive t)
   (rust-indent-offset          2)
-  (rust-rustfmt-switches       (list "--edition" "2021" "--config-path" (concat (getenv "HOME") "/.config/rustfmt"))))
+  (rust-rustfmt-switches       (list "--edition" "2024" "--config-path" (concat (getenv "HOME") "/.config/rustfmt"))))
 
 
 (use-package cargo
