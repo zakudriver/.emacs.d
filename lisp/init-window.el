@@ -219,6 +219,7 @@
      "\\*quickrun\\*$"
      "\\*tldr\\*$"
      "\\*vc-.*\\*$"
+     "\\*diff-hl\\**"
      "^\\*elfeed-entry\\*$"
      "^\\*macro expansion\\**"
 

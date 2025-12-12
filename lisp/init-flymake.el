@@ -36,10 +36,10 @@
   :hook
   (prog-mode . (lambda ()
                  (when (apply 'derived-mode-p my/eslint-enable-mode)
-                   (add-node-modules-path))))
+                   (my/add-node-modules-path-based-on-lock))))
   :custom
   (add-node-modules-path-command '("bun pm bin"))
-  (add-node-modules-path-debug   t)
+  ;; (add-node-modules-path-debug   t)
   :config
   (defun my/add-node-modules-path-based-on-lock ()
     (let* ((root (locate-dominating-file default-directory
@@ -53,21 +53,22 @@
                       (file-exists-p (expand-file-name "bun.lock" root)))
                   "bun pm bin")
                  ((file-exists-p (expand-file-name "pnpm-lock.yaml" root))
-                  "pnpm bin")
+                  "pnpm bin -w")
                  ((file-exists-p (expand-file-name "package-lock.json" root))
                   "npm bin")
-                 (t "pnpm bin"))))
+                 (t "npm bin"))))
       (setq-local add-node-modules-path-command (list cmd)))
     (add-node-modules-path)))
 
 
 (use-package flymake-eslint
+  :custom
+  (flymake-eslint-defer-binary-check      t)
+  (flymake-eslint-prefer-json-diagnostics t)
   :hook
   (eglot-managed-mode . (lambda ()
                           (when (apply 'derived-mode-p my/eslint-enable-mode)
-                            (flymake-eslint-enable))))
-  :custom
-  (flymake-eslint-prefer-json-diagnostics t))
+                            (flymake-eslint-enable)))))
 
 
 (use-package flymake-oxlint
@@ -78,6 +79,7 @@
                           (when (apply 'derived-mode-p my/eslint-enable-mode)
                             (flymake-oxlint-enable))))
   :custom
+  (flymake-oxlint-defer-binary-check      t)
   (flymake-oxlint-prefer-json-diagnostics t))
 
 

@@ -112,6 +112,8 @@
   ;; (require 'init-js)
   (require 'init-web)
 
+  (require 'init-ai)
+
   (require 'init-sol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

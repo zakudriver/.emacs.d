@@ -225,7 +225,7 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
 (use-package project
   :ensure nil
   :custom
-  (project-vc-extra-root-markers '(".git" ".dir-locals.el" "package.json")))
+  (project-vc-extra-root-markers '(".git" ".dir-locals.el" "package.json" "Cargo.toml")))
 
 
 (provide 'init-utils)
