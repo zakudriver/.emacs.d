@@ -125,7 +125,7 @@ If OFFSET is `non-nil', will goto next term buffer with OFFSET."
   (setq url-automatic-caching t))
 
 
-(use-package go-translate
+(use-package gt
   :custom
   (gts-translate-list '(("en" "zh") ("zh" "en")))
   :bind

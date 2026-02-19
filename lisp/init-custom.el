@@ -159,7 +159,8 @@
                           (almost-mono-themes almost-mono-white)
                           (almost-mono-themes almost-mono-black)
                           (almost-mono-themes almost-mono-gray)
-                          (almost-mono-themes almost-mono-cream))
+                          (almost-mono-themes almost-mono-cream)
+                          (koishi-theme koishi))
   "Theme list.")
 
 
