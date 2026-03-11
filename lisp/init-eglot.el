@@ -12,16 +12,24 @@
 
 
 (use-package eglot
+  :ensure nil
   :defer 3
-  :hook
-  (prog-mode . (lambda ()
-                 (when (apply 'derived-mode-p my/eglot-major-mode)
-                   (eglot-ensure))))
+  ;; :hook
+  ;; (prog-mode . (lambda ()
+  ;;                (when (apply 'derived-mode-p my/eglot-major-mode)
+  ;;                  (eglot-ensure))))
   :custom
   (eglot-events-buffer-size 0)
   (eglot-autoshutdown       t)
   (eglot-menu-string        "⌨")
+  :init
+  (dolist (mode my/eglot-major-mode)
+    (let ((hook-name (intern (concat (symbol-name mode) "-hook"))))
+      (add-hook hook-name #'eglot-ensure)))
   :config
+  (setq-default eglot-workspace-configuration
+                '((:rust-analyzer . (:cargo (:allFeatures t)))))
+
   ;; (add-to-list 'eglot-server-programs '((tsx-ts-mode :language-id "typescriptreact") . ("tailwindcss-language-server")))
   ;; (add-to-list 'eglot-server-programs
   ;;              '((typescript-ts-mode  :language-id "html") . ("tailwindcss-language-server" "--stdio")))
